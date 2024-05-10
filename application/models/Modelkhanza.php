@@ -1,0 +1,40 @@
+<?php
+    class Modelkhanza extends CI_Model{
+
+        function datapegawai(){
+            $query =
+                    "
+                        select a.no_ktp, mulai_kontrak, alamat, nik, nama, CASE WHEN jk = 'Pria' THEN 'L' ELSE 'P' END sexid, CASE WHEN stts_aktif = 'AKTIF' THEN 'N' ELSE 'Y' END susspended
+                        from pegawai a
+                    ";
+
+            $recordset = $this->db->query($query);
+            $recordset = $recordset->result();
+            return $recordset;
+        }
+
+        function checkdata($nik){
+            $query =
+                    "
+                        select a.nik
+                        from dt01_gen_user_data a
+                        where a.nik='".$nik."'
+                    ";
+
+            $recordset = $this->db->query($query);
+            $recordset = $recordset->result();
+            return $recordset;
+        }
+
+        function insertdatauser($data){           
+            $sql =   $this->db->insert("dt01_gen_user_data",$data);
+            return $sql;
+        }
+
+        function updatedatauser($data,$nik){           
+            $sql =   $this->db->update("dt01_gen_user_data",$data,array("nik"=>$nik));
+            return $sql;
+        }
+        
+    }
+?>

@@ -1,0 +1,66 @@
+<?php
+    defined("BASEPATH") OR exit("No direct script access allowed");
+    class Sign extends CI_Controller{ 
+
+        public function __construct(){
+            parent:: __construct();
+            $this->load->model("Modelsign","md");
+        }
+        
+        public function index(){
+            $this->template->load("template/template-sign","v_signin");
+            $this->session->sess_destroy();
+        }
+
+        public function signin(){
+            $username        = $this->input->post("username");
+            $password        = encodedata($this->input->post("password"));
+
+            $checkauth =$this->md->login(ORG_ID,$username,$password);
+            
+            if(!empty($checkauth)){
+                $datasession = $this->md->datasession(ORG_ID,$checkauth->user_id);
+
+                $sessiondata = array(
+                    "orgid"        => $datasession->org_id,
+                    "hospitalname" => $datasession->hospitalname,
+                    "website"      => $datasession->website,
+                    "trial"        => $datasession->trial,
+                    "userid"       => $datasession->user_id,
+                    "name"         => $datasession->name,
+                    "initial"      => $datasession->initial,
+                    "username"     => $datasession->username,
+                    "imgprofile"   => $datasession->image_profile,
+                    "email"        => $datasession->email,
+                    "loggedin"     => true,
+                    "timeout"      => false
+                );
+                
+                $this->session->set_userdata($sessiondata);
+    
+                if($datasession->suspended==="N"){
+                    $json["responCode"]="00";
+                    $json["responHead"]="success";
+                    $json["responDesc"]="Hey, ".$datasession->name."<br>Welcome Back and Have a nice day";
+                    $json["url"]=base_url()."index.php/dashboard/dashboard";
+                }else{
+                    $json["responCode"]="01";
+                    $json["responHead"]="error";
+                    $json["responDesc"]="Your account is suspended please Contact your IT Operation";
+                }
+            }else{
+                $json["responCode"]="01";
+                $json["responHead"]="error";
+                $json["responDesc"]="Username and/or Password Unknown";
+            }
+            
+            echo json_encode($json);
+        }
+
+        public function logoutsystem(){                            
+            $this->session->sess_destroy();
+            redirect("auth/sign");
+        }
+
+    }
+?>
