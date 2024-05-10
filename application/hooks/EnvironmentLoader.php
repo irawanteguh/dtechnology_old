@@ -9,7 +9,7 @@
             self::$appInstance->load->model("ModelRoot"); // Model names should start with capital by convention
 
             $dtechClientId = "10c84edd-500b-49e3-93a5-a2c8cd2c8524";
-            $server        = "DEV";
+            $server        = "PROD";
 
             self::$environmentSettings = self::$appInstance->ModelRoot->environment($dtechClientId);
 
