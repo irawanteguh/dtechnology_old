@@ -61,7 +61,6 @@
                                 </div> 
                             </div>
                         </div>   
-                          
                         <div class="col-md-3 mb-5">
                             <label class="d-flex align-items-center fs-5 fw-bold mb-2">
                                 <span class="required">Nomor Kartu Tanda Penduduk</span>
@@ -77,10 +76,6 @@
                             </label>
                             <input type="text" class="form-control form-control-solid form-control-sm" placeholder="Silakan Masukan Alamat Email Anda" id="email-edit" name="email-edit" required>
                         </div>
-                        <div class="custom-file">
-							<input type="file" class="custom-file-input" id="customFile">
-							<label class="custom-file-label" for="customFile">Choose file</label>
-						</div>
                         <div class="form-group col-md-12">
                             <label class="col-form-label" for="filektp">Upload KTP</label>
                             <div class="dropzone" id="file_doc">

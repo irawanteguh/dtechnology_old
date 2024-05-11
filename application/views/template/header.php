@@ -910,18 +910,24 @@
 
 					<div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 
-						<div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-							<?php
-							    $colors = ['danger', 'warning', 'success', 'primary'];
-								$randomIndex = array_rand($colors);
-								$randomColor = $colors[$randomIndex];
-								
-								if($_SESSION['imgprofile']==="Y"){
-									echo "<img src='".base_url()."assets/images/avatars/".$_SESSION['userid'].".jpeg' alt='user' />";
-								}else{
-									echo "<div class='symbol-label fs-3 bg-light-".$randomColor." text-".$randomColor."'>".$_SESSION['initial']."</div>";
-								}
-							?>
+						<div class="btn btn-active-light d-flex align-items-center bg-hover-light py-2 px-2 px-md-3 show menu-dropdown" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+							<div class="d-none d-md-flex flex-column align-items-end justify-content-center me-2">
+								<span class="text-muted fs-7 fw-bold lh-1 mb-2">Hello</span>
+								<span class="text-dark fs-base fw-bolder lh-1"><?php echo $_SESSION['name']?></span>
+							</div>
+							<div class="symbol symbol-30px symbol-md-40px">
+								<?php
+									$colors = ['danger', 'warning', 'success', 'primary'];
+									$randomIndex = array_rand($colors);
+									$randomColor = $colors[$randomIndex];
+									
+									if($_SESSION['imgprofile']==="Y"){
+										echo "<img src='".base_url()."assets/images/avatars/".$_SESSION['userid'].".jpeg' alt='user' />";
+									}else{
+										echo "<div class='symbol-label fs-3 bg-light-".$randomColor." text-".$randomColor."'>".$_SESSION['initial']."</div>";
+									}
+								?>
+							</div>
 						</div>
 
 						<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-400px" data-kt-menu="true">

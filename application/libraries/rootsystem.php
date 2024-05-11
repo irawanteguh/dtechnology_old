@@ -172,7 +172,7 @@
                     $isshow   = ($submenu['PACKAGE'] === self::$segment1);
 
                     $classbtn  = $isActive ? "menu-link active" : "menu-link";
-                    $classhead = $isshow ? "menu-item menu-accordion" : "menu-item menu-accordion";
+                    $classhead = $isshow ? "menu-item menu-accordion show" : "menu-item menu-accordion";
         
                     if ($submenu["PARENT"] === "Y") {
                         $submenu_html .="<div data-kt-menu-trigger='click' class='".$classhead."'>";
