@@ -44,28 +44,33 @@ var validatorsignin = function () {
                         }
                     });
                 }else{
-                    Swal.fire({
-                        title            : "<h1 class='font-weight-bold' style='color:#234974;'>For Your Information</h1>",
-                        html             : "<b>"+response.responDesc+"</b>",
-                        icon             : response.responHead,
-                        confirmButtonText: "Please Try Again",
-                        buttonsStyling   : false,
-                        timerProgressBar : true,
-                        timer            : 5000,
-                        customClass      : {confirmButton: "btn btn-danger"},
-                        showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
-                        hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
-                    }).then(function (result) {
-                        if(result.isConfirmed){
-                            form.querySelector('[name="username"]').value = "";
-                            form.querySelector('[name="password"]').value = "";
-                        }else{
-                            if(Swal.DismissReason.backdrop || Swal.DismissReason.cancel || Swal.DismissReason.close || Swal.DismissReason.esc || Swal.DismissReason.timer){
+                    if(response.responCode == "02"){
+                        window.open(response.url, "_self");
+                    }else{
+                        Swal.fire({
+                            title            : "<h1 class='font-weight-bold' style='color:#234974;'>For Your Information</h1>",
+                            html             : "<b>"+response.responDesc+"</b>",
+                            icon             : response.responHead,
+                            confirmButtonText: "Please Try Again",
+                            buttonsStyling   : false,
+                            timerProgressBar : true,
+                            timer            : 5000,
+                            customClass      : {confirmButton: "btn btn-danger"},
+                            showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                            hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+                        }).then(function (result) {
+                            if(result.isConfirmed){
                                 form.querySelector('[name="username"]').value = "";
                                 form.querySelector('[name="password"]').value = "";
+                            }else{
+                                if(Swal.DismissReason.backdrop || Swal.DismissReason.cancel || Swal.DismissReason.close || Swal.DismissReason.esc || Swal.DismissReason.timer){
+                                    form.querySelector('[name="username"]').value = "";
+                                    form.querySelector('[name="password"]').value = "";
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
+                    
                 }
             },
             complete: function () {

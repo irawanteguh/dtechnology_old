@@ -19,7 +19,7 @@
 
             $data['clients']=$fileclient;
 
-            $this->template->load("template/template-blank","v_landingpage",$data);
+            $this->template->load("template/template-landingpage","v_landingpage",$data);
         }
     }
 ?>

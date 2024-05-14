@@ -8,7 +8,7 @@
         }
         
         public function index(){
-            $this->template->load("template/template-sign","v_signin");
+            $this->template->load("template/template-blank","v_signin");
             $this->session->sess_destroy();
         }
 
@@ -44,9 +44,10 @@
                     $json["responDesc"]="Hey, ".$datasession->name."<br>Welcome Back and Have a nice day";
                     $json["url"]=base_url()."index.php/dashboard/dashboard";
                 }else{
-                    $json["responCode"]="01";
+                    $json["responCode"]="02";
                     $json["responHead"]="error";
                     $json["responDesc"]="Your account is suspended please Contact your IT Operation";
+                    $json["url"]=base_url()."index.php/auth/deactive";
                 }
             }else{
                 $json["responCode"]="01";

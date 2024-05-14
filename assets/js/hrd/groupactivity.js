@@ -33,7 +33,7 @@ function daftarjabatan(){
                     getvariabel =   "data-positionid='"+result[i].POSITION_ID+"'"+
                                     "data-position='"+result[i].POSITION+"'";
 
-                    tableresult +="<a class='btn list-group-item list-group-item-action font-weight-bold' role='button' "+getvariabel+" onclick='getdata(this)'>";
+                    tableresult +="<a class='btn font-weight-bold list-group-item list-group-item-action' role='button' "+getvariabel+" onclick='getdata(this)'>";
                     tableresult +=result[i].POSITION+" "+(result[i].FUNCTIONAL ? result[i].FUNCTIONAL : '')+"<div class='text-muted'>Level : "+result[i].LEVEL+"<br>RVU : "+todesimal(result[i].RVU)+"</div>";
                     tableresult +="</a>";
                 }

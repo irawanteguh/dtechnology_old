@@ -1,19 +1,20 @@
 <?php
 	defined('BASEPATH') OR exit('No direct script access allowed');
-	class Dashboard extends CI_Controller {
+	class Position extends CI_Controller {
 
 		public function __construct(){
             parent:: __construct();
 			rootsystem::system();
-			$this->load->model("Modeldashboard","md");
+			$this->load->model("Modelposition","md");
         }
 
 		public function index(){
-			$this->template->load("template/template-sidebar","v_dashboard");
+			$this->template->load("template/template-sidebar","v_position");
 		}
 
-		public function todolist(){
-            $result = $this->md->todolist(ORG_ID,$_SESSION['userid']);
+		public function daftarjabatan(){
+			$search = $this->input->post("search");
+            $result = $this->md->daftarjabatan(ORG_ID,$search);
             
 			if(!empty($result)){
                 $json["responCode"]="00";
