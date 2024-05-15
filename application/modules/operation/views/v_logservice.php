@@ -16,6 +16,7 @@
                         <th>Response Code</th>
                         <th>Time</th>
                         <th>Request Date</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-600 fw-bold" id="resultlogservice"></tbody>

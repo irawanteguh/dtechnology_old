@@ -53,7 +53,26 @@ function todolist() {
                         tableresult += "<a href='#' class='text-gray-800 text-hover-primary fw-bolder fs-6 todo-item text-decoration-line-through'>" + result[i].TODO + "</a>";
                     }
                     
-                    tableresult += "<span class='text-muted fw-bold d-block'>Due in 3 Days</span>";
+                    if (result[i].DUEDATE === "1") {
+                        tableresult += "<span class='text-muted fw-bold d-block'>Today</span>";
+                    } else if (result[i].DUEDATE === "2") {
+                        tableresult += "<span class='text-muted fw-bold d-block'>Due in 3 Days</span>";
+                    } else if (result[i].DUEDATE === "3") {
+                        tableresultMonth += tableresult;
+                    } else if (result[i].DUEDATE === "4") {
+                        tableresultYear += tableresult;
+                    }
+
+                    if (result[i].PRIORITY === "1") {
+                        
+                    } else if (result[i].PRIORITY === "2") {
+                        tableresult += "<span class='text-muted fw-bold d-block'>Due in 3 Days</span>";
+                    } else if (result[i].PRIORITY === "3") {
+                        tableresult += "<span class='text-muted fw-bold d-block'>Due in 3 Days</span>";
+                    } else {
+                        tableresult += "<span class='text-muted fw-bold d-block'>Due in 3 Days</span>";
+                    }
+                    
                     tableresult += "</div>";
 
                     if (result[i].PRIORITY === "1") {
