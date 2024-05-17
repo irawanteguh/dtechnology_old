@@ -98,7 +98,7 @@
             $response = Tilaka::checkcertificateuser(json_encode($body));
             
             if($response['success']){
-                if($response['status']==="2"){ //Sudah Di Setujui Oleh Tilaka
+                if($response['status']===2){ //Sudah Di Setujui Oleh Tilaka
                     $data['CERTIFICATE']=$response['status'];
                     $this->md->updatedatauser($data,$userid);
                 }
