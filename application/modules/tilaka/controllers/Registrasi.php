@@ -151,25 +151,6 @@
             $dataupdate['IDENTITY_NO'] = $noktp;
 
             if($this->md->updatedatauser($dataupdate,$userid)){
-
-                $datasession = $this->ms->datasession(ORG_ID,$userid);
-
-                $sessiondata = array(
-                    "orgid"        => $datasession->org_id,
-                    "hospitalname" => $datasession->hospitalname,
-                    "website"      => $datasession->website,
-                    "trial"        => $datasession->trial,
-                    "userid"       => $datasession->user_id,
-                    "name"         => $datasession->name,
-                    "initial"      => $datasession->initial,
-                    "username"     => $datasession->username,
-                    "imgprofile"   => $datasession->image_profile,
-                    "loggedin"     => true,
-                    "timeout"      => false
-                );
-                
-                $this->session->set_userdata($sessiondata);
-
                 $json['responCode']="00";
                 $json['responHead']="success";
                 $json['responDesc']="Perbaharui Data Sukses";

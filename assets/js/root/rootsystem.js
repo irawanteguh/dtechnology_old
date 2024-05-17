@@ -16,7 +16,7 @@ if (window.location.href !== url+'index.php/auth/sign') {
                 redirUrl          : url+'index.php/auth/sign',
                 logoutUrl         : url+'index.php/auth/sign',
                 warnAfter         : 600000,                                 //warn after 5 seconds
-                redirAfter        : 61000,                                //redirect after 10 secons,
+                redirAfter        : 610000,                                //redirect after 10 secons,
                 ignoreUserActivity: true,
                 countdownMessage  : "Redirecting in {timer} seconds.",
                 countdownBar      : true

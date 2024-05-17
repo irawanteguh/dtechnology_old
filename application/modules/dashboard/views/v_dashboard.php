@@ -1,5 +1,33 @@
-<div class="row">
-	<div class="col-xl-4">
+<div class="row g-6 g-xl-9 mb-5">
+    <div class="col-lg-6 col-xxl-3">
+        <div class="card h-100">
+            <div class="card-body p-9">
+                <div class="fs-2hx fw-bolder" id="counttodolist">N/A</div>
+                <div class="fs-4 fw-bold text-gray-400 mb-7">Current Todo List</div>
+                <div class="d-flex flex-wrap">
+                    <div class="d-flex flex-center h-100px w-100px me-9 mb-5">
+                        <canvas id="todolist-chart" width="150" height="150" style="display: block; box-sizing: border-box; height: 100px; width: 100px;"></canvas>
+                    </div>
+                    <div class="d-flex flex-column justify-content-center flex-row-fluid pe-11 mb-5">
+                        <div class="d-flex fs-6 fw-bold align-items-center mb-3">
+                            <div class="bullet bg-primary me-3"></div>
+                            <div class="text-gray-400">Waiting</div>
+                            <div class="ms-auto fw-bolder text-gray-700" id="countwaiting">N/A</div>
+                        </div>
+                        <div class="d-flex fs-6 fw-bold align-items-center mb-3">
+                            <div class="bullet bg-success me-3"></div>
+                            <div class="text-gray-400">Done</div>
+                            <div class="ms-auto fw-bolder text-gray-700" id="countdone">N/A</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-6 g-xl-9">
+	<div class="col-lg-6 col-xxl-5">
         <div class="card">
             <div class="card-header border-0">
 				<h3 class="card-title fw-bolder text-dark">Todo</h3>
@@ -35,7 +63,8 @@
 							<div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">Todo List</div>
 						</div>
 						<div class="menu-item px-3">
-							<a href="#" class="menu-link px-3">Create Todo List</a>
+							<a href="" data-bs-toggle="modal" data-bs-target="#modal-todolist" class="menu-link px-3">Create Todo List</a>
+                            <!-- <a href="#" class="menu-link px-3">Asign Todo List</a> -->
 						</div>
 					</div>
 				</div>
