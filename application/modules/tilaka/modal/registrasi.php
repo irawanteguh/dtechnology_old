@@ -57,7 +57,7 @@
                                     <label class="d-flex align-items-center fs-5 fw-bold mb-2">
                                         <span class="required">Nama Karyawan</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid form-control-sm" id="namakryawan-edit" name="namakryawan-edit" readonly>
+                                    <input type="text" class="form-control form-control-solid form-control-sm" id="namakryawan-edit" name="namakryawan-edit">
                                 </div> 
                             </div>
                         </div>   
