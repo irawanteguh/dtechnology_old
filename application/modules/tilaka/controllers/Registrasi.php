@@ -79,7 +79,7 @@
                             }
                         }else{
                             if(isset($_GET['tilaka_name'])){
-                                redirect("tilaka/registrasiusertilaka");
+                                redirect("tilaka/registrasi");
                             }else{
                                 $this->template->load("template/template-sidebar","v_registrasi");
                             }

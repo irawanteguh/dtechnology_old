@@ -41,6 +41,23 @@
             echo json_encode($json);
         }
 
+        public function datastaff(){
+            $result = $this->md->datastaff(ORG_ID,$_SESSION['userid']);
+            
+			if(!empty($result)){
+                $json["responCode"]="00";
+                $json["responHead"]="success";
+                $json["responDesc"]="Data Di Temukan";
+				$json['responResult']=$result;
+            }else{
+                $json["responCode"]="01";
+                $json["responHead"]="info";
+                $json["responDesc"]="Data Tidak Di Temukan";
+            }
+
+            echo json_encode($json);
+        }
+
         public function charttodolist(){
             $result = $this->md->charttodolist(ORG_ID,$_SESSION['userid']);
             

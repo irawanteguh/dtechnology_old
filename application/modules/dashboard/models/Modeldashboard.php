@@ -54,6 +54,23 @@
             return $recordset;
         }
 
+        function datastaff($orgid,$userid){
+            $query =
+                    "
+                        select a.*, upper(LEFT(a.name, 1)) initial,
+                               (select position from dt01_hrd_position_ms where active='1' and org_id='".$orgid."' and position_id=a.position_id )position
+                        from dt01_gen_user_data a
+                        WHERE a.active='1'
+                        AND   a.org_id='".$orgid."'
+                        AND   a.atasan_id='".$userid."'
+                
+                    ";
+
+            $recordset = $this->db->query($query);
+            $recordset = $recordset->result();
+            return $recordset;
+        }
+
         function prioritas(){
             $query =
                     "

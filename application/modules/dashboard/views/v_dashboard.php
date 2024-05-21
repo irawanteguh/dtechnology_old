@@ -1,3 +1,4 @@
+
 <div class="row g-6 g-xl-9 mb-5">
     <div class="col-lg-6 col-xxl-3">
         <div class="card h-100">
@@ -26,8 +27,8 @@
     </div>
 </div>
 
-<div class="row g-6 g-xl-9">
-	<div class="col-lg-6 col-xxl-5">
+<div class="row gy-5 g-xl-8">
+	<div class="col-lg-4">
         <div class="card">
             <div class="card-header border-0">
 				<h3 class="card-title fw-bolder text-dark">Todo</h3>
@@ -81,5 +82,25 @@
         
     </div>
     <div class="col-xl-8">
+        <div class="card card-xl-stretch mb-5 mb-xl-8">
+            <div class="card-header border-0 pt-5">
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label fw-bolder fs-3 mb-1">Performance Staff</span>
+                </h3>
+            </div>
+            <div class="card-body py-3">
+                <div class="table-responsive">
+                    <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                        <thead>
+                            <tr class="fw-bolder text-muted">
+                                <th>Name</th>
+                                <th>Progress</th>
+                            </tr>
+                        </thead>
+                        <tbody id="datastaff"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
