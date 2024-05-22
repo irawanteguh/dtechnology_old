@@ -55,11 +55,18 @@
                 }
 
                 if($_GET['reason_code'] === "1" && $_GET['status'] === "S"){
-                    $data['REGISTER_ID']    = "";
-                    $data['IMAGE_IDENTITY'] = "N";
-                    $this->md->updatedataregister($data,$_GET['register_id']);
-                    redirect("tilaka/registrasi");
+                    $body['register_id']=$_GET['register_id'];
+                    $response = Tilaka::checkregistrasiuser(json_encode($body));
+                    if($response['success']){
+                        if($response['data']['status']==="F" && $response['data']['reason_code']==="1" && $response['data']['manual_registration_status']==="F"){
+                            $data['REGISTER_ID']    = "";
+                            $data['IMAGE_IDENTITY'] = "N";
+                            $this->md->updatedataregister($data,$_GET['register_id']);
+                            redirect("tilaka/registrasi");
+                        }
+                    }
                 }
+                
             }else{
                 if(isset($_GET['status']) && isset($_GET['revoke_id']) && isset($_GET['user_identifier'])){
                     if($_GET['status'] === "Sukses"){
