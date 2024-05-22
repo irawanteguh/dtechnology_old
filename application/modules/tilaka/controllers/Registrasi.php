@@ -17,13 +17,6 @@
                     $response = Tilaka::checkregistrasiuser(json_encode($body));
                     if($response['success']){
 
-                        if($response['data']['status']==="S" && $response['data']['reason_code']==="1"){
-                            $data['REGISTER_ID']    = "";
-                            $data['IMAGE_IDENTITY'] = "N";
-                            $this->md->updatedataregister($data,$_GET['register_id']);
-                            redirect("tilaka/registrasi");
-                        }
-
                         if($response['data']['status']==="S" && $response['data']['reason_code']==="0"){
                             $data['USER_IDENTIFIER'] = $response['data']['tilaka_name'];
                             $this->md->updatedataregister($data,$_GET['register_id']);
@@ -59,6 +52,13 @@
                         }
 
                     }
+                }
+
+                if($_GET['reason_code'] === "1" && $_GET['status'] === "S"){
+                    $data['REGISTER_ID']    = "";
+                    $data['IMAGE_IDENTITY'] = "N";
+                    $this->md->updatedataregister($data,$_GET['register_id']);
+                    redirect("tilaka/registrasi");
                 }
             }else{
                 if(isset($_GET['status']) && isset($_GET['revoke_id']) && isset($_GET['user_identifier'])){
