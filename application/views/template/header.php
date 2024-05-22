@@ -1040,6 +1040,8 @@
 								<a href="../../demo1/dist/account/settings.html" class="menu-link px-5">Account Settings</a>
 							</div> -->
 							<div class="menu-item px-5">
+								<a href="../profile/overview" class="menu-link px-5">My Profile</a>
+								<a href="../profile/activity" class="menu-link px-5">My Activity</a>
 								<a data-bs-toggle="modal" data-bs-target="#modal-logout" class="menu-link px-5">Sign Out</a>
 							</div>
 							<!-- <div class="separator my-2"></div>
