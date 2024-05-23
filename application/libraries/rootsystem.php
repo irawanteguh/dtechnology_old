@@ -29,8 +29,10 @@
         }
 
         public static function category(){
-            $category   = "";
-            $menuheader = "";
+            $category            = "";
+            $menuheader          = "";
+            $menuprofile         = "";
+            $menuprofileshortcut = "";
 
             foreach (self::$resultmenu as $cat) {
                 if($cat["PARENT"] === "C"){
@@ -50,11 +52,29 @@
                     $menuheader .="</div>";
                     $menuheader .="</div>";
                     $menuheader .="</div>";
+                }else{
+                    if($cat["PARENT"] === "N") {
+                        if($cat['PACKAGE']==="profile"){
+                            $isActive = ($cat['PACKAGE'] === self::$segment1 && $cat['DEF_CONTROLLER'] === self::$segment2);
+                            $classbtn = $isActive ? "active" : "";
+
+                            $menuprofile .="<li class='nav-item'>";
+                            $menuprofile .="<a class='nav-link text-active-primary me-6 ".$classbtn."' href='".base_url()."index.php/".$cat['PACKAGE']."/".$cat['DEF_CONTROLLER']."'>".$cat['MODULES_NAME']."</a>";
+                            $menuprofile .="</li>";
+
+                            $menuprofileshortcut .="<div class='menu-item px-3'>";
+                            $menuprofileshortcut .="<a class='menu-link px-5' href='".base_url()."index.php/".$cat['PACKAGE']."/".$cat['DEF_CONTROLLER']."'>".$cat['MODULES_NAME']."</a>";
+                            $menuprofileshortcut .="</div>";
+                        }
+                    }
+                    
                 }
             }
 
             $data["menu"]       = !empty($category) ? $category    : "";
             $data["menuheader"] = !empty($menuheader) ? $menuheader: "";
+            $data["menuprofile"] = !empty($menuprofile) ? $menuprofile: "";
+            $data["menuprofileshortcut"] = !empty($menuprofileshortcut) ? $menuprofileshortcut: "";
 
             self::$app->load->vars($data);
         }
@@ -164,7 +184,7 @@
         }
 
         public static function generate_submenu($parent_id){
-            $submenu_html = "";
+            $submenu_html     = "";
         
             foreach (self::$resultmenu as $submenu) {
                 if ($submenu['MODULES_HEADER_ID'] === $parent_id) {
@@ -207,8 +227,6 @@
             }
             return $submenu_html;
         }
-        
-        
 
         public static function referensi(){
             $referensi = "";

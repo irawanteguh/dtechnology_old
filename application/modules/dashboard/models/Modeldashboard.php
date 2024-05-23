@@ -5,12 +5,24 @@
             $query =
                     "
                         SELECT X.*,
-                                CASE 
+                                case 
                                     when X.DUEDATE = '1' THEN 'Today'
                                     when X.DUEDATE = '2' then CONCAT('Due in ', X.DAYS_DIFF, ' Days')
                                     when X.DUEDATE = '3' then CONCAT('Due in ', X.DAYS_DIFF, ' Days')
                                     else CONCAT('Due in ', X.WEEKS_DIFF, ' Weeks')
-                                END KETERANGAN
+                                end KETERANGAN,
+                                case 
+                                    when X.status = '1' and X.DAYS_DIFF < 1 then 
+                                    '0'
+                                    else
+                                    '1'
+                                end statusshow,
+                                case
+                                    WHEN x.status = '0' AND x.due_date < CURRENT_DATE THEN '1'
+                                    WHEN x.status = '0' AND x.due_date >= CURRENT_DATE THEN '2'
+                                    WHEN x.status = '1' THEN '3'
+                                    ELSE '0'
+                                end countstatus
                                 
                         FROM(
                             SELECT a.*,
@@ -42,10 +54,25 @@
         function charttodolist($orgid,$userid){
             $query =
                     "
-                        select CASE WHEN a.status = '0' THEN 'Waiting' ELSE 'Done' end status, count(todo_id)jml
+                        select
+                                case
+                                    WHEN a.status = '0' AND a.due_date < CURRENT_DATE THEN 'Over due date'
+                                    WHEN a.status = '0' AND a.due_date >= CURRENT_DATE THEN 'Yet to start'
+                                    WHEN a.status = '1' THEN 'Completed'
+                                    ELSE 'Unknown'
+                                end AS status,
+                                    count(todo_id)jml
                         from dt01_hrd_todo_dt a
                         where a.active='1'
-                        group by status
+                        and   a.org_id='".$orgid."'
+                        and   a.user_id='".$userid."'
+                        GROUP BY 
+                                CASE
+                                    WHEN a.status = '0' AND a.due_date < CURRENT_DATE THEN 'Over due date'
+                                    WHEN a.status = '0' AND a.due_date >= CURRENT_DATE THEN 'Yet to start'
+                                    WHEN a.status = '1' THEN 'Completed'
+                                    ELSE 'Unknown'
+                                END
                 
                     ";
 
@@ -58,7 +85,7 @@
             $query =
                     "
                         select a.*, upper(LEFT(a.name, 1)) initial,
-                               (select position from dt01_hrd_position_ms where active='1' and org_id='".$orgid."' and position_id=a.position_id )position
+                               (select position from dt01_hrd_position_ms where active='1' and org_id='".$orgid."' and position_id=(select position_id from dt01_hrd_position_dt where active='1' and org_id='".$orgid."' and  user_id=a.user_id))position
                         from dt01_gen_user_data a
                         WHERE a.active='1'
                         AND   a.org_id='".$orgid."'

@@ -22,9 +22,12 @@ function todolist() {
             $("#kt_activity_month").html("");
             $("#kt_activity_year").html("");
 
+            $("#allcount").html("");
             $("#counttodolist").html("");
             $("#countwaiting").html("");
+            $("#countoverdue").html("");
             $("#countdone").html("");
+            $("#countoverduelabel").html("");
         },
         success: function(data) {
             var result           = "";
@@ -33,7 +36,8 @@ function todolist() {
             var tableresultMonth = "";
             var tableresultYear  = "";
             var assignby         = "";
-            var count            = 0;
+            var allcount         = 0;
+            var overduecount     = 0;
             var waiting          = 0;
             var done             = 0;
 
@@ -41,77 +45,84 @@ function todolist() {
                 result = data.responResult;
                 for (var i in result) {
 
-                    if(result[i].STATUS==="0"){
-                        waiting ++;
+                    if(result[i].statusshow === "1"){
+                        if(result[i].USER_ID === result[i].CREATED_BY){
+                            assignby ="";
+                        }else{
+                            assignby ="Assign By <a href='#'>"+result[i].dibuatoleh+"</a>"
+                        }
+    
+                        var tableresult = "<div class='d-flex align-items-center mb-8'>";
+    
+                        if (result[i].PRIORITY === "1") {
+                            tableresult += "<span class='bullet bullet-vertical h-40px bg-success'></span>";
+                        } else if (result[i].PRIORITY === "2") {
+                            tableresult += "<span class='bullet bullet-vertical h-40px bg-primary'></span>";
+                        } else if (result[i].PRIORITY === "3") {
+                            tableresult += "<span class='bullet bullet-vertical h-40px bg-warning'></span>";
+                        } else {
+                            tableresult += "<span class='bullet bullet-vertical h-40px bg-danger'></span>";
+                        }
+    
+                        tableresult += "<div class='form-check form-check-custom form-check-solid mx-5'>";
+                        tableresult += "<input class='form-check-input' type='checkbox' value='"+result[i].TODO_ID+"' onclick='toggleStrikeThrough(this)' " + (result[i].STATUS === "1" ? "checked" : "") + ">";
+                        tableresult += "</div>";
+    
+    
+                        tableresult += "<div class='flex-grow-1'>";
+    
+                        if(result[i].STATUS === "0" ){
+                            tableresult += "<a href='#' class='text-gray-800 text-hover-primary fw-bolder fs-6 todo-item'>" + result[i].TODO + "</a>";
+                        }else{
+                            tableresult += "<a href='#' class='text-gray-800 text-hover-primary fw-bolder fs-6 todo-item text-decoration-line-through'>" + result[i].TODO + "</a>";
+                        }
+                        
+                        if(result[i].DAYS_DIFF < 0){
+                            tableresult += "<span class='text-muted fw-bold d-block'>Late "+result[i].DAYS_DIFF+" Days</span>";
+                        }else{
+                            tableresult += "<span class='text-muted fw-bold d-block'>"+result[i].KETERANGAN+"</span>";
+                        }
+    
+                        tableresult += "<span class='text-muted fw-bold d-block'>"+assignby+"</span>";
+                        tableresult += "</div>";
+    
+                        if (result[i].PRIORITY === "1") {
+                            tableresult += "<span class='badge badge-light-success fs-8 fw-bolder'>Low</span>";
+                        } else if (result[i].PRIORITY === "2") {
+                            tableresult += "<span class='badge badge-light-primary fs-8 fw-bolder'>Medium Low</span>";
+                        } else if (result[i].PRIORITY === "3") {
+                            tableresult += "<span class='badge badge-light-warning fs-8 fw-bolder'>Medium High</span>";
+                        } else {
+                            tableresult += "<span class='badge badge-light-danger fs-8 fw-bolder'>High</span>";
+                        }
+    
+                        
+                        tableresult += "<a class='btn btn-icon btn-active-color-danger btn-sm' data-id='"+result[i].TODO_ID+"'  onclick='deletetodolist(this)'><i class='bi bi-trash-fill'></i></a>";
+                        tableresult += "</div>";
+    
+                        if (result[i].DUEDATE === "1") {
+                            tableresultToday += tableresult;
+                        } else if (result[i].DUEDATE === "2") {
+                            tableresultWeek += tableresult;
+                        } else if (result[i].DUEDATE === "3") {
+                            tableresultMonth += tableresult;
+                        } else if (result[i].DUEDATE === "4") {
+                            tableresultYear += tableresult;
+                        }
+                    }
+
+                    allcount ++;
+                    if(result[i].countstatus==="1"){
+                        overduecount ++;
                     }else{
-                        done ++;
+                        if(result[i].countstatus==="2"){
+                            waiting ++;
+                        }else{
+                            done ++;
+                        }
                     }
 
-                    if(result[i].USER_ID === result[i].CREATED_BY){
-                        assignby ="";
-                    }else{
-                        assignby ="Assign By <a href='#'>"+result[i].dibuatoleh+"</a>"
-                    }
-
-                    var tableresult = "<div class='d-flex align-items-center mb-8'>";
-
-                    if (result[i].PRIORITY === "1") {
-                        tableresult += "<span class='bullet bullet-vertical h-40px bg-success'></span>";
-                    } else if (result[i].PRIORITY === "2") {
-                        tableresult += "<span class='bullet bullet-vertical h-40px bg-primary'></span>";
-                    } else if (result[i].PRIORITY === "3") {
-                        tableresult += "<span class='bullet bullet-vertical h-40px bg-warning'></span>";
-                    } else {
-                        tableresult += "<span class='bullet bullet-vertical h-40px bg-danger'></span>";
-                    }
-
-                    tableresult += "<div class='form-check form-check-custom form-check-solid mx-5'>";
-                    tableresult += "<input class='form-check-input' type='checkbox' value='"+result[i].TODO_ID+"' onclick='toggleStrikeThrough(this)' " + (result[i].STATUS === "1" ? "checked" : "") + ">";
-                    tableresult += "</div>";
-
-
-                    tableresult += "<div class='flex-grow-1'>";
-
-                    if(result[i].STATUS === "0" ){
-                        tableresult += "<a href='#' class='text-gray-800 text-hover-primary fw-bolder fs-6 todo-item'>" + result[i].TODO + "</a>";
-                    }else{
-                        tableresult += "<a href='#' class='text-gray-800 text-hover-primary fw-bolder fs-6 todo-item text-decoration-line-through'>" + result[i].TODO + "</a>";
-                    }
                     
-                    if(result[i].DAYS_DIFF < 0){
-                        tableresult += "<span class='text-muted fw-bold d-block'>Late "+result[i].DAYS_DIFF+" Days</span>";
-                    }else{
-                        tableresult += "<span class='text-muted fw-bold d-block'>"+result[i].KETERANGAN+"</span>";
-                    }
-
-                    tableresult += "<span class='text-muted fw-bold d-block'>"+assignby+"</span>";
-                    tableresult += "</div>";
-
-                    if (result[i].PRIORITY === "1") {
-                        tableresult += "<span class='badge badge-light-success fs-8 fw-bolder'>Low</span>";
-                    } else if (result[i].PRIORITY === "2") {
-                        tableresult += "<span class='badge badge-light-primary fs-8 fw-bolder'>Medium Low</span>";
-                    } else if (result[i].PRIORITY === "3") {
-                        tableresult += "<span class='badge badge-light-warning fs-8 fw-bolder'>Medium High</span>";
-                    } else {
-                        tableresult += "<span class='badge badge-light-danger fs-8 fw-bolder'>High</span>";
-                    }
-
-                    
-                    tableresult += "<a class='btn btn-icon btn-active-color-danger btn-sm' data-id='"+result[i].TODO_ID+"'  onclick='deletetodolist(this)'><i class='bi bi-trash-fill'></i></a>";
-                    tableresult += "</div>";
-
-                    if (result[i].DUEDATE === "1") {
-                        tableresultToday += tableresult;
-                    } else if (result[i].DUEDATE === "2") {
-                        tableresultWeek += tableresult;
-                    } else if (result[i].DUEDATE === "3") {
-                        tableresultMonth += tableresult;
-                    } else if (result[i].DUEDATE === "4") {
-                        tableresultYear += tableresult;
-                    }
-
-                    count ++;
                 }
             }
 
@@ -119,8 +130,12 @@ function todolist() {
             $("#kt_activity_week").html(tableresultWeek);
             $("#kt_activity_month").html(tableresultMonth);
             $("#kt_activity_year").html(tableresultYear);
-            $("#counttodolist").html(count);
+
+            $("#allcount").html(allcount);
+            $("#counttodolist").html(allcount);
             $("#countwaiting").html(waiting);
+            $("#countoverdue").html(overduecount);
+            $("#countoverduelabel").html(overduecount+" Overdue Tasks");
             $("#countdone").html(done);
         },
         error: function(xhr, status, error) {

@@ -1,24 +1,50 @@
 
 <div class="row g-6 g-xl-9 mb-5">
-    <div class="col-lg-6 col-xxl-3">
-        <div class="card h-100">
-            <div class="card-body p-9">
-                <div class="fs-2hx fw-bolder" id="counttodolist">N/A</div>
-                <div class="fs-4 fw-bold text-gray-400 mb-7">Current Todo List</div>
+    <div class="col-lg-6">
+        <div class="card card-flush h-lg-100">
+            <div class="card-header mt-6">
+                <div class="card-title flex-column">
+                    <h3 class="fw-bolder mb-1">Task Summary</h3>
+                    <div class="fs-6 fw-bold text-gray-400" id="countoverduelabel" ></div>
+                </div>
+            </div>
+            <div class="card-body p-9 pt-5">
                 <div class="d-flex flex-wrap">
-                    <div class="d-flex flex-center h-100px w-100px me-9 mb-5">
-                        <canvas id="todolist-chart" width="150" height="150" style="display: block; box-sizing: border-box; height: 100px; width: 100px;"></canvas>
+                    <div class="position-relative d-flex flex-center h-175px w-175px me-15 mb-7">
+                        <div class="position-absolute translate-middle start-50 top-50 d-flex flex-column flex-center">
+                            <span class="fs-2qx fw-bolder" id="allcount"></span>
+                            <span class="fs-6 fw-bold text-gray-400">Total Tasks</span>
+                        </div>
+                        <canvas id="todolist-chart" width="262" height="262" style="display: block; box-sizing: border-box; height: 174.667px; width: 174.667px;"></canvas>
                     </div>
                     <div class="d-flex flex-column justify-content-center flex-row-fluid pe-11 mb-5">
                         <div class="d-flex fs-6 fw-bold align-items-center mb-3">
                             <div class="bullet bg-primary me-3"></div>
-                            <div class="text-gray-400">Waiting</div>
-                            <div class="ms-auto fw-bolder text-gray-700" id="countwaiting">N/A</div>
+                            <div class="text-gray-400">Active</div>
+                            <div class="ms-auto fw-bolder text-gray-700" id="counttodolist"></div>
                         </div>
                         <div class="d-flex fs-6 fw-bold align-items-center mb-3">
                             <div class="bullet bg-success me-3"></div>
-                            <div class="text-gray-400">Done</div>
-                            <div class="ms-auto fw-bolder text-gray-700" id="countdone">N/A</div>
+                            <div class="text-gray-400">Completed</div>
+                            <div class="ms-auto fw-bolder text-gray-700" id="countdone"></div>
+                        </div>
+                        <div class="d-flex fs-6 fw-bold align-items-center mb-3">
+                            <div class="bullet bg-danger me-3"></div>
+                            <div class="text-gray-400">Overdue</div>
+                            <div class="ms-auto fw-bolder text-gray-700" id="countoverdue"></div>
+                        </div>
+                        <div class="d-flex fs-6 fw-bold align-items-center">
+                            <div class="bullet bg-gray-300 me-3"></div>
+                            <div class="text-gray-400">Yet to start</div>
+                            <div class="ms-auto fw-bolder text-gray-700" id="countwaiting"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed p-6">
+                    <div class="d-flex flex-stack flex-grow-1">
+                        <div class="fw-bold">
+                            <div class="fs-6 text-gray-700">
+                            <a href="#" class="fw-bolder me-1">Invite New .NET Collaborators</a>to create great outstanding business to business .jsp modutr class scripts</div>
                         </div>
                     </div>
                 </div>
@@ -27,8 +53,8 @@
     </div>
 </div>
 
-<div class="row gy-5 g-xl-8">
-	<div class="col-lg-4">
+<div class="row g-6 g-xl-9 mb-5">
+    <div class="col-lg-6">
         <div class="card">
             <div class="card-header border-0">
 				<h3 class="card-title fw-bolder text-dark">Todo</h3>
@@ -81,7 +107,11 @@
         </div>
         
     </div>
-    <div class="col-xl-8">
+</div>
+
+<div class="row gy-5 g-xl-8">
+	
+    <div class="col-xl-12">
         <div class="card card-xl-stretch mb-5 mb-xl-8">
             <div class="card-header border-0 pt-5">
                 <h3 class="card-title align-items-start flex-column">

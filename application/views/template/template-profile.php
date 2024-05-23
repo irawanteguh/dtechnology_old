@@ -62,7 +62,7 @@
 																		<path d="M12 22C14.6 22 17 21 18.7 19.4C17.9 16.9 15.2 15 12 15C8.8 15 6.09999 16.9 5.29999 19.4C6.99999 21 9.4 22 12 22Z" fill="black"></path>
 																	</svg>
 																</span>
-																Developer
+																<?php echo $_SESSION['position']?>
 															</a>
 															<a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
 																<span class="svg-icon svg-icon-4 me-1">
@@ -71,7 +71,7 @@
 																		<path d="M12.0624 13.0453C13.7193 13.0453 15.0624 11.7022 15.0624 10.0453C15.0624 8.38849 13.7193 7.04535 12.0624 7.04535C10.4056 7.04535 9.06241 8.38849 9.06241 10.0453C9.06241 11.7022 10.4056 13.0453 12.0624 13.0453Z" fill="black"></path>
 																	</svg>
 																</span>
-																SF, Bay Area
+																<?php echo $_SESSION['alamat']?>
 															</a>
 															<a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
 																<span class="svg-icon svg-icon-4 me-1">
@@ -159,9 +159,9 @@
 																			<path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black"></path>
 																		</svg>
 																	</span>
-																	<div class="fs-2 fw-bolder counted" data-kt-countup="true" data-kt-countup-value="4500" data-kt-countup-prefix="$">$4,500</div>
+																	<div class="fs-2 fw-bolder" data-kt-countup="true" data-kt-countup-value="70" data-kt-countup-prefix="%">70</div>
 																</div>
-																<div class="fw-bold fs-6 text-gray-400">Activity</div>
+																<div class="fw-bold fs-6 text-gray-400">Aktivitas</div>
 															</div>
 															<div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
 																<div class="d-flex align-items-center">
@@ -171,9 +171,9 @@
 																			<path d="M11.4343 15.4343L7.25 11.25C6.83579 10.8358 6.16421 10.8358 5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75L11.2929 18.2929C11.6834 18.6834 12.3166 18.6834 12.7071 18.2929L18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25C17.8358 10.8358 17.1642 10.8358 16.75 11.25L12.5657 15.4343C12.2533 15.7467 11.7467 15.7467 11.4343 15.4343Z" fill="black"></path>
 																		</svg>
 																	</span>
-																	<div class="fs-2 fw-bolder counted" data-kt-countup="true" data-kt-countup-value="80">80</div>
+																	<div class="fs-2 fw-bolder" data-kt-countup="true" data-kt-countup-value="30" data-kt-countup-prefix="%">30</div>
 																</div>
-																<div class="fw-bold fs-6 text-gray-400">Behavior</div>
+																<div class="fw-bold fs-6 text-gray-400">Perilaku</div>
 															</div>
 															<div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
 																<div class="d-flex align-items-center">
@@ -183,7 +183,7 @@
 																			<path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black"></path>
 																		</svg>
 																	</span>
-																	<div class="fs-2 fw-bolder counted" data-kt-countup="true" data-kt-countup-value="60" data-kt-countup-prefix="%">%60</div>
+																	<div class="fs-2 fw-bolder" data-kt-countup="true" data-kt-countup-value="100" data-kt-countup-prefix="%">100</div>
 																</div>
 																<div class="fw-bold fs-6 text-gray-400">Total</div>
 															</div>
@@ -203,27 +203,7 @@
 										</div>
 										<div class="d-flex overflow-auto h-55px">
 											<ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap">
-												<li class="nav-item">
-													<a class="nav-link text-active-primary me-6 active" href="overview">Overview</a>
-												</li>
-												<li class="nav-item">
-													<a class="nav-link text-active-primary me-6" href="activity">Activity</a>
-												</li>
-												<li class="nav-item">
-													<a class="nav-link text-active-primary me-6" href="activity">Education</a>
-												</li>
-												<li class="nav-item">
-													<a class="nav-link text-active-primary me-6" href="activity">Training</a>
-												</li>
-												<li class="nav-item">
-													<a class="nav-link text-active-primary me-6" href="activity">Document</a>
-												</li>
-												<li class="nav-item">
-													<a class="nav-link text-active-primary me-6" href="activity">Connections</a>
-												</li>
-												<li class="nav-item">
-													<a class="nav-link text-active-primary me-6" href="activity">Setting</a>
-												</li>
+												<?php echo $menuprofile ?>
 											</ul>
 										</div>
 									</div>
