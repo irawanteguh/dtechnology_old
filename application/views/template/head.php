@@ -23,6 +23,7 @@
 
         echo "\t\t<link href='".base_url('assets/vendors/animate.css/animate.min.css')."' rel='stylesheet'>".PHP_EOL;
         echo "\t\t<link href='".base_url('assets/vendors/fontawesome-6.5.1/css/all.min.css')."' rel='stylesheet'>".PHP_EOL;
+        echo "\t\t<link href='".base_url('assets/vendors/fullcalendar/fullcalendar.bundle.css')."' rel='stylesheet'>".PHP_EOL;
 
         $csspathmodules = FCPATH.'assets/css/root/';
         if (is_dir($csspathmodules)) {

@@ -224,7 +224,9 @@
 												</div>";
                                     }
                                 ?>
-								<?php echo $contents ?>
+								<div class="row g-6 g-xl-9 mb-5">
+									<?php echo $contents ?>
+								</div>
 							</div>
 						</div>
 					</div>

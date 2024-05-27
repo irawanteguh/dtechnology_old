@@ -1,5 +1,4 @@
-<div class="row g-6 g-xl-9">
-    <div class="col-lg-6">
+<div class="col-lg-6">
         <div class="card card-flush h-lg-100">
             <div class="card-header mt-6">
                 <div class="card-title flex-column">
@@ -15,7 +14,7 @@
                     <div class="position-relative d-flex flex-center h-175px w-175px me-15 mb-7">
                         <div class="position-absolute translate-middle start-50 top-50 d-flex flex-column flex-center">
                             <span class="fs-2qx fw-bolder">237</span>
-                            <span class="fs-6 fw-bold text-gray-400">Total Tasks</span>
+                            <span class="fs-6 fw-bold text-gray-400">Activity</span>
                         </div>
                         <canvas id="project_overview_chart" width="262" height="262" style="display: block; box-sizing: border-box; height: 174.667px; width: 174.667px;"></canvas>
                     </div>
@@ -27,17 +26,17 @@
                         </div>
                         <div class="d-flex fs-6 fw-bold align-items-center mb-3">
                             <div class="bullet bg-success me-3"></div>
-                            <div class="text-gray-400">Completed</div>
+                            <div class="text-gray-400">Approve</div>
                             <div class="ms-auto fw-bolder text-gray-700">45</div>
                         </div>
                         <div class="d-flex fs-6 fw-bold align-items-center mb-3">
                             <div class="bullet bg-danger me-3"></div>
-                            <div class="text-gray-400">Overdue</div>
+                            <div class="text-gray-400">Pending</div>
                             <div class="ms-auto fw-bolder text-gray-700">0</div>
                         </div>
                         <div class="d-flex fs-6 fw-bold align-items-center">
                             <div class="bullet bg-gray-300 me-3"></div>
-                            <div class="text-gray-400">Yet to start</div>
+                            <div class="text-gray-400">Denied</div>
                             <div class="ms-auto fw-bolder text-gray-700">25</div>
                         </div>
                     </div>
@@ -53,4 +52,51 @@
             </div>
         </div>
     </div>
-</div>
+    <div class="col-lg-6">
+        <div class="card card-flush h-lg-100">
+            <div class="card-header mt-6">
+                <div class="card-title flex-column">
+                    <h3 class="fw-bolder mb-1">Posistion Information</h3>
+                    <!-- <div class="fs-6 fw-bold text-gray-400">24 Overdue Tasks</div> -->
+                </div>
+                <div class="card-toolbar">
+                    <a href="#" class="btn btn-light btn-sm">View Tasks</a>
+                </div>
+            </div>
+            <div class="card-body p-9 pt-5">
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="card card-flush h-lg-100">
+            <div class="card-header mt-6">
+                <div class="card-title flex-column">
+                    <h3 class="fw-bolder mb-1">Personal Information</h3>
+                    <!-- <div class="fs-6 fw-bold text-gray-400">24 Overdue Tasks</div> -->
+                </div>
+                <div class="card-toolbar">
+                    <a href="#" class="btn btn-light btn-sm">View Tasks</a>
+                </div>
+            </div>
+            <div class="card-body p-9 pt-5">
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card card-flush h-lg-100">
+            <div class="card-header mt-6">
+                <div class="card-title flex-column">
+                    <h3 class="fw-bolder mb-1">Emergency Contact</h3>
+                    <!-- <div class="fs-6 fw-bold text-gray-400">24 Overdue Tasks</div> -->
+                </div>
+                <div class="card-toolbar">
+                    <a href="#" class="btn btn-light btn-sm">View Tasks</a>
+                </div>
+            </div>
+            <div class="card-body p-9 pt-5">
+                
+            </div>
+        </div>
+    </div>
