@@ -84,12 +84,16 @@
         function datastaff($orgid,$userid){
             $query =
                     "
-                        select a.*, upper(LEFT(a.name, 1)) initial,
-                               (select position from dt01_hrd_position_ms where active='1' and org_id='".$orgid."' and position_id=(select position_id from dt01_hrd_position_dt where active='1' and org_id='".$orgid."' and  user_id=a.user_id))position
-                        from dt01_gen_user_data a
-                        WHERE a.active='1'
-                        AND   a.org_id='".$orgid."'
-                        AND   a.atasan_id='".$userid."'
+                        select a.user_id,
+                                (select image_profile from dt01_gen_user_data where active='1' and org_id='".$orgid."' and user_id=a.user_id)image_profile,
+                                (select name from dt01_gen_user_data where active='1' and org_id='".$orgid."' and user_id=a.user_id)name,
+                                (select upper(LEFT(name, 1)) from dt01_gen_user_data where active='1' and org_id='".$orgid."' and user_id=a.user_id)initial,
+                                (select position from dt01_hrd_position_ms where active='1' and org_id='".$orgid."' and position_id=a.position_id)position
+                        from dt01_hrd_position_dt a
+                        where a.active='1'
+                        and   a.position_primary='Y'
+                        and   a.org_id='".$orgid."'
+                        and   a.atasan_id='".$userid."'
                 
                     ";
 

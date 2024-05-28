@@ -280,20 +280,16 @@ function datastaff() {
                     tableresult +="<div class='d-flex align-items-center'>";
 
                         tableresult +="<div class='symbol symbol-45px me-5'>";
-                        if(result[i].IMAGE_PROFILE==="N"){
+                        if(result[i].image_profile==="N"){
                             tableresult +="<div class='symbol-label fs-3 bg-light-"+randomColor+" text-"+randomColor+"'>"+result[i].initial+"</div>";
                         }else{
-                            tableresult +="<img src='"+url+"assets/images/avatars/"+result[i].USER_ID+".jpeg' alt='"+result[i].NAME+"'>";
+                            tableresult +="<img src='"+url+"assets/images/avatars/"+result[i].user_id+".jpeg' alt='"+result[i].name+"'>";
                         }
                         tableresult +="</div>";
 
                         tableresult +="<div class='d-flex justify-content-start flex-column'>";
-                        tableresult +="<a href='#' class='text-dark fw-bolder text-hover-primary fs-6'>"+result[i].NAME+"</a>";
-                        if(result[i].POSITION_ID!=""){
-                            tableresult +="<span class='text-muted fw-bold text-muted d-block fs-7'>"+result[i].position+"</span>";
-                        }else{
-                            tableresult +="<span class='text-muted fw-bold text-muted d-block fs-7'>-</span>";
-                        }
+                        tableresult +="<a href='#' class='text-dark fw-bolder text-hover-primary fs-6'>"+result[i].name+"</a>";
+                        tableresult +="<span class='text-muted fw-bold text-muted d-block fs-7'>"+result[i].position+"</span>";
                         
                         tableresult +="</div>";
 

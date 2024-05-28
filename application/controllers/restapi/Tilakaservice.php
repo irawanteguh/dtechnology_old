@@ -21,7 +21,7 @@
             $result = $this->md->dataupload(ORG_ID,"0");
             if(!empty($result)){
                 foreach($result as $a){
-                    $location = PATHFILE."/".$a->NO_FILE.".pdf";
+                    $location = PATHFILE_GET."/".$a->NO_FILE.".pdf";
                     if(file_exists($location)){
                         $response = Tilaka::uploadfile($location);
                         if($response['success']){
@@ -211,7 +211,7 @@
                             $fileContent = file_get_contents(htmlspecialchars_decode($a['presigned_url']));
                             if ($fileContent !== false) {
                                 $resultchecknofile = $this->md->checknofile($filename);
-                                $destinationPath   = PATHFILE.DIRECTORY_SEPARATOR.$resultchecknofile[0]->NO_FILE.".pdf";
+                                $destinationPath   = PATHFILE_POST.DIRECTORY_SEPARATOR.$resultchecknofile[0]->NO_FILE.".pdf";
                                 file_put_contents($destinationPath, $fileContent);
                             }
                         }
