@@ -14,7 +14,7 @@
             parent:: __construct();
             rootsystem::system();
 
-			$db = $this->load->database('localhost', TRUE);
+			$db = $this->load->database('dtech', TRUE);
 
 			self::$host         = $db->hostname;
 			self::$user         = $db->username;
