@@ -182,12 +182,13 @@
         }
 
         public function edituser(){
-            $userid      = $this->input->post("userid-edit");
-            $nikrs       = $this->input->post("nikrs-edit");
-            $namakryawan = $this->input->post("namakryawan-edit");
-            $noktp       = $this->input->post("noktp-edit");
-            $email       = $this->input->post("email-edit");
-            $file        = (object)@$_FILES['avatar'];
+            $userid       = $this->input->post("userid-edit");
+            $nikrs        = $this->input->post("nikrs-edit");
+            $namakaryawan = $this->input->post("namakaryawan-edit");
+            $namaktp      = $this->input->post("namaktp-edit");
+            $noktp        = $this->input->post("noktp-edit");
+            $email        = $this->input->post("email-edit");
+            $file         = (object)@$_FILES['avatar'];
 
             $config['upload_path']      = './assets/images/avatars/';
             $config['allowed_types']    = 'jpeg';
@@ -203,10 +204,11 @@
                 $dataupdate['IMAGE_PROFILE'] = "Y";
             }
 
-            $dataupdate['NIK']         = $nikrs;
-            $dataupdate['NAME']        = $namakryawan;
-            $dataupdate['EMAIL']       = $email;
-            $dataupdate['IDENTITY_NO'] = $noktp;
+            $dataupdate['NIK']           = $nikrs;
+            $dataupdate['NAME']          = $namakaryawan;
+            $dataupdate['NAME_IDENTITY'] = $namaktp;
+            $dataupdate['EMAIL']         = $email;
+            $dataupdate['IDENTITY_NO']   = $noktp;
 
             if($this->md->updatedatauser($dataupdate,$userid)){
                 $json['responCode']="00";
@@ -276,7 +278,7 @@
                     if($responseuuid['success']){
                         $body['registration_id']   = $responseuuid['data'][0];
                         $body['email']             = $result->EMAIL;
-                        $body['name']              = $result->NAME;
+                        $body['name']              = $result->NAME_IDENTIY;
                         $body['company_name']      = $_SESSION['hospitalname'];
                         $body['date_expire']       = $expireddate;
                         $body['nik']               = $result->IDENTITY_NO;

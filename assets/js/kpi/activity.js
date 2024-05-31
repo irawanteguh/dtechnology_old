@@ -1,5 +1,33 @@
 calendar();
 
+flatpickr('[name="calendar_event_start_date"]', {
+    enableTime: false,
+    dateFormat: "d.m.Y",
+    onChange: function(selectedDates, dateStr, instance) {
+        instance.close();
+    }
+});
+
+flatpickr('[name="calendar_event_start_time"]', {
+    enableTime: true,
+    time_24hr : true,
+    noCalendar: true,
+    dateFormat: "H:i",
+    // onChange: function(selectedDates, dateStr, instance) {
+    //     instance.close();
+    // }
+});
+
+flatpickr('[name="calendar_event_end_time"]', {
+    enableTime: true,
+    time_24hr : true,
+    noCalendar: true,
+    dateFormat: "H:i",
+    // onChange: function(selectedDates, dateStr, instance) {
+    //     instance.close();
+    // }
+});
+
 function calendar() {
     var e = document.getElementById("kt_calendar_app");
     var calendar = new FullCalendar.Calendar(e, {
@@ -24,7 +52,7 @@ function calendar() {
 
         },
         dateClick: function(info) {
-            
+            $('#modal-addactivity').modal('show');
         },
         eventDrop: function(info) {
             

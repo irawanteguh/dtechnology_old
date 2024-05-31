@@ -10,6 +10,14 @@ $('#modal-todolist').on('shown.bs.modal', function (e) {
     $('#todolist-prioritas-tambah').val("");
 });
 
+flatpickr('[name="todolist-duedate-tambah"]', {
+    enableTime: false,
+    dateFormat: "d.m.Y",
+    onChange: function(selectedDates, dateStr, instance) {
+        instance.close();
+    }
+});
+
 function todolist() {
     $.ajax({
         url: url + "index.php/dashboard/dashboard/todolist",
@@ -333,14 +341,6 @@ function datastaff() {
     });
     return false;
 };
-
-flatpickr('[name="todolist-duedate-tambah"]', {
-    enableTime: false,
-    dateFormat: "d.m.Y",
-    onChange: function(selectedDates, dateStr, instance) {
-        instance.close();
-    }
-});
 
 $(document).on("submit", "#forminserttodolist", function (e) {
 	e.preventDefault();

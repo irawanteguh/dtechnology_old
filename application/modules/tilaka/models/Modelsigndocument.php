@@ -20,6 +20,16 @@
             return $recordset;
         }
 
+        function updateauthurl($data,$requestid){           
+            $sql =   $this->db->update("dt01_gen_auth_url_sign_dt",$data,array("REQUEST_ID"=>$requestid));
+            return $sql;
+        }
+
+        function updatefile($data,$urlid){           
+            $sql =   $this->db->update("dt01_gen_document_file_dt",$data,array("REQUEST_ID"=>$urlid));
+            return $sql;
+        }
+
 
     }
 ?>

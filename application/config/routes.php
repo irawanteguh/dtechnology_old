@@ -12,4 +12,6 @@
     $route['appkyc']               = 'restapi/Tilakaservice/checkdataapprovalkyc';
 
     $route['pegawai']              = 'restapi/Khanza/pegawai';
+
+    $route['masterDomisili'] = 'restapi/satusehat/MasterDomisili/domisili';
 ?>

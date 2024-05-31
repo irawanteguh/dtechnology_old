@@ -13,12 +13,13 @@
 		public function __construct(){
             parent:: __construct();
             rootsystem::system();
-            $this->load->model("Modelbackupdb","md");
 
-			self::$host         = "localhost";
-			self::$user         = "root";
-			self::$password     = "";
-			self::$database     = "sikms";
+			$db = $this->load->database('localhost', TRUE);
+
+			self::$host         = $db->hostname;
+			self::$user         = $db->username;
+			self::$password     = $db->password;
+			self::$database     = $db->database;
 			self::$pathdatabase = FCPATH."database/";
 			self::$backupPath   = self::$pathdatabase.date('Y-m-d-H-i-s').'.sql';
         }

@@ -9,9 +9,21 @@
         }
 
 		public function index(){
-			$this->template->load("template/template-sidebar","v_activity");
+			$data = $this->loadcombobox();
+			$this->template->load("template/template-sidebar","v_activity",$data);
 		}
         
+		public function loadcombobox(){
+            $resultactivityr= $this->md->activity();
+            $activity="";
+            foreach($resultactivityr as $a ){
+                $activity.="<option value='".$a->activity_id."'>".$a->keterangan."</option>";
+            }
+            
+            $data['activity'] = $activity;
+
+            return $data;
+		}
 
 		public function calender(){
             $result        = $this->md->calender();  

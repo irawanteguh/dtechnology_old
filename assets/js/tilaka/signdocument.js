@@ -28,10 +28,10 @@ function dataexecutesign(){
                                     "data-useridentifier='"+result[i].USER_IDENTIFIER+"'";
 
                     tableresult +="<tr>";
-                    if(result[i].STATUS!="0"){
-                        tableresult +="<td></td>";
+                    if(result[i].STATUS==="0"){
+                        tableresult +="<td><div class='badge badge-light-warning fw-bolder'>Waiting Sign</div></td>";
                     }else{
-                        tableresult +="<td><div class='badge badge-light-success fw-bolder'>The signing process is ongoing</div></td>";
+                        tableresult +="<td><div class='badge badge-light-success fw-bolder'>The signing process is ongoing</div></td>";  
                     }
                     tableresult +="<td>"+(result[i].USER_IDENTIFIER ? result[i].USER_IDENTIFIER : "")+"</td>";
                     tableresult +="<td>"+(result[i].nik ? result[i].nik : "")+"</td>";

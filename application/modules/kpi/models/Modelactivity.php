@@ -16,6 +16,19 @@
             return $recordset;
         }
 
+        function activity(){
+            $query =
+                    "
+                        select a.activity_id, activity, durasi,
+                            CONCAT(a.activity, ' Durasi ', a.durasi, ' Menit') keterangan
+                        from dt01_hrd_activity_ms a
+                    ";
+
+            $recordset = $this->db->query($query);
+            $recordset = $recordset->result();
+            return $recordset;
+        }
+
 
     }
 ?>

@@ -17,7 +17,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 row">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="col-md-12 mb-5">
                                     <label class="d-flex align-items-center fs-5 fw-bold mb-2">
                                         <span>Avatar</span>
@@ -46,35 +46,42 @@
                                     </div>
                                 </div> 
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-10 row">
                                 <div class="col-md-12 mb-5">
                                     <label class="d-flex align-items-center fs-5 fw-bold mb-2">
                                         <span class="required">NIK Rumah Sakit</span>
                                     </label>
                                     <input type="text" class="form-control form-control-solid form-control-sm" id="nikrs-edit" name="nikrs-edit" readonly>
                                 </div>                                  
-                                <div class="col-md-12 mb-5">
+                                <div class="col-md-6 mb-5">
                                     <label class="d-flex align-items-center fs-5 fw-bold mb-2">
                                         <span class="required">Nama Karyawan</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-solid form-control-sm" id="namakryawan-edit" name="namakryawan-edit">
-                                </div> 
+                                    <input type="text" class="form-control form-control-solid form-control-sm" id="namakaryawan-edit" name="namakaryawan-edit" readonly>
+                                </div>
+                                <div class="col-md-6 mb-5">
+                                    <label class="d-flex align-items-center fs-5 fw-bold mb-2">
+                                        <span class="required">Nama Sesuai KTP</span>
+                                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Silakan masukan nama sesuai KTP"></i>
+                                    </label>
+                                    <input type="text" class="form-control form-control-solid form-control-sm" id="namaktp-edit" name="namaktp-edit">
+                                </div>  
+                                <div class="col-md-4 mb-5">
+                                    <label class="d-flex align-items-center fs-5 fw-bold mb-2">
+                                        <span class="required">Nomor Kartu Tanda Penduduk</span>
+                                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Silakan no KTP anda yang aktif"></i>
+                                    </label>
+                                    <input type="text" class="form-control form-control-solid form-control-sm" placeholder="Silakan Masukan Nomor KTP" id="noktp-edit" name="noktp-edit" minlength="16" maxlength="16" required>
+                                    <span class="fs-9 text-muted">Nomor Kartu Tanda Penduduk Maksimal 16 Digit</span>
+                                </div>                                
+                                <div class="col-md-8 mb-5">
+                                    <label class="d-flex align-items-center fs-5 fw-bold mb-2">
+                                        <span class="required">Email Address</span>
+                                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Silakan alamat email anda yang aktif"></i>
+                                    </label>
+                                    <input type="text" class="form-control form-control-solid form-control-sm" placeholder="Silakan Masukan Alamat Email Anda" id="email-edit" name="email-edit" required>
+                                </div>
                             </div>
-                        </div>   
-                        <div class="col-md-3 mb-5">
-                            <label class="d-flex align-items-center fs-5 fw-bold mb-2">
-                                <span class="required">Nomor Kartu Tanda Penduduk</span>
-                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Silakan no KTP anda yang aktif"></i>
-                            </label>
-                            <input type="text" class="form-control form-control-solid form-control-sm" placeholder="Silakan Masukan Nomor KTP" id="noktp-edit" name="noktp-edit" minlength="16" maxlength="16" required>
-                            <span class="fs-9 text-muted">Nomor Kartu Tanda Penduduk Maksimal 16 Digit</span>
-                        </div>                                  
-                        <div class="col-md-9 mb-5">
-                            <label class="d-flex align-items-center fs-5 fw-bold mb-2">
-                                <span class="required">Email Address</span>
-                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Silakan alamat email anda yang aktif"></i>
-                            </label>
-                            <input type="text" class="form-control form-control-solid form-control-sm" placeholder="Silakan Masukan Alamat Email Anda" id="email-edit" name="email-edit" required>
                         </div>
                         <div class="form-group col-md-12">
                             <label class="col-form-label" for="filektp">Upload KTP</label>

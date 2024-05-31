@@ -28,16 +28,25 @@ $('#searchtablemasterkaryawan').on('keypress', function (event) {
 });
 
 function getdata(btn){
-	var userid = btn.attr("data-userid");
-	var nik    = btn.attr("data-nik");
-	var nama   = btn.attr("data-nama");
-	var noktp  = btn.attr("data-noktp");
-	var email  = btn.attr("data-email");
+	var userid  = btn.attr("data-userid");
+	var nik     = btn.attr("data-nik");
+	var nama    = btn.attr("data-nama");
+	var namaktp = btn.attr("data-namaktp");
+	var noktp   = btn.attr("data-noktp");
+	var email   = btn.attr("data-email");
 
 	$(":hidden[name='userid-edit']").val(userid);
     $(":hidden[name='userid-registrasi']").val(userid);
 	$("input[name='nikrs-edit']").val(nik);
-	$("input[name='namakryawan-edit']").val(nama);
+	$("input[name='namakaryawan-edit']").val(nama);
+    
+
+    if(namaktp==="null"){
+        $("input[name='namaktp-edit']").val(nama);
+    }else{
+        $("input[name='namaktp-edit']").val(namaktp);
+    }
+
     if(noktp==="null"){
         $("input[name='noktp-edit']").val("");
     }else{
@@ -51,16 +60,24 @@ function getdata(btn){
 };
 
 function getdataedit(btn){
-	var userid = btn.attr("data-userid");
-	var nik    = btn.attr("data-nik");
-	var nama   = btn.attr("data-nama");
-	var noktp  = btn.attr("data-noktp");
-	var email  = btn.attr("data-email");
+	var userid  = btn.attr("data-userid");
+	var nik     = btn.attr("data-nik");
+	var nama    = btn.attr("data-nama");
+	var namaktp = btn.attr("data-namaktp");
+	var noktp   = btn.attr("data-noktp");
+	var email   = btn.attr("data-email");
 
 	$(":hidden[name='userid-edit']").val(userid);
     $(":hidden[name='userid-registrasi']").val(userid);
 	$("input[name='nikrs-edit']").val(nik);
-	$("input[name='namakryawan-edit']").val(nama);
+	$("input[name='namakaryawan-edit']").val(nama);
+
+    if(namaktp===""){
+        $("input[name='namaktp-edit']").val(nama);
+    }else{
+        $("input[name='namaktp-edit']").val(namaktp);
+    }
+
     if(noktp==="null"){
         $("input[name='noktp-edit']").val("");
     }else{
@@ -398,6 +415,7 @@ function datakaryawan(){
                     getvariabel =   "data-userid='"+result[i].USER_ID+"'"+
                                     "data-nik='"+result[i].NIK+"'"+
                                     "data-nama='"+result[i].NAME+"'"+
+                                    "data-namaktp='"+result[i].NAME_IDENTITY+"'"+
                                     "data-noktp='"+result[i].IDENTITY_NO+"'"+
                                     "data-useridentifier='"+result[i].USER_IDENTIFIER+"'"+
                                     "data-registerid='"+result[i].REGISTER_ID+"'"+

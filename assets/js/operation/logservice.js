@@ -23,6 +23,7 @@ function datalog(){
                     tableresult += "<td class='text-center'>" + result[i].REMOTE_ADDRESS + "</td>";
                     tableresult += "<td class='text-center'>" + result[i].REQUEST_METHOD + "</td>";
                     tableresult += "<td>" + result[i].REQUEST_URL + "</td>";
+                    tableresult += "<td>" + result[i].SOURCE + "</td>";
 
                     if (result[i].RESPONSE_STATUS === "200") {
                         tableresult += "<td class='text-center'><span class='badge badge-success'>" + result[i].RESPONSE_STATUS + "</span></td>";

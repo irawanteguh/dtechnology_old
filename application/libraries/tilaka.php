@@ -120,7 +120,7 @@
             $header = array("Content-Type: application/json","Authorization: Bearer ".Tilaka::oauth()['access_token']);
 
             $responsecurl = curl([
-                'url'     => TILAKA_BASE_URL."api/v1/checksignstatus",
+                'url'     => TILAKALITE_URL."api/v1/checksignstatus",
                 'method'  => "POST",
                 'header'  => $header,
                 'body'    => $body,
