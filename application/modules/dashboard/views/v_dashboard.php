@@ -39,14 +39,14 @@
                     </div>
                 </div>
             </div>
-            <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed p-6">
+            <!-- <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed p-6">
                 <div class="d-flex flex-stack flex-grow-1">
                     <div class="fw-bold">
                         <div class="fs-6 text-gray-700">
                         <a href="#" class="fw-bolder me-1">Invite New .NET Collaborators</a>to create great outstanding business to business .jsp modutr class scripts</div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

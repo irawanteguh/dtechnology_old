@@ -109,7 +109,7 @@ function certificatestatus(btn){
     var useridentifier = $(btn).attr("data-useridentifier");
     var registerid     = $(btn).attr("data-registerid");
     $.ajax({
-        url       : url+"index.php/tilaka/registrasi/useridentifier",
+        url       : url+"index.php/tilaka/registrasi/certificatestatus",
         data      : {userid:userid,useridentifier:useridentifier,registerid:registerid},
         method    : "POST",
         dataType  : "JSON",
@@ -194,7 +194,7 @@ function certificatestatus(btn){
             if(result['status']===4){
                 Swal.fire({
                     title            : "<h1 class='font-weight-bold' style='color:#234974;'>For Your Information</h1>",
-                    html             : "<b>Message : "+result['message']['info']+"<br>Serial Number : "+result['message']['serialnumber']+"<br>Unique Id : "+result['message']['uniqueId']+"</b>",
+                    html             : "<b>Message : "+result['message']['info']+"</b>",
                     icon             : "success",
                     confirmButtonText: 'Please Try Again',
                     customClass      : {confirmButton: 'btn btn-danger'},

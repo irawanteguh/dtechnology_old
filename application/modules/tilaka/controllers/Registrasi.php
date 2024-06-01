@@ -140,7 +140,7 @@
             }
 		}
 
-        public function useridentifier(){
+        public function certificatestatus(){
             $userid         = $this->input->post("userid");
             $useridentifier = $this->input->post("useridentifier");
             $registerid     = $this->input->post("registerid");
@@ -149,8 +149,14 @@
             $response = Tilaka::checkcertificateuser(json_encode($body));
             
             if($response['success']){
-                if($response['status']===2){ //Sudah Di Setujui Oleh Tilaka
+                if($response['status']===2){
                     $data['CERTIFICATE']=$response['status'];
+                    $this->md->updatedatauser($data,$userid);
+                }
+
+                if($response['status']===4){
+                    $data['REGISTER_ID']    = "";
+                    $data['IMAGE_IDENTITY'] = "N";
                     $this->md->updatedatauser($data,$userid);
                 }
             }

@@ -25,6 +25,8 @@
                         $data['PARENT_CODE'] = $a['parent_code'];
                         $data['BPS_CODE']    = $a['bps_code'];
                         $data['NAME']        = $a['name'];
+                        $data['JENIS']       = "1";
+                        $data['CREATED_BY']  = "ac55c7c3-bf4a-48cb-86b8-f1d02de32c7c";
                         $this->md->insertdata($data);
     
     
@@ -39,6 +41,8 @@
                                     $data['PARENT_CODE'] = $a['parent_code'];
                                     $data['BPS_CODE']    = $a['bps_code'];
                                     $data['NAME']        = $a['name'];
+                                    $data['JENIS']       = "2";
+                                    $data['CREATED_BY']  = "ac55c7c3-bf4a-48cb-86b8-f1d02de32c7c";
                                     $this->md->insertdata($data);
         
         
@@ -53,6 +57,8 @@
                                                 $data['PARENT_CODE'] = $a['parent_code'];
                                                 $data['BPS_CODE']    = $a['bps_code'];
                                                 $data['NAME']        = $a['name'];
+                                                $data['JENIS']       = "3";
+                                                $data['CREATED_BY']  = "ac55c7c3-bf4a-48cb-86b8-f1d02de32c7c";
                                                 $this->md->insertdata($data);
             
             
@@ -67,6 +73,8 @@
                                                             $data['PARENT_CODE'] = $a['parent_code'];
                                                             $data['BPS_CODE']    = $a['bps_code'];
                                                             $data['NAME']        = $a['name'];
+                                                            $data['JENIS']       = "4";
+                                                            $data['CREATED_BY']  = "ac55c7c3-bf4a-48cb-86b8-f1d02de32c7c";
                                                             $this->md->insertdata($data);
                                                         }            
                                                     }

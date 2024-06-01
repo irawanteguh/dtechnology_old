@@ -30,8 +30,7 @@ function historyposition() {
 
                         tableresult +="<div class='d-flex justify-content-start flex-column'>";
                         tableresult +="<a href='#' class='text-dark fw-bolder text-hover-primary fs-6'>"+result[i].position+"</a>";
-                        tableresult +="<span class='text-muted fw-bold text-muted d-block fs-7'>"+result[i].nameatasan+"</span>";
-                        
+                        tableresult +="<span class='fw-bold text-muted d-block fs-7'>"+result[i].nameatasan+"</span>";
                         tableresult +="</div>";
 
                     tableresult +="</div>";
@@ -48,6 +47,7 @@ function historyposition() {
                     }else{
                         tableresult +="<td><div class='badge badge-light-danger fw-bolder'>In Active</div></td>";
                     }
+                    tableresult +="<td class='text-end'><span class='fw-bold d-block fs-7'>"+result[i].dibuatoleh+"</span><span class='fw-bold text-muted d-block fs-7'>"+result[i].CREATED_DATE+"</span></td>";
                     tableresult +="</tr>";
                 }
             }

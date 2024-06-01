@@ -199,7 +199,7 @@ function charttodolist() {
                     data: {
                         datasets: [{
                             data: nilai1,
-                            backgroundColor: ["#00A3FF", "#50CD89", "#E4E6EF"]
+                            backgroundColor: ["#50CD89","#F64E60","#B5B5C3"]
                         }],
                         labels: label
                     },
