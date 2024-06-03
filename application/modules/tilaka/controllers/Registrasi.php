@@ -149,14 +149,8 @@
             $response = Tilaka::checkcertificateuser(json_encode($body));
             
             if($response['success']){
-                if($response['status']===2){
+                if($response['status']===2 || $response['status']===4){
                     $data['CERTIFICATE']=$response['status'];
-                    $this->md->updatedatauser($data,$userid);
-                }
-
-                if($response['status']===4){
-                    $data['REGISTER_ID']    = "";
-                    $data['IMAGE_IDENTITY'] = "N";
                     $this->md->updatedatauser($data,$userid);
                 }
             }

@@ -21,7 +21,7 @@
             $result = $this->md->dataupload(ORG_ID,"0");
             if(!empty($result)){
                 foreach($result as $a){
-                    $location = PATHFILE_GET."/".$a->NO_FILE.".pdf";
+                    $location = PATHFILE_GET_TILAKA."/".$a->NO_FILE.".pdf";
                     if(file_exists($location)){
                         $response = Tilaka::uploadfile($location);
                         if($response['success']){
@@ -129,48 +129,6 @@
             }
         }
 
-        // public function excutesign_POST(){
-        //     $result = $this->md->dataexecutesign("1");
-        //     if(!empty($result)){
-        //         foreach($result as $a){
-        //             $body['request_id']      = $a->REQUEST_ID;
-        //             $body['user_identifier'] = $a->USER_IDENTIFIER;
-        //             $body['hmac_nonce']      = "";
-        //             $response = Tilaka::excutesign(json_encode($body));
-
-        //             if($response['status']==="DONE"){
-        //                 $dataupdate['STATUS']="2";
-        //                 $this->md->updateauthurl($dataupdate,$a->URL_ID);
-        
-        //                 $bodydownload['request_id'] = $a->REQUEST_ID;
-        //                 $response = Tilaka::excutesignstatus(json_encode($bodydownload));
-        
-        //                 if($response['success']){
-        //                     $dataupdate['STATUS']="3";
-        //                     $this->md->updateauthurl($dataupdate,$a->URL_ID);
-        
-        //                     foreach($response['list_pdf'] as $a){
-        //                         $filename           = $a['filename'];
-
-        //                         $updatefile['STATUS_SIGN'] = "3";
-        //                         $updatefile['LINK']        = $a['presigned_url'];
-        //                         $this->md->updatelinkdownload($updatefile,$filename);
-
-        //                         $fileContent = file_get_contents(htmlspecialchars_decode($a['presigned_url']));
-        //                         if ($fileContent !== false) {
-        //                             $resultchecknofile = $this->md->checknofile($filename);
-        //                             $destinationPath   = PATHFILE.DIRECTORY_SEPARATOR.$resultchecknofile[0]->NO_FILE.".pdf";
-        //                             file_put_contents($destinationPath, $fileContent);
-        //                         }
-        //                     }
-        //                 }
-        //             }
-        //         }
-
-        //         $this->response($response,REST_Controller::HTTP_OK);
-        //     }
-        // }
-
         public function excutesign_POST(){
             $result = $this->md->dataexecutesign("1");
             if(!empty($result)){
@@ -211,7 +169,7 @@
                             $fileContent = file_get_contents(htmlspecialchars_decode($a['presigned_url']));
                             if ($fileContent !== false) {
                                 $resultchecknofile = $this->md->checknofile($filename);
-                                $destinationPath   = PATHFILE_POST.DIRECTORY_SEPARATOR.$resultchecknofile[0]->NO_FILE.".pdf";
+                                $destinationPath   = PATHFILE_POST_TILAKA.DIRECTORY_SEPARATOR.$resultchecknofile[0]->NO_FILE.".pdf";
                                 file_put_contents($destinationPath, $fileContent);
                             }
                         }

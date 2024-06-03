@@ -119,6 +119,7 @@ function certificatestatus(btn){
             toastr["info"]("Sending request...", "Please wait");
         },
         success:function(data){
+            toastr.clear();
             var result        = data.responResult;
 
             if(result['success']===false){
@@ -398,6 +399,7 @@ function datakaryawan(){
             $("#resultmasterkaryawan").html("");
         },
         success:function(data){
+            toastr.clear();
             var result      = "";
             var tableresult = "";
             var getvariabel = "";
@@ -422,16 +424,16 @@ function datakaryawan(){
                                     "data-issueid='"+result[i].ISSUE_ID+"'"+
                                     "data-email='"+result[i].EMAIL+"'";
 
-                    btnedit      = "<a class='dropdown-item btn btn-sm' data-bs-toggle='modal' data-bs-target='#modal-edituser' "+getvariabel+" onclick='getdataedit($(this));'><i class='bi bi-pencil'></i> Perbaharui Data</a>";
-                    btnpengajuan = "<a class='dropdown-item btn btn-sm' data-bs-toggle='modal' data-bs-target='#modal-registerusertilaka' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-person-add'></i> Pengajuan</a>";
+                    btnedit             = "<a class='dropdown-item btn btn-sm' data-bs-toggle='modal' data-bs-target='#modal-edituser' "+getvariabel+" onclick='getdataedit($(this));'><i class='bi bi-pencil'></i> Perbaharui Data</a>";
+                    btnpengajuan        = "<a class='dropdown-item btn btn-sm' data-bs-toggle='modal' data-bs-target='#modal-registerusertilaka' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-person-add'></i> Pengajuan</a>";
                     
-                    btnreenroll    = "<a class='dropdown-item btn btn-sm' "+getvariabel+" onclick='reenroll(this)' title='Re Enroll'><i class='fa-solid fa-user-clock text-success'></i> Re Enroll</a>";
-                    btncheckstatus = "<a class='dropdown-item btn btn-sm' "+getvariabel+" onclick='certificatestatus(this)'><i class='fa-solid fa-circle-check text-success'></i> Check Status</a>";
-                    btnrevoke      = "<a class='dropdown-item btn btn-sm' "+getvariabel+" onclick='revoke(this)'><i class='fa-solid fa-user-slash text-danger'></i> Revoke</a>";
-
+                    btnreenroll         = "<a class='dropdown-item btn btn-sm' "+getvariabel+" onclick='reenroll(this)' title='Re Enroll'><i class='fa-solid fa-user-clock text-success'></i> Re Enroll</a>";
+                    btncheckstatus      = "<a class='dropdown-item btn btn-sm' "+getvariabel+" onclick='certificatestatus(this)'><i class='fa-solid fa-circle-check text-success'></i> Check Status</a>";
+                    btnrevoke           = "<a class='dropdown-item btn btn-sm' "+getvariabel+" onclick='revoke(this)'><i class='fa-solid fa-user-slash text-danger'></i> Revoke</a>";
                     btnverifpengajuan   = "<a class='dropdown-item btn btn-sm' href='"+tilakabaseurl+"personal-webview/guide?request_id="+result[i].REGISTER_ID+"&redirect_url="+url+"index.php/tilaka/registrasi'><i class='fa-solid fa-list-check'></i> Verification Pengajuan</a>";
                     btnverifikasienroll = "<a class='dropdown-item btn btn-sm' href='"+tilakabaseurl+"personal-webview/kyc/re-enroll?issue_id="+result[i].ISSUE_ID+"&redirect_url="+url+"index.php/tilaka/registrasi'><i class='fa-solid fa-list-check'></i> Verification Re Enroll</a>";
                     btnappcertificate   = "<a class='dropdown-item btn btn-sm' href='"+tilakabaseurl+"personal-webview/link-account?setting=1&channel_id="+clientidtilaka+"&request_id="+result[i].REGISTER_ID+"&redirect_url="+url+"index.php/tilaka/registrasi'><i class='fa-solid fa-file-circle-check'></i> Approval Certificate</a>";
+                    
                     btnapprevoke        = "<a class='dropdown-item btn btn-sm' href='"+tilakabaseurl+"personal-webview/kyc/revoke?revoke_id="+result[i].REVOKE_ID+"&redirect_url="+url+"index.php/tilaka/registrasi' title='Revoke Approval'><i class='fa-solid fa-user-slash text-danger'></i> Revoke Approval</a>";
                     btngantimfa         = "<a class='dropdown-item btn btn-sm' href='"+tilakabaseurl+"personal-webview/login?setting=2&tilaka_name="+result[i].USER_IDENTIFIER+"&redirect_url="+url+"index.php/tilaka/registrasi&channel_id="+clientidtilaka+"'><i class='fa-solid fa-arrows-spin text-primary'></i> Change MFA</a>";
 
@@ -509,7 +511,11 @@ function datakaryawan(){
                                 tableresult +="</a>";
                             tableresult +="</div>";
                             tableresult +="<div class='d-flex flex-column'>";
-                                tableresult +="<a href='#' class='text-gray-800 text-hover-primary mb-1'>"+result[i].NAME+"</a>";
+                                if(result[i].REGISTER_ID!=""){
+                                    tableresult +="<a class='text-gray-800 text-hover-primary mb-1' href='#' "+getvariabel+" onclick='certificatestatus(this)'>"+result[i].NAME+"</a>";
+                                }else{
+                                    tableresult +="<a class='text-gray-800 text-hover-primary mb-1' href='#'>"+result[i].NAME+"</a>";
+                                }
                                 tableresult +="<span>"+(result[i].EMAIL ? result[i].EMAIL : "-")+"</span>";
                             tableresult +="</div>";
                     tableresult +="</td>";
