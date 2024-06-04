@@ -72,7 +72,7 @@ function getdataedit(btn){
 	$("input[name='nikrs-edit']").val(nik);
 	$("input[name='namakaryawan-edit']").val(nama);
 
-    if(namaktp===""){
+    if(namaktp==="null"){
         $("input[name='namaktp-edit']").val(nama);
     }else{
         $("input[name='namaktp-edit']").val(namaktp);
@@ -447,7 +447,7 @@ function datakaryawan(){
                         btnaction = btnedit+btnpengajuan;
                     }
 
-                    if(result[i].REGISTER_ID!="" && result[i].USER_IDENTIFIER===""){
+                    if((result[i].REGISTER_ID!="" && result[i].USER_IDENTIFIER==="") || (result[i].REGISTER_ID!="" && result[i].USER_IDENTIFIER!="") ){
                         statususer ="<td><div class='badge badge-light-success fw-bolder'>Pengajuan Berhasil</div><div class='small'>Silakan Melakukan face recognition</div></td>";
                         btnaction = btnverifpengajuan;
                     }

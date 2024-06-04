@@ -278,7 +278,7 @@
                     if($responseuuid['success']){
                         $body['registration_id']   = $responseuuid['data'][0];
                         $body['email']             = $result->EMAIL;
-                        $body['name']              = $result->NAME_IDENTIY;
+                        $body['name']              = $result->NAME_IDENTITY;
                         $body['company_name']      = $_SESSION['hospitalname'];
                         $body['date_expire']       = $expireddate;
                         $body['nik']               = $result->IDENTITY_NO;
