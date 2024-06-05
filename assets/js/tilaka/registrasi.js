@@ -478,7 +478,7 @@ function datakaryawan(){
                     }
 
                     if(result[i].REGISTER_ID!="" &&  result[i].USER_IDENTIFIER!="" && result[i].CERTIFICATE==="4"){
-                        statususer ="<td><div class='badge badge-light-danger fw-bolder'>Pengajuan Di Tolak Tilaka</div><div class='small'>Silakan Lakukan Persetujuan Sertifikat Tanda Tangan Elektronik</div></td>";
+                        statususer ="<td><div class='badge badge-light-danger fw-bolder'>Pengajuan Di Tolak Tilaka</div><div class='small'>Silakan Melakukan Pengajuan Sertifikat Tanda Tangan Elektronik</div></td>";
                         btnaction = btnedit+btnpengajuan;
                     }
 
