@@ -1,8 +1,8 @@
 dataexecutesign();
 
-setInterval(() => {
-    dataexecutesign();
-}, 10000);
+// setInterval(() => {
+//     dataexecutesign();
+// }, 10000);
 
 function dataexecutesign(){
     $.ajax({

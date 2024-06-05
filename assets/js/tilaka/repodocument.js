@@ -1,8 +1,8 @@
 dataupload();
 
-setInterval(() => {
-    dataupload();
-}, 10000);
+// setInterval(() => {
+//     dataupload();
+// }, 10000);
 
 
 function dataupload(){
