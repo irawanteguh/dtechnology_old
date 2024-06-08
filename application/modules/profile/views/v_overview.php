@@ -207,3 +207,121 @@
         </form>
     </div>
 </div>
+
+<div class="col-lg-12">
+    <div class="card card-flush h-lg-100">
+        <!--begin::Card header-->
+        <div class="card-header">
+            <!--begin::Title-->
+            <div class="card-title">
+                <h3 class="text-danger">Emergency Contact</h3>
+            </div>
+            <!--end::Title-->
+        </div>
+        <!--end::Card header-->
+        <!--begin::Card body-->
+        <div class="card-body">
+            <!--begin::Addresses-->
+            <div class="row gx-9 gy-6">
+                <!--begin::Col-->
+                <div class="col-xl-6">
+                    <!--begin::Address-->
+                    <div class="card card-dashed border-danger border-3 h-xl-100 flex-row flex-stack flex-wrap p-6">
+                        <!--begin::Details-->
+                        <div class="d-flex flex-column py-2">
+                            <div class="d-flex align-items-center fs-5 fw-bolder mb-5">Address 1
+                            <span class="badge badge-light-success fs-7 ms-2">Primary</span></div>
+                            <div class="fs-6 fw-bold text-gray-600">Ap #285-7193 Ullamcorper Avenue
+                            <br>Amesbury HI 93373
+                            <br>US</div>
+                        </div>
+                        <!--end::Details-->
+                        <!--begin::Actions-->
+                        <div class="d-flex align-items-center py-2">
+                            <button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-3">Delete</button>
+                            <button class="btn btn-sm btn-light btn-active-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_new_address">Edit</button>
+                        </div>
+                        <!--end::Actions-->
+                    </div>
+                    <!--end::Address-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-6">
+                    <!--begin::Address-->
+                    <div class="card card-dashed h-xl-100 flex-row flex-stack flex-wrap p-6">
+                        <!--begin::Details-->
+                        <div class="d-flex flex-column py-2">
+                            <div class="d-flex align-items-center fs-5 fw-bolder mb-3">Address 2</div>
+                            <div class="fs-6 fw-bold text-gray-600">Ap #285-7193 Ullamcorper Avenue
+                            <br>Amesbury HI 93373
+                            <br>US</div>
+                        </div>
+                        <!--end::Details-->
+                        <!--begin::Actions-->
+                        <div class="d-flex align-items-center py-2">
+                            <button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-3">Delete</button>
+                            <button class="btn btn-sm btn-light btn-active-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_new_address">Edit</button>
+                        </div>
+                        <!--end::Actions-->
+                    </div>
+                    <!--end::Address-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-6">
+                    <!--begin::Address-->
+                    <div class="card card-dashed h-xl-100 flex-row flex-stack flex-wrap p-6">
+                        <!--begin::Details-->
+                        <div class="d-flex flex-column py-2">
+                            <div class="d-flex align-items-center fs-5 fw-bolder mb-3">Address 3</div>
+                            <div class="fs-6 fw-bold text-gray-600">Ap #285-7193 Ullamcorper Avenue
+                            <br>Amesbury HI 93373
+                            <br>US</div>
+                        </div>
+                        <!--end::Details-->
+                        <!--begin::Actions-->
+                        <div class="d-flex align-items-center py-2">
+                            <button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-3">Delete</button>
+                            <button class="btn btn-sm btn-light btn-active-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_new_address">Edit</button>
+                        </div>
+                        <!--end::Actions-->
+                    </div>
+                    <!--end::Address-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-6">
+                    <!--begin::Notice-->
+                    <div class="notice d-flex bg-light-danger rounded border-danger border-3 border border-dashed flex-stack h-xl-100 mb-10 p-6">
+                        <!--begin::Wrapper-->
+                        <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
+                            <!--begin::Content-->
+                            <div class="mb-3 mb-md-0 fw-bold">
+                                <h4 class="text-gray-900 fw-bolder">This is a very important note!</h4>
+                                <div class="fs-6 text-gray-700 pe-7">Writing headlines for blog posts is much science and probably cool audience</div>
+                            </div>
+                            <!--end::Content-->
+                            <!--begin::Action-->
+                            <a href="#" class="btn btn-danger px-6 align-self-center text-nowrap" data-bs-toggle="modal" data-bs-target="#kt_modal_new_address">New Contact</a>
+                            <!--end::Action-->
+                        </div>
+                        <!--end::Wrapper-->
+                    </div>
+                    <!--end::Notice-->
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Addresses-->
+            <!--begin::Tax info-->
+            <div class="mt-10">
+                <h3 class="mb-3">Tax Location</h3>
+                <div class="fw-bold text-gray-600 fs-6">United States - 10% VAT
+                <br>
+                <a class="fw-bolder" href="#">More Info</a></div>
+            </div>
+            <!--end::Tax info-->
+        </div>
+        <!--end::Card body-->
+    </div>
+</div>

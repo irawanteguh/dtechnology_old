@@ -14,7 +14,7 @@
 		}
         
 		public function loadcombobox(){
-            $resultactivityr= $this->md->activity();
+            $resultactivityr= $this->md->activity(ORG_ID, $_SESSION['userid']);
             $activity="";
             foreach($resultactivityr as $a ){
                 $activity.="<option value='".$a->activity_id."'>".$a->keterangan."</option>";

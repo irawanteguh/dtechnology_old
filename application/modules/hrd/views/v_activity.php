@@ -1,11 +1,11 @@
-<div class="col-md-6 card mb-5">
-    <div class="card-header border-0 pt-5">
-        <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">Data Penempatan Karyawan</span>
-            <span class="text-muted mt-1 fw-bold fs-7">Over 300 Position</span>
+<div class="card card-flush">
+	<div class="card-header pt-5">
+		<h3 class="card-title align-items-start flex-column">
+            <span class="card-label fw-bolder fs-3 mb-1">List Activity</span>
+            <span class="text-muted mt-1 fw-bold fs-7" id="info_list_activity"></span>
         </h3>
-        <div class="card-toolbar">
-			<!-- <button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+		<div class="card-toolbar">
+			<button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
 				<span class="svg-icon svg-icon-2">
 					<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
 						<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -16,55 +16,27 @@
 						</g>
 					</svg>
 				</span>
-			</button> -->
-			<!-- <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">
+			</button>
+			<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">
 				<div class="menu-item px-3">
-					<div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">Payments</div>
+					<a href="#" class="menu-link flex-stack px-3">Add Activity
+					<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="" data-bs-original-title="Add Activity" aria-label="Specify a target name for future usage and reference"></i></a>
 				</div>
-				<div class="menu-item px-3">
-					<a href="#" class="menu-link px-3">Create Invoice</a>
-				</div>
-				<div class="menu-item px-3">
-					<a href="#" class="menu-link flex-stack px-3">Create Payment
-					<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="" data-bs-original-title="Specify a target name for future usage and reference" aria-label="Specify a target name for future usage and reference"></i></a>
-				</div>
-				<div class="menu-item px-3">
-					<a href="#" class="menu-link px-3">Generate Bill</a>
-				</div>
-				<div class="menu-item px-3" data-kt-menu-trigger="hover" data-kt-menu-placement="right-end">
-					<a href="#" class="menu-link px-3">
-						<span class="menu-title">Subscription</span>
-						<span class="menu-arrow"></span>
-					</a>
-					<div class="menu-sub menu-sub-dropdown w-175px py-4">
-						<div class="menu-item px-3">
-							<a href="#" class="menu-link px-3">Plans</a>
-						</div>
-						<div class="menu-item px-3">
-							<a href="#" class="menu-link px-3">Billing</a>
-						</div>
-						<div class="menu-item px-3">
-							<a href="#" class="menu-link px-3">Statements</a>
-						</div>
-						<div class="separator my-2"></div>
-						<div class="menu-item px-3">
-							<div class="menu-content px-3">
-								<label class="form-check form-switch form-check-custom form-check-solid">
-									<input class="form-check-input w-30px h-20px" type="checkbox" value="1" checked="checked" name="notifications">
-									<span class="form-check-label text-muted fs-6">Recuring</span>
-								</label>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="menu-item px-3 my-1">
-					<a href="#" class="menu-link px-3">Settings</a>
-				</div>
-			</div> -->
+			</div>
 		</div>
-    </div>
-    <div class="card-body py-3">
-        
-    </div>
+	</div>
+	<div class="card-body py-3 border-info">
+		<div class="table-responsive">
+			<table class="table align-middle table-row-dashed fs-6 gy-2" id="tablemasterkaryawan">
+				<thead>
+					<tr class="fw-bolder text-muted bg-light">
+						<th class="ps-4 rounded-start">Activity Name</th>
+						<th>Duration</th>
+						<th class="pe-4 text-end rounded-end">Actions</th>
+					</tr>
+				</thead>
+				<tbody class="text-gray-600 fw-bold" id="resutlmasteractivity"></tbody>
+			</table>
+		</div>
+	</div>
 </div>
-

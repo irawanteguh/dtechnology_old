@@ -33,7 +33,6 @@
                     "imgprofile"   => $datasession->image_profile,
                     "email"        => $datasession->email,
                     "alamat"       => $datasession->address,
-                    "position"     => $datasession->position,
                     "loggedin"     => true,
                     "timeout"      => false
                 );

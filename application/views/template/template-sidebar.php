@@ -75,13 +75,9 @@
 			}
 
 			$segment   = $this->uri->segment(1);
-			$directory = APPPATH.'modules/'.$segment.'/modal/';
-			if (is_dir($directory)) {
-				$files = glob($directory . '*.php');
-				foreach ($files as $file){
-					include($file);
-				}
-			}
+			$directory = APPPATH.'modules/'.$segment.'/modal/'.$this->uri->segment(2);
+			include($directory.".php");
+			
 		?>
 		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
 			<span class="svg-icon">

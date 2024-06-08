@@ -71,7 +71,7 @@
                         </div>
                         <div class="fv-row">
                             <label class="fs-6 fw-bold mb-2">Activity Description</label>
-                            <textarea class="form-control form-control-solid" name="" id="" placeholder="Silakan masukan kegiatan anda secara detail" rows="5"></textarea>
+                            <textarea data-kt-autosize="true" class="form-control form-control-solid" name="" id="" placeholder="Silakan masukan kegiatan anda secara detail"></textarea>
                         </div>
                     </div>
                 </div> 

@@ -16,7 +16,7 @@
             return $recordset;
         }
 
-        function activity($orgid,$durasi){
+        function activity($orgid,$userid){
             $query =
                     "
                         select a.activity_id, activity, durasi,
@@ -24,7 +24,21 @@
                         from dt01_hrd_activity_ms a
                         where a.active='1'
                         and   a.org_id='".$orgid."'
-                        and   a.durasi <= '".$durasi."'
+                        and   a.activity_id in (
+                                                select activity_id
+                                                from dt01_hrd_mapping_activity
+                                                where active='1'
+                                                and org_id=a.org_id
+                                                and position_id in (
+                                                                    select position_id
+                                                                    from dt01_hrd_position_dt
+                                                                    where active='1'
+                                                                    and org_id=a.org_id
+                                                                    and status='1'
+                                                                    and user_id='".$userid."'
+                                                                )
+                                            )
+                                                                    
                     ";
 
             $recordset = $this->db->query($query);
