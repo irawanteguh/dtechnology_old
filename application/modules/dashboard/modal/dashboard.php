@@ -17,7 +17,7 @@
                                 <span class="required">Todo List</span>
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Silakan Masukan Todo List Anda"></i>
                             </label>
-                            <textarea rows="2" name="todolist-kegiatan-tambah" id="todolist-kegiatan-tambah" class="form-control form-control-solid mb-2" required></textarea>
+                            <textarea data-kt-autosize="true" name="todolist-kegiatan-tambah" id="todolist-kegiatan-tambah" class="form-control form-control-solid mb-2" required></textarea>
                         </div>
                         <div class="col-md-6">
                             <label class="required fs-6 fw-bold mb-2">Due Date</label>

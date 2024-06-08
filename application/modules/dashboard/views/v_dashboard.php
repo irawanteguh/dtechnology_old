@@ -12,7 +12,7 @@
                 <div class="position-relative d-flex flex-center h-175px w-175px me-15 mb-7">
                     <div class="position-absolute translate-middle start-50 top-50 d-flex flex-column flex-center">
                         <span class="fs-2qx fw-bolder" id="allcount"></span>
-                        <span class="fs-6 fw-bold text-gray-400">Total Tasks</span>
+                        <span class="fs-6 fw-bold text-gray-400">Active</span>
                     </div>
                     <canvas id="todolist-chart" width="262" height="262" style="display: block; box-sizing: border-box; height: 174.667px; width: 174.667px;"></canvas>
                 </div>

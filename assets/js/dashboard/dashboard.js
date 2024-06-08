@@ -62,11 +62,11 @@ function todolist() {
     
                         var tableresult = "<div class='d-flex align-items-center mb-8'>";
     
-                        if (result[i].PRIORITY === "1") {
+                        if (result[i].PRIORITY === "0") {
                             tableresult += "<span class='bullet bullet-vertical h-40px bg-success'></span>";
-                        } else if (result[i].PRIORITY === "2") {
+                        } else if (result[i].PRIORITY === "1") {
                             tableresult += "<span class='bullet bullet-vertical h-40px bg-primary'></span>";
-                        } else if (result[i].PRIORITY === "3") {
+                        } else if (result[i].PRIORITY === "2") {
                             tableresult += "<span class='bullet bullet-vertical h-40px bg-warning'></span>";
                         } else {
                             tableresult += "<span class='bullet bullet-vertical h-40px bg-danger'></span>";
@@ -94,11 +94,11 @@ function todolist() {
                         tableresult += "<span class='text-muted fw-bold d-block'>"+assignby+"</span>";
                         tableresult += "</div>";
     
-                        if (result[i].PRIORITY === "1") {
+                        if (result[i].PRIORITY === "0") {
                             tableresult += "<span class='badge badge-light-success fs-8 fw-bolder'>Low</span>";
-                        } else if (result[i].PRIORITY === "2") {
+                        } else if (result[i].PRIORITY === "1") {
                             tableresult += "<span class='badge badge-light-primary fs-8 fw-bolder'>Medium Low</span>";
-                        } else if (result[i].PRIORITY === "3") {
+                        } else if (result[i].PRIORITY === "2") {
                             tableresult += "<span class='badge badge-light-warning fs-8 fw-bolder'>Medium High</span>";
                         } else {
                             tableresult += "<span class='badge badge-light-danger fs-8 fw-bolder'>High</span>";

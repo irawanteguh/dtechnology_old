@@ -6,9 +6,9 @@
 
 	$db['dtech'] = array(
 		'dsn'          => '',
-		'hostname'     => '192.168.102.12',
-		'username'     => 'geri',
-		'password'     => 'coba',
+		'hostname'     => '10.12.120.118',
+		'username'     => 'MELON2',
+		'password'     => 'T@npaPassword',
 		'database'     => 'sikms',
 		'dbdriver'     => 'mysqli',
 		'dbprefix'     => '',

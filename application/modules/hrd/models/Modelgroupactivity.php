@@ -5,8 +5,9 @@
             $query =
                     "
                         select a.ORG_ID, POSITION_ID, POSITION, RVU, LEVEL, LEVEL_FUNGSIONAL, DATE_FORMAT(LAST_UPDATE_DATE,'%d.%m.%Y %H:%i:%s')LASTUPDATEDATE,
-                        (select IFNULL(name, 'Unknown')  from  dt01_gen_user_data where active = '1' and org_id = a.org_id and user_id = IFNULL(a.CREATED_BY, a.LAST_UPDATE_BY)) LASTUPDATEDBY,
-                        (select level from dt01_gen_level_fungsional_ms where active='1' and level_id=a.LEVEL_FUNGSIONAL)FUNCTIONAL
+                            (select IFNULL(name, 'Unknown')  from  dt01_gen_user_data where active = '1' and org_id = a.org_id and user_id = IFNULL(a.CREATED_BY, a.LAST_UPDATE_BY)) LASTUPDATEDBY,
+                            (select level from dt01_gen_level_fungsional_ms where active='1' and level_id=a.LEVEL_FUNGSIONAL)FUNCTIONAL,
+                            (select count(user_id) from dt01_hrd_position_dt where active='1' and status='1' and position_primary='Y' and org_id=a.org_id and position_id=a.position_id)jml
                         from dt01_hrd_position_ms a
                         where a.active='1'
                         and   a.org_id='".$orgid."'
@@ -37,8 +38,7 @@
             return $recordset;
         }
 
-        function checkdata($orgid,$positionid,$activityid)
-        {
+        function checkdata($orgid,$positionid,$activityid){
             $query =
                     "
                         select a.transaksi_id
@@ -53,14 +53,12 @@
             return $recordset;
         }
 
-        function updatemapping($positionid,$activityid,$data)
-        {           
+        function updatemapping($positionid,$activityid,$data){           
             $sql =   $this->db->update("dt01_hrd_mapping_activity",$data,array("position_id"=>$positionid,"activity_id"=>$activityid));
             return $sql;
         }
 
-        function insertmapping($data)
-        {           
+        function insertmapping($data){           
             $sql =   $this->db->insert("dt01_hrd_mapping_activity",$data);
             return $sql;
         }

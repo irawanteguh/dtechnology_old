@@ -73,6 +73,7 @@
                                     WHEN a.status = '1' THEN 'Completed'
                                     ELSE 'Unknown'
                                 END
+                        order by status asc
                 
                     ";
 

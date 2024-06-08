@@ -13,7 +13,7 @@
 		}
 
         public function daftarjabatan(){
-			$search = $this->input->post("search");
+			$search = "";
             $result = $this->md->daftarjabatan(ORG_ID,$search);
             
 			if(!empty($result)){
@@ -31,7 +31,7 @@
         }
 
         public function daftarkegiatan(){
-            $search     = $this->input->post("search");
+            $search     = "";
             $positionid = $this->input->post("positionid");
             $result     = $this->md->daftarkegiatan(ORG_ID,$positionid,$search);
             
@@ -49,5 +49,50 @@
             echo json_encode($json);
         }
 
+        public function mappingactivity(){
+            $switchId    = $this->input->post("switchId");
+            $switchValue = $this->input->post("switchValue");
+            $positionid  = $this->input->post("positionid");
+
+            if($switchValue==="true"){
+                $data['active']="1";
+            }else{
+                $data['active']="0";
+            }
+
+            
+            $resultcheckdata =  $this->md->checkdata($_SESSION['orgid'],$positionid,$switchId);
+
+            if(!empty($resultcheckdata)){
+                $data['last_update_by']=$_SESSION['userid'];
+                if($this->md->updatemapping($positionid,$switchId,$data)){
+                    $json["responCode"]="00";
+                    $json["responHead"]="success";
+                    $json["responDesc"]="Activity Success";
+                }else{
+                    $json["responCode"]="01";
+                    $json["responHead"]="info";
+                    $json["responDesc"]="Activity Field";
+                }
+            }else{
+                $data['ORG_ID']       = $_SESSION['orgid'];
+                $data['TRANSAKSI_ID'] = generateuuid();
+                $data['POSITION_ID']  = $positionid;
+                $data['ACTIVITY_ID']  = $switchId;
+                $data['CREATED_BY']   = $_SESSION['userid'];
+
+                if($this->md->insertmapping($data)){
+                    $json["responCode"]="00";
+                    $json["responHead"]="success";
+                    $json["responDesc"]="Activity Success";
+                }else{
+                    $json["responCode"]="01";
+                    $json["responHead"]="info";
+                    $json["responDesc"]="Activity Field";
+                }
+            }
+
+            echo json_encode($json);
+        }
 	}
 ?>
