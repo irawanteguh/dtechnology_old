@@ -75,7 +75,7 @@
 			}
 
 			$segment   = $this->uri->segment(1);
-			$directory = APPPATH.'modules/'.$segment.'/modal/'.$this->uri->segment(2)."php";
+			$directory = APPPATH.'modules/'.$segment.'/modal/'.$this->uri->segment(2).".php";
 			if(file_exists($directory)){
 				include($directory);
 			}

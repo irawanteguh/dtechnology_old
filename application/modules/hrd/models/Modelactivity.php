@@ -16,6 +16,11 @@
             return $recordset;
         }
 
+        function insertmasteractivity($data){           
+            $sql =   $this->db->insert("dt01_hrd_activity_ms",$data);
+            return $sql;
+        }
+
         function updatemasteactivity($activityid,$data){           
             $sql =   $this->db->update("dt01_hrd_activity_ms",$data,array("activity_id"=>$activityid));
             return $sql;

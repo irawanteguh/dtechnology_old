@@ -522,7 +522,7 @@
 						</div>
 					</div> -->
 
-					<!-- <div class="d-flex align-items-center ms-1 ms-lg-3">
+					<div class="d-flex align-items-center ms-1 ms-lg-3">
 						<div class="btn btn-icon btn-active-light-primary position-relative w-30px h-30px w-md-40px h-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
 							<span class="svg-icon svg-icon-1">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -534,15 +534,15 @@
 							</span>
 						</div>
 						<div class="menu menu-sub menu-sub-dropdown menu-column w-350px w-lg-375px" data-kt-menu="true">
-							<div class="d-flex flex-column bgi-no-repeat rounded-top" style="background-image:url('assets/media/misc/pattern-1.jpg')">
+							<div class="d-flex flex-column bgi-no-repeat rounded-top" style="background-image:url('<?php echo base_url('assets/images/misc/pattern-1.jpg'); ?>')">
 								<h3 class="text-white fw-bold px-9 mt-10 mb-6">Notifications
 								<span class="fs-8 opacity-75 ps-3">24 reports</span></h3>
 								<ul class="nav nav-line-tabs nav-line-tabs-2x nav-stretch fw-bold px-9">
 									<li class="nav-item">
-										<a class="nav-link text-white opacity-75 opacity-state-100 pb-4" data-bs-toggle="tab" href="#kt_topbar_notifications_1">Alerts</a>
+										<a class="nav-link text-white opacity-75 opacity-state-100 pb-4 active" data-bs-toggle="tab" href="#kt_topbar_notifications_1">Alerts</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link text-white opacity-75 opacity-state-100 pb-4 active" data-bs-toggle="tab" href="#kt_topbar_notifications_2">Updates</a>
+										<a class="nav-link text-white opacity-75 opacity-state-100 pb-4" data-bs-toggle="tab" href="#kt_topbar_notifications_2">Updates</a>
 									</li>
 									<li class="nav-item">
 										<a class="nav-link text-white opacity-75 opacity-state-100 pb-4" data-bs-toggle="tab" href="#kt_topbar_notifications_3">Logs</a>
@@ -550,7 +550,7 @@
 								</ul>
 							</div>
 							<div class="tab-content">
-								<div class="tab-pane fade" id="kt_topbar_notifications_1" role="tabpanel">
+								<div class="tab-pane fade show active" id="kt_topbar_notifications_1" role="tabpanel">
 									<div class="scroll-y mh-325px my-5 px-8">
 										<div class="d-flex flex-stack py-4">
 											<div class="d-flex align-items-center">
@@ -700,7 +700,7 @@
 										</a>
 									</div>
 								</div>
-								<div class="tab-pane fade show active" id="kt_topbar_notifications_2" role="tabpanel">
+								<div class="tab-pane fade" id="kt_topbar_notifications_2" role="tabpanel">
 									<div class="d-flex flex-column px-9">
 										<div class="pt-10 pb-0">
 											<h3 class="text-dark text-center fw-bolder">Get Pro Access</h3>
@@ -710,7 +710,7 @@
 											</div>
 										</div>
 										<div class="text-center px-4">
-											<img class="mw-100 mh-200px" alt="image" src="assets/media/illustrations/sketchy-1/1.png" />
+
 										</div>
 									</div>
 								</div>
@@ -802,7 +802,7 @@
 										</div>
 									</div>
 									<div class="py-3 text-center border-top">
-										<a href="../../demo1/dist/pages/profile/activity.html" class="btn btn-color-gray-600 btn-active-color-primary">View All
+										<a href="../operation/logservice" class="btn btn-color-gray-600 btn-active-color-primary">View All
 											<span class="svg-icon svg-icon-5">
 												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 													<rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black" />
@@ -814,7 +814,7 @@
 								</div>
 							</div>
 						</div>
-					</div> -->
+					</div>
 
 					<!-- <div class="d-flex align-items-center ms-1 ms-lg-3">
 						<div class="btn btn-icon btn-active-light-primary position-relative w-30px h-30px w-md-40px h-md-40px" id="kt_drawer_chat_toggle">

@@ -52,7 +52,7 @@ function datalog(){
                         var requestBody = result[i].REQUEST_BODY; // Fallback to original if not a valid JSON
                     }
                     tableresult +="<h6>Request Body</h6>";
-                    tableresult += "<textarea rows='30' class='form-control form-control-solid'>" + requestBody + "</textarea>";
+                    tableresult += "<textarea rows='30' class='form-control form-control-solid' readonly>" + requestBody + "</textarea>";
 
                     tableresult += "</div>";
                     tableresult += "<div class='col-md-6'>";
@@ -63,7 +63,7 @@ function datalog(){
                         var responseBody = result[i].RESPONSE_BODY; // Fallback to original if not a valid JSON
                     }
                     tableresult +="<h6>Response Body</h6>";
-                    tableresult += "<textarea rows='30' class='form-control form-control-solid'>" + responseBody + "</textarea>";
+                    tableresult += "<textarea rows='30' class='form-control form-control-solid' readonly>" + responseBody + "</textarea>";
 
                     tableresult += "</div>";
                     tableresult += "</div>";
@@ -74,25 +74,6 @@ function datalog(){
             }
 
             $("#resultlogservice").html(tableresult);
-
-            // document.querySelectorAll("[data-kt-table-widget-4='expand_row']").forEach(button => {
-            //     button.addEventListener('click', function() {
-            //         const tr = this.closest('tr');
-            //         const nextTr = tr.nextElementSibling;
-            
-            //         if (nextTr.classList.contains('d-none')) {
-            //             nextTr.classList.remove('d-none');
-            //             tr.setAttribute('aria-expanded', 'true');
-            //             nextTr.setAttribute('data-kt-table-widget-4', 'subtable_template');
-            //             this.classList.add('active'); // Add the active class to the button
-            //         } else {
-            //             nextTr.classList.add('d-none');
-            //             tr.setAttribute('aria-expanded', 'false');
-            //             nextTr.removeAttribute('data-kt-table-widget-4');
-            //             this.classList.remove('active'); // Remove the active class from the button
-            //         }
-            //     });
-            // });
 
             document.querySelectorAll("[data-kt-table-widget-4='expand_row']").forEach(button => {
                 button.addEventListener('click', function() {
@@ -132,8 +113,6 @@ function datalog(){
                     }
                 });
             });
-            
-            
             
             toastr[data.responHead](data.responDesc, "INFORMATION");
 

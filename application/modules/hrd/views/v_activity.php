@@ -1,4 +1,4 @@
-<div class="card card-flush">
+<div class="card card-flush h-lg-100">
 	<div class="card-header pt-5">
 		<h3 class="card-title align-items-start flex-column">
             <span class="card-label fw-bolder fs-3 mb-1">List Activity</span>
@@ -19,13 +19,13 @@
 			</button>
 			<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">
 				<div class="menu-item px-3">
-					<a href="#" class="menu-link flex-stack px-3">Add Activity
+					<a href="#" data-bs-toggle="modal" data-bs-target="#modal_activity_add" class="menu-link flex-stack px-3">Add Activity
 					<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="" data-bs-original-title="Add Activity" aria-label="Specify a target name for future usage and reference"></i></a>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="card-body py-3 border-info">
+	<div class="card-body py-3">
 		<div class="table-responsive">
 			<table class="table align-middle table-row-dashed fs-6 gy-2" id="tablemasterkaryawan">
 				<thead>

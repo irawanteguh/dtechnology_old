@@ -21,3 +21,24 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="modal_view_pdf" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header pb-0">
+                <h1 class="mb-3">View File</h1>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-1">
+                        <i class="bi bi-x-lg"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div id="viewdoc" style="height:600px;"></div>
+            </div>
+            <div class="modal-footer p-1">				
+                <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

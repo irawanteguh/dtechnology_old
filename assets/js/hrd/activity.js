@@ -9,12 +9,17 @@ function getdata(btn){
 
     $(":hidden[name='data_activity_id_hapus']").val(data_activity_id);
     $(":hidden[name='data_activity_id_aktif']").val(data_activity_id);
+    $(":hidden[name='data_activity_id_edit']").val(data_activity_id);
 
     $(":text[name='data_activity_name_hapus']").val(data_activity_name);
-    $(":text[name='data_activity_durasi_hapus']").val(data_activity_durasi);
+    $(":text[name='data_activity_durasi_hapus']").val(data_activity_durasi+" Menit");
+    
 
     $(":text[name='data_activity_name_aktif']").val(data_activity_name);
-    $(":text[name='data_activity_durasi_aktif']").val(data_activity_durasi);
+    $(":text[name='data_activity_durasi_aktif']").val(data_activity_durasi+" Menit");
+
+    $(":text[name='data_activity_name_edit']").val(data_activity_name);
+    $(":text[name='data_activity_durasi_edit']").val(data_activity_durasi);
 
 };
 
@@ -40,9 +45,9 @@ function masteractivity(){
                     var action      = "";
                     var getvariabel = "data_activity_id='"+result[i].activity_id+"'"+
                                       "data_activity_name='"+result[i].activity+"'"+
-                                      "data_activity_durasi='"+result[i].durasi+" Menit'";
+                                      "data_activity_durasi='"+result[i].durasi+"'";
 
-                    action  ="<a class='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1' data-bs-toggle='modal' data-bs-target='#unhidemodules' "+getvariabel+" onclick='getdata(this)'><i class='bi bi-pencil-fill text-primary'></i></a>";
+                    action  ="<a class='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1' data-bs-toggle='modal' data-bs-target='#modal_activity_edit' "+getvariabel+" onclick='getdata(this)'><i class='bi bi-pencil-fill text-primary'></i></a>";
                     if(result[i].active==="1"){
                         action +="<a class='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1' data-bs-toggle='modal' data-bs-target='#modal_activity_hapus' "+getvariabel+" onclick='getdata(this)'><i class='bi bi-trash-fill text-danger'></i></a>";
                     }else{
@@ -91,7 +96,7 @@ function masteractivity(){
     return false;
 };
 
-$(document).on("submit", "#formhapusactivity", function (e) {
+$(document).on("submit", "#formaddactivity", function (e) {
 	e.preventDefault();
     e.stopPropagation();
 
@@ -107,7 +112,7 @@ $(document).on("submit", "#formhapusactivity", function (e) {
         beforeSend: function () {
             toastr.clear();
             toastr["info"]("Sending request...", "Please wait");
-			$("#btn_modules_hapus").addClass("disabled");
+			$("#btn_activity_add").addClass("disabled");
         },
 		success: function (data) {
             if (data.responCode == "00") {
@@ -119,8 +124,8 @@ $(document).on("submit", "#formhapusactivity", function (e) {
 		},
         complete: function () {
             toastr.clear();
-            $("#modal_activity_hapus").modal("hide");
-            $("#btn_modules_hapus").removeClass("disabled");
+            $("#modal_activity_add").modal("hide");
+            $("#btn_activity_add").removeClass("disabled");
 		},
         error: function(xhr, status, error) {
             Swal.fire({
@@ -140,7 +145,7 @@ $(document).on("submit", "#formhapusactivity", function (e) {
     return false;
 });
 
-$(document).on("submit", "#formaktifaktifactivity", function (e) {
+$(document).on("submit", "#formhapusactivity", function (e) {
 	e.preventDefault();
     e.stopPropagation();
 
@@ -156,7 +161,56 @@ $(document).on("submit", "#formaktifaktifactivity", function (e) {
         beforeSend: function () {
             toastr.clear();
             toastr["info"]("Sending request...", "Please wait");
-			$("#btn_modules_aktif").addClass("disabled");
+			$("#btn_activity_hapus").addClass("disabled");
+        },
+		success: function (data) {
+            if (data.responCode == "00") {
+                masteractivity();
+			}
+
+            toastr.clear();
+			toastr[data.responHead](data.responDesc, "INFORMATION");
+		},
+        complete: function () {
+            toastr.clear();
+            $("#modal_activity_hapus").modal("hide");
+            $("#btn_activity_hapus").removeClass("disabled");
+		},
+        error: function(xhr, status, error) {
+            Swal.fire({
+                title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
+                html             : "<b>"+error+"</b>",
+                icon             : "error",
+                confirmButtonText: "Please Try Again",
+                buttonsStyling   : false,
+                timerProgressBar : true,
+                timer            : 5000,
+                customClass      : {confirmButton: "btn btn-danger"},
+                showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+            });
+		}
+	});
+    return false;
+});
+
+$(document).on("submit", "#formaktifactivity", function (e) {
+	e.preventDefault();
+    e.stopPropagation();
+
+	var form = $(this);
+    var url  = $(this).attr("action");
+
+	$.ajax({
+        url       : url,
+        data      : form.serialize(),
+        method    : "POST",
+        dataType  : "JSON",
+        cache     : false,
+        beforeSend: function () {
+            toastr.clear();
+            toastr["info"]("Sending request...", "Please wait");
+			$("#btn_activity_aktif").addClass("disabled");
         },
 		success: function (data) {
             if (data.responCode == "00") {
@@ -169,7 +223,56 @@ $(document).on("submit", "#formaktifaktifactivity", function (e) {
         complete: function () {
             toastr.clear();
             $("#modal_activity_active").modal("hide");
-            $("#btn_modules_aktif").removeClass("disabled");
+            $("#btn_activity_aktif").removeClass("disabled");
+		},
+        error: function(xhr, status, error) {
+            Swal.fire({
+                title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
+                html             : "<b>"+error+"</b>",
+                icon             : "error",
+                confirmButtonText: "Please Try Again",
+                buttonsStyling   : false,
+                timerProgressBar : true,
+                timer            : 5000,
+                customClass      : {confirmButton: "btn btn-danger"},
+                showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+            });
+		}
+	});
+    return false;
+});
+
+$(document).on("submit", "#formeditactivity", function (e) {
+	e.preventDefault();
+    e.stopPropagation();
+
+	var form = $(this);
+    var url  = $(this).attr("action");
+
+	$.ajax({
+        url       : url,
+        data      : form.serialize(),
+        method    : "POST",
+        dataType  : "JSON",
+        cache     : false,
+        beforeSend: function () {
+            toastr.clear();
+            toastr["info"]("Sending request...", "Please wait");
+			$("#btn_activity_edit").addClass("disabled");
+        },
+		success: function (data) {
+            if (data.responCode == "00") {
+                masteractivity();
+			}
+
+            toastr.clear();
+			toastr[data.responHead](data.responDesc, "INFORMATION");
+		},
+        complete: function () {
+            toastr.clear();
+            $("#modal_activity_edit").modal("hide");
+            $("#btn_activity_edit").removeClass("disabled");
 		},
         error: function(xhr, status, error) {
             Swal.fire({
