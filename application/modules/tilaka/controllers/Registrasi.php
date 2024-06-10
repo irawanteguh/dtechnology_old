@@ -149,10 +149,8 @@
             $response = Tilaka::checkcertificateuser(json_encode($body));
             
             if($response['success']){
-                if($response['status']===2 || $response['status']===4){
-                    $data['CERTIFICATE']=$response['status'];
-                    $this->md->updatedatauser($data,$userid);
-                }
+                $data['CERTIFICATE']=$response['status'];
+                $this->md->updatedatauser($data,$userid);
             }
 
             $json["responCode"]   = "00";
