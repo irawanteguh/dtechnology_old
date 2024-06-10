@@ -75,8 +75,10 @@
 			}
 
 			$segment   = $this->uri->segment(1);
-			$directory = APPPATH.'modules/'.$segment.'/modal/'.$this->uri->segment(2);
-			include($directory.".php");
+			$directory = APPPATH.'modules/'.$segment.'/modal/'.$this->uri->segment(2)."php";
+			if(file_exists($directory)){
+				include($directory);
+			}
 			
 		?>
 		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
