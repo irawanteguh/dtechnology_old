@@ -2,7 +2,9 @@
     <script> var url            = '<?php echo base_url();?>'; </script>
     <script> var tilakabaseurl  = '<?php echo TILAKA_BASE_URL ?>'; </script>
     <script> var clientidtilaka = '<?php echo CLIENT_ID_TILAKA ?>'; </script>
-    <script> var pathposttilaka = '<?php echo PATHFILE_POST_TILAKA ?>'; </script>
+    <script> var pathposttilaka = '<?php echo addslashes(PATHFILE_POST_TILAKA); ?>'.replace(/\\/g, '/'); </script>
+
+
 
     <title>DTechnology</title>
     <link rel="icon" type="image/gif" href="<?php echo base_url();?>assets/favicon/favicon.png">
