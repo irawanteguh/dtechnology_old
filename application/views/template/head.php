@@ -2,7 +2,8 @@
     <script> var url            = '<?php echo base_url();?>'; </script>
     <script> var tilakabaseurl  = '<?php echo TILAKA_BASE_URL ?>'; </script>
     <script> var clientidtilaka = '<?php echo CLIENT_ID_TILAKA ?>'; </script>
-    <script> var pathposttilaka = '<?php echo addslashes(PATHFILE_POST_TILAKA); ?>'.replace(/\\/g, '/').replace(/^[CDEcde]:\/xampp\/htdocs/, 'http://localhost'); </script>
+    <script> var pathposttilaka = '<?php echo addslashes(PATHFILE_POST_TILAKA); ?>'.replace(/\\/g, '/').replace(/^[CDEcde]:\/xampp\/htdocs/, 'http://' + window.location.host); </script>
+
 
 
 
