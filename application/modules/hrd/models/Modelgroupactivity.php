@@ -23,12 +23,13 @@
         function daftarkegiatan($orgid,$positionid,$parameter){
             $query =
                     "
-                        select a.ORG_ID, ACTIVITY_ID, ACTIVITY, DURASI, DATE_FORMAT(LAST_UPDATE_DATE,'%d.%m.%Y %H:%i:%s')LASTUPDATEDATE,
+                        select a.ORG_ID, ACTIVITY_ID, ACTIVITY, DURASI,
                             (SELECT IFNULL(name, 'Unknown')  FROM  dt01_gen_user_data WHERE active = '1' AND org_id = a.org_id AND user_id = IFNULL(a.CREATED_BY, a.LAST_UPDATE_BY)) LASTUPDATEDBY,
                             (select transaksi_id from dt01_hrd_mapping_activity where active='1' and org_id=a.org_id and activity_id=a.ACTIVITY_ID and position_id='".$positionid."')transidmapping
                         from dt01_hrd_activity_ms a
                         where a.active='1'
                         and   a.org_id='".$orgid."'
+                        and   a.pk=''
                         and   upper(a.activity) like upper('%".$parameter."%')
                         order by activity asc, durasi asc
                     ";

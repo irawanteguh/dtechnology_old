@@ -39,6 +39,7 @@ function daftarjabatan(){
             var tableresult = "";
             var color       = ['danger','warning','success','primary'];
             var maxuser     = 5;
+            var jml         = 0;
 
             if(data.responCode==="00"){
                 result        = data.responResult;
@@ -148,10 +149,13 @@ function daftarjabatan(){
                     tableresult +="</div>";
                     tableresult +="</td>";
                     tableresult +="</tr>";
+
+                    jml ++;
                 }
             }
 
             $("#resultmasterposition").html(tableresult);
+            $("#info_list_position").html(todesimal(jml)+" Position");
             toastr[data.responHead](data.responDesc, "INFORMATION");
 
         },

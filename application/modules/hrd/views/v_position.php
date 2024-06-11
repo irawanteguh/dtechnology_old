@@ -1,8 +1,8 @@
 <div class="card mb-5 mb-xl-8">
     <div class="card-header border-0 pt-5">
         <h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">Data Penempatan Karyawan</span>
-            <span class="text-muted mt-1 fw-bold fs-7">Over 300 Position</span>
+            <span class="card-label fw-bolder fs-3 mb-1">List Of Position</span>
+            <span class="text-muted mt-1 fw-bold fs-7" id="info_list_position"></span>
         </h3>
         <div class="card-toolbar">
 			<!-- <button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">

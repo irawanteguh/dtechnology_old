@@ -61,7 +61,8 @@ function masteractivity(){
                     }else{
                         tableresult +="<td class='ps-4'>"+result[i].activity+" <span class='badge badge-light-danger'>Non Active</span></td>";
                     }
-                    
+
+                    tableresult +="<td class='text-start'>"+(result[i].klinis ? result[i].klinis : "")+"</td>";
                     tableresult +="<td class='text-end'>"+result[i].durasi+" Menit</td>";
                     tableresult +="<td class='text-end row'>"+action+"</td>";
                     tableresult +="</tr>";
