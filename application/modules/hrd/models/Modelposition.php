@@ -1,7 +1,7 @@
 <?php
     class Modelposition extends CI_Model{
 
-        function cekdataprimary($orgid,$userid,$positionid){
+        function cekdataprimary($orgid,$userid){
             $query =
                     "
                         select a.user_id, position_id,
@@ -10,10 +10,9 @@
 
                         from dt01_hrd_position_dt a
                         where a.active='1'
-                        and   a.org_id='".$orgid."'
                         and   a.position_primary='Y'
+                        and   a.org_id='".$orgid."'
                         and   a.user_id='".$userid."'
-                        and   a.position_id='".$positionid."'
                 
                     ";
 
