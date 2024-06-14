@@ -1,4 +1,5 @@
 masteractivity();
+
 function getdata(btn){
     var $btn = $(btn);
 
