@@ -31,7 +31,7 @@
                 <thead>
                     <tr class="fw-bolder text-muted bg-light">
                         <th class="ps-4 rounded-start">Position</th>
-                        <th>Value</th>
+                        <!-- <th>Value</th> -->
                         <th>Member Primary</th>
 						<th>Member Secondry</th>
                         <th class="pe-4 text-end rounded-end">Actions</th>

@@ -51,7 +51,7 @@ function daftarjabatan(){
 
                     tableresult +="<tr>";
                     tableresult +="<td class='ps-4'>"+result[i].POSITION+" "+(result[i].FUNCTIONAL ? result[i].FUNCTIONAL : "")+"</td>";
-                    tableresult +="<td><div>"+(result[i].LEVEL ? result[i].LEVEL : "")+"</div><div>" + (result[i].RVU ? todesimal(result[i].RVU) : "") + "</div></td>";
+                    // tableresult +="<td><div>"+(result[i].LEVEL ? result[i].LEVEL : "")+"</div><div>" + (result[i].RVU ? todesimal(result[i].RVU) : "") + "</div></td>";
                     tableresult +="<td>";
                     tableresult +="<div class='symbol-group symbol-hover flex-nowrap flex-grow-1 min-w-100px pe-2'>";
                     
@@ -67,10 +67,10 @@ function daftarjabatan(){
                         }
 
                         var userProfile = userIdsprimary[j].trim().split(':');
-                        var userId = userProfile[0];
-                        var statusimg = userProfile[1];
+                        var userId      = userProfile[0];
+                        var statusimg   = userProfile[1];
                         var nameprofile = userProfile[2];
-                        var intial = userProfile[3];
+                        var intial      = userProfile[3];
 
                         if (statusimg === "N") {
                             tableresult += "<div class='symbol symbol-circle symbol-25px' data-bs-toggle='tooltip' title='" + nameprofile + "'>";
