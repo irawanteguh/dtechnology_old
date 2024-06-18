@@ -408,11 +408,11 @@ function datakaryawan(){
             if(data.responCode==="00"){
                 result        = data.responResult;
                 for(var i in result){
-                    btnaction  = "";
-                    statususer = "<td><div class='badge badge-light-success fw-bolder'></div></td>";
 
                     var randomIndex = Math.floor(Math.random() * color.length);
                     var randomColor = color[randomIndex];
+                        btnaction   = "";
+                        statususer  = "<td><div class='badge badge-light-success fw-bolder'></div></td>";
 
                     getvariabel =   "data-userid='"+result[i].USER_ID+"'"+
                                     "data-nik='"+result[i].NIK+"'"+

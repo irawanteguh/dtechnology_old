@@ -51,18 +51,46 @@
         }
 
         public function insertpenempatan(){
-            $cekdataposisi = $this->md->cekdataposisi(ORG_ID,$this->input->post("namakaryawan-add"),$this->input->post("penempatanid-add"));
-            $cekdataprimary = $this->md->cekdataprimary(ORG_ID,$this->input->post("namakaryawan-add"),$this->input->post("penempatanid-add"));
+            $cekdataposisi  = $this->md->cekdataposisi(ORG_ID,$this->input->post("data_position_userid_registration"),$this->input->post("data_position_id_registration"));
+           
 
             if(empty($cekdataposisi)){
-                if(empty($cekdataprimary)){
+                if($this->input->post("data_position_type_registration") === "Y"){
+                    $cekdataprimary = $this->md->cekdataprimary(ORG_ID,$this->input->post("data_position_userid_registration"));
+
+                    if(empty($cekdataprimary)){
+                        $data['org_id']           = $_SESSION['orgid'];
+                        $data['trans_id']         = generateuuid();
+                        $data['user_id']          = $this->input->post("data_position_userid_registration");
+                        $data['position_id']      = $this->input->post("data_position_id_registration");
+                        $data['atasan_id']        = $this->input->post("data_position_atasan_registration");
+                        $data['start_date']       = DateTime::createFromFormat("d.m.Y", $this->input->post("data_position_tanggal_registration"))->format("Y-m-d");
+                        $data['position_primary'] = $this->input->post("data_position_type_registration");
+                        $data['created_by']       = $_SESSION['userid'];
+                        
+                        if($this->md->insertpenempatan($data)){
+                            $json['responCode']="00";
+                            $json['responHead']="success";
+                            $json['responDesc']="Tambah Todo List Berhasil";
+                        }else{
+                            $json['responCode']="01";
+                            $json['responHead']="info";
+                            $json['responDesc']="Tambah Todo List Gagal";
+                        }
+                    }else{
+                        $json['responCode']="01";
+                        $json['responHead']="info";
+                        $json['responDesc']="Karyawan Sudah Mempunyai Penempatan Primary <br>".$cekdataprimary->position;
+                        $json['responResult']=$cekdataprimary;
+                    }
+                }else{
                     $data['org_id']           = $_SESSION['orgid'];
                     $data['trans_id']         = generateuuid();
-                    $data['user_id']          = $this->input->post("namakaryawan-add");
-                    $data['position_id']      = $this->input->post("penempatanid-add");
-                    $data['atasan_id']        = $this->input->post("namaatasan-add");
-                    $data['start_date']       = DateTime::createFromFormat("d.m.Y", $this->input->post("mulaitanggal-add"))->format("Y-m-d");
-                    $data['position_primary'] = $this->input->post("type-add");
+                    $data['user_id']          = $this->input->post("data_position_userid_registration");
+                    $data['position_id']      = $this->input->post("data_position_id_registration");
+                    $data['atasan_id']        = $this->input->post("data_position_atasan_registration");
+                    $data['start_date']       = DateTime::createFromFormat("d.m.Y", $this->input->post("data_position_tanggal_registration"))->format("Y-m-d");
+                    $data['position_primary'] = $this->input->post("data_position_type_registration");
                     $data['created_by']       = $_SESSION['userid'];
                     
                     if($this->md->insertpenempatan($data)){
@@ -74,12 +102,8 @@
                         $json['responHead']="info";
                         $json['responDesc']="Tambah Todo List Gagal";
                     }
-                }else{
-                    $json['responCode']="01";
-                    $json['responHead']="info";
-                    $json['responDesc']="Karyawan Sudah Mempunyai Penempatan Primary <br>".$cekdataposisi->position;
-                    $json['responResult']=$cekdataprimary;
                 }
+                
             }else{
                 $json['responCode']   = "01";
                 $json['responHead']   = "info";

@@ -14,8 +14,10 @@
         }
 
         public static function checksession(){
-            if(!self::$app->session->userdata('loggedin')){
-                redirect("auth/sign");
+            if(self::$app->uri->segment(1)!="auth"){
+                if(!self::$app->session->userdata('loggedin')){
+                    redirect("auth/sign");
+                }
             }
         }
 

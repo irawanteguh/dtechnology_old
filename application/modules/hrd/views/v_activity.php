@@ -1,7 +1,7 @@
 <div class="card card-flush h-lg-100">
 	<div class="card-header pt-5">
 		<h3 class="card-title align-items-start flex-column">
-            <span class="card-label fw-bolder fs-3 mb-1">List Activity</span>
+            <span class="card-label fw-bolder fs-3 mb-1">List Of Activity</span>
             <span class="text-muted mt-1 fw-bold fs-7" id="info_list_activity"></span>
         </h3>
 		<div class="card-toolbar">
@@ -31,6 +31,7 @@
 				<thead>
 					<tr class="fw-bolder text-muted bg-light">
 						<th class="ps-4 rounded-start">Activity Name</th>
+						<th>PK</th>
 						<th>Duration</th>
 						<th class="pe-4 text-end rounded-end">Actions</th>
 					</tr>

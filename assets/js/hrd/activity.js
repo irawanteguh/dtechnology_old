@@ -1,4 +1,5 @@
 masteractivity();
+
 function getdata(btn){
     var $btn = $(btn);
 
@@ -61,7 +62,8 @@ function masteractivity(){
                     }else{
                         tableresult +="<td class='ps-4'>"+result[i].activity+" <span class='badge badge-light-danger'>Non Active</span></td>";
                     }
-                    
+
+                    tableresult +="<td class='text-start'>"+(result[i].klinis ? result[i].klinis : "")+"</td>";
                     tableresult +="<td class='text-end'>"+result[i].durasi+" Menit</td>";
                     tableresult +="<td class='text-end row'>"+action+"</td>";
                     tableresult +="</tr>";
@@ -99,10 +101,8 @@ function masteractivity(){
 $(document).on("submit", "#formaddactivity", function (e) {
 	e.preventDefault();
     e.stopPropagation();
-
 	var form = $(this);
     var url  = $(this).attr("action");
-
 	$.ajax({
         url       : url,
         data      : form.serialize(),
@@ -115,16 +115,31 @@ $(document).on("submit", "#formaddactivity", function (e) {
 			$("#btn_activity_add").addClass("disabled");
         },
 		success: function (data) {
-            if (data.responCode == "00") {
-                masteractivity();
-			}
-
             toastr.clear();
-			toastr[data.responHead](data.responDesc, "INFORMATION");
+
+            if (data.responCode == "00") {
+                toastr[data.responHead](data.responDesc, "INFORMATION");
+                $("#modal_activity_add").modal("hide");
+                masteractivity();
+			}else{
+                $("#btn_activity_add").removeClass("disabled");
+                Swal.fire({
+                    title            : "<h1 class='font-weight-bold' style='color:#234974;'>For Your Information</h1>",
+                    html             : "<b>"+data.responDesc+"</b>",
+                    icon             : data.responHead,
+                    confirmButtonText: "Please Try Again",
+                    buttonsStyling   : false,
+                    timerProgressBar : true,
+                    timer            : 5000,
+                    customClass      : {confirmButton: "btn btn-danger"},
+                    showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                    hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+                });
+            };
+			
 		},
         complete: function () {
             toastr.clear();
-            $("#modal_activity_add").modal("hide");
             $("#btn_activity_add").removeClass("disabled");
 		},
         error: function(xhr, status, error) {
@@ -148,10 +163,8 @@ $(document).on("submit", "#formaddactivity", function (e) {
 $(document).on("submit", "#formhapusactivity", function (e) {
 	e.preventDefault();
     e.stopPropagation();
-
 	var form = $(this);
     var url  = $(this).attr("action");
-
 	$.ajax({
         url       : url,
         data      : form.serialize(),
@@ -164,16 +177,30 @@ $(document).on("submit", "#formhapusactivity", function (e) {
 			$("#btn_activity_hapus").addClass("disabled");
         },
 		success: function (data) {
-            if (data.responCode == "00") {
-                masteractivity();
-			}
-
             toastr.clear();
-			toastr[data.responHead](data.responDesc, "INFORMATION");
+
+            if (data.responCode == "00") {
+                toastr[data.responHead](data.responDesc, "INFORMATION");
+                $("#modal_activity_hapus").modal("hide");
+                masteractivity();
+			}else{
+                $("#btn_activity_hapus").removeClass("disabled");
+                Swal.fire({
+                    title            : "<h1 class='font-weight-bold' style='color:#234974;'>For Your Information</h1>",
+                    html             : "<b>"+data.responDesc+"</b>",
+                    icon             : data.responHead,
+                    confirmButtonText: "Please Try Again",
+                    buttonsStyling   : false,
+                    timerProgressBar : true,
+                    timer            : 5000,
+                    customClass      : {confirmButton: "btn btn-danger"},
+                    showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                    hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+                });
+            };
 		},
         complete: function () {
             toastr.clear();
-            $("#modal_activity_hapus").modal("hide");
             $("#btn_activity_hapus").removeClass("disabled");
 		},
         error: function(xhr, status, error) {
@@ -197,10 +224,8 @@ $(document).on("submit", "#formhapusactivity", function (e) {
 $(document).on("submit", "#formaktifactivity", function (e) {
 	e.preventDefault();
     e.stopPropagation();
-
 	var form = $(this);
     var url  = $(this).attr("action");
-
 	$.ajax({
         url       : url,
         data      : form.serialize(),
@@ -213,16 +238,31 @@ $(document).on("submit", "#formaktifactivity", function (e) {
 			$("#btn_activity_aktif").addClass("disabled");
         },
 		success: function (data) {
-            if (data.responCode == "00") {
-                masteractivity();
-			}
-
             toastr.clear();
-			toastr[data.responHead](data.responDesc, "INFORMATION");
+
+            if (data.responCode == "00") {
+                toastr[data.responHead](data.responDesc, "INFORMATION");
+                $("#modal_activity_active").modal("hide");
+                masteractivity();
+			}else{
+                Swal.fire({
+                    title            : "<h1 class='font-weight-bold' style='color:#234974;'>For Your Information</h1>",
+                    html             : "<b>"+data.responDesc+"</b>",
+                    icon             : data.responHead,
+                    confirmButtonText: "Please Try Again",
+                    buttonsStyling   : false,
+                    timerProgressBar : true,
+                    timer            : 5000,
+                    customClass      : {confirmButton: "btn btn-danger"},
+                    showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                    hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+                });
+                $("#btn_activity_aktif").removeClass("disabled");
+            };
+		
 		},
         complete: function () {
             toastr.clear();
-            $("#modal_activity_active").modal("hide");
             $("#btn_activity_aktif").removeClass("disabled");
 		},
         error: function(xhr, status, error) {
@@ -246,10 +286,8 @@ $(document).on("submit", "#formaktifactivity", function (e) {
 $(document).on("submit", "#formeditactivity", function (e) {
 	e.preventDefault();
     e.stopPropagation();
-
 	var form = $(this);
     var url  = $(this).attr("action");
-
 	$.ajax({
         url       : url,
         data      : form.serialize(),
@@ -262,16 +300,31 @@ $(document).on("submit", "#formeditactivity", function (e) {
 			$("#btn_activity_edit").addClass("disabled");
         },
 		success: function (data) {
-            if (data.responCode == "00") {
-                masteractivity();
-			}
-
             toastr.clear();
-			toastr[data.responHead](data.responDesc, "INFORMATION");
+
+            if (data.responCode == "00") {
+                toastr[data.responHead](data.responDesc, "INFORMATION");
+                $("#modal_activity_edit").modal("hide");
+                masteractivity();
+			}else{
+                $("#btn_activity_edit").removeClass("disabled");
+                Swal.fire({
+                    title            : "<h1 class='font-weight-bold' style='color:#234974;'>For Your Information</h1>",
+                    html             : "<b>"+data.responDesc+"</b>",
+                    icon             : data.responHead,
+                    confirmButtonText: "Please Try Again",
+                    buttonsStyling   : false,
+                    timerProgressBar : true,
+                    timer            : 5000,
+                    customClass      : {confirmButton: "btn btn-danger"},
+                    showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                    hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+                });
+            };
+            
 		},
         complete: function () {
             toastr.clear();
-            $("#modal_activity_edit").modal("hide");
             $("#btn_activity_edit").removeClass("disabled");
 		},
         error: function(xhr, status, error) {

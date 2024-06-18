@@ -21,7 +21,6 @@
                         }else{
                             define($setting['ENVIRONMENT_NAME'], $setting['PROD']);
                         }
-                        
                     }
                 }
             } else {

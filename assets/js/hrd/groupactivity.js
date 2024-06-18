@@ -5,7 +5,6 @@ function getdata(btn){
     var positionid = $btn.attr("data-positionid");
     var position   = $btn.attr("data-position");
 
-
     $(":hidden[name='positionid-mapping']").val(positionid);
     $("#headerlistactivity").html("List Activity : "+position);
     daftarkegiatan();
@@ -147,6 +146,19 @@ $(document).on("change",".form-check-input",function(e){
 		success: function(data){
 			if(data.responCode==="00"){
                 daftarkegiatan();
+            }else{
+                Swal.fire({
+                    title            : "<h1 class='font-weight-bold' style='color:#234974;'>For Your Information</h1>",
+                    html             : "<b>"+data.responDesc+"</b>",
+                    icon             : data.responHead,
+                    confirmButtonText: "Please Try Again",
+                    buttonsStyling   : false,
+                    timerProgressBar : true,
+                    timer            : 5000,
+                    customClass      : {confirmButton: "btn btn-danger"},
+                    showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                    hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+                });
             }
 		},
 		complete: function(){

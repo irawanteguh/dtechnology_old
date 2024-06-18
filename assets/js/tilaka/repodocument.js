@@ -9,7 +9,7 @@ function viewdoc(btn){
     var responsefile = jQuery.ajax({url: filename, type: 'HEAD', async: false}).status;
 
     if(responsefile === 200){
-        viewfile = "<embed src='"+filename+"#toolbar=0&navpanes=0' width='100%' height='100%' type='application/pdf' id='view'>";
+        viewfile = "<embed src='"+filename+"' width='100%' height='100%' type='application/pdf' id='view'>";
     }else{
         viewfile = `
                     <div class='alert alert-dismissible bg-light-info border border-info border-3 border-dashed d-flex flex-column flex-sm-row w-100 p-5 mb-10 fa-fade'>

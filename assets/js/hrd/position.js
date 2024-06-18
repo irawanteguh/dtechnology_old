@@ -1,11 +1,13 @@
 daftarjabatan();
 
+
+
 $('#modal-positioning').on('hidden.bs.modal', function (e) {
-    $(":hidden[name='penempatanid-add']").val("");
-	$("input[name='penempatan-add']").val("");
+    $(":hidden[name='data_position_id_registration']").val("");
+	$("input[name='data_position_name_registration']").val("");
 });
 
-flatpickr('[name="mulaitanggal-add"]', {
+flatpickr('[name="data_position_tanggal_registration"]', {
     enableTime: false,
     dateFormat: "d.m.Y",
     onChange: function(selectedDates, dateStr, instance) {
@@ -14,18 +16,16 @@ flatpickr('[name="mulaitanggal-add"]', {
 });
 
 function getdata(btn){
-	var positionid  = btn.attr("data-positionid");
-	var position     = btn.attr("data-position");
+	var positionid = btn.attr("data-positionid");
+	var position   = btn.attr("data-position");
 
-	$(":hidden[name='penempatanid-add']").val(positionid);
-	$("input[name='penempatan-add']").val(position);
+	$(":hidden[name='data_position_id_registration']").val(positionid);
+	$("input[name='data_position_name_registration']").val(position);
 };
 
 function daftarjabatan(){
-    var search     = $("input[name='search']").val();
     $.ajax({
         url       : url+"index.php/hrd/position/daftarjabatan",
-        data      : {search:search},
         method    : "POST",
         dataType  : "JSON",
         cache     : false,
@@ -39,6 +39,7 @@ function daftarjabatan(){
             var tableresult = "";
             var color       = ['danger','warning','success','primary'];
             var maxuser     = 5;
+            var jml         = 0;
 
             if(data.responCode==="00"){
                 result        = data.responResult;
@@ -50,7 +51,7 @@ function daftarjabatan(){
 
                     tableresult +="<tr>";
                     tableresult +="<td class='ps-4'>"+result[i].POSITION+" "+(result[i].FUNCTIONAL ? result[i].FUNCTIONAL : "")+"</td>";
-                    tableresult +="<td><div>"+(result[i].LEVEL ? result[i].LEVEL : "")+"</div><div>" + (result[i].RVU ? todesimal(result[i].RVU) : "") + "</div></td>";
+                    // tableresult +="<td><div>"+(result[i].LEVEL ? result[i].LEVEL : "")+"</div><div>" + (result[i].RVU ? todesimal(result[i].RVU) : "") + "</div></td>";
                     tableresult +="<td>";
                     tableresult +="<div class='symbol-group symbol-hover flex-nowrap flex-grow-1 min-w-100px pe-2'>";
                     
@@ -66,10 +67,10 @@ function daftarjabatan(){
                         }
 
                         var userProfile = userIdsprimary[j].trim().split(':');
-                        var userId = userProfile[0];
-                        var statusimg = userProfile[1];
+                        var userId      = userProfile[0];
+                        var statusimg   = userProfile[1];
                         var nameprofile = userProfile[2];
-                        var intial = userProfile[3];
+                        var intial      = userProfile[3];
 
                         if (statusimg === "N") {
                             tableresult += "<div class='symbol symbol-circle symbol-25px' data-bs-toggle='tooltip' title='" + nameprofile + "'>";
@@ -142,30 +143,44 @@ function daftarjabatan(){
                     tableresult += "<button id='btnGroupDrop1' type='button' class='btn btn-light-primary dropdown-toggle btn-sm' data-bs-toggle='dropdown' aria-expanded='false'>Action</button>";
                     tableresult += "<div class='dropdown-menu' aria-labelledby='btnGroupDrop1'>";
                     // tableresult += "<a class='dropdown-item btn btn-sm' data-bs-toggle='modal' data-bs-target='#modal-edituser' "+getvariabel+" onclick='getdataedit($(this));'><i class='bi bi-pencil'></i> Perbaharui Data</a>";
-                    tableresult += "<a class='dropdown-item btn btn-sm' data-bs-toggle='modal' data-bs-target='#modal-positioning' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-person-add'></i> Positioning</a>";
+                    tableresult += "<a class='dropdown-item btn btn-sm' data-bs-toggle='modal' data-bs-target='#modal_position_registration' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-person-add'></i> Positioning</a>";
                                      
                     tableresult +="</div>";
                     tableresult +="</div>";
                     tableresult +="</td>";
                     tableresult +="</tr>";
+
+                    jml ++;
                 }
             }
 
             $("#resultmasterposition").html(tableresult);
+            $("#info_list_position").html(todesimal(jml)+" Position");
             toastr[data.responHead](data.responDesc, "INFORMATION");
 
         },
-        error: function(xhr, status, error) {
-            toastr["error"]("Terjadi kesalahan : "+error, "Opps !");
-		},
 		complete: function () {
 			toastr.clear();
-		}
+		},
+        error: function(xhr, status, error) {
+            Swal.fire({
+                title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
+                html             : "<b>"+error+"</b>",
+                icon             : "error",
+                confirmButtonText: "Please Try Again",
+                buttonsStyling   : false,
+                timerProgressBar : true,
+                timer            : 5000,
+                customClass      : {confirmButton: "btn btn-danger"},
+                showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+            });
+		},
     });
     return false;
 };
 
-$(document).on("submit", "#formpenempatankaryawan", function (e) {
+$(document).on("submit", "#forminsertpenempatan", function (e) {
 	e.preventDefault();
 	var data = new  FormData(this);
 	$.ajax({
@@ -179,11 +194,15 @@ $(document).on("submit", "#formpenempatankaryawan", function (e) {
         beforeSend : function () {
             toastr.clear();
             toastr["info"]("Sending request...", "Please wait");
+			$("#btn_position_registrasi").addClass("disabled");
         },
 		success: function (data) {
+            toastr.clear();
+            
 			if(data.responCode === "00"){
+                toastr[data.responHead](data.responDesc, "INFORMATION");
+                $('#modal_position_registration').modal('hide');
 				daftarjabatan();
-                $('#modal-positioning').modal('hide');
 			}else{
                 Swal.fire({
                     title            : "<h1 class='font-weight-bold' style='color:#234974;'>For Your Information</h1>",
@@ -197,10 +216,12 @@ $(document).on("submit", "#formpenempatankaryawan", function (e) {
                     showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
                     hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
                 });
+                $("#btn_position_registrasi").removeClass("disabled");
             }
 		},
         complete: function () {
-           
+            toastr.clear();
+            $("#btn_position_registrasi").removeClass("disabled");
 		},
         error: function(xhr, status, error) {
             Swal.fire({

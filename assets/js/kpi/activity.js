@@ -1,31 +1,49 @@
 calendar();
 
-flatpickr('[name="calendar_event_start_date"]', {
+
+
+$('#modal_activity_userguides').on('hidden.bs.modal', function (e) {
+    $('#modal_activity_add').modal('show');
+});
+
+$('#modal_activity_add').on('show.bs.modal', function (e) {
+    $("input[name='data_activity_time_start_add']").val(new Date().getHours() + ":" + ('0' + new Date().getMinutes()).slice(-2));
+    $("input[name='data_activity_time_end_add']").val(new Date().getHours() + ":" + ('0' + new Date().getMinutes()).slice(-2));
+    $('#data_activity_description_add').val("");
+    volume();
+});
+
+flatpickr('[name="data_activity_date_add"]', {
     enableTime: false,
     dateFormat: "d.m.Y",
-    onChange: function(selectedDates, dateStr, instance) {
+    maxDate   : "today",
+    onChange  : function(selectedDates, dateStr, instance) {
         instance.close();
     }
 });
 
-flatpickr('[name="calendar_event_start_time"]', {
-    enableTime: true,
-    time_24hr : true,
-    noCalendar: true,
-    dateFormat: "H:i",
-    // onChange: function(selectedDates, dateStr, instance) {
-    //     instance.close();
-    // }
+flatpickr('[name="data_activity_time_start_add"]', {
+    enableTime   : true,
+    time_24hr    : true,
+    noCalendar   : true,
+    dateFormat   : "H:i",
+    defaultHour  : new Date().getHours(),
+    defaultMinute: new Date().getMinutes(),
+    onChange: function(selectedDates, dateStr, instance) {
+        checkTime();
+    }
 });
 
-flatpickr('[name="calendar_event_end_time"]', {
+flatpickr('[name="data_activity_time_end_add"]', {
     enableTime: true,
     time_24hr : true,
     noCalendar: true,
     dateFormat: "H:i",
-    // onChange: function(selectedDates, dateStr, instance) {
-    //     instance.close();
-    // }
+    defaultHour  : new Date().getHours(),
+    defaultMinute: new Date().getMinutes(),
+    onChange: function(selectedDates, dateStr, instance) {
+        checkTime();
+    }
 });
 
 function calendar() {
@@ -52,7 +70,30 @@ function calendar() {
 
         },
         dateClick: function(info) {
-            $('#modal-addactivity').modal('show');
+            var today = new Date();
+            var clickedDate = new Date(info.dateStr);
+
+            if (clickedDate > today) {
+                Swal.fire({
+                    title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
+                    html             : "<b>You cannot select a date beyond today.</b>",
+                    icon             : "error",
+                    confirmButtonText: "Please Try Again",
+                    buttonsStyling   : false,
+                    timerProgressBar : true,
+                    timer            : 5000,
+                    customClass      : {confirmButton: "btn btn-danger"},
+                    showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                    hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+                });
+            } else {
+                var pilihtgl = info.dateStr;
+                pilihtgl = String(pilihtgl);
+                pilihtgl = pilihtgl.substr(8,2)+'.'+pilihtgl.substr(5,2)+'.'+pilihtgl.substr(0,4);
+
+                $(":input[name='data_activity_date_add']").val(pilihtgl);
+                $('#modal_activity_add').modal('show');
+            }
         },
         eventDrop: function(info) {
             
@@ -60,359 +101,109 @@ function calendar() {
         eventClick: function(info) {
             view(info);
         },
+        aspectRatio: 2.4
     });
 
     calendar.render();
 };
 
-const view = (info) => {
-    const startDate = info.event.allDay ? moment(info.event.start).format("Do MMM, YYYY") : moment(info.event.start).format("Do MMM, YYYY - h:mm a");
-    const endDate   = info.event.allDay ? moment(info.event.end-1).format("Do MMM, YYYY") : moment(info.event.end-1).format("Do MMM, YYYY - h:mm a");
+function checkTime() {
+    var startTime = document.getElementById("data_activity_time_start_add").value;
+    var endTime   = document.getElementById("data_activity_time_end_add").value;
+    var startDate = new Date("2000-01-01T" + startTime + ":00");
+    var endDate   = new Date("2000-01-01T" + endTime + ":00");
 
-    const content = `
-        <div class="fw-bolder mb-2">${info.event.title}</div>
-        <div class="fs-7"><span class="fw-bold">Start:</span> ${startDate}</div>
-        <div class="fs-7 mb-4"><span class="fw-bold">End:</span> ${endDate}</div>
-        <div id="kt_calendar_event_view_button" type="button" class="btn btn-sm btn-light-primary">View More</div>
-    `;
+    if (startDate > endDate) {
+        Swal.fire({
+            icon : 'error',
+            title: 'Oops...',
+            text : 'Waktu mulai tidak boleh melebihi atau sama dengan waktu selesai!',
+        });
+    }else{
+        volume();
+    }
+}
 
-    const popover = new bootstrap.Popover(info.el, {
-        container: 'body',
-        trigger  : 'hover',
-        boundary : 'window',
-        placement: 'auto',
-        html     : true,
-        title    : 'Event Summary',
-        content  : content
-    });
-
-    popover.show();
+function volume(){
+	var kegiatan        = $("select[name='data_activity_primaryactivity_add']").val();
+	var mulaikegiatan   = $("input[name='data_activity_time_start_add']").val();
+	var selesaikegiatan = $("input[name='data_activity_time_end_add']").val();
+	$.ajax({
+		url     : url+"index.php/kpi/activity/volume",
+		data    : {'kegiatan': kegiatan, 'mulaikegiatan': mulaikegiatan, 'selesaikegiatan': selesaikegiatan},
+		method  : "POST",
+		dataType: "html",
+		cache   : false,
+		success : function (data) {
+			$("select[name='data_activity_volume_add']").html(data);
+		}
+	});
+	return false;
 };
 
+$(document).on("change", "select[name='data_activity_primaryactivity_add']", function (e) {
+    e.preventDefault();
+    volume();
+});
 
+$(document).on("submit", "#forminsertactivity", function (e) {
+	e.preventDefault();
+    e.stopPropagation();
+	var form = $(this);
+    var url  = $(this).attr("action");
+	$.ajax({
+        url       : url,
+        data      : form.serialize(),
+        method    : "POST",
+        dataType  : "JSON",
+        cache     : false,
+        beforeSend: function () {
+            toastr.clear();
+            toastr["info"]("Sending request...", "Please wait");
+			$("#btn_activity_add").addClass("disabled");
+        },
+		success: function (data) {
+            toastr.clear();
 
-// var KTAppCalendar = function () {
-//     var e, t, n, a, o, r, i, l, d, s, c, m, u, v, f, p, y, D, _, b, k, g, S, Y, h, T, M, w, E, L;
-//     var x = { id: "", eventName: "", eventDescription: "", eventLocation: "", startDate: "", endDate: "", allDay: !1 };
-//     var B = !1;
-
-//     const q = (e) => {
-//         C();
-//         const n = x.allDay ? moment(x.startDate).format("Do MMM, YYYY") : moment(x.startDate).format("Do MMM, YYYY - h:mm a");
-//         const a = x.allDay ? moment(x.endDate).format("Do MMM, YYYY") : moment(x.endDate).format("Do MMM, YYYY - h:mm a");
-//         var o = {
-//             container: "body",
-//             trigger: "manual",
-//             boundary: "window",
-//             placement: "auto",
-//             dismiss: !0,
-//             html: !0,
-//             title: "Event Summary",
-//             content: `
-//                 <div class="fw-bolder mb-2">${x.eventName}</div>
-//                 <div class="fs-7"><span class="fw-bold">Start:</span> ${n}</div>
-//                 <div class="fs-7 mb-4"><span class="fw-bold">End:</span> ${a}</div>
-//                 <div id="kt_calendar_event_view_button" type="button" class="btn btn-sm btn-light-primary">View More</div>
-//             `
-//         };
-//         (t = KTApp.initBootstrapPopover(e, o)).show();
-//         B = !0;
-//         F();
-//     };
-
-//     const C = () => {
-//         B && (t.dispose(), B = !1);
-//     };
-
-//     const N = () => {
-//         f.innerText = "Add a New Event";
-//         v.show();
-//         const t = p.querySelectorAll('[data-kt-calendar="datepicker"]');
-//         const r = p.querySelector("#kt_calendar_datepicker_allday");
-//         r.addEventListener("click", (e) => {
-//             e.target.checked ? t.forEach((e) => e.classList.add("d-none")) : (d.setDate(x.startDate, !0, "Y-m-d"), t.forEach((e) => e.classList.remove("d-none")));
-//         });
-//         O(x);
-//         _.addEventListener("click", (function (t) {
-//             t.preventDefault();
-//             y && y.validate().then((function (t) {
-//                 console.log("validated!");
-//                 if ("Valid" == t) {
-//                     _.setAttribute("data-kt-indicator", "on");
-//                     _.disabled = !0;
-//                     setTimeout((function () {
-//                         _.removeAttribute("data-kt-indicator");
-//                         Swal.fire({
-//                             text: "New event added to calendar!",
-//                             icon: "success",
-//                             buttonsStyling: !1,
-//                             confirmButtonText: "Ok, got it!",
-//                             customClass: { confirmButton: "btn btn-primary" }
-//                         }).then((function (t) {
-//                             if (t.isConfirmed) {
-//                                 v.hide();
-//                                 _.disabled = !1;
-//                                 let t = !1;
-//                                 r.checked && (t = !0);
-//                                 0 === c.selectedDates.length && (t = !0);
-//                                 var l = moment(i.selectedDates[0]).format();
-//                                 var s = moment(d.selectedDates[d.selectedDates.length - 1]).format();
-//                                 if (!t) {
-//                                     const e = moment(i.selectedDates[0]).format("YYYY-MM-DD");
-//                                     const t = e;
-//                                     l = e + "T" + moment(c.selectedDates[0]).format("HH:mm:ss");
-//                                     s = t + "T" + moment(u.selectedDates[0]).format("HH:mm:ss");
-//                                 }
-//                                 e.addEvent({
-//                                     id: V(),
-//                                     title: n.value,
-//                                     description: a.value,
-//                                     location: o.value,
-//                                     start: l,
-//                                     end: s,
-//                                     allDay: t
-//                                 });
-//                                 e.render();
-//                                 p.reset();
-//                             }
-//                         }));
-//                     }), 2000);
-//                 } else {
-//                     Swal.fire({
-//                         text: "Sorry, looks like there are some errors detected, please try again.",
-//                         icon: "error",
-//                         buttonsStyling: !1,
-//                         confirmButtonText: "Ok, got it!",
-//                         customClass: { confirmButton: "btn btn-primary" }
-//                     });
-//                 }
-//             }));
-//         }));
-//     };
-
-//     const A = () => {
-//         var e, t, n;
-//         w.show();
-//         x.allDay ? (e = "All Day", t = moment(x.startDate).format("Do MMM, YYYY"), n = moment(x.endDate).format("Do MMM, YYYY")) : (e = "", t = moment(x.startDate).format("Do MMM, YYYY - h:mm a"), n = moment(x.endDate).format("Do MMM, YYYY - h:mm a"));
-//         g.innerText = x.eventName;
-//         S.innerText = e;
-//         Y.innerText = x.eventDescription ? x.eventDescription : "--";
-//         h.innerText = x.eventLocation ? x.eventLocation : "--";
-//         T.innerText = t;
-//         M.innerText = n;
-//     };
-
-//     const H = () => {
-//         E.addEventListener("click", (t) => {
-//             t.preventDefault();
-//             w.hide();
-//             (() => {
-//                 f.innerText = "Edit an Event";
-//                 v.show();
-//                 const t = p.querySelectorAll('[data-kt-calendar="datepicker"]');
-//                 const r = p.querySelector("#kt_calendar_datepicker_allday");
-//                 r.addEventListener("click", (e) => {
-//                     e.target.checked ? t.forEach((e) => e.classList.add("d-none")) : (d.setDate(x.startDate, !0, "Y-m-d"), t.forEach((e) => e.classList.remove("d-none")));
-//                 });
-//                 O(x);
-//                 _.addEventListener("click", (function (t) {
-//                     t.preventDefault();
-//                     y && y.validate().then((function (t) {
-//                         console.log("validated!");
-//                         if ("Valid" == t) {
-//                             _.setAttribute("data-kt-indicator", "on");
-//                             _.disabled = !0;
-//                             setTimeout((function () {
-//                                 _.removeAttribute("data-kt-indicator");
-//                                 Swal.fire({
-//                                     text: "New event added to calendar!",
-//                                     icon: "success",
-//                                     buttonsStyling: !1,
-//                                     confirmButtonText: "Ok, got it!",
-//                                     customClass: { confirmButton: "btn btn-primary" }
-//                                 }).then((function (t) {
-//                                     if (t.isConfirmed) {
-//                                         v.hide();
-//                                         _.disabled = !1;
-//                                         e.getEventById(x.id).remove();
-//                                         let t = !1;
-//                                         r.checked && (t = !0);
-//                                         0 === c.selectedDates.length && (t = !0);
-//                                         var l = moment(i.selectedDates[0]).format();
-//                                         var s = moment(d.selectedDates[d.selectedDates.length - 1]).format();
-//                                         if (!t) {
-//                                             const e = moment(i.selectedDates[0]).format("YYYY-MM-DD");
-//                                             const t = e;
-//                                             l = e + "T" + moment(c.selectedDates[0]).format("HH:mm:ss");
-//                                             s = t + "T" + moment(u.selectedDates[0]).format("HH:mm:ss");
-//                                         }
-//                                         e.addEvent({
-//                                             id: V(),
-//                                             title: n.value,
-//                                             description: a.value,
-//                                             location: o.value,
-//                                             start: l,
-//                                             end: s,
-//                                             allDay: t
-//                                         });
-//                                         e.render();
-//                                         p.reset();
-//                                     }
-//                                 }));
-//                             }), 2000);
-//                         } else {
-//                             Swal.fire({
-//                                 text: "Sorry, looks like there are some errors detected, please try again.",
-//                                 icon: "error",
-//                                 buttonsStyling: !1,
-//                                 confirmButtonText: "Ok, got it!",
-//                                 customClass: { confirmButton: "btn btn-primary" }
-//                             });
-//                         }
-//                     }));
-//                 }));
-//             })();
-//         });
-//     };
-
-//     const F = () => {
-//         document.querySelector("#kt_calendar_event_view_button").addEventListener("click", (e) => {
-//             e.preventDefault();
-//             C();
-//             A();
-//         });
-//     };
-
-//     const O = () => {
-//         n.value = x.eventName ? x.eventName : "";
-//         a.value = x.eventDescription ? x.eventDescription : "";
-//         o.value = x.eventLocation ? x.eventLocation : "";
-//         i.setDate(x.startDate, !0, "Y-m-d");
-//         const e = x.endDate ? x.endDate : moment(x.startDate).add(1, 'days').format("YYYY-MM-DD");
-//         d.setDate(e, !0, "Y-m-d");
-//         const t = p.querySelector("#kt_calendar_datepicker_allday");
-//         const r = p.querySelectorAll('[data-kt-calendar="datepicker"]');
-//         x.allDay ? (t.checked = !0, r.forEach((e) => e.classList.add("d-none"))) : (t.checked = !1, c.setDate(x.startDate, !0, "Y-m-d H:i"), u.setDate(x.endDate, !0, "Y-m-d H:i"), r.forEach((e) => e.classList.remove("d-none")));
-//     };
-
-//     const P = (event) => {
-//         x.id = event.id;
-//         x.eventName = event.title;
-//         x.eventDescription = event.description;
-//         x.eventLocation = event.location;
-//         x.startDate = event.start;
-//         x.endDate = event.end ? event.end : moment(event.start).add(1, 'days').format("YYYY-MM-DD");
-//         x.allDay = event.allDay;
-//     };
-
-//     return {
-//         init: function () {
-//             (e = document.getElementById("kt_calendar_app")),
-//             (t = document.getElementById("kt_modal_add_event")),
-//             (n = document.getElementById("kt_calendar_event_name")),
-//             (a = document.getElementById("kt_calendar_event_description")),
-//             (o = document.getElementById("kt_calendar_event_location")),
-//             (r = document.getElementById("kt_calendar_add_event_submit")),
-//             (i = flatpickr("#kt_calendar_datepicker_start_date", { enableTime: !1, dateFormat: "Y-m-d" })),
-//             (d = flatpickr("#kt_calendar_datepicker_end_date", { enableTime: !1, dateFormat: "Y-m-d" })),
-//             (c = flatpickr("#kt_calendar_datepicker_start_time", { enableTime: !0, noCalendar: !0, dateFormat: "H:i" })),
-//             (u = flatpickr("#kt_calendar_datepicker_end_time", { enableTime: !0, noCalendar: !0, dateFormat: "H:i" })),
-//             (v = new bootstrap.Modal(t)),
-//             (l = document.querySelector('[data-kt-calendar="add"]')),
-//             (f = t.querySelector(".modal-title")),
-//             (p = t.querySelector("#kt_modal_add_event_form")),
-//             (y = FormValidation.formValidation(p, {
-//                 fields: { calendar_event_name: { validators: { notEmpty: { message: "Event name is required" } } } },
-//                 plugins: { trigger: new FormValidation.plugins.Trigger(), bootstrap: new FormValidation.plugins.Bootstrap5({ rowSelector: ".fv-row", eleInvalidClass: "", eleValidClass: "" }) }
-//             })),
-//             (E = document.querySelector("#kt_calendar_event_view")),
-//             (w = new bootstrap.Modal(E)),
-//             (g = E.querySelector("#kt_calendar_event_view_name")),
-//             (S = E.querySelector("#kt_calendar_event_view_all_day")),
-//             (Y = E.querySelector("#kt_calendar_event_view_description")),
-//             (h = E.querySelector("#kt_calendar_event_view_location")),
-//             (T = E.querySelector("#kt_calendar_event_view_start_date")),
-//             (M = E.querySelector("#kt_calendar_event_view_end_date")),
-//             l.addEventListener("click", (function (e) {
-//                 e.preventDefault();
-//                 const n = new Date();
-//                 (x = { id: "", eventName: "", eventDescription: "", eventLocation: "", startDate: n, endDate: moment(n).add(1, 'days').format("YYYY-MM-DD"), allDay: !1 });
-//                 N();
-//             }));
-//             document.querySelectorAll('[data-kt-calendar="view"]').forEach((function (e) {
-//                 e.addEventListener("click", (function (e) {
-//                     e.preventDefault();
-//                     A();
-//                 }));
-//             }));
-//             document.querySelector('[data-kt-calendar="delete"]').addEventListener("click", (function (t) {
-//                 t.preventDefault();
-//                 Swal.fire({
-//                     text: "Are you sure you want to delete this event?",
-//                     icon: "warning",
-//                     showCancelButton: !0,
-//                     buttonsStyling: !1,
-//                     confirmButtonText: "Yes, delete it!",
-//                     cancelButtonText: "No, return",
-//                     customClass: { confirmButton: "btn fw-bold btn-danger", cancelButton: "btn fw-bold btn-active-light-primary" }
-//                 }).then((function (t) {
-//                     t.value ? (e.getEventById(x.id).remove(), w.hide()) : "cancel" === t.dismiss && Swal.fire({ text: "Your event was not deleted!.", icon: "error", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn fw-bold btn-primary" } });
-//                 }));
-//             }));
-//             (m = document.getElementById("kt_calendar_external_events")), new FullCalendarInteraction.Draggable(m, {
-//                 itemSelector: ".fc-draggable-handle", eventData: function (e) {
-//                     return { title: e.getAttribute("title"), location: e.getAttribute("data-calendar-location"), description: e.getAttribute("data-calendar-description"), id: V() };
-//                 }
-//             });
-//             document.querySelectorAll("#kt_calendar_external_events .fc-draggable-handle").forEach((e) => { e.draggable = !0; });
-//             document.getElementById("kt_calendar_external_events_remove").addEventListener("click", (function () {
-//                 document.querySelectorAll("#kt_calendar_external_events .fc-draggable-handle").forEach((e) => { e.parentNode.removeChild(e); });
-//             }));
-//             var n = moment().startOf("day");
-//             var a = n.format("YYYY-MM");
-//             var o = n.clone().subtract(1, "day").format("YYYY-MM-DD");
-//             var r = n.format("YYYY-MM-DD");
-//             var l = n.clone().add(1, "day").format("YYYY-MM-DD");
-//             (e = new FullCalendar.Calendar(e, {
-//                 headerToolbar: { left: "prev,next today", center: "title", right: "dayGridMonth,timeGridWeek,timeGridDay" },
-//                 height: 800,
-//                 contentHeight: 780,
-//                 aspectRatio: 3,
-//                 nowIndicator: !0,
-//                 now: r + "T09:25:00",
-//                 views: { dayGridMonth: { buttonText: "month" }, timeGridWeek: { buttonText: "week" }, timeGridDay: { buttonText: "day" } },
-//                 initialView: "dayGridMonth",
-//                 initialDate: r,
-//                 editable: !0,
-//                 dayMaxEvents: !0,
-//                 navLinks: !0,
-//                 events: [
-//                     { id: V(), title: "Conference", start: a + "-17", end: a + "-19", description: "Lorem ipsum dolor eius mod tempor labore", className: "fc-event-danger", location: "USA" },
-//                     { id: V(), title: "Meeting", start: r + "T13:00:00", description: "Lorem ipsum dolor eius mod tempor labore", end: r + "T14:00:00", className: "fc-event-success", location: "USA" },
-//                     { id: V(), title: "Dinner", start: r + "T19:00:00", description: "Lorem ipsum dolor eius mod tempor labore", end: r + "T21:00:00", location: "USA" },
-//                     { id: V(), title: "All Day Event", start: o, end: r, description: "Lorem ipsum dolor eius mod tempor labore", className: "fc-event-danger", location: "USA" },
-//                     { id: V(), title: "Reporting", start: r + "T12:00:00", description: "Lorem ipsum dolor eius mod tempor labore", end: r + "T14:00:00", className: "fc-event-success", location: "USA" },
-//                     { id: V(), title: "Company Trip", start: l, end: l, description: "Lorem ipsum dolor eius mod tempor labore", className: "fc-event-primary", location: "USA" },
-//                     { id: V(), title: "Staff Meeting", start: r + "T11:00:00", description: "Lorem ipsum dolor eius mod tempor labore", end: r + "T14:00:00", className: "fc-event-info", location: "USA" },
-//                     { id: V(), title: "Lunch", start: l + "T14:00:00", description: "Lorem ipsum dolor eius mod tempor labore", className: "fc-event-warning", location: "USA" },
-//                     { id: V(), title: "Meeting", start: l + "T07:30:00", description: "Lorem ipsum dolor eius mod tempor labore", end: l + "T09:30:00", className: "fc-event-info", location: "USA" },
-//                     { id: V(), title: "Happy Hour", start: l + "T17:30:00", description: "Lorem ipsum dolor eius mod tempor labore", end: l + "T21:00:00", className: "fc-event-danger", location: "USA" },
-//                     { id: V(), title: "Dinner", start: l + "T18:00:00", description: "Lorem ipsum dolor eius mod tempor labore", end: l + "T21:00:00", className: "fc-event-success", location: "USA" },
-//                     { id: V(), title: "Birthday Party", start: l, end: l, description: "Lorem ipsum dolor eius mod tempor labore", className: "fc-event-primary", location: "USA" },
-//                     { id: V(), title: "Site visit", start: l, end: l, description: "Lorem ipsum dolor eius mod tempor labore", className: "fc-event-info", location: "USA" }
-//                 ],
-//                 select: function (e) {
-//                     (x = { id: "", eventName: "", eventDescription: "", eventLocation: "", startDate: e.start, endDate: e.end, allDay: e.allDay }),
-//                     N();
-//                 },
-//                 eventClick: function (event) {
-//                     P(event.event);
-//                     A();
-//                 }
-//             })).render();
-//         }
-//     }
-// }();
-// KTUtil.onDOMContentLoaded((function () {
-//     KTCalendarApp.init();
-// }));
+            if (data.responCode == "00") {
+                toastr[data.responHead](data.responDesc, "INFORMATION");
+                $("#modal_activity_add").modal("hide");
+                calendar();
+			}else{
+                $("#btn_activity_add").removeClass("disabled");
+                Swal.fire({
+                    title            : "<h1 class='font-weight-bold' style='color:#234974;'>For Your Information</h1>",
+                    html             : "<b>"+data.responDesc+"</b>",
+                    icon             : data.responHead,
+                    confirmButtonText: "Please Try Again",
+                    buttonsStyling   : false,
+                    timerProgressBar : true,
+                    timer            : 5000,
+                    customClass      : {confirmButton: "btn btn-danger"},
+                    showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                    hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+                });
+            };
+			
+		},
+        complete: function () {
+            toastr.clear();
+            $("#btn_activity_add").removeClass("disabled");
+		},
+        error: function(xhr, status, error) {
+            Swal.fire({
+                title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
+                html             : "<b>"+error+"</b>",
+                icon             : "error",
+                confirmButtonText: "Please Try Again",
+                buttonsStyling   : false,
+                timerProgressBar : true,
+                timer            : 5000,
+                customClass      : {confirmButton: "btn btn-danger"},
+                showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+            });
+		}
+	});
+    return false;
+});

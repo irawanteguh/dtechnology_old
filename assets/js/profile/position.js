@@ -11,17 +11,21 @@ function historyposition() {
         success: function(data) {
             var result      = "";
             var tableresult = "";
+            var color       = ['danger','warning','success','primary'];
 
             if (data.responCode === "00") {
                 result = data.responResult;
                 for (var i in result) {
+                    var randomIndex = Math.floor(Math.random() * color.length);
+                    var randomColor = color[randomIndex];
+                    
                     tableresult +="<tr>";
                     
                     tableresult +="<td>";
                     tableresult +="<div class='d-flex align-items-center'>";
 
                         tableresult +="<div class='symbol symbol-45px me-5'>";
-                        if(result[i].image_profile==="N"){
+                        if(result[i].photoprofile==="N"){
                             tableresult +="<div class='symbol-label fs-3 bg-light-"+randomColor+" text-"+randomColor+"'>"+result[i].initial+"</div>";
                         }else{
                             tableresult +="<img src='"+url+"assets/images/avatars/"+result[i].atasan_id+".jpeg' alt='"+result[i].name+"'>";
