@@ -37,7 +37,7 @@
 												</div>";
 									}
 								?>
-								<div class="row g-6 g-xl-9 mb-5">
+								<div class="row g-6 g-xl-9">
 									<?php echo $contents ?>
 								</div>
 							</div>
@@ -57,6 +57,7 @@
 		<!-- <button id="kt_explore_toggle" class="explore-toggle btn btn-sm bg-body btn-color-gray-700 btn-active-primary shadow-sm position-fixed px-5 fw-bolder zindex-2 top-50 mt-10 end-0 transform-90 fs-6 rounded-top-0" title="Explore Metronic" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-trigger="hover">
 			<span id="kt_explore_toggle_label">Explore</span>
 		</button> -->
+
 		<?php
 			$dirdrawer = APPPATH.'views/template/drawer/';
 			if (is_dir($dirdrawer)) {
@@ -79,8 +80,15 @@
 			if(file_exists($directory)){
 				include($directory);
 			}
+
+			$segment   = $this->uri->segment(1);
+			$directory = APPPATH.'modules/'.$segment.'/drawer/'.$this->uri->segment(2).".php";
+			if(file_exists($directory)){
+				include($directory);
+			}
 			
 		?>
+		
 		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
 			<span class="svg-icon">
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

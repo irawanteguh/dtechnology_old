@@ -1,6 +1,66 @@
 
-<div class="col-lg-6">
-    <div class="card card-flush h-lg-100">
+
+<div class="col-md-4">
+    <div class="card">
+        <div class="card-body">
+            <div id="kt_security_recent_alerts" class="carousel carousel-custom carousel-stretch slide pointer-event" data-bs-ride="carousel" data-bs-interval="8000">
+                <div class="d-flex flex-stack align-items-center flex-wrap">
+                    <h4 class="text-gray-400 fw-bold mb-0 pe-2">Recent Information</h4>
+                    <ol class="p-0 m-0 carousel-indicators carousel-indicators-dots">
+                        <li data-bs-target="#kt_security_recent_alerts" data-bs-slide-to="0" class="ms-1 active" aria-current="true"></li>
+                        <li data-bs-target="#kt_security_recent_alerts" data-bs-slide-to="1" class="ms-1"></li>
+                        <li data-bs-target="#kt_security_recent_alerts" data-bs-slide-to="2" class="ms-1"></li>
+                    </ol>
+                </div>
+                <div class="carousel-inner pt-6">
+                    <div class="carousel-item active">
+                        <div class="carousel-wrapper">
+                            <div class="d-flex flex-column flex-grow-1">
+                                <a href="#" class="fs-5 fw-bolder text-dark text-hover-primary">Latest Announcements</a>
+                                <p class="text-gray-600 fs-6 fw-bold pt-3 mb-0">In the last year, you’ve probably had to adapt to new ways of living and working.</p>
+                            </div>
+                            <div class="d-flex flex-stack pt-8">
+                                <span class="badge badge-light-primary fs-7 fw-bolder me-2">Jun 10, 2021</span>
+                                <a href="#" class="btn btn-sm btn-light">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-wrapper">
+                            <div class="d-flex flex-column flex-grow-1">
+                                <a href="#" class="fw-bolder text-dark text-hover-primary">Login Attempt Failed</a>
+                                <p class="text-gray-600 fs-6 fw-bold pt-3 mb-0">As we approach one year of working remotely, we wanted to take a look back and share some ways teams around the world have collaborated effectively.</p>
+                            </div>
+                            <div class="d-flex flex-stack pt-8">
+                                <span class="badge badge-light-primary fs-7 fw-bolder me-2">Oct 05, 2021</span>
+                                <a href="#" class="btn btn-light btn-sm btn-color-muted fs-7 fw-bolder px-5">Join</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-wrapper">
+                            <div class="d-flex flex-column flex-grow-1">
+                                <a href="#" class="fw-bolder text-dark text-hover-primary">Top Picks For You</a>
+                                <p class="text-gray-600 fs-6 fw-bold pt-3 mb-0">Today we are excited to share an amazing certification opportunity which is designed to teach you everything</p>
+                            </div>
+                            <div class="d-flex flex-stack pt-8">
+                                <span class="badge badge-light-primary fs-7 fw-bolder me-2">Sep 11, 2021</span>
+                                <a href="#" class="btn btn-light btn-sm btn-color-muted fs-7 fw-bolder px-5">Collaborate</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-8">
+
+</div>
+
+<div class="col-md-6">
+    <div class="card card-flush h-100">
         <div class="card-header pt-6">
             <div class="card-title flex-column">
                 <h3 class="fw-bolder mb-1">Task Summary</h3>
@@ -8,6 +68,23 @@
             </div>
         </div>
         <div class="card-body">
+            <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed mb-10 p-6">
+                <span class="svg-icon svg-icon-2tx svg-icon-warning me-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="black"></rect>
+                        <rect x="11" y="14" width="7" height="2" rx="1" transform="rotate(-90 11 14)" fill="black"></rect>
+                        <rect x="11" y="17" width="2" height="2" rx="1" transform="rotate(-90 11 17)" fill="black"></rect>
+                    </svg>
+                </span>
+                <div class="d-flex flex-stack flex-grow-1">
+                    <div class="fw-bold">
+                        <h4 class="text-gray-900 fw-bolder">We need your attention!</h4>
+                        <div class="fs-6 text-gray-700">
+                            <a href="#" class="fw-bolder me-1">View Detailed Task Report</a> for more insights on your team's progress.
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="d-flex flex-wrap">
                 <div class="position-relative d-flex flex-center h-175px w-175px me-15 mb-7">
                     <div class="position-absolute translate-middle start-50 top-50 d-flex flex-column flex-center">
@@ -39,22 +116,12 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed p-6">
-                <div class="d-flex flex-stack flex-grow-1">
-                    <div class="fw-bold">
-                        <div class="fs-6 text-gray-700">
-                        <a href="#" class="fw-bolder me-1">Invite New .NET Collaborators</a>to create great outstanding business to business .jsp modutr class scripts</div>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </div>
 </div>
 
-<div class="col-lg-6"></div>
-
 <div class="col-lg-6">
-    <div class="card card-flush h-lg-100">
+    <div class="card card-flush h-100">
         <div class="card-header">
             <div class="card-title flex-column">
                 <h3 class="fw-bolder mb-1">Todo</h3>
@@ -96,7 +163,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-body pt-0">
+        <div class="card-body">
             <div class="tab-content">
                 <div id="kt_activity_today" class="card-body p-0 tab-pane fade show active" role="tabpanel" aria-labelledby="kt_activity_today_tab"></div>
                 <div id="kt_activity_week" class="card-body p-0 tab-pane" role="tabpanel" aria-labelledby="kt_activity_week_tab"></div>

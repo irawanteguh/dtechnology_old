@@ -3,11 +3,20 @@
     	<h1 class="logo me-auto"><a href="index.html">DTechnology</a></h1>
       	<nav id="navbar" class="navbar">
 			<ul>
-			<li><a class = "nav-link scrollto active" href = "#hero">Home</a></li>
-			<li><a class = "nav-link scrollto" href        = "#about">About</a></li>
-			<li><a class = "nav-link scrollto" href        = "#services">Services</a></li>
-			<li><a class = "nav-link scrollto" href        = "#portfolio">Portfolio</a></li>
-			<li><a class = "nav-link scrollto" href        = "#team">Team</a></li>
+				<li><a class = "nav-link scrollto active" href = "#hero">Home</a></li>
+				<li><a class = "nav-link scrollto" href = "#about">About</a></li>
+				<li><a class = "nav-link scrollto" href = "#services">Services</a></li>
+				<li><a class = "nav-link scrollto" href = "#portfolio">Portfolio</a></li>
+				<li><a class = "nav-link scrollto" href = "#team">Team</a></li>
+				<li class="dropdown">
+					<a href="#"><span>Carrers</span> <i class="bi bi-chevron-down"></i></a>
+					<ul>
+						<li><a href="index.php/auth/signup">Sign Up</a></li>
+						<li><a href="index.php/auth/sign">Sign In</a></li>
+						<li><a href="#">Carrers List</a></li>
+					</ul>
+				</li>
+
 			<li class="dropdown">
 				<a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
 				<ul>

@@ -816,7 +816,7 @@
 						</div>
 					</div>
 
-					<div class="d-flex align-items-center ms-1 ms-lg-3">
+					<!-- <div class="d-flex align-items-center ms-1 ms-lg-3">
 						<a href="#" class="btn btn-icon btn-icon-muted btn-active-icon-primar ms-1" data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
 							<i class="ki-duotone ki-night-day theme-light-show fs-1"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span></i>    <i class="ki-duotone ki-moon theme-dark-show fs-1"><span class="path1"></span><span class="path2"></span></i>
 						</a>
@@ -850,7 +850,7 @@
 								</a>
 							</div>
 						</div>
-					</div>
+					</div> -->
 
 					<!-- <div class="d-flex align-items-center ms-1 ms-lg-3">
 						<div class="btn btn-icon btn-active-light-primary position-relative w-30px h-30px w-md-40px h-md-40px" id="kt_drawer_chat_toggle">
