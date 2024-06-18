@@ -411,7 +411,7 @@ var idaddress = '';
 var submitaddressButton = document.querySelector("#kt_address_submit");
 var validatoraddress;
 var formaddress = document.querySelector("#formaddress");
-function formaddress() {
+function formaddressreset() {
     $('#formcontact')[0].reset();
     $('#formcontact #contact_relationship').val('').trigger('change');
 }
