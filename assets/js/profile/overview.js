@@ -1,3 +1,9 @@
+getmaritalstatus();
+getethnic();
+getreligion();
+getemergencycontact();
+getaddress();
+
 var dob = document.querySelector("[name='dob']");
 new tempusDominus.TempusDominus(dob, {
     display: {
@@ -29,18 +35,17 @@ new tempusDominus.TempusDominus(dob, {
         enabledHours: []
     }
 });
+
 Inputmask({
     "mask": "99/99/9999"
-}).mask(".kt_inputmask_1");
-getmaritalstatus();
-getethnic();
-getreligion();
+}).
+mask(".kt_inputmask_1");
+
+
 setTimeout(() => {
     datauser();
 }, 100);
 
-getemergencycontact();
-getaddress();
 function getreligion() {
     $.ajax({
         url: url + "index.php/profile/overview/getreligion",
@@ -61,6 +66,7 @@ function getreligion() {
         }
     });
 }
+
 function getethnic() {
     $.ajax({
         url: url + "index.php/profile/overview/getethnic",
@@ -81,6 +87,7 @@ function getethnic() {
         }
     });
 }
+
 function calculateAge() {
     var birthdate = $('[name="dob"]').val();
     birthdate = birthdate.split('/');
@@ -159,12 +166,12 @@ function getmaritalstatus() {
         }
     });
 }
-/* CONTACT*/
 
 var idcontact = '';
 var submitButton = document.querySelector("#kt_contact_submit");
 var validator;
 var formcontact = document.querySelector("#formcontact");
+
 function getrelathionship() {
     $.ajax({
         url: url + "index.php/profile/overview/getrelathionship",
@@ -184,6 +191,7 @@ function getrelathionship() {
         }
     });
 }
+
 function getemergencycontact() {
     $.ajax({
         url: url + "index.php/profile/overview/getemergencycontact",
@@ -194,15 +202,32 @@ function getemergencycontact() {
         },
         success: function (data) {
             var html = '';
+            var newcontact = '';
+
+            newcontact += `<div class="col-lg-6">
+                            <div class="notice d-flex bg-light-danger border-3 rounded border-danger border border-dashed h-lg-100 p-6">
+                                <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
+                                    <div class="mb-3 mb-md-0 fw-bold">
+                                        <h4 class="text-gray-900 fw-bolder">Emergency Contact Information!</h4>
+                                        <div class="fs-6 text-gray-700 pe-7">Please carefully read
+                                        <a href="#" class="fw-bolder me-1">our guidelines</a> before adding a new emergency contact.</div>
+                                    </div>
+                                    <a href="#" class="btn btn-danger px-6 align-self-center text-nowrap" onclick="newcontact()"><i class="fa-solid fa-plus"></i> Add Emergency Contact</a>
+                                </div>
+                            </div>
+                        </div>`;
+
             if (data.responCode === '00') {
                 data.responResult.map(function (d) {
                     var primary = '';
+
                     if (d.CONTACT_PRIMARY === '1') {
                         primary = '<span class="badge badge-light-primary fs-7 ms-2">Primary</span>';
                     }
+
                     html += `
                     <div class="col-lg-6">
-                        <div class="card card-dashed border-primary border-3 h-xl-100 flex-row flex-stack flex-wrap p-4">
+                        <div class="card card-dashed border-danger border-3 h-xl-100 flex-row flex-stack flex-wrap p-4">
                             <div class="d-flex flex-column py-2">
                                 <div class="d-flex align-items-center fs-5 fw-bolder mb-5">`+ d.CONTACT_NAME + `
                                     `+ primary + `
@@ -218,22 +243,25 @@ function getemergencycontact() {
                                 </div>
                             </div>
                             <div class="d-flex align-items-center py-2">
-                                <button type="button" class="btn btn-sm btn-light btn-active-light-primary me-3" onclick='deletecontact(this)' data-id='`+ d.CONTACT_ID + `'>Delete</button>
-                                <button type="button" class="btn btn-sm btn-light btn-active-light-primary" onclick='editcontact(this)' data-id='`+ d.CONTACT_ID + `'>Edit</button>
+                                <button type="button" class="btn btn-sm btn-light btn-active-light-primary  me-3" onclick='editcontact(this)' data-id='`+ d.CONTACT_ID + `'>Edit</button>
+                                <button type="button" class="btn btn-sm btn-light btn-active-light-primary" onclick='deletecontact(this)' data-id='`+ d.CONTACT_ID + `'>Delete</button>
                             </div>
                         </div>
                     </div>
                     `;
                 })
             }
-            $("#listcontact").html(html);
+
+            $("#listcontact").html(newcontact+html);
         }
     });
 }
+
 function formreset() {
     $('#formcontact')[0].reset();
     $('#formcontact #contact_relationship').val('').trigger('change');
 }
+
 function newcontact() {
     getrelathionship();
     formreset();
@@ -291,6 +319,7 @@ function deletecontact(e) {
     });
 
 }
+
 function getaddress() {
     $.ajax({
         url: url + "index.php/profile/overview/getaddress",
@@ -300,7 +329,22 @@ function getaddress() {
         beforeSend: function () {
         },
         success: function (data) {
-            var html = '';
+            var html       = '';
+            var newaddress = '';
+
+            newaddress += `<div class="col-lg-6">
+                            <div class="notice d-flex bg-light-info border-3 rounded border-info border border-dashed h-lg-100 p-6">
+                                <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
+                                    <div class="mb-3 mb-md-0 fw-bold">
+                                        <h4 class="text-gray-900 fw-bolder">Add New Address</h4>
+                                        <div class="fs-6 text-gray-700 pe-7">Please carefully read
+                                        <a href="#" class="fw-bolder me-1">our address guidelines</a> before adding a new address.</div>
+                                    </div>
+                                    <a href="#" class="btn btn-info px-6 align-self-center text-nowrap" onclick="newaddress()"><i class="fa-solid fa-plus"></i> Add Address</a>
+                                </div>
+                            </div>
+                        </div>`;
+
             if (data.responCode === '00') {
                 data.responResult.map(function (d) {
                     var primary = '';
@@ -309,7 +353,7 @@ function getaddress() {
                     }
                     html += `
                     <div class="col-lg-6">
-                        <div class="card card-dashed border-primary border-3 h-xl-100 flex-row flex-stack flex-wrap p-4">
+                        <div class="card card-dashed border-info border-3 h-xl-100 flex-row flex-stack flex-wrap p-4">
                             <div class="d-flex flex-column py-2">
                                 <div class="d-flex align-items-center fs-5 fw-bolder mb-5">`+ d.ADDRESS_LABEL + `
                                     `+ primary + `
@@ -319,19 +363,21 @@ function getaddress() {
                                 </div>
                             </div>
                             <div class="d-flex align-items-center py-2">
-                                <button type="button" class="btn btn-sm btn-light btn-active-light-primary me-3" onclick='deleteaddress(this)' data-id='`+ d.ADDRESS_ID + `'>Delete</button>
-                                <button type="button" class="btn btn-sm btn-light btn-active-light-primary" onclick='editaddress(this)' data-id='`+ d.ADDRESS_ID + `'>Edit</button>
+                                <button type="button" class="btn btn-sm btn-light btn-active-light-primary me-3" onclick='editaddress(this)' data-id='`+ d.ADDRESS_ID + `'>Edit</button>
+                                <button type="button" class="btn btn-sm btn-light btn-active-light-primary" onclick='deleteaddress(this)' data-id='`+ d.ADDRESS_ID + `'>Delete</button>
                             </div>
                         </div>
                     </div>
                     `;
                 })
             }
-            $("#listaddress").html(html);
+            $("#listaddress").html(newaddress+html);
         }
     });
 }
+
 KTUtil.onDOMContentLoaded(function () {
+
     validator = FormValidation.formValidation(formcontact, {
         fields: {
             contact_name: {
@@ -370,6 +416,7 @@ KTUtil.onDOMContentLoaded(function () {
             })
         }
     });
+
     submitButton.addEventListener('click', function (e) {
         e.preventDefault();
         validator.validate().then(function (status) {
@@ -393,6 +440,7 @@ KTUtil.onDOMContentLoaded(function () {
                             $("#kt_modal_new_contact").modal('hide');
                             getemergencycontact();
                         }
+                        
                         toastr.clear();
                         toastr[res.responHead](res.responDesc, "INFORMATION");
                     },
@@ -401,12 +449,11 @@ KTUtil.onDOMContentLoaded(function () {
                         submitButton.disabled = false;
                     },
                 });
-            }
+            };
         });
     })
 });
 
-/*ADDRESS*/
 var idaddress = '';
 var submitaddressButton = document.querySelector("#kt_address_submit");
 var validatoraddress;
