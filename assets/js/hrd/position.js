@@ -1,28 +1,5 @@
 daftarjabatan();
 
-
-
-$('#modal-positioning').on('hidden.bs.modal', function (e) {
-    $(":hidden[name='data_position_id_registration']").val("");
-	$("input[name='data_position_name_registration']").val("");
-});
-
-flatpickr('[name="data_position_tanggal_registration"]', {
-    enableTime: false,
-    dateFormat: "d.m.Y",
-    onChange: function(selectedDates, dateStr, instance) {
-        instance.close();
-    }
-});
-
-function getdata(btn){
-	var positionid = btn.attr("data-positionid");
-	var position   = btn.attr("data-position");
-
-	$(":hidden[name='data_position_id_registration']").val(positionid);
-	$("input[name='data_position_name_registration']").val(position);
-};
-
 function daftarjabatan(){
     $.ajax({
         url       : url+"index.php/hrd/position/daftarjabatan",
@@ -139,14 +116,14 @@ function daftarjabatan(){
                     tableresult += "</td>";
 
                     tableresult += "<td class='text-end'>";
-                    tableresult += "<div class='btn-group' role='group'>";
-                    tableresult += "<button id='btnGroupDrop1' type='button' class='btn btn-light-primary dropdown-toggle btn-sm' data-bs-toggle='dropdown' aria-expanded='false'>Action</button>";
-                    tableresult += "<div class='dropdown-menu' aria-labelledby='btnGroupDrop1'>";
+                    // tableresult += "<div class='btn-group' role='group'>";
+                    // tableresult += "<button id='btnGroupDrop1' type='button' class='btn btn-light-primary dropdown-toggle btn-sm' data-bs-toggle='dropdown' aria-expanded='false'>Action</button>";
+                    // tableresult += "<div class='dropdown-menu' aria-labelledby='btnGroupDrop1'>";
                     // tableresult += "<a class='dropdown-item btn btn-sm' data-bs-toggle='modal' data-bs-target='#modal-edituser' "+getvariabel+" onclick='getdataedit($(this));'><i class='bi bi-pencil'></i> Perbaharui Data</a>";
-                    tableresult += "<a class='dropdown-item btn btn-sm' data-bs-toggle='modal' data-bs-target='#modal_position_registration' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-person-add'></i> Positioning</a>";
+                    // tableresult += "<a class='dropdown-item btn btn-sm' data-bs-toggle='modal' data-bs-target='#modal_position_registration' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-person-add'></i> Positioning</a>";
                                      
-                    tableresult +="</div>";
-                    tableresult +="</div>";
+                    // tableresult +="</div>";
+                    // tableresult +="</div>";
                     tableresult +="</td>";
                     tableresult +="</tr>";
 
@@ -179,64 +156,3 @@ function daftarjabatan(){
     });
     return false;
 };
-
-$(document).on("submit", "#forminsertpenempatan", function (e) {
-	e.preventDefault();
-	var data = new  FormData(this);
-	$.ajax({
-        url        : url+'index.php/hrd/position/insertpenempatan',
-        data       : data,
-        method     : "POST",
-        dataType   : "JSON",
-        cache      : false,
-        processData: false,
-        contentType: false,
-        beforeSend : function () {
-            toastr.clear();
-            toastr["info"]("Sending request...", "Please wait");
-			$("#btn_position_registrasi").addClass("disabled");
-        },
-		success: function (data) {
-            toastr.clear();
-            
-			if(data.responCode === "00"){
-                toastr[data.responHead](data.responDesc, "INFORMATION");
-                $('#modal_position_registration').modal('hide');
-				daftarjabatan();
-			}else{
-                Swal.fire({
-                    title            : "<h1 class='font-weight-bold' style='color:#234974;'>For Your Information</h1>",
-                    html             : "<b>"+data.responDesc+"</b>",
-                    icon             : data.responHead,
-                    confirmButtonText: "Please Try Again",
-                    buttonsStyling   : false,
-                    timerProgressBar : true,
-                    timer            : 5000,
-                    customClass      : {confirmButton: "btn btn-danger"},
-                    showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
-                    hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
-                });
-                $("#btn_position_registrasi").removeClass("disabled");
-            }
-		},
-        complete: function () {
-            toastr.clear();
-            $("#btn_position_registrasi").removeClass("disabled");
-		},
-        error: function(xhr, status, error) {
-            Swal.fire({
-                title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
-                html             : "<b>"+error+"</b>",
-                icon             : "error",
-                confirmButtonText: "Please Try Again",
-                buttonsStyling   : false,
-                timerProgressBar : true,
-                timer            : 5000,
-                customClass      : {confirmButton: "btn btn-danger"},
-                showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
-                hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
-            });
-		}
-	});
-    return false;
-});

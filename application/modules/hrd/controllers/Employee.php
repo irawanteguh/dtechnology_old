@@ -14,16 +14,8 @@
 		}
 
         public function loadcombobox(){
-            $parameter = "and a.user_id <> '".$_SESSION['userid']."'";
-
-            $resultnamaatasan    = $this->md->daftarkaryawan(ORG_ID,$parameter);
             $resultdaftarjabatan = $this->md->daftarjabatan(ORG_ID);
             $resulttype          = $this->md->type();
-
-            $daftarkaryawan="";
-            foreach($resultnamaatasan as $a ){
-                $daftarkaryawan.="<option value='".$a->user_id."'>".$a->name."</option>";
-            }
 
             $position="";
             foreach($resultdaftarjabatan as $a ){
@@ -35,11 +27,23 @@
                 $type.="<option value='".$a->id."'>".$a->type."</option>";
             }
 
-            $data['namaatasan'] = $daftarkaryawan;
             $data['position']   = $position;
             $data['type']       = $type;
             return $data;
 		}
+
+        public function namaatasan(){
+            $userid               = $this->input->post('userid');
+            $parameter            = "and a.user_id <> '".$userid."'";
+            $resultdaftarkaryawan = $this->md->daftarkaryawan(ORG_ID,$parameter);
+            
+            $namaatasan   = "";
+            foreach($resultdaftarkaryawan as $a ){
+                $namaatasan.="<option value='".$a->user_id."'>".$a->name."</option>";
+            }
+
+            echo $namaatasan;
+        }
 
         public function masteremployee(){
             $result = $this->md->masteremployee(ORG_ID);
@@ -58,6 +62,69 @@
             echo json_encode($json);
         }
 		
+        public function insertpenempatan(){
+            $cekdataposisi  = $this->md->cekdataposisi(ORG_ID,$this->input->post("data_position_userid_registration"),$this->input->post("data_position_posisitionid_registration"));
+
+            if(empty($cekdataposisi)){
+                if($this->input->post("data_position_type_registration") === "Y"){
+                    $cekdataprimary = $this->md->cekdataprimary(ORG_ID,$this->input->post("data_position_userid_registration"));
+
+                    if(empty($cekdataprimary)){
+                        $data['org_id']           = $_SESSION['orgid'];
+                        $data['trans_id']         = generateuuid();
+                        $data['user_id']          = $this->input->post("data_position_userid_registration");
+                        $data['position_id']      = $this->input->post("data_position_posisitionid_registration");
+                        $data['atasan_id']        = $this->input->post("data_position_atasanid_registration");
+                        $data['start_date']       = DateTime::createFromFormat("d.m.Y", $this->input->post("data_position_tanggal_registration"))->format("Y-m-d");
+                        $data['position_primary'] = $this->input->post("data_position_type_registration");
+                        $data['created_by']       = $_SESSION['userid'];
+                        
+                        if($this->md->insertpenempatan($data)){
+                            $json['responCode']="00";
+                            $json['responHead']="success";
+                            $json['responDesc']="Tambah Todo List Berhasil";
+                        }else{
+                            $json['responCode']="01";
+                            $json['responHead']="info";
+                            $json['responDesc']="Tambah Todo List Gagal";
+                        }
+                    }else{
+                        $json['responCode']="01";
+                        $json['responHead']="info";
+                        $json['responDesc']="Karyawan Sudah Mempunyai Penempatan Primary <br>".$cekdataprimary->position;
+                        $json['responResult']=$cekdataprimary;
+                    }
+                }else{
+                    $data['org_id']           = $_SESSION['orgid'];
+                    $data['trans_id']         = generateuuid();
+                    $data['user_id']          = $this->input->post("data_position_userid_registration");
+                    $data['position_id']      = $this->input->post("data_position_posisitionid_registration");
+                    $data['atasan_id']        = $this->input->post("data_position_atasanid_registration");
+                    $data['start_date']       = DateTime::createFromFormat("d.m.Y", $this->input->post("data_position_tanggal_registration"))->format("Y-m-d");
+                    $data['position_primary'] = $this->input->post("data_position_type_registration");
+                    $data['created_by']       = $_SESSION['userid'];
+                    
+                    if($this->md->insertpenempatan($data)){
+                        $json['responCode']="00";
+                        $json['responHead']="success";
+                        $json['responDesc']="Tambah Todo List Berhasil";
+                    }else{
+                        $json['responCode']="01";
+                        $json['responHead']="info";
+                        $json['responDesc']="Tambah Todo List Gagal";
+                    }
+                }
+                
+            }else{
+                $json['responCode']   = "01";
+                $json['responHead']   = "info";
+                $json['responDesc']   = "Karyawan Sudah Di Tempatkan <br>".$cekdataposisi->position;
+            }
+            
+            
+
+            echo json_encode($json);
+        }
 
 	}
 ?>

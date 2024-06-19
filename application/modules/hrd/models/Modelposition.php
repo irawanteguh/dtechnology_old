@@ -1,46 +1,6 @@
 <?php
     class Modelposition extends CI_Model{
 
-        function cekdataprimary($orgid,$userid){
-            $query =
-                    "
-                        select a.user_id, position_id,
-                               (select name from dt01_gen_user_data where active='1' and org_id=a.org_id and user_id=a.user_id)name,
-                               (select position from dt01_hrd_position_ms where active='1' and org_id=a.org_id and position_id=a.position_id)position
-
-                        from dt01_hrd_position_dt a
-                        where a.active='1'
-                        and   a.position_primary='Y'
-                        and   a.org_id='".$orgid."'
-                        and   a.user_id='".$userid."'
-                
-                    ";
-
-            $recordset = $this->db->query($query);
-            $recordset = $recordset->row();
-            return $recordset;
-        }
-
-        function cekdataposisi($orgid,$userid,$positionid){
-            $query =
-                    "
-                        select a.user_id, position_id,
-                               (select name from dt01_gen_user_data where active='1' and org_id=a.org_id and user_id=a.user_id)name,
-                               (select position from dt01_hrd_position_ms where active='1' and org_id=a.org_id and position_id=a.position_id)position
-
-                        from dt01_hrd_position_dt a
-                        where a.active='1'
-                        and   a.org_id='".$orgid."'
-                        and   a.user_id='".$userid."'
-                        and   a.position_id='".$positionid."'
-                
-                    ";
-
-            $recordset = $this->db->query($query);
-            $recordset = $recordset->row();
-            return $recordset;
-        }
-
         function daftarjabatan($orgid,$parameter){
             $query =
                     "
@@ -108,41 +68,6 @@
             $recordset = $this->db->query($query);
             $recordset = $recordset->result();
             return $recordset;
-        }
-
-        function daftarkaryawan($orgid){
-            $query =
-                    "
-                        select a.user_id, name
-                        from dt01_gen_user_data a
-                        where a.active='1'
-                        and   a.org_id='".$orgid."'
-                        order by name asc
-                
-                    ";
-
-            $recordset = $this->db->query($query);
-            $recordset = $recordset->result();
-            return $recordset;
-        }
-
-        function type(){
-            $query =
-                    "
-                        select 'Y' id, 'Primary' type
-                        union
-                        select 'N' id, 'Secondary' type
-                        order by type asc
-                    ";
-
-            $recordset = $this->db->query($query);
-            $recordset = $recordset->result();
-            return $recordset;
-        }
-
-        function insertpenempatan($data){           
-            $sql =   $this->db->insert("dt01_hrd_position_dt",$data);
-            return $sql;
         }
 
     }

@@ -182,6 +182,5 @@
                     </table>
                 </div>
             </div>
-            <!--end: Card Body-->
         </div>
     </div>
