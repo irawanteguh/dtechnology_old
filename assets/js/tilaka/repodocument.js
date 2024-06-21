@@ -40,12 +40,14 @@ function dataupload(){
         cache   : false,
         beforeSend: function () {
             $("#resultrepodocument").html("");
+            $("#info_list_document").html("");
             toastr.clear();
             toastr["info"]("Sending request...", "Please wait");
         },
         success:function(data){
             var result      = "";
             var tableresult = "";
+            var jml = 0;
 
             if(data.responCode==="00"){
                 result = data.responResult;
@@ -69,12 +71,12 @@ function dataupload(){
                             }
                         }
                     }
-                    tableresult +="<td><div><a href='#' data-bs-toggle='modal' data-bs-target='#modal_view_pdf' data-dirfile='"+pathposttilaka+"/"+(result[i].NO_FILE ? result[i].NO_FILE : "")+".pdf' onclick='viewdoc(this)'>"+(result[i].NO_FILE ? result[i].NO_FILE : "-")+"</a></div><div>"+(result[i].FILENAME ? result[i].FILENAME : "-")+"</div></td>";
-                    tableresult +="<td>"+(result[i].jenisdocumen ? result[i].jenisdocumen : "")+"</td>";
-                    tableresult +="<td>"+(result[i].assignname ? result[i].assignname : "")+"</td>";
+                    tableresult +="<td><div>"+(result[i].jenisdocumen ? result[i].jenisdocumen : "-")+"</div><div><a href='#' data-bs-toggle='modal' data-bs-target='#modal_view_pdf' data-dirfile='"+pathposttilaka+"/"+(result[i].NO_FILE ? result[i].NO_FILE : "")+".pdf' onclick='viewdoc(this)'>"+(result[i].NO_FILE ? result[i].NO_FILE : "-")+"</a></div><div>"+(result[i].FILENAME ? result[i].FILENAME : "-")+"</div></td>";
+                    tableresult +="<td><div>"+(result[i].pasien_idx ? result[i].pasien_idx : "-")+"</div><div>"+(result[i].transaksi_idx ? result[i].transaksi_idx : "-")+"</div></td>";
+                    tableresult +="<td><div>"+(result[i].assignname ? result[i].assignname : "")+"</div><div>"+(result[i].useridentifier ? result[i].useridentifier : "<i class='bi bi-x-octagon text-danger'></i>")+"</div></td>";
                     tableresult +="<td>"+(result[i].tgljam ? result[i].tgljam : "")+"</td>";
-                    tableresult +="<td>"+(result[i].useridentifier ? result[i].useridentifier : "<i class='bi bi-x-octagon text-danger'></i>") +"</td>";
-                    tableresult += "<td class='text-end'>";
+                    // tableresult +="<td>"+(result[i].useridentifier ? result[i].useridentifier : "<i class='bi bi-x-octagon text-danger'></i>") +"</td>";
+                    tableresult += "<td class='pe-4 text-end'>";
                     tableresult += "<button type='button' class='btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px' data-kt-table-widget-4='expand_row'>";
                     tableresult += "<i class='bi bi-plus fs-4 m-0 toggle-off'></i>";
                     tableresult += "<i class='bi bi-dash fs-4 m-0 toggle-on'></i>";
@@ -89,10 +91,13 @@ function dataupload(){
                     tableresult += "</div>";
                     tableresult += "</td>";
                     tableresult += "</tr>";
+
+                    jml ++;
                 }
             }
 
             $("#resultrepodocument").html(tableresult);
+            $("#info_list_document").html(jml);
 
             document.querySelectorAll("[data-kt-table-widget-4='expand_row']").forEach(button => {
                 button.addEventListener('click', function() {

@@ -64,6 +64,7 @@
             $resultcheckdata =  $this->md->checkdata($_SESSION['orgid'],$positionid,$switchId);
 
             if(!empty($resultcheckdata)){
+                $data['last_update_date']=date("Y-m-d H:i:s");
                 $data['last_update_by']=$_SESSION['userid'];
                 if($this->md->updatemapping($positionid,$switchId,$data)){
                     $json["responCode"]="00";
@@ -75,11 +76,13 @@
                     $json["responDesc"]="Activity Field";
                 }
             }else{
-                $data['ORG_ID']       = $_SESSION['orgid'];
-                $data['TRANSAKSI_ID'] = generateuuid();
-                $data['POSITION_ID']  = $positionid;
-                $data['ACTIVITY_ID']  = $switchId;
-                $data['CREATED_BY']   = $_SESSION['userid'];
+                $data['org_id']           = $_SESSION['orgid'];
+                $data['transaksi_id']     = generateuuid();
+                $data['position_id']      = $positionid;
+                $data['activity_id']      = $switchId;
+                $data['created_by']       = $_SESSION['userid'];
+                $data['last_update_by']   = $_SESSION['userid'];
+                $data['last_update_date'] = date("Y-m-d H:i:s");
 
                 if($this->md->insertmapping($data)){
                     $json["responCode"]="00";

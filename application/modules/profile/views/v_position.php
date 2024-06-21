@@ -36,7 +36,7 @@
                             <th>Date</th>
                             <th>Type</th>
                             <th>Status</th>
-                            <th class="pe-4 text-end rounded-end">Create By</th>
+                            <th class="pe-4 text-end rounded-end">Last Update</th>
                         </tr>
                     </thead>
                     <tbody id="historyposition"></tbody>

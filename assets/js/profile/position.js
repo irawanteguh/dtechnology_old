@@ -51,7 +51,7 @@ function historyposition() {
                     }else{
                         tableresult +="<td><div class='badge badge-light-danger fw-bolder'>In Active</div></td>";
                     }
-                    tableresult +="<td class='text-end'><span class='fw-bold d-block fs-7'>"+result[i].dibuatoleh+"</span><span class='fw-bold text-muted d-block fs-7'>"+result[i].CREATED_DATE+"</span></td>";
+                    tableresult +="<td class='text-end pe-4'><span class='fw-bold d-block fs-7'>"+result[i].dibuatoleh+"</span><span class='fw-bold text-muted d-block fs-7'>"+result[i].CREATED_DATE+"</span></td>";
                     tableresult +="</tr>";
                 }
             }

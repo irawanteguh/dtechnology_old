@@ -15,7 +15,7 @@
     <div class="card-header pt-5">
 		<h3 class="card-title align-items-start flex-column">
             <span class="card-label fw-bolder fs-3 mb-1">Repository Document</span>
-            <span class="text-muted mt-1 fw-bold fs-7" id="">n/a</span>
+            <span class="text-muted mt-1 fw-bold fs-7" id="info_list_document"></span>
         </h3>
 		<div class="card-toolbar">
 			<button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
@@ -45,10 +45,9 @@
                     <tr class="fw-bolder text-muted bg-light align-middle">
                         <th class="ps-4 rounded-start">Status</th>
                         <th>Filename</th>
-                        <th>Category Document</th>
+                        <th>Information</th>
                         <th>Assign By</th>
                         <th>Created Date</th>
-                        <th>Tilaka Name</th>
                         <th class="pe-4 text-end rounded-end">Note</th>
                     </tr>
                 </thead>

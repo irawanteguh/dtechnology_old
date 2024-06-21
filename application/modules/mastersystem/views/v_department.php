@@ -33,13 +33,12 @@
                         <table class="table align-middle table-row-dashed fs-6 gy-2" id="tablemasterkaryawan">
                             <thead>
                                 <tr class="fw-bolder text-muted bg-light">
-                                    <th class="ps-4 rounded-start">Activity Name</th>
-                                    <th>PK</th>
-                                    <th>Duration</th>
+                                    <th class="ps-4 rounded-start">Department</th>
+                                    <th>Part Of</th>
                                     <th class="pe-4 text-end rounded-end">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody class="text-gray-600 fw-bold" id="resutlmasteractivity"></tbody>
+                            <tbody class="text-gray-600 fw-bold" id="resultmasterdepartment"></tbody>
                         </table>
                     </div>
                 </div>

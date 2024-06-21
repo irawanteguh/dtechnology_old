@@ -6,9 +6,11 @@
                     "
                         select x.*
                         from(
-                            select a.activity_id, activity, durasi, active,
+                            select a.activity_id, activity, durasi, active, date_format(last_update_date,'%d.%m.%Y %H:%i:%s')last_update_date,
                                 (select concat(name,' ',area) from dt01_hrd_klinis_ms where active='1' and org_id=a.org_id and klinis_id=a.pk)klinis,
-                                (select nomor from dt01_hrd_klinis_ms where active='1' and org_id=a.org_id and klinis_id=a.pk)nomor
+                                (select nomor from dt01_hrd_klinis_ms where active='1' and org_id=a.org_id and klinis_id=a.pk)nomor,
+                                (select name from dt01_gen_user_data where active='1' and org_id=a.org_id and user_id=a.created_by)dibuatoleh
+
                             from dt01_hrd_activity_ms a
                             where a.org_id='".$orgid."'
                         )x

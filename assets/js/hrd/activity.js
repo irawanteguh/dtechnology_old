@@ -65,7 +65,8 @@ function masteractivity(){
 
                     tableresult +="<td class='text-start'>"+(result[i].klinis ? result[i].klinis : "")+"</td>";
                     tableresult +="<td class='text-end'>"+result[i].durasi+" Menit</td>";
-                    tableresult +="<td class='text-end row'>"+action+"</td>";
+                    tableresult +="<td><span class='fw-bold d-block fs-7'>"+result[i].dibuatoleh+"</span><span class='fw-bold text-muted d-block fs-7'>"+result[i].last_update_date+"</span></td>";
+                    tableresult +="<td class='text-end row pe-4'>"+action+"</td>";
                     tableresult +="</tr>";
 
                     jml ++;

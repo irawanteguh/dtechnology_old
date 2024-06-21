@@ -14,12 +14,15 @@
 		}
         
 		public function loadcombobox(){
-			$resultcekklinisid = $this->md->cekklinisid(ORG_ID,$_SESSION['userid']);
+			$pk = "";
 
+			$resultcekklinisid = $this->md->cekklinisid(ORG_ID,$_SESSION['userid']);
 			if($resultcekklinisid->klinis_id != null){
-				$resultactivity= $this->md->activityperawatpelaksana(ORG_ID, $resultcekklinisid->klinis_id);
+				$pk = $resultcekklinisid->klinis_id;
 			}
             
+			$resultactivity= $this->md->activity(ORG_ID,$_SESSION['userid'],$pk);
+
             $activity="";
             foreach($resultactivity as $a ){
                 $activity.="<option value='".$a->activity_id."'>".$a->activity."</option>";
@@ -31,7 +34,7 @@
 		}
 
 		public function calender(){
-            $result        = $this->md->calender();  
+            $result = $this->md->calender();
             
             $events = array();
 
@@ -88,12 +91,16 @@
 		public function insertactivity(){
 			$atasanid ="";
 
-			$resultcekklinisid = $this->md->cekklinisid(ORG_ID,$_SESSION['userid']);
-			$resultcekatasanid = $this->md->cekatasanid(ORG_ID,$_SESSION['userid']);
+			// $resultcekklinisid = $this->md->cekklinisid(ORG_ID,$_SESSION['userid']);
+			$resultcekatasanprimary = $this->md->cekatasan(ORG_ID,$_SESSION['userid'],$this->input->post("data_activity_primaryactivity_add"));
 
-			if($resultcekklinisid->klinis_id != null){
-				$atasanid = $resultcekatasanid->atasan_id;
+			if(!empty($resultcekatasanprimary)){
+				$atasanid = $resultcekatasanprimary[0]['atasan_id'];
 			}
+
+			// if($resultcekklinisid->klinis_id != null){
+			// 	$atasanid = $resultcekatasanid->atasan_id;
+			// }
             
 			$data['org_id']         = $_SESSION['orgid'];
 			$data['trans_id']       = generateuuid();
