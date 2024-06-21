@@ -169,7 +169,7 @@
                             $fileContent = file_get_contents(htmlspecialchars_decode($a['presigned_url']));
                             if ($fileContent !== false) {
                                 $resultchecknofile = $this->md->checknofile($filename);
-                                $destinationPath   = PATHFILE_POST_TILAKA.DIRECTORY_SEPARATOR.$resultchecknofile[0]->NO_FILE.".pdf";
+                                $destinationPath   = PATHFILE_POST_TILAKA.DIRECTORY_SEPARATOR.$resultchecknofile[0]->NO_FILE;
                                 file_put_contents($destinationPath, $fileContent);
                             }
                         }
