@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="card-body">
-            <div id="kt_docs_search_handler_basic" data-kt-search-keypress="true" data-kt-search-min-length="2" data-kt-search-enter="true" data-kt-search-layout="inline" data-kt-search="true" class="">
+            <div id="kt_docs_search_handler_position" data-kt-search-keypress="true" data-kt-search-min-length="2" data-kt-search-enter="true" data-kt-search-layout="inline" data-kt-search="true" class="">
                 <form data-kt-search-element="form" class="w-100 position-relative mb-5" autocomplete="off">
                     <input type="hidden" />
                     <span class="svg-icon svg-icon-2 svg-icon-lg-1 svg-icon-gray-500 position-absolute top-50 ms-5 translate-middle-y">
@@ -33,8 +33,8 @@
                         </span>
                     </span>
                 </form>
-                <div data-kt-search-element="results">
-                    <div class="mh-450px scroll-y me-n5 pe-5" id="listposition"></div>
+                <div>
+                    <div class="mh-450px scroll-y me-n5 pe-5" id="listposition" data-kt-search-element='results'></div>
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
             </div>
         </div>
         <div class="card-body">
-            <div id="kt_docs_search_handler_basic" data-kt-search-keypress="true" data-kt-search-min-length="2" data-kt-search-enter="true" data-kt-search-layout="inline" data-kt-search="true" class="">
+            <div id="kt_docs_search_handler_activity" data-kt-search-keypress="true" data-kt-search-min-length="2" data-kt-search-enter="true" data-kt-search-layout="inline" data-kt-search="true" class="">
                 <form data-kt-search-element="form" class="w-100 position-relative mb-5" autocomplete="off">
                     <input type="hidden" />
 
@@ -63,8 +63,8 @@
                         </svg>
                     </span>
 
-                    <input type="text" class="form-control form-control-solid px-15" name="search" value="" placeholder="Keyword..." data-kt-search-element="input" />
-                    
+                    <input type="text" class="form-control form-control-solid px-15" name="searchactivity" value="" placeholder="Keyword..." data-kt-search-element="input" />
+
                     <span class="position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-5" data-kt-search-element="spinner">
                         <span class="spinner-border h-15px w-15px align-middle text-gray-400"></span>
                     </span>
