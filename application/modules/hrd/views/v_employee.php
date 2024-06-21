@@ -1,6 +1,6 @@
 <div class="col-md-12">
 	<div class="card card-flush">
-		<div class="card-header" id="teguh-head">
+		<div class="card-header pt-5" id="">
 			<h3 class="card-title align-items-start flex-column">
 				<span class="card-label fw-bolder fs-3 mb-1">List Of Employee</span>
 				<span class="text-muted mt-1 fw-bold fs-7" id="info_list_employee"></span>
@@ -27,7 +27,7 @@
 			</div> -->
 		</div>
 		<div class="card-body py-3">
-			<div class="table-responsive">
+			<div class="table-responsive mh-550px scroll-y me-n5 pe-5"">
 				<table class="table align-middle table-row-dashed fs-6 gy-2" id="tablemasterkaryawan">
 					<thead>
 						<tr class="fw-bolder text-muted bg-light">

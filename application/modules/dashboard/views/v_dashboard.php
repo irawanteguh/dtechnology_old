@@ -55,13 +55,17 @@
     </div>
 </div>
 
+
 <div class="col-md-8">
 
 </div>
 
+
+
+
 <div class="col-md-6">
     <div class="card card-flush h-100">
-        <div class="card-header pt-6">
+        <div class="card-header pt-5">
             <div class="card-title flex-column">
                 <h3 class="fw-bolder mb-1">Task Summary</h3>
                 <div class="fs-6 fw-bold text-gray-400" id="countoverduelabel"></div>
@@ -120,11 +124,13 @@
     </div>
 </div>
 
+
 <div class="col-lg-6">
     <div class="card card-flush h-100">
-        <div class="card-header">
+        <div class="card-header pt-5">
             <div class="card-title flex-column">
                 <h3 class="fw-bolder mb-1">Todo</h3>
+                <div class="fs-6 fw-bold text-gray-400" id="">n/a</div>
             </div>
             <div class="card-toolbar">
                 <ul class="nav nav-tabs nav-line-tabs nav-stretch fs-6 border-0 fw-bolder m-5" role="tablist">
@@ -175,8 +181,8 @@
 </div>
 
 <div class="col-lg-12">
-    <div class="card card-flush h-lg-100">
-        <div class="card-header">
+    <div class="card card-flush h-100">
+        <div class="card-header pt-5">
             <div class="card-title flex-column">
                 <h3 class="fw-bolder mb-1">Performance Staff</h3>
             </div>

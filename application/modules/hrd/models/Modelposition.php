@@ -5,7 +5,8 @@
             $query =
                     "
                         SELECT a.ORG_ID, a.POSITION_ID, a.POSITION, a.RVU, a.LEVEL, a.LEVEL_FUNGSIONAL, 
-                                DATE_FORMAT(a.LAST_UPDATE_DATE, '%d.%m.%Y %H:%i:%s') LASTUPDATEDATE,
+                                date_format(last_update_date,'%d.%m.%Y %H:%i:%s')last_update_date,
+                                (select name from dt01_gen_user_data where active='1' and org_id=a.org_id and user_id=a.created_by)dibuatoleh,
                                 (SELECT IFNULL(name, 'Unknown')  FROM dt01_gen_user_data  WHERE active = '1'  AND org_id = a.org_id AND user_id = IFNULL(a.CREATED_BY, a.LAST_UPDATE_BY)) LASTUPDATEDBY,
                                 (SELECT level FROM dt01_gen_level_fungsional_ms WHERE active = '1' AND level_id = a.LEVEL_FUNGSIONAL) FUNCTIONAL,
                                 (

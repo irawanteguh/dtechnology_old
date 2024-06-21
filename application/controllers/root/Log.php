@@ -1,19 +1,15 @@
 <?php
 	defined('BASEPATH') OR exit('No direct script access allowed');
-	class Department extends CI_Controller {
+	class Log extends CI_Controller {
 
 		public function __construct(){
             parent:: __construct();
 			rootsystem::system();
-			$this->load->model("Modeldepartment","md");
+			$this->load->model("Modelserviceapi","md");
         }
 
-		public function index(){
-			$this->template->load("template/template-sidebar","v_department");
-		}
-
-		public function masterdepartment(){
-            $result = $this->md->masterdepartment(ORG_ID);
+        public function log(){
+            $result = $this->md->log(ORG_ID);
             
 			if(!empty($result)){
                 $json["responCode"]="00";
@@ -28,5 +24,8 @@
 
             echo json_encode($json);
         }
+
+        
+
 	}
 ?>

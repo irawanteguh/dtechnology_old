@@ -31,42 +31,68 @@
             return $recordset;
         }
 
-        function cekatasanid($orgid,$userid){
+        // function cekatasanid($orgid,$userid){
+        //     $query =
+        //             "
+        //                select a.atasan_id
+        //                 from dt01_hrd_position_dt a
+        //                 where a.active='1'
+        //                 and   a.org_id='".$orgid."'
+        //                 and   a.user_id='".$userid."'
+        //                 and   a.position_primary='Y'
+        //             ";
+
+        //     $recordset = $this->db->query($query);
+        //     $recordset = $recordset->row();
+        //     return $recordset;
+        // }
+
+        function cekatasan($orgid,$userid,$activityid){
             $query =
                     "
-                       select a.atasan_id
+                        select a.atasan_id, position_primary
                         from dt01_hrd_position_dt a
-                        where a.active='1'
-                        and   a.org_id='".$orgid."'
+                        where a.org_id='".$orgid."'
+                        and   a.active='1'
                         and   a.user_id='".$userid."'
-                        and   a.position_primary='Y'
+                        and   a.position_id in (select position_id from dt01_hrd_mapping_activity where org_id=a.org_id and active='1' and activity_id='".$activityid."')
+                        order by position_primary desc
                     ";
 
             $recordset = $this->db->query($query);
-            $recordset = $recordset->row();
+            $recordset = $recordset->result_array();
             return $recordset;
         }
 
-        function activityperawatpelaksana($orgid,$pk){
+        function activity($orgid,$userid,$pk){
             $query =
                     "
                         select x.*
                         from(
-                            select a.activity_id, concat(' [ ',(select concat(name,' ',area)  from dt01_hrd_klinis_ms where active='1' and klinis_id=a.pk),' ] ',activity,' Durasi ',durasi,' Menit')activity, durasi,
-                                (select nomor from dt01_hrd_klinis_ms a where active='1' and klinis_id=a.pk)urut
-                            from dt01_hrd_activity_ms a
-                            where a.active='1'
-                            and   a.org_id='".$orgid."'
-                            and   a.pk='".$pk."'
+                                select a.activity_id, concat(activity,' Durasi ',durasi,' Menit')activity, durasi,
+                                    (select nomor from dt01_hrd_klinis_ms a where active='1' and klinis_id=a.pk)urut
+                                from dt01_hrd_activity_ms a
+                                where a.active='1'
+                                and   a.org_id='".$orgid."'
+                                and   a.activity_id in ( select activity_id from dt01_hrd_mapping_activity where org_id='".$orgid."' and active='1' and position_id in (select position_id from dt01_hrd_position_dt where org_id='".$orgid."' and active='1' and active='1' and status='1' and user_id='".$userid."'))
 
-                            union
+                                union
 
-                            select a.activity_id, concat(' [ ',(select concat(name,' ',area)  from dt01_hrd_klinis_ms where active='1' and klinis_id=a.pk),' ] ',activity,' Durasi ',durasi,' Menit')activity, durasi,
-                                (select nomor from dt01_hrd_klinis_ms a where active='1' and klinis_id=a.pk)urut
-                            from dt01_hrd_activity_ms a
-                            where a.active='1'
-                            and   a.org_id='".$orgid."'
-                            and   a.pk in ( select sub_klinis_id from dt01_hrd_mapping_klinis where active='1' and klinis_id='".$pk."')
+                                select a.activity_id, concat(' [ ',(select concat(name,' ',area)  from dt01_hrd_klinis_ms where active='1' and klinis_id=a.pk),' ] ',activity,' Durasi ',durasi,' Menit')activity, durasi,
+                                    (select nomor from dt01_hrd_klinis_ms a where active='1' and klinis_id=a.pk)urut
+                                from dt01_hrd_activity_ms a
+                                where a.active='1'
+                                and   a.org_id='".$orgid."'
+                                and   a.pk='".$pk."'
+
+                                union
+
+                                select a.activity_id, concat(' [ ',(select concat(name,' ',area)  from dt01_hrd_klinis_ms where active='1' and klinis_id=a.pk),' ] ',activity,' Durasi ',durasi,' Menit')activity, durasi,
+                                     (select nomor from dt01_hrd_klinis_ms a where active='1' and klinis_id=a.pk)urut
+                                from dt01_hrd_activity_ms a
+                                where a.active='1'
+                                and   a.org_id='".$orgid."'
+                                and   a.pk in ( select sub_klinis_id from dt01_hrd_mapping_klinis where active='1' and klinis_id='".$pk."')
                         )x
                         order by x.urut desc, x.activity asc, x.durasi asc
                                                                     
@@ -76,6 +102,43 @@
             $recordset = $recordset->result();
             return $recordset;
         }
+
+        // function activityperawatpelaksana($orgid,$positionid,$pk){
+        //     $query =
+        //             "
+        //                 select x.*
+        //                 from(
+        //                         select a.activity_id, concat(' [ ',(select concat(name,' ',area)  from dt01_hrd_klinis_ms where active='1' and klinis_id=a.pk),' ] ',activity,' Durasi ',durasi,' Menit')activity, durasi,
+        //                             (select nomor from dt01_hrd_klinis_ms a where active='1' and klinis_id=a.pk)urut
+        //                         from dt01_hrd_activity_ms a
+        //                         where a.active='1'
+        //                         and   a.org_id='".$orgid."'
+        //                         and   a.activity_id in ( select activity_id from dt01_hrd_mapping_activity where active='1' org_id='".$orgid."' and position_id='".$positionid."')
+
+        //                         select a.activity_id, concat(' [ ',(select concat(name,' ',area)  from dt01_hrd_klinis_ms where active='1' and klinis_id=a.pk),' ] ',activity,' Durasi ',durasi,' Menit')activity, durasi,
+        //                             (select nomor from dt01_hrd_klinis_ms a where active='1' and klinis_id=a.pk)urut
+        //                         from dt01_hrd_activity_ms a
+        //                         where a.active='1'
+        //                         and   a.org_id='".$orgid."'
+        //                         and   a.pk='".$pk."'
+
+        //                         union
+
+        //                         select a.activity_id, concat(' [ ',(select concat(name,' ',area)  from dt01_hrd_klinis_ms where active='1' and klinis_id=a.pk),' ] ',activity,' Durasi ',durasi,' Menit')activity, durasi,
+        //                             (select nomor from dt01_hrd_klinis_ms a where active='1' and klinis_id=a.pk)urut
+        //                         from dt01_hrd_activity_ms a
+        //                         where a.active='1'
+        //                         and   a.org_id='".$orgid."'
+        //                         and   a.pk in ( select sub_klinis_id from dt01_hrd_mapping_klinis where active='1' and klinis_id='".$pk."')
+        //                 )x
+        //                 order by x.urut desc, x.activity asc, x.durasi asc
+                                                                    
+        //             ";
+
+        //     $recordset = $this->db->query($query);
+        //     $recordset = $recordset->result();
+        //     return $recordset;
+        // }
 
         function volume($orgid,$activityid,$starttime,$endtime){
             $query =

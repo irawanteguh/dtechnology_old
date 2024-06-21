@@ -114,7 +114,7 @@ function daftarjabatan(){
 
                     tableresult += "</div>";
                     tableresult += "</td>";
-
+                    tableresult +="<td><span class='fw-bold d-block fs-7'>"+result[i].dibuatoleh+"</span><span class='fw-bold text-muted d-block fs-7'>"+result[i].last_update_date+"</span></td>";
                     tableresult += "<td class='text-end'>";
                     // tableresult += "<div class='btn-group' role='group'>";
                     // tableresult += "<button id='btnGroupDrop1' type='button' class='btn btn-light-primary dropdown-toggle btn-sm' data-bs-toggle='dropdown' aria-expanded='false'>Action</button>";
