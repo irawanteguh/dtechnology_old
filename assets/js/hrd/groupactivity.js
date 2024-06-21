@@ -1,7 +1,7 @@
 // search position
 var processs = function (search) {
     var timeout = setTimeout(function () {
-        var rows = $("#listposition div");
+        var rows = $("#listposition > div");
         const inputField = element.querySelector("[data-kt-search-element='input']");
         var val = $.trim(inputField.value).replace(/ +/g, ' ').toLowerCase();
         rows.removeClass('d-none').filter(function () {
@@ -23,7 +23,7 @@ searchObject.on("kt.search.clear", clear);
 // search activity
 var processs2 = function (search) {
     var timeout = setTimeout(function () {
-        var rows = $("#listactivity div");
+        var rows = $("#listactivity > div");
         const inputField = element2.querySelector("[data-kt-search-element='input']");
         var val = $.trim(inputField.value).replace(/ +/g, ' ').toLowerCase();
         rows.removeClass('d-none').filter(function () {
