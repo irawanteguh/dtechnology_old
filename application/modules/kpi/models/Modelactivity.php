@@ -16,6 +16,21 @@
             return $recordset;
         }
 
+        function cekklinisactivity($orgid,$activityid){
+            $query =
+                    "
+                        select a.pk
+                        from dt01_hrd_activity_ms a
+                        where a.active='1'
+                        and   a.org_id='".$orgid."'
+                        and   a.activity_id='".$activityid."'
+                    ";
+
+            $recordset = $this->db->query($query);
+            $recordset = $recordset->row();
+            return $recordset;
+        }
+
         function cekklinisid($orgid,$userid){
             $query =
                     "
@@ -31,21 +46,21 @@
             return $recordset;
         }
 
-        // function cekatasanid($orgid,$userid){
-        //     $query =
-        //             "
-        //                select a.atasan_id
-        //                 from dt01_hrd_position_dt a
-        //                 where a.active='1'
-        //                 and   a.org_id='".$orgid."'
-        //                 and   a.user_id='".$userid."'
-        //                 and   a.position_primary='Y'
-        //             ";
+        function cekatasanid($orgid,$userid){
+            $query =
+                    "
+                        select a.atasan_id
+                        from dt01_hrd_position_dt a
+                        where a.active='1'
+                        and   a.org_id='".$orgid."'
+                        and   a.user_id='".$userid."'
+                        and   a.position_primary='Y'
+                    ";
 
-        //     $recordset = $this->db->query($query);
-        //     $recordset = $recordset->row();
-        //     return $recordset;
-        // }
+            $recordset = $this->db->query($query);
+            $recordset = $recordset->row();
+            return $recordset;
+        }
 
         function cekatasan($orgid,$userid,$activityid){
             $query =
@@ -60,7 +75,7 @@
                     ";
 
             $recordset = $this->db->query($query);
-            $recordset = $recordset->result_array();
+            $recordset = $recordset->row();
             return $recordset;
         }
 
@@ -79,20 +94,11 @@
                                 union
 
                                 select a.activity_id, concat(' [ ',(select concat(name,' ',area)  from dt01_hrd_klinis_ms where active='1' and klinis_id=a.pk),' ] ',activity,' Durasi ',durasi,' Menit')activity, durasi,
-                                    (select nomor from dt01_hrd_klinis_ms a where active='1' and klinis_id=a.pk)urut
-                                from dt01_hrd_activity_ms a
-                                where a.active='1'
-                                and   a.org_id='".$orgid."'
-                                and   a.pk='".$pk."'
-
-                                union
-
-                                select a.activity_id, concat(' [ ',(select concat(name,' ',area)  from dt01_hrd_klinis_ms where active='1' and klinis_id=a.pk),' ] ',activity,' Durasi ',durasi,' Menit')activity, durasi,
                                      (select nomor from dt01_hrd_klinis_ms a where active='1' and klinis_id=a.pk)urut
                                 from dt01_hrd_activity_ms a
                                 where a.active='1'
                                 and   a.org_id='".$orgid."'
-                                and   a.pk in ( select sub_klinis_id from dt01_hrd_mapping_klinis where active='1' and klinis_id='".$pk."')
+                                and   a.pk in ( select sub_klinis_id from dt01_hrd_mapping_klinis where active='1' ".$pk.")
                         )x
                         order by x.urut desc, x.activity asc, x.durasi asc
                                                                     

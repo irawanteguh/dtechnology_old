@@ -1,72 +1,66 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Activity extends CI_Controller
-{
+class Activity extends CI_Controller{
 
-	public function __construct()
-	{
+	public function __construct(){
 		parent::__construct();
 		rootsystem::system();
 		$this->load->model("Modelactivity", "md");
 	}
 
-	public function index()
-	{
+	public function index(){
 		$data = $this->loadcombobox();
 		$this->template->load("template/template-sidebar", "v_activity", $data);
 	}
 
-	public function loadcombobox()
-	{
+	public function loadcombobox(){
 		$resultcekklinisid = $this->md->cekklinisid(ORG_ID, $_SESSION['userid']);
-		$resultactivity = '';
-		if ($resultcekklinisid->klinis_id != null) {
-			$resultactivity = $this->md->activityperawatpelaksana(ORG_ID, $resultcekklinisid->klinis_id);
+
+		if ($resultcekklinisid->klinis_id != "") {
+			$pk = "and klinis_id = '".$resultcekklinisid->klinis_id."'";
+		}else{
+			$pk = "and klinis_id is null";
 		}
 
-		$activity = "";
-
-		if ($resultactivity) {
-			foreach ($resultactivity as $a) {
-				$activity .= "<option value='" . $a->activity_id . "'>" . $a->activity . "</option>";
-			}
+		$resultactivity = $this->md->activity(ORG_ID,$_SESSION['userid'],$pk);
+		$activity       = "";
+		foreach ($resultactivity as $a) {
+			$activity .= "<option value='" . $a->activity_id . "'>" . $a->activity . "</option>";
 		}
+
 		$data['activity'] = $activity;
 
 		return $data;
 	}
 
-	public function calender()
-	{
-		$result        = $this->md->calender();
-
+	public function calender(){
+		$result = $this->md->calender();
 		$events = array();
 
 		foreach ($result as $a) {
 
-			$data['title']     = $a->kegiatanutama;
-			$data['start']     = $a->start_date;
+			$data['title'] = $a->kegiatanutama;
+			$data['start'] = $a->start_date;
 
-			if (!empty($a->end_date)) {
+			if(!empty($a->end_date)){
 				$data['end'] = $a->end_date;
 			} else {
 				$data['end'] = $a->start_date;
 			}
 
-			if ($a->status === "0") {
+			if($a->status === "0"){
 				$data['color']     = '#0d6efd';
 			}
 
-			if ($a->status === "1") {
+			if($a->status === "1"){
 				$data['color']     = '#00a65a';
 			}
 
-			if ($a->status === "2") {
+			if($a->status === "2"){
 				$data['color']     = '#ffc107';
 			}
 
-
-			if ($a->status === "9") {
+			if($a->status === "9"){
 				$data['color']     = '#dc3545';
 			}
 
@@ -77,8 +71,7 @@ class Activity extends CI_Controller
 		echo json_encode($events);
 	}
 
-	public function volume()
-	{
+	public function volume(){
 		$kegiatanid      = $this->input->post('kegiatan');
 		$mulaikegiatan   = $this->input->post('mulaikegiatan');
 		$selesaikegiatan = $this->input->post('selesaikegiatan');
@@ -93,20 +86,21 @@ class Activity extends CI_Controller
 		echo $list;
 	}
 
-	public function insertactivity()
-	{
-		$atasanid = "";
+	public function insertactivity(){
+		$activityid = $this->input->post("data_activity_primaryactivity_add");
 
-		$resultcekklinisid = $this->md->cekklinisid(ORG_ID, $_SESSION['userid']);
-		$resultcekatasanid = $this->md->cekatasanid(ORG_ID, $_SESSION['userid']);
-
-		if ($resultcekklinisid->klinis_id != null) {
-			$atasanid = $resultcekatasanid->atasan_id;
+		$resultcekklinisactivity = $this->md->cekklinisactivity(ORG_ID,$activityid);
+		if($resultcekklinisactivity->pk === ""){
+			$resultcekatasan = $this->md->cekatasan(ORG_ID, $_SESSION['userid'],$activityid);
+			$atasanid        = $resultcekatasan->atasan_id;
+		}else{
+			$resultcekatasanid = $this->md->cekatasanid(ORG_ID, $_SESSION['userid']);
+			$atasanid = $resultcekatasanid->atasan_id;			
 		}
 
 		$data['org_id']         = $_SESSION['orgid'];
 		$data['trans_id']       = generateuuid();
-		$data['activity_id']    = $this->input->post("data_activity_primaryactivity_add");
+		$data['activity_id']    = $activityid;
 		$data['activity']       = $this->input->post("data_activity_description_add");
 		$data['start_date']     = DateTime::createFromFormat("d.m.Y", $this->input->post("data_activity_date_add"))->format("Y-m-d");
 		$data['start_time_in']  = $this->input->post("data_activity_time_start_add");
