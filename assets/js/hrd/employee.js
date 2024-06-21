@@ -1,5 +1,13 @@
 masteremployee();
 
+$("#modal_employee_registrationposition_view").on('hide.bs.modal', function(){
+    $(":hidden[name='modal_data_employee_registrationposition_transid_view']").val("");
+    $("input[name='modal_data_employee_registrationposition_name_view']").val("");
+    $("input[name='modal_data_employee_registrationposition_position_view']").val("");
+    $("input[name='modal_data_employee_registrationposition_atasan_view']").val("");
+    $("input[name='modal_data_employee_registrationposition_nik_view']").val("");
+});
+
 flatpickr('[name="drawer_data_employee_registrationposition_date_add"]', {
     enableTime: false,
     dateFormat: "d.m.Y",
@@ -12,12 +20,13 @@ flatpickr('[name="drawer_data_employee_registrationposition_date_add"]', {
 function getdata(btn){
     toastr.clear();
 
-    var userid          = btn.attr("data-userid");
-    var transid         = btn.attr("data-transid");
-    var name            = btn.attr("data-name");
-    var positionprimary = btn.attr("data-positionprimary");
-    var atasanprimary   = btn.attr("data-atasanprimary");
-    var nik             = btn.attr("data-nik");
+    var userid            = btn.attr("data-userid");
+    var transid           = btn.attr("data-transid");
+    var name              = btn.attr("data-name");
+    var positionprimary   = btn.attr("data-positionprimary");
+    var funsgionalprimary = btn.attr("data-funsgionalprimary");
+    var atasanprimary     = btn.attr("data-atasanprimary");
+    var nik               = btn.attr("data-nik");
 
 	$(":hidden[name='drawer_data_employee_registrationposition_userid_add']").val(userid);
     $(":hidden[name='modal_data_employee_registrationposition_transid_view']").val(transid);
@@ -25,7 +34,12 @@ function getdata(btn){
 	$("input[name='drawer_data_employee_registrationposition_name_add']").val(name);
 
     $("input[name='modal_data_employee_registrationposition_name_view']").val(name);
-    $("input[name='modal_data_employee_registrationposition_position_view']").val(positionprimary);
+    if(funsgionalprimary != "null"){
+        $("input[name='modal_data_employee_registrationposition_position_view']").val(positionprimary+" "+funsgionalprimary);
+    }else{
+        $("input[name='modal_data_employee_registrationposition_position_view']").val(positionprimary);
+    }
+    
     $("input[name='modal_data_employee_registrationposition_atasan_view']").val(atasanprimary);
     $("input[name='modal_data_employee_registrationposition_nik_view']").val(nik);
     
@@ -48,11 +62,12 @@ function masteremployee(){
         },
         success:function(data){
             toastr.clear();
-            var result      = "";
-            var tableresult = "";
-            var getvariabel = "";
-            var color       = ['danger','warning','success','primary'];
-            var jml         = 0;
+            var result              = "";
+            var tableresult         = "";
+            var getvariabel         = "";
+            var getvariabelsecodary = "";
+            var color               = ['danger','warning','success','primary'];
+            var jml                 = 0;
 
             if(data.responCode==="00"){
                 result        = data.responResult;
@@ -65,6 +80,7 @@ function masteremployee(){
                                     "data-transid='"+result[i].transidprimary+"'"+
                                     "data-name='"+result[i].name+"'"+
                                     "data-positionprimary='"+result[i].positionprimary+"'"+
+                                    "data-funsgionalprimary='"+result[i].funsgionalprimary+"'"+
                                     "data-atasanprimary='"+result[i].atasanprimary+"'"+
                                     "data-nik='"+result[i].nik+"'";
 
@@ -98,18 +114,31 @@ function masteremployee(){
                     tableresult += "<td>";
                     for (var j = 0; j < userIdsprimary.length; j++) {
                         var userProfile = userIdsprimary[j].trim().split(':');
-                        if (userProfile.length === 4) {
-                            var positionid = userProfile[0];
-                            var position   = userProfile[1];
-                            var level      = userProfile[2];
+
+                        if (userProfile.length === 5) {
+                            var transid    = userProfile[0];
+                            var positionid = userProfile[1];
+                            var position   = userProfile[2];
+                            var level      = userProfile[3];
+                            var atasan     = userProfile[4];
+                            
+                        } else if (userProfile.length === 4) { 
+                            var transid    = userProfile[0];
+                            var positionid = userProfile[1];
+                            var position   = userProfile[2];
+                            var level      = "";
                             var atasan     = userProfile[3];
-                        } else if (userProfile.length === 3) { 
-                            var positionid = userProfile[0];
-                            var position   = userProfile[1];
-                            var atasan     = userProfile[2];                            
                         }
 
-                        tableresult += "<div><a href='#' data-bs-toggle='modal' data-bs-target='#modal_employee_registrationposition_view' "+getvariabel+" onclick='getdata($(this));'>"+position+" "+level+"</a></div><div>"+atasan+"</div>";
+                        getvariabelsecodary =   "data-userid='"+result[i].user_id+"'"+
+                                                "data-transid='"+transid+"'"+
+                                                "data-name='"+result[i].name+"'"+
+                                                "data-positionprimary='"+position+"'"+
+                                                "data-funsgionalprimary='"+level+"'"+
+                                                "data-atasanprimary='"+atasan+"'"+
+                                                "data-nik='"+result[i].nik+"'";
+
+                        tableresult += "<div><a href='#' data-bs-toggle='modal' data-bs-target='#modal_employee_registrationposition_view' "+getvariabelsecodary+" onclick='getdata($(this));'>"+position+" "+level+"</a></div><div>"+atasan+"</div>";
                         
                         if (j < userIdsprimary.length - 1) {
                             tableresult += "<div class='separator my-2'></div>";

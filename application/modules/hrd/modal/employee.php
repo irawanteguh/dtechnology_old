@@ -8,7 +8,7 @@
                 <div class="btn btn-icon btn-sm btn-color-gray-400 btn-active-color-primary" data-bs-toggle="tooltip" data-bs-dismiss="modal" title="" data-bs-original-title="Hide Registration Position"><span class="svg-icon svg-icon-1"><i class="bi bi-x-lg"></i></span></div>
             </div>
             <div class="modal-body">
-                <input type="hidden" id="modal_data_employee_registrationposition_transid_view" name="modal_data_employee_registrationposition_transid_view">
+                <input type="text" id="modal_data_employee_registrationposition_transid_view" name="modal_data_employee_registrationposition_transid_view">
                 <div class="text-center mb-5">
                     <h1 class="mb-3">Registration Position</h1>
                     <div class="text-muted fw-bold fs-5">Please make changes to your position registration</div>

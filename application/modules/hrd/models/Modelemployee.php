@@ -71,6 +71,7 @@
                                     (select position_id from dt01_hrd_position_dt where org_id='".$orgid."' and active='1' and status='1' and position_primary='Y' and user_id=a.user_id)positioidprimary,
                                     (
                                         SELECT GROUP_CONCAT(
+                                                b.trans_id, ':',
                                                 b.position_id, ':',
                                                 COALESCE(p.position, ''), ':',
                                                 COALESCE(f.level, ''), ':',
