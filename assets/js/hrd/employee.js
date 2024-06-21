@@ -1,6 +1,6 @@
 masteremployee();
 
-flatpickr('[name="data_position_tanggal_registration"]', {
+flatpickr('[name="drawer_data_employee_registrationposition_date_add"]', {
     enableTime: false,
     dateFormat: "d.m.Y",
     maxDate: "today",
@@ -12,13 +12,26 @@ flatpickr('[name="data_position_tanggal_registration"]', {
 function getdata(btn){
     toastr.clear();
 
-	var userid = btn.attr("data-userid");
-	var name   = btn.attr("data-name");
+    var userid          = btn.attr("data-userid");
+    var transid         = btn.attr("data-transid");
+    var name            = btn.attr("data-name");
+    var positionprimary = btn.attr("data-positionprimary");
+    var atasanprimary   = btn.attr("data-atasanprimary");
+    var nik             = btn.attr("data-nik");
 
-	$(":hidden[name='data_position_userid_registration']").val(userid);
-	$("input[name='data_position_name_registration']").val(name);
+	$(":hidden[name='drawer_data_employee_registrationposition_userid_add']").val(userid);
+    $(":hidden[name='modal_data_employee_registrationposition_transid_view']").val(transid);
 
+	$("input[name='drawer_data_employee_registrationposition_name_add']").val(name);
+
+    $("input[name='modal_data_employee_registrationposition_name_view']").val(name);
+    $("input[name='modal_data_employee_registrationposition_position_view']").val(positionprimary);
+    $("input[name='modal_data_employee_registrationposition_atasan_view']").val(atasanprimary);
+    $("input[name='modal_data_employee_registrationposition_nik_view']").val(nik);
+    
+    
     namaatasan(userid);
+    position(userid);
 };
 
 function masteremployee(){
@@ -49,7 +62,11 @@ function masteremployee(){
                     var randomColor = color[randomIndex];
 
                     getvariabel =   "data-userid='"+result[i].user_id+"'"+
-                                    "data-name='"+result[i].name+"'";
+                                    "data-transid='"+result[i].transidprimary+"'"+
+                                    "data-name='"+result[i].name+"'"+
+                                    "data-positionprimary='"+result[i].positionprimary+"'"+
+                                    "data-atasanprimary='"+result[i].atasanprimary+"'"+
+                                    "data-nik='"+result[i].nik+"'";
 
                     tableresult +="<tr>";
                     tableresult +="<td>";
@@ -75,7 +92,7 @@ function masteremployee(){
                     tableresult +="</td>";
 
                     tableresult +="<td><div>"+(result[i].nik ? result[i].nik : "")+"</div><div>" + (result[i].identity_no ? result[i].identity_no : "") + "</div></td>";
-                    tableresult +="<td><div>"+(result[i].positionprimary ? result[i].positionprimary : "")+" "+(result[i].funsgionalprimary ? result[i].funsgionalprimary : "")+"</div><div>"+(result[i].atasanprimary ? result[i].atasanprimary : "")+"</div></td>"
+                    tableresult +="<td><div><a href='#' data-bs-toggle='modal' data-bs-target='#modal_employee_registrationposition_view' "+getvariabel+" onclick='getdata($(this));'>"+(result[i].positionprimary ? result[i].positionprimary : "")+" "+(result[i].funsgionalprimary ? result[i].funsgionalprimary : "")+"</a></div><div>"+(result[i].atasanprimary ? result[i].atasanprimary : "")+"</div></td>"
 
                     var userIdsprimary = result[i].membersecondry ? result[i].membersecondry.split(';') : [];
                     tableresult += "<td>";
@@ -83,18 +100,16 @@ function masteremployee(){
                         var userProfile = userIdsprimary[j].trim().split(':');
                         if (userProfile.length === 4) {
                             var positionid = userProfile[0];
-                            var position = userProfile[1];
-                            var level = userProfile[2];
-                            var atasan = userProfile[3];
-
-                            tableresult += "<div>" + position + " " + level + "</div><div>" + atasan + "</div>";
+                            var position   = userProfile[1];
+                            var level      = userProfile[2];
+                            var atasan     = userProfile[3];
                         } else if (userProfile.length === 3) { 
                             var positionid = userProfile[0];
-                            var position = userProfile[1];
-                            var atasan = userProfile[2];
-
-                            tableresult += "<div>" + position + "</div><div>" + atasan + "</div>";
+                            var position   = userProfile[1];
+                            var atasan     = userProfile[2];                            
                         }
+
+                        tableresult += "<div><a href='#' data-bs-toggle='modal' data-bs-target='#modal_employee_registrationposition_view' "+getvariabel+" onclick='getdata($(this));'>"+position+" "+level+"</a></div><div>"+atasan+"</div>";
                         
                         if (j < userIdsprimary.length - 1) {
                             tableresult += "<div class='separator my-2'></div>";
@@ -108,7 +123,7 @@ function masteremployee(){
                             tableresult += "<button id='btnGroupDrop1' type='button' class='btn btn-light-primary dropdown-toggle btn-sm' data-bs-toggle='dropdown' aria-expanded='false'>Action</button>";
                             tableresult += "<div class='dropdown-menu' aria-labelledby='btnGroupDrop1'>";
                                 // tableresult += "<a class='dropdown-item btn btn-sm' data-bs-toggle='modal' data-bs-target='#modal-edituser' "+getvariabel+" onclick='getdataedit($(this));'><i class='bi bi-pencil'></i> Perbaharui Data</a>";
-                                tableresult += "<a class='dropdown-item btn btn-sm' data-kt-drawer-show='true' data-kt-drawer-target='#drawer_employee_position_registration' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-person-add'></i> Positioning</a>";
+                                tableresult += "<a class='dropdown-item btn btn-sm' data-kt-drawer-show='true' data-kt-drawer-target='#drawer_employee_registrationposition_add' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-person-add'></i> Positioning</a>";
                             tableresult +="</div>";
                         tableresult +="</div>";
                     tableresult +="</td>";
@@ -153,7 +168,21 @@ function namaatasan(userid){
 		dataType: "html",
 		cache   : false,
 		success : function (data) {
-			$("select[name='data_position_atasanid_registration']").html(data);
+			$("select[name='drawer_data_employee_registrationposition_atasanid_add']").html(data);
+		}
+	});
+	return false;
+};
+
+function position(userid){
+	$.ajax({
+		url     : url+"index.php/hrd/employee/position",
+		data    : {userid:userid},
+		method  : "POST",
+		dataType: "html",
+		cache   : false,
+		success : function (data) {
+			$("select[name='drawer_data_employee_registrationposition_positionid_add']").html(data);
 		}
 	});
 	return false;
@@ -177,10 +206,9 @@ $(document).on("submit", "#forminsertpenempatan", function (e) {
         },
 		success: function (data) {
             toastr.clear();
-            
 			if(data.responCode === "00"){
                 toastr[data.responHead](data.responDesc, "INFORMATION");
-                $('#drawer_employee_position_registration_close').trigger('click');
+                $('#drawer_employee_registrationposition_add_close').trigger('click');
 				masteremployee();
 			}else{
                 Swal.fire({
@@ -218,4 +246,164 @@ $(document).on("submit", "#forminsertpenempatan", function (e) {
 		}
 	});
     return false;
+});
+
+function hapus(userid){
+	$.ajax({
+		url     : url+"index.php/hrd/employee/namaatasan",
+		data    : {userid:userid},
+		method  : "POST",
+		dataType: "html",
+		cache   : false,
+		success : function (data) {
+			$("select[name='drawer_data_employee_registrationposition_atasanid_add']").html(data);
+		}
+	});
+	return false;
+};
+
+document.getElementById('modal_employee_registrationposition_delete').addEventListener('click', function() {
+    Swal.fire({
+        title             : 'Are you sure?',
+        text              : "You won't be able to revert this!",
+        icon              : 'warning',
+        showCancelButton  : true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor : '#d33',
+        confirmButtonText : 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var transId = document.getElementById('modal_data_employee_registrationposition_transid_view').value;
+            $.ajax({
+                url    : url+"index.php/hrd/employee/hapuspenempatan",
+                type   : 'POST',
+                data   : { modal_data_employee_registrationposition_transid_view: transId },
+                success: function(response) {
+                    var jsonResponse = JSON.parse(response);
+                    
+                    if(jsonResponse.responCode === "00"){
+                        Swal.fire({
+                            title            : "<h1 class='font-weight-bold' style='color:#234974;'>Success</h1>",
+                            html             : "<b>The position has been deleted.</b>",
+                            icon             : jsonResponse.responHead,
+                            confirmButtonText: 'Yeah, got it!',
+                            customClass      : {confirmButton: 'btn btn-success'},
+                            timerProgressBar : true,
+                            timer            : 2000,
+                            showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                            hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+                        }).then(function (result) {
+                            if(result.isConfirmed){
+                                masteremployee();
+                                $("#modal_employee_registrationposition_view").modal("hide");
+                            }else{
+                                masteremployee();
+                                $("#modal_employee_registrationposition_view").modal("hide");
+                            }
+                        });
+                    }else{
+                        Swal.fire({
+                            title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
+                            html             : "<b>The position could not be deleted.</b>",
+                            icon             : "error",
+                            confirmButtonText: "Please Try Again",
+                            buttonsStyling   : false,
+                            timerProgressBar : true,
+                            timer            : 5000,
+                            customClass      : {confirmButton: "btn btn-danger"},
+                            showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                            hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+                        })
+                    }
+                },
+                error: function() {
+                    Swal.fire({
+                        title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
+                        html             : "<b>There was a problem with the server.</b>",
+                        icon             : "error",
+                        confirmButtonText: "Please Try Again",
+                        buttonsStyling   : false,
+                        timerProgressBar : true,
+                        timer            : 5000,
+                        customClass      : {confirmButton: "btn btn-danger"},
+                        showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                        hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+                    });
+                }
+            });
+        }
+    });
+});
+
+document.getElementById('modal_employee_registrationposition_nonactive').addEventListener('click', function() {
+    Swal.fire({
+        title             : 'Are you sure?',
+        text              : "You won't be able to revert this!",
+        icon              : 'warning',
+        showCancelButton  : true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor : '#d33',
+        confirmButtonText : 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var transId = document.getElementById('modal_data_employee_registrationposition_transid_view').value;
+            $.ajax({
+                url    : url+"index.php/hrd/employee/nonactivepenempatan",
+                type   : 'POST',
+                data   : { modal_data_employee_registrationposition_transid_view: transId },
+                success: function(response) {
+                    var jsonResponse = JSON.parse(response);
+                    
+                    if(jsonResponse.responCode === "00"){
+                        Swal.fire({
+                            title            : "<h1 class='font-weight-bold' style='color:#234974;'>Success</h1>",
+                            html             : "<b>The position has been deleted.</b>",
+                            icon             : jsonResponse.responHead,
+                            confirmButtonText: 'Yeah, got it!',
+                            customClass      : {confirmButton: 'btn btn-success'},
+                            timerProgressBar : true,
+                            timer            : 2000,
+                            showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                            hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+                        }).then(function (result) {
+                            if(result.isConfirmed){
+                                masteremployee();
+                                $("#modal_employee_registrationposition_view").modal("hide");
+                            }else{
+                                masteremployee();
+                                $("#modal_employee_registrationposition_view").modal("hide");
+                            }
+                        });
+                    }else{
+                        Swal.fire({
+                            title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
+                            html             : "<b>The position could not be deleted.</b>",
+                            icon             : "error",
+                            confirmButtonText: "Please Try Again",
+                            buttonsStyling   : false,
+                            timerProgressBar : true,
+                            timer            : 5000,
+                            customClass      : {confirmButton: "btn btn-danger"},
+                            showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                            hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+                        })
+                    }
+                },
+                error: function() {
+                    Swal.fire({
+                        title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
+                        html             : "<b>There was a problem with the server.</b>",
+                        icon             : "error",
+                        confirmButtonText: "Please Try Again",
+                        buttonsStyling   : false,
+                        timerProgressBar : true,
+                        timer            : 5000,
+                        customClass      : {confirmButton: "btn btn-danger"},
+                        showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                        hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+                    });
+                }
+            });
+        }
+    });
 });

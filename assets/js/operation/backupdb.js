@@ -66,4 +66,4 @@ function confirmDeletion(filename) {
             window.location.href = 'delete?file=' + encodeURIComponent(filename);
         }
     });
-}
+};
