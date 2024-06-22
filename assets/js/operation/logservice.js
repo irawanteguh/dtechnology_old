@@ -1,5 +1,28 @@
 datalog();
 
+var processs = function (search) {
+    var timeout = setTimeout(function () {
+        var   rows       = $("#resultlogservice > tr");
+        const inputField = element.querySelector("[data-kt-search-element='input']");
+        var   val        = $.trim(inputField.value).replace(/ +/g, ' ').toLowerCase();
+
+        rows.removeClass('d-none').filter(function () {
+            var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+            return !~text.indexOf(val);
+        }).addClass('d-none');
+        search.complete();
+    }, 500);
+}
+
+var clear = function (search) {
+    $("#resultlogservice tr").removeClass('d-none');
+}
+
+element      = document.querySelector('#kt_docs_search_handler_position');
+searchObject = new KTSearch(element);
+searchObject.on("kt.search.process", processs);
+searchObject.on("kt.search.clear", clear);
+
 function datalog(){
     $.ajax({
         url     : url+"index.php/operation/logservice/datalog",
@@ -19,7 +42,7 @@ function datalog(){
                 result        = data.responResult;
                 for(var i in result){
                     tableresult += "<tr>";
-                    tableresult += "<td class='text-center'>" + result[i].REQUEST_ID + "</td>";
+                    tableresult += "<td class='text-start ps-4'>" + result[i].REQUEST_ID + "</td>";
                     tableresult += "<td class='text-center'>" + result[i].REMOTE_ADDRESS + "</td>";
                     tableresult += "<td class='text-center'>" + result[i].REQUEST_METHOD + "</td>";
                     tableresult += "<td>" + result[i].REQUEST_URL + "</td>";

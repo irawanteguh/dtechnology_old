@@ -1,9 +1,9 @@
 // search position
 var processs = function (search) {
     var timeout = setTimeout(function () {
-        var rows = $("#listposition > div");
+        var   rows       = $("#listposition > div");
         const inputField = element.querySelector("[data-kt-search-element='input']");
-        var val = $.trim(inputField.value).replace(/ +/g, ' ').toLowerCase();
+        var   val        = $.trim(inputField.value).replace(/ +/g, ' ').toLowerCase();
         rows.removeClass('d-none').filter(function () {
             var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
             return !~text.indexOf(val);
@@ -11,10 +11,12 @@ var processs = function (search) {
         search.complete();
     }, 500);
 }
+
 var clear = function (search) {
     $("#listposition div").removeClass('d-none');
 }
-element = document.querySelector('#kt_docs_search_handler_position');
+
+element      = document.querySelector('#kt_docs_search_handler_position');
 searchObject = new KTSearch(element);
 searchObject.on("kt.search.process", processs);
 searchObject.on("kt.search.clear", clear);
@@ -23,9 +25,9 @@ searchObject.on("kt.search.clear", clear);
 // search activity
 var processs2 = function (search) {
     var timeout = setTimeout(function () {
-        var rows = $("#listactivity > div");
+        var   rows       = $("#listactivity > div");
         const inputField = element2.querySelector("[data-kt-search-element='input']");
-        var val = $.trim(inputField.value).replace(/ +/g, ' ').toLowerCase();
+        var   val        = $.trim(inputField.value).replace(/ +/g, ' ').toLowerCase();
         rows.removeClass('d-none').filter(function () {
             var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
             return !~text.indexOf(val);

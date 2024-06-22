@@ -14,7 +14,8 @@
 		}
 
         public function datalog(){
-            $result = $this->md->datalog(ORG_ID);
+            $parameter ="AND CREATED_DATE >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)";
+            $result = $this->md->datalog(ORG_ID,$parameter);
             
 			if(!empty($result)){
                 $json["responCode"]="00";
