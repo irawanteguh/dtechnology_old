@@ -46,13 +46,12 @@
                     $category .=self::generate_menu($cat['MODULES_ID'], self::$resultmenu);
                     
                     $menuheader .="<div data-kt-menu-trigger='click' data-kt-menu-placement='bottom-start' class='menu-item menu-lg-down-accordion me-lg-1'>";
-                    $menuheader .="<span class='menu-link py-3'><span class='menu-title'>".$cat['MODULES_NAME']."</span><span class='menu-arrow d-lg-none'></span></span>";
-                    $menuheader .="<div class='menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px'>";
-                    $menuheader .="<div data-kt-menu-trigger='{\"default\":\"click\", \"lg\": \"hover\"}' data-kt-menu-placement='right-start' class='menu-item menu-lg-down-accordion'>";
-
-                    $menuheader .=self::generate_menuheader($cat['MODULES_ID'], self::$resultmenu);
-                    $menuheader .="</div>";
-                    $menuheader .="</div>";
+                        $menuheader .="<span class='menu-link py-3'><span class='menu-title'>".$cat['MODULES_NAME']."</span><span class='menu-arrow d-lg-none'></span></span>";
+                        $menuheader .="<div class='menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px'>";
+                            $menuheader .="<div data-kt-menu-trigger='{\"default\":\"click\", \"lg\": \"hover\"}' data-kt-menu-placement='right-start' class='menu-item menu-lg-down-accordion'>";
+                                $menuheader .=self::generate_menuheader($cat['MODULES_ID'], self::$resultmenu);
+                            $menuheader .="</div>";
+                        $menuheader .="</div>";
                     $menuheader .="</div>";
                 }else{
                     if($cat["PARENT"] === "N") {
@@ -69,13 +68,12 @@
                             $menuprofileshortcut .="</div>";
                         }
                     }
-                    
                 }
             }
 
-            $data["menu"]       = !empty($category) ? $category    : "";
-            $data["menuheader"] = !empty($menuheader) ? $menuheader: "";
-            $data["menuprofile"] = !empty($menuprofile) ? $menuprofile: "";
+            $data["menu"]                = !empty($category) ? $category    : "";
+            $data["menuheader"]          = !empty($menuheader) ? $menuheader: "";
+            $data["menuprofile"]         = !empty($menuprofile) ? $menuprofile: "";
             $data["menuprofileshortcut"] = !empty($menuprofileshortcut) ? $menuprofileshortcut: "";
 
             self::$app->load->vars($data);
@@ -83,32 +81,35 @@
 
         public static function generate_menuheader($parent_id){
             $menu_html = "";
-
+        
             foreach(self::$resultmenu as $menu){
                 if($menu["MODULES_HEADER_ID"] === $parent_id){
-
+        
                     if($menu["PARENT"] === "Y"){
-                        $menu_html .="<span class='menu-link py-3'><span class='menu-icon'><span class='svg-icon svg-icon-2'><i class='".$menu['ICON']."'></i></span></span><span class='menu-title'>".$menu['MODULES_NAME']."</span><span class='menu-arrow'></span></span>";
-                        $menu_html .="<div class='menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg py-lg-4 w-lg-225px'>";
-                        $menu_html .=self::generate_submenuheader($menu['MODULES_ID'], self::$resultmenu);
-                        $menu_html .="</div>";
-                    }else{
-                        $menu_html .="<div class='menu-item'>";
-                        $menu_html .="<a class='menu-link py-3' href='".base_url()."index.php/".$menu['PACKAGE']."/".$menu['DEF_CONTROLLER']."' data-bs-toggle='tooltip' data-bs-trigger='hover' data-bs-dismiss='click' data-bs-placement='right' data-bs-original-title='Klik Untuk Membuka Menu ".$menu['MODULES_NAME']."'>";
-                        $menu_html .="<span class='menu-icon'>";
-                        $menu_html .="<span class='svg-icon svg-icon-2'>";
-                        $menu_html .="<i class='".$menu['ICON']."'></i>";
-                        $menu_html .="</span>";
-                        $menu_html .="</span>";
-                        $menu_html .="<span class='menu-title'>".$menu['MODULES_NAME']."</span>";
-                        $menu_html .="</a>";
-                        $menu_html .="</div>";
+                        $menu_html .= "<div data-kt-menu-trigger='{default:\"click\", lg: \"hover\"}' data-kt-menu-placement='right-start' class='menu-item menu-lg-down-accordion'>";
+                            $menu_html .= "<span class='menu-link py-3'><span class='menu-icon'><span class='svg-icon svg-icon-2'><i class='".$menu['ICON']."'></i></span></span><span class='menu-title'>".$menu['MODULES_NAME']."</span><span class='menu-arrow'></span></span>";
+                            $menu_html .= "<div class='menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg py-lg-4 w-lg-225px'>";
+                                $menu_html .= self::generate_submenuheader($menu['MODULES_ID'], self::$resultmenu);
+                            $menu_html .= "</div>";
+                        $menu_html .= "</div>";
+                    } else {
+                        $menu_html .= "<div class='menu-item'>";
+                        $menu_html .= "<a class='menu-link py-3' href='".base_url()."index.php/".$menu['PACKAGE']."/".$menu['DEF_CONTROLLER']."' data-bs-toggle='tooltip' data-bs-trigger='hover' data-bs-dismiss='click' data-bs-placement='right' data-bs-original-title='Klik Untuk Membuka Menu ".$menu['MODULES_NAME']."'>";
+                        $menu_html .= "<span class='menu-icon'>";
+                        $menu_html .= "<span class='svg-icon svg-icon-2'>";
+                        $menu_html .= "<i class='".$menu['ICON']."'></i>";
+                        $menu_html .= "</span>";
+                        $menu_html .= "</span>";
+                        $menu_html .= "<span class='menu-title'>".$menu['MODULES_NAME']."</span>";
+                        $menu_html .= "</a>";
+                        $menu_html .= "</div>";
                     }
                 }
             }
-
+        
             return $menu_html;
         }
+        
 
         public static function generate_submenuheader($parent_id){
             $submenu_html = "";
@@ -117,7 +118,7 @@
                 if ($submenu['MODULES_HEADER_ID'] === $parent_id) {
 
                     if($submenu["PARENT"] === "Y"){
-                        $submenu_html .= "<div data-kt-menu-trigger='{\"default\":\"click\", \"lg\": \"hover\"}' data-kt-menu-placement='right-start' class='menu-item menu-lg-down-accordion'>";
+                        $submenu_html .="<div data-kt-menu-trigger='{\"default\":\"click\", \"lg\": \"hover\"}' data-kt-menu-placement='right-start' class='menu-item menu-lg-down-accordion'>";
                         $submenu_html .="<span class='menu-link py-3'><span class='menu-icon'><span class='svg-icon svg-icon-2'><i class='".$submenu['ICON']."'></i></span></span><span class='menu-title'>".$submenu['MODULES_NAME']."</span><span class='menu-arrow'></span></span>";
                         $submenu_html .="<div class='menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg py-lg-4 w-lg-225px'>";
                         $submenu_html .= self::generate_submenuheader($submenu['MODULES_ID'], self::$resultmenu);
