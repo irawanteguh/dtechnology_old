@@ -33,8 +33,8 @@
 						<thead>
 							<tr class="fw-bolder text-muted bg-light">
 								<th class="ps-4 rounded-start">Name</th>
-								<th>Classification</th>
 								<th>Identitfy No</th>
+								<th>Classification</th>
 								<th>Primary</th>
 								<th class="pe-4 text-end rounded-end">Actions</th>
 							</tr>

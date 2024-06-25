@@ -78,9 +78,10 @@ function masteremployee(){
 
                         tableresult +="</div>";
                     tableresult +="</td>";
-                    tableresult +="<td><div>"+(result[i].kategori ? result[i].kategori : "")+"</div><div>" + (result[i].klinis ? result[i].klinis : "") + "</div></td>";
+                    
 
                     tableresult +="<td><div>"+(result[i].nik ? result[i].nik : "")+"</div><div>" + (result[i].identity_no ? result[i].identity_no : "") + "</div></td>";
+                    tableresult +="<td><div>"+(result[i].kategori ? result[i].kategori : "")+"</div><div>" + (result[i].klinis ? result[i].klinis : "") + "</div></td>";
                     tableresult +="<td><div>"+(result[i].positionprimary ? result[i].positionprimary : "")+" "+(result[i].funsgionalprimary ? result[i].funsgionalprimary : "")+"</div><div>"+(result[i].atasanprimary ? result[i].atasanprimary : "")+"</div></td>"
 
                     tableresult += "<td class='text-end pe-4'>";
