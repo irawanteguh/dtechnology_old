@@ -125,7 +125,7 @@
             <div class="card-header pt-5">
                 <div class="card-title flex-column">
                     <h3 class="fw-bolder mb-1">Todo</h3>
-                    <div class="fs-6 fw-bold text-gray-400" id="">n/a</div>
+                    <div class="fs-6 fw-bold text-gray-400" id="info_list_todo"></div>
                 </div>
                 <div class="card-toolbar">
                     <ul class="nav nav-tabs nav-line-tabs nav-stretch fs-6 border-0 fw-bolder m-5" role="tablist">

@@ -10,12 +10,16 @@ function getdata(btn){
     var funsgionalprimary = btn.attr("data-funsgionalprimary");
     var atasanprimary     = btn.attr("data-atasanprimary");
     var kategori          = btn.attr("data-kategori");
+    var klinisid          = btn.attr("data-klinisid");
     var klinis            = btn.attr("data-klinis");
     var nik               = btn.attr("data-nik");
 
     //Drawer
 	$(":hidden[name='drawer_data_rkk_userid_add']").val(userid);
 	$("input[name='drawer_data_rkk_name_add']").val(name);
+
+    var $rkk = $('#drawer_data_rkk_rkkid_add').select2();
+        $rkk.val(klinisid).trigger('change');
 };
 
 function masteremployee(){
@@ -53,6 +57,7 @@ function masteremployee(){
                                     "data-funsgionalprimary='"+result[i].funsgionalprimary+"'"+
                                     "data-atasanprimary='"+result[i].atasanprimary+"'"+
                                     "data-kategori='"+result[i].kategori+"'"+
+                                    "data-klinisid='"+result[i].klinis_id+"'"+
                                     "data-klinis='"+result[i].klinis+"'"+
                                     "data-nik='"+result[i].nik+"'";
 

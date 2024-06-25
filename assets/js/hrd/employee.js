@@ -8,7 +8,8 @@ $("#modal_employee_registrationposition_view").on('hide.bs.modal', function(){
     $("input[name='modal_data_employee_registrationposition_nik_view']").val("");
 });
 
-flatpickr('[name="drawer_data_employee_registrationposition_date_add"]', {
+flatpickr('[name="drawer_data_employee_registrationposition_date_add"], [name="drawer_data_employee_registrationposition_date_edit"]', {
+    enableTime: false,
     enableTime: false,
     dateFormat: "d.m.Y",
     maxDate: "today",
@@ -17,17 +18,25 @@ flatpickr('[name="drawer_data_employee_registrationposition_date_add"]', {
     }
 });
 
+
 function getdata(btn){
     toastr.clear();
 
     var userid            = btn.attr("data-userid");
     var transid           = btn.attr("data-transid");
     var name              = btn.attr("data-name");
+    var positioidprimary  = btn.attr("data-positioidprimary");
     var positionprimary   = btn.attr("data-positionprimary");
     var funsgionalprimary = btn.attr("data-funsgionalprimary");
+    var atasanidprimary   = btn.attr("data-atasanidprimary");
     var atasanprimary     = btn.attr("data-atasanprimary");
+    var kategoriid        = btn.attr("data-kategoriid");
     var kategori          = btn.attr("data-kategori");
+    var type              = btn.attr("data-type");
     var nik               = btn.attr("data-nik");
+
+    namaatasan(userid,atasanidprimary);
+    position(userid);
 
     //Drawer
 	$(":hidden[name='drawer_data_employee_registrationposition_userid_add']").val(userid);
@@ -36,12 +45,18 @@ function getdata(btn){
 	$("input[name='drawer_data_employee_registrationposition_name_add']").val(name);
     $("input[name='drawer_data_employee_registrationkategoritenaga_name_add']").val(name);
 
-    var $classifictionid = $('drawer_data_employee_registrationkategoritenaga_classifictionid_add').select2();
-        $classifictionid.val(kategori).trigger('change');
+    var $classification = $('#drawer_data_employee_registrationkategoritenaga_classifictionid_add').select2();
+        $classification.val(kategoriid).trigger('change');
 
     //Modal
     $(":hidden[name='modal_data_employee_registrationposition_transid_view']").val(transid);
+    $(":hidden[name='modal_data_employee_registrationposition_transid_edit']").val(transid);
+    $(":hidden[name='modal_data_employee_registrationposition_userid_edit']").val(userid);
     $("input[name='modal_data_employee_registrationposition_name_view']").val(name);
+    $("input[name='modal_data_employee_registrationposition_name_edit']").val(name);
+    $("input[name='modal_data_employee_registrationposition_nik_view']").val(nik);
+    $("input[name='modal_data_employee_registrationposition_nik_edit']").val(nik);
+
     if(funsgionalprimary != "null"){
         $("input[name='modal_data_employee_registrationposition_position_view']").val(positionprimary+" "+funsgionalprimary);
     }else{
@@ -49,11 +64,44 @@ function getdata(btn){
     }
     
     $("input[name='modal_data_employee_registrationposition_atasan_view']").val(atasanprimary);
-    $("input[name='modal_data_employee_registrationposition_nik_view']").val(nik);
-    
-    
-    namaatasan(userid);
-    position(userid);
+
+    var $typeid = $('#modal_data_employee_registrationposition_type_edit').select2();
+        $typeid.val(type).trigger('change');
+};
+
+
+function namaatasan(userid,atasanidprimary){
+	$.ajax({
+		url     : url+"index.php/hrd/employee/namaatasan",
+		data    : {userid:userid},
+		method  : "POST",
+		dataType: "html",
+		cache   : false,
+		success : function (data) {
+			$("select[name='drawer_data_employee_registrationposition_atasanid_add']").html(data);
+            $("select[name='modal_data_employee_registrationposition_atasanid_edit']").html(data);
+		},
+        complete: function () {
+            var $atasanid = $('#modal_data_employee_registrationposition_atasanid_edit').select2();
+            $atasanid.val(atasanidprimary).trigger('change');
+		}
+	});
+	return false;
+};
+
+function position(userid){
+	$.ajax({
+		url     : url+"index.php/hrd/employee/position",
+		data    : {userid:userid},
+		method  : "POST",
+		dataType: "html",
+		cache   : false,
+		success : function (data) {
+			$("select[name='drawer_data_employee_registrationposition_positionid_add']").html(data);
+            $("select[name='modal_data_employee_registrationposition_positionid_edit']").html(data);
+		}
+	});
+	return false;
 };
 
 function masteremployee(){
@@ -87,10 +135,14 @@ function masteremployee(){
                     getvariabel =   "data-userid='"+result[i].user_id+"'"+
                                     "data-transid='"+result[i].transidprimary+"'"+
                                     "data-name='"+result[i].name+"'"+
+                                    "data-positioidprimary='"+result[i].positioidprimary+"'"+
                                     "data-positionprimary='"+result[i].positionprimary+"'"+
                                     "data-funsgionalprimary='"+result[i].funsgionalprimary+"'"+
+                                    "data-atasanidprimary='"+result[i].atasanidprimary+"'"+
                                     "data-atasanprimary='"+result[i].atasanprimary+"'"+
+                                    "data-kategoriid='"+result[i].kategori_id+"'"+
                                     "data-kategori='"+result[i].kategori+"'"+
+                                    "data-type='Y'"+
                                     "data-nik='"+result[i].nik+"'";
 
                     tableresult +="<tr>";
@@ -125,27 +177,34 @@ function masteremployee(){
                     for (var j = 0; j < userIdsprimary.length; j++) {
                         var userProfile = userIdsprimary[j].trim().split(':');
 
-                        if (userProfile.length === 5) {
+                        if (userProfile.length === 6) {
                             var transid    = userProfile[0];
                             var positionid = userProfile[1];
-                            var position   = userProfile[2];
-                            var level      = userProfile[3];
-                            var atasan     = userProfile[4];
+                            var atasanid = userProfile[2];
+                            var position   = userProfile[3];
+                            var level      = userProfile[4];
+                            var atasan     = userProfile[5];
                             
-                        } else if (userProfile.length === 4) { 
+                        } else if (userProfile.length === 5) { 
                             var transid    = userProfile[0];
                             var positionid = userProfile[1];
-                            var position   = userProfile[2];
+                            var atasanid = userProfile[2];
+                            var position   = userProfile[3];
                             var level      = "";
-                            var atasan     = userProfile[3];
+                            var atasan     = userProfile[4];
                         }
 
                         getvariabelsecodary =   "data-userid='"+result[i].user_id+"'"+
                                                 "data-transid='"+transid+"'"+
                                                 "data-name='"+result[i].name+"'"+
+                                                // "data-positioidprimary='"+result[i].positioidprimary+"'"+
                                                 "data-positionprimary='"+position+"'"+
                                                 "data-funsgionalprimary='"+level+"'"+
+                                                "data-atasanidprimary='"+atasanid+"'"+
                                                 "data-atasanprimary='"+atasan+"'"+
+                                                // "data-kategoriid='"+result[i].kategori_id+"'"+
+                                                // "data-kategori='"+result[i].kategori+"'"+
+                                                "data-type='N'"+
                                                 "data-nik='"+result[i].nik+"'";
 
                         tableresult += "<div><a href='#' data-bs-toggle='modal' data-bs-target='#modal_employee_registrationposition_view' "+getvariabelsecodary+" onclick='getdata($(this));'>"+position+" "+level+"</a></div><div>"+atasan+"</div>";
@@ -157,7 +216,7 @@ function masteremployee(){
                     tableresult += "</td>";
 
 
-                    tableresult += "<td class='text-end pe-4'>";
+                    tableresult += "<td class='text-end'>";
                         tableresult += "<div class='btn-group' role='group'>";
                             tableresult += "<button id='btnGroupDrop1' type='button' class='btn btn-light-primary dropdown-toggle btn-sm' data-bs-toggle='dropdown' aria-expanded='false'>Action</button>";
                             tableresult += "<div class='dropdown-menu' aria-labelledby='btnGroupDrop1'>";
@@ -199,33 +258,7 @@ function masteremployee(){
     return false;
 };
 
-function namaatasan(userid){
-	$.ajax({
-		url     : url+"index.php/hrd/employee/namaatasan",
-		data    : {userid:userid},
-		method  : "POST",
-		dataType: "html",
-		cache   : false,
-		success : function (data) {
-			$("select[name='drawer_data_employee_registrationposition_atasanid_add']").html(data);
-		}
-	});
-	return false;
-};
 
-function position(userid){
-	$.ajax({
-		url     : url+"index.php/hrd/employee/position",
-		data    : {userid:userid},
-		method  : "POST",
-		dataType: "html",
-		cache   : false,
-		success : function (data) {
-			$("select[name='drawer_data_employee_registrationposition_positionid_add']").html(data);
-		}
-	});
-	return false;
-};
 
 $(document).on("submit", "#forminsertpenempatan", function (e) {
 	e.preventDefault();
@@ -268,6 +301,66 @@ $(document).on("submit", "#forminsertpenempatan", function (e) {
         complete: function () {
             toastr.clear();
             $("#btn_position_registrasi").removeClass("disabled");
+		},
+        error: function(xhr, status, error) {
+            Swal.fire({
+                title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
+                html             : "<b>"+error+"</b>",
+                icon             : "error",
+                confirmButtonText: "Please Try Again",
+                buttonsStyling   : false,
+                timerProgressBar : true,
+                timer            : 5000,
+                customClass      : {confirmButton: "btn btn-danger"},
+                showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+            });
+		}
+	});
+    return false;
+});
+
+$(document).on("submit", "#formeditpenempatan", function (e) {
+	e.preventDefault();
+	var data = new  FormData(this);
+	$.ajax({
+        url        : url+'index.php/hrd/employee/editpenempatan',
+        data       : data,
+        method     : "POST",
+        dataType   : "JSON",
+        cache      : false,
+        processData: false,
+        contentType: false,
+        beforeSend : function () {
+            toastr.clear();
+            toastr["info"]("Sending request...", "Please wait");
+			$("#btn_employee_edit").addClass("disabled");
+        },
+		success: function (data) {
+            toastr.clear();
+			if(data.responCode === "00"){
+                toastr[data.responHead](data.responDesc, "INFORMATION");
+                $("#modal_employee_registrationposition_edit").modal("hide");
+				masteremployee();
+			}else{
+                Swal.fire({
+                    title            : "<h1 class='font-weight-bold' style='color:#234974;'>For Your Information</h1>",
+                    html             : "<b>"+data.responDesc+"</b>",
+                    icon             : data.responHead,
+                    confirmButtonText: "Please Try Again",
+                    buttonsStyling   : false,
+                    timerProgressBar : true,
+                    timer            : 5000,
+                    customClass      : {confirmButton: "btn btn-danger"},
+                    showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                    hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+                });
+                $("#btn_employee_edit").removeClass("disabled");
+            }
+		},
+        complete: function () {
+            toastr.clear();
+            $("#btn_employee_edit").removeClass("disabled");
 		},
         error: function(xhr, status, error) {
             Swal.fire({

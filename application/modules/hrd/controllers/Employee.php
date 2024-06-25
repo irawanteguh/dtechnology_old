@@ -124,6 +124,37 @@
             echo json_encode($json);
         }
 
+        public function editpenempatan(){
+            $type       = $this->input->post("modal_data_employee_registrationposition_type_edit");
+            $transid    = $this->input->post("modal_data_employee_registrationposition_transid_edit");
+            $userid     = $this->input->post("modal_data_employee_registrationposition_userid_edit");
+            $positionid = $this->input->post("modal_data_employee_registrationposition_positionid_edit");
+            $atasanid   = $this->input->post("modal_data_employee_registrationposition_atasanid_edit");
+            $date       = DateTime::createFromFormat("d.m.Y", $this->input->post("drawer_data_employee_registrationposition_date_edit"))->format("Y-m-d");
+            
+
+            $data['org_id']           = $_SESSION['orgid'];
+            $data['trans_id']         = generateuuid();
+            $data['user_id']          = $userid;
+            $data['position_id']      = $positionid;
+            $data['atasan_id']        = $atasanid;
+            $data['start_date']       = $date;
+            $data['position_primary'] = $type;
+            $data['created_by']       = $_SESSION['userid'];
+            
+            if($this->md->updatepenempatan($data,$transid)){
+                $json['responCode']="00";
+                $json['responHead']="success";
+                $json['responDesc']="Data Added Successfully";
+            }else{
+                $json['responCode']="01";
+                $json['responHead']="error";
+                $json['responDesc']="Data Failed to Add";
+            }
+
+            echo json_encode($json);
+        }
+
         public function hapuspenempatan(){
             $transid = $this->input->post("modal_data_employee_registrationposition_transid_view");
 

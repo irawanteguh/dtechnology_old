@@ -36,6 +36,8 @@ function todolist() {
             $("#countoverdue").html("");
             $("#countdone").html("");
             $("#countoverduelabel").html("");
+
+            $("#info_list_todo").html("");
         },
         success: function(data) {
             var result           = "";
@@ -145,6 +147,8 @@ function todolist() {
             $("#countoverdue").html(overduecount);
             $("#countoverduelabel").html(overduecount+" Overdue Tasks");
             $("#countdone").html(done);
+
+            $("#info_list_todo").html(allcount+" Task");
         },
         error: function(xhr, status, error) {
             Swal.fire({
