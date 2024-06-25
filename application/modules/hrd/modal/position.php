@@ -40,11 +40,11 @@
                 </div>
             </div>
             <form action="<?php echo base_url();?>index.php/hrd/position/editposition" id="formeditposition">
-                <input type="text" id="data_positiion_id_edit" name="data_positiion_id_edit">
+                <input type="hidden" id="data_positiion_id_edit" name="data_positiion_id_edit">
                 <div class="modal-body">
                     <div class="text-center mb-5">
-                        <h1 class="mb-3">Add Master Position</h1>
-                        <div class="text-muted fw-bold fs-5">Please Add Master Position</div>
+                        <h1 class="mb-3">Edit Master Position</h1>
+                        <div class="text-muted fw-bold fs-5">Please Edit Master Position</div>
                     </div>
                     <div class="row">
                         <div class="col-md-12 mb-5">
