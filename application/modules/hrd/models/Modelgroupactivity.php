@@ -23,15 +23,24 @@
         function daftarkegiatan($orgid,$positionid,$parameter){
             $query =
                     "
-                        select a.ORG_ID, ACTIVITY_ID, ACTIVITY, DURASI,
-                            (SELECT IFNULL(name, 'Unknown')  FROM  dt01_gen_user_data WHERE active = '1' AND org_id = a.org_id AND user_id = IFNULL(a.CREATED_BY, a.LAST_UPDATE_BY)) LASTUPDATEDBY,
-                            (select transaksi_id from dt01_hrd_mapping_activity where active='1' and org_id=a.org_id and activity_id=a.ACTIVITY_ID and position_id='".$positionid."')transidmapping
-                        from dt01_hrd_activity_ms a
-                        where a.active='1'
-                        and   a.org_id='".$orgid."'
-                        and   a.pk=''
-                        and   upper(a.activity) like upper('%".$parameter."%')
-                        order by activity asc, durasi asc
+                        select x.*,
+                               case
+                                   when transidmapping <> '' then 
+                                   '0'
+                                   else
+                                   '1'
+                               end urut
+                        from(
+                            select a.ORG_ID, ACTIVITY_ID, ACTIVITY, DURASI,
+                                (SELECT IFNULL(name, 'Unknown')  FROM  dt01_gen_user_data WHERE active = '1' AND org_id = a.org_id AND user_id = IFNULL(a.CREATED_BY, a.LAST_UPDATE_BY)) LASTUPDATEDBY,
+                                (select transaksi_id from dt01_hrd_mapping_activity where active='1' and org_id=a.org_id and activity_id=a.ACTIVITY_ID and position_id='".$positionid."')transidmapping
+                            from dt01_hrd_activity_ms a
+                            where a.active='1'
+                            and   a.org_id='".$orgid."'
+                            and   a.pk=''
+                            and   upper(a.activity) like upper('%".$parameter."%')
+                        )x
+                        order by urut asc, activity asc, durasi asc
                     ";
 
             $recordset = $this->db->query($query);
