@@ -9,7 +9,7 @@
         }
 
 		public function index(){
-			$this->template->load("template/template-profile","v_rkk");
+			$this->template->load("template/template-sidebar","v_rkk");
 		}
 
         public function listrkk(){

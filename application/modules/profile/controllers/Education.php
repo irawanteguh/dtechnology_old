@@ -9,7 +9,7 @@
         }
 
 		public function index(){
-			$this->template->load("template/template-profile","v_education");
+			$this->template->load("template/template-sidebar","v_education");
 		}
         
 

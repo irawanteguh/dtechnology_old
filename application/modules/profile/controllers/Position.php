@@ -9,7 +9,7 @@
         }
 
 		public function index(){
-			$this->template->load("template/template-profile","v_position");
+			$this->template->load("template/template-sidebar","v_position");
 		}
 
 		public function historyposition(){

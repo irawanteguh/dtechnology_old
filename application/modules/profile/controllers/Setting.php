@@ -9,7 +9,7 @@
         }
 
 		public function index(){
-			$this->template->load("template/template-profile","v_setting");
+			$this->template->load("template/template-sidebar","v_setting");
 		}
         
 

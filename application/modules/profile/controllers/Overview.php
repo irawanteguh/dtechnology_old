@@ -13,7 +13,7 @@ class overview extends CI_Controller
 	public function index()
 	{
 
-		$this->template->load("template/template-profile", "v_overview");
+		$this->template->load("template/template-sidebar", "v_overview");
 	}
 	public function datauser()
 	{

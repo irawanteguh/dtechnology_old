@@ -1,4 +1,5 @@
-<div class="col-lg-12">
+<div class="row gy-5 g-xl-8 mb-xl-8">
+    <div class="col-xl-12">
         <div class="card">
             <div class="card-header align-items-center border-0 mt-4">
                 <h3 class="card-title align-items-start flex-column">
@@ -184,3 +185,4 @@
             </div>
         </div>
     </div>
+</div>

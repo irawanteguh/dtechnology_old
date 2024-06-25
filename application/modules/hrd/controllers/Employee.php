@@ -14,14 +14,21 @@
 		}
 
         public function loadcombobox(){
-            $resulttype          = $this->md->type();
+            $resulttype                 = $this->md->type();
+            $resultmasterclassification = $this->md->masterclassification(ORG_ID);
 
             $type="";
             foreach($resulttype as $a ){
                 $type.="<option value='".$a->id."'>".$a->type."</option>";
             }
 
-            $data['type']       = $type;
+            $classification="";
+            foreach($resultmasterclassification as $a ){
+                $classification.="<option value='".$a->kategori_id."'>".$a->kategori."</option>";
+            }
+
+            $data['type']           = $type;
+            $data['classification'] = $classification;
             return $data;
 		}
 
@@ -142,6 +149,25 @@
             $data['end_date'] = $date = date("Y-m-d");
 
             if($this->md->updatepenempatan($data,$transid)){
+                $json['responCode']="00";
+                $json['responHead']="success";
+                $json['responDesc']="Data Updated Successfully";
+            }else{
+                $json['responCode']="01";
+                $json['responHead']="error";
+                $json['responDesc']="Data failed to update";
+            }
+
+            echo json_encode($json);
+        }
+
+        public function updatekategoritenaga(){
+            $userid           = $this->input->post("drawer_data_employee_registrationkategoritenaga_userid_add");
+            $classificationid = $this->input->post("drawer_data_employee_registrationkategoritenaga_classifictionid_add");
+
+            $data['kategori_id']   = $classificationid;
+
+            if($this->md->updateuserdata($data,$userid)){
                 $json['responCode']="00";
                 $json['responHead']="success";
                 $json['responDesc']="Data Updated Successfully";

@@ -1,4 +1,4 @@
-<div class="row g-6 g-xl-9">
+<div class="row gy-5 g-xl-8 mb-xl-8">
     <div class="col-lg-12">
         <div class="card">
         <!--begin::Card header-->

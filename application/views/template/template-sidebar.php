@@ -36,10 +36,19 @@
 													</div>
 												</div>";
 									}
+
+									$segment   = $this->uri->segment(1);
+									$directory = APPPATH.'modules/'.$segment.'/notification/'.$this->uri->segment(2).".php";
+									if(file_exists($directory)){
+										include($directory);
+									}
+
+									if($this->uri->segment(1) === "profile"){
+										include(APPPATH."views/template/profile.php");
+									}
+
+									echo $contents
 								?>
-								<div class="row g-6 g-xl-9">
-									<?php echo $contents ?>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -75,14 +84,12 @@
 				}
 			}
 
-			$segment   = $this->uri->segment(1);
-			$directory = APPPATH.'modules/'.$segment.'/modal/'.$this->uri->segment(2).".php";
+			$directory = APPPATH.'modules/'.$this->uri->segment(1).'/modal/'.$this->uri->segment(2).".php";
 			if(file_exists($directory)){
 				include($directory);
 			}
 
-			$segment   = $this->uri->segment(1);
-			$directory = APPPATH.'modules/'.$segment.'/drawer/'.$this->uri->segment(2).".php";
+			$directory = APPPATH.'modules/'.$this->uri->segment(1).'/drawer/'.$this->uri->segment(2).".php";
 			if(file_exists($directory)){
 				include($directory);
 			}

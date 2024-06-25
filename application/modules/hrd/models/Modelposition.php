@@ -71,5 +71,15 @@
             return $recordset;
         }
 
+        function insertmasterposition($data){           
+            $sql =   $this->db->insert("dt01_hrd_position_ms",$data);
+            return $sql;
+        }
+
+        function updatemasterposition($positionid,$data){           
+            $sql =   $this->db->update("dt01_hrd_position_ms",$data,array("position_id"=>$positionid));
+            return $sql;
+        }
+
     }
 ?>

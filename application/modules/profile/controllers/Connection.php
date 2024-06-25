@@ -9,7 +9,7 @@
         }
 
 		public function index(){
-			$this->template->load("template/template-profile","v_connection");
+			$this->template->load("template/template-sidebar","v_connection");
 		}
         
         public function datakaryawan(){

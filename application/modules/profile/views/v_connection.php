@@ -1,1 +1,1 @@
-<div class="row g-6 mb-6 g-xl-9 mb-xl-9" id="datakaryawan"></div>
+<div class="row gy-5 g-xl-8 mb-xl-8" id="datakaryawan"></div>
