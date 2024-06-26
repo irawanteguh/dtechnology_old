@@ -34,6 +34,7 @@
 							<tr class="fw-bolder text-muted bg-light">
 								<th class="ps-4 rounded-start">Name</th>
 								<th>Identitfy No</th>
+								<th>Duty Hours</th>
 								<th>Classification</th>
 								<th>Primary</th>
 								<th>Secondary</th>

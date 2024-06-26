@@ -183,6 +183,7 @@ function masteremployee(){
                     tableresult +="</td>";
                     
                     tableresult +="<td><div>"+(result[i].nik ? result[i].nik : "")+"</div><div>" + (result[i].identity_no ? result[i].identity_no : "") + "</div></td>";
+                    tableresult +="<td><div>"+(result[i].hours_month ? todesimal(result[i].hours_month)  : "")+"</div><div>Minutes / Month</div></td>";
                     tableresult +="<td>"+(result[i].kategori ? result[i].kategori : "")+"</td>";
                     tableresult +="<td><div><a href='#' data-bs-toggle='modal' data-bs-target='#modal_employee_registrationposition_view' "+getvariabel+" onclick='getdata($(this));'>"+(result[i].positionprimary ? result[i].positionprimary : "")+" "+(result[i].funsgionalprimary ? result[i].funsgionalprimary : "")+"</a></div><div>"+(result[i].atasanprimary ? result[i].atasanprimary : "")+"</div></td>"
 

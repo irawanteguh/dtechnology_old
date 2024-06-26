@@ -211,7 +211,7 @@
                                 (select position         from dt01_hrd_position_ms where org_id='".$orgid."' and active='1' and position_id=x.positioidprimary)positionprimary,
                                 (select level_fungsional from dt01_hrd_position_ms where org_id='".$orgid."' and active='1' and position_id=x.positioidprimary)levelfungsionalprimary
                             from(
-                                select a.user_id, name, email, nik, identity_no, image_profile, upper(LEFT(a.name, 1)) initial,kategori_id,
+                                select a.user_id, name, email, nik, identity_no, image_profile, upper(LEFT(a.name, 1)) initial,kategori_id, hours_month,
                                     (select kategori from dt01_hrd_kategori_tenaga_ms where org_id='".$orgid."' and active='1' and kategori_id=a.kategori_id)kategori,
                                     (select trans_id    from dt01_hrd_position_dt where org_id='".$orgid."' and active='1' and status='1' and position_primary='Y' and user_id=a.user_id)transidprimary,
                                     (select atasan_id   from dt01_hrd_position_dt where org_id='".$orgid."' and active='1' and status='1' and position_primary='Y' and user_id=a.user_id)atasanidprimary,
