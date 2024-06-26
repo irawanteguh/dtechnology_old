@@ -16,6 +16,8 @@
         public function loadcombobox(){
             $resulttype                 = $this->md->type();
             $resultmasterclassification = $this->md->masterclassification(ORG_ID);
+            $resultdutydays             = $this->md->dutydays();
+            $resultdutyhours            = $this->md->dutyhours();
 
             $type="";
             foreach($resulttype as $a ){
@@ -27,8 +29,21 @@
                 $classification.="<option value='".$a->kategori_id."'>".$a->kategori."</option>";
             }
 
+            $days="";
+            foreach($resultdutydays as $a ){
+                $days.="<option value='".$a->id."'>".$a->keterangan."</option>";
+            }
+
+            $hours="";
+            foreach($resultdutyhours as $a ){
+                $hours.="<option value='".$a->id."'>".$a->keterangan."</option>";
+            }
+
             $data['type']           = $type;
             $data['classification'] = $classification;
+            $data['days']           = $days;
+            $data['hours']          = $hours;
+            
             return $data;
 		}
 
@@ -195,8 +210,14 @@
         public function updatekategoritenaga(){
             $userid           = $this->input->post("drawer_data_employee_registrationkategoritenaga_userid_add");
             $classificationid = $this->input->post("drawer_data_employee_registrationkategoritenaga_classifictionid_add");
+            $days             = $this->input->post("drawer_data_employee_registrationkategoritenaga_days_add");
+            $hours            = $this->input->post("drawer_data_employee_registrationkategoritenaga_hours_add");
+            $total            = $this->input->post("drawer_data_employee_registrationkategoritenaga_totalhours_add");
 
-            $data['kategori_id']   = $classificationid;
+            $data['kategori_id'] = $classificationid;
+            $data['duty_days']   = $days;
+            $data['duty_hours']  = $hours;
+            $data['hours_month'] = $total;
 
             if($this->md->updateuserdata($data,$userid)){
                 $json['responCode']="00";

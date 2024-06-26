@@ -122,6 +122,30 @@
 								<?php echo $classification;?>
 							</select>
 						</div>
+						<div class="col-md-12 mb-5">
+							<label class="d-flex align-items-center fs-5 fw-bold mb-2">
+								<span class="required">Working Days a Month</span>
+								<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Working Days a Month"></i>
+							</label>
+							<select data-control="select2" data-dropdown-parent="#drawer_employee_registrationkategoritenaga_add" data-placeholder="Please Select Working Days a Month" class="form-select form-select-solid" name="drawer_data_employee_registrationkategoritenaga_days_add" id="drawer_data_employee_registrationkategoritenaga_days_add" required>
+								<?php echo $days;?>
+							</select>
+						</div>
+						<div class="col-md-12 mb-5">
+							<label class="d-flex align-items-center fs-5 fw-bold mb-2">
+								<span class="required">Daily Working Hours</span>
+								<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Daily Working Hours"></i>
+							</label>
+							<select data-control="select2" data-dropdown-parent="#drawer_employee_registrationkategoritenaga_add" data-placeholder="Please Select Daily Working Hours" class="form-select form-select-solid" name="drawer_data_employee_registrationkategoritenaga_hours_add" id="drawer_data_employee_registrationkategoritenaga_hours_add" required>
+								<?php echo $hours;?>
+							</select>
+						</div>
+						<div class="col-md-12 mb-5">
+							<label class="d-flex align-items-center fs-5 fw-bold mb-2">
+								<span class="required">Working Hours a Month</span>
+							</label>
+							<input type="text" class="form-control form-control-solid" id="drawer_data_employee_registrationkategoritenaga_totalhours_add" name="drawer_data_employee_registrationkategoritenaga_totalhours_add" readonly>
+						</div>
 						<input class="btn btn-light-primary" id="btn_registrationkategoritenaga_add" type="submit" value="SIMPAN" name="simpan" >
 					</div>
 				</div>

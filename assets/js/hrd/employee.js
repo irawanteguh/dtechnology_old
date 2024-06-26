@@ -1,3 +1,18 @@
+$(document).on("change", "select[name='drawer_data_employee_registrationkategoritenaga_days_add'], select[name='drawer_data_employee_registrationkategoritenaga_hours_add']", function (e) {
+    e.preventDefault();
+    calculateTotalHours();
+});
+
+function calculateTotalHours() {
+    var daysSelect = document.getElementById('drawer_data_employee_registrationkategoritenaga_days_add');
+    var hoursSelect = document.getElementById('drawer_data_employee_registrationkategoritenaga_hours_add');
+
+    var days  = parseInt(daysSelect.value) || 0;
+    var hours = parseInt(hoursSelect.value) || 0;
+
+    $("input[name='drawer_data_employee_registrationkategoritenaga_totalhours_add']").val(days * hours * 60);
+}
+
 masteremployee();
 
 $("#modal_employee_registrationposition_view").on('hide.bs.modal', function(){
@@ -17,7 +32,6 @@ flatpickr('[name="drawer_data_employee_registrationposition_date_add"], [name="d
         instance.close();
     }
 });
-
 
 function getdata(btn){
     toastr.clear();
