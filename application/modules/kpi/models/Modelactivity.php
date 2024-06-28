@@ -84,7 +84,7 @@
                     "
                         select x.*
                         from(
-                                select a.activity_id, concat(activity,' Durasi ',durasi,' Menit')activity, durasi,
+                                select concat(a.activity_id,':',durasi)activity_id, concat(activity,' Durasi ',durasi,' Menit')activity, durasi,
                                     (select nomor from dt01_hrd_klinis_ms a where active='1' and klinis_id=a.pk)urut
                                 from dt01_hrd_activity_ms a
                                 where a.active='1'
@@ -93,7 +93,7 @@
 
                                 union
 
-                                select a.activity_id, concat(' [ ',(select concat(name,' ',area)  from dt01_hrd_klinis_ms where active='1' and klinis_id=a.pk),' ] ',activity,' Durasi ',durasi,' Menit')activity, durasi,
+                                select concat(a.activity_id,':',durasi)activity_id, concat(' [ ',(select concat(name,' ',area)  from dt01_hrd_klinis_ms where active='1' and klinis_id=a.pk),' ] ',activity,' Durasi ',durasi,' Menit')activity, durasi,
                                      (select nomor from dt01_hrd_klinis_ms a where active='1' and klinis_id=a.pk)urut
                                 from dt01_hrd_activity_ms a
                                 where a.active='1'
@@ -108,43 +108,6 @@
             $recordset = $recordset->result();
             return $recordset;
         }
-
-        // function activityperawatpelaksana($orgid,$positionid,$pk){
-        //     $query =
-        //             "
-        //                 select x.*
-        //                 from(
-        //                         select a.activity_id, concat(' [ ',(select concat(name,' ',area)  from dt01_hrd_klinis_ms where active='1' and klinis_id=a.pk),' ] ',activity,' Durasi ',durasi,' Menit')activity, durasi,
-        //                             (select nomor from dt01_hrd_klinis_ms a where active='1' and klinis_id=a.pk)urut
-        //                         from dt01_hrd_activity_ms a
-        //                         where a.active='1'
-        //                         and   a.org_id='".$orgid."'
-        //                         and   a.activity_id in ( select activity_id from dt01_hrd_mapping_activity where active='1' org_id='".$orgid."' and position_id='".$positionid."')
-
-        //                         select a.activity_id, concat(' [ ',(select concat(name,' ',area)  from dt01_hrd_klinis_ms where active='1' and klinis_id=a.pk),' ] ',activity,' Durasi ',durasi,' Menit')activity, durasi,
-        //                             (select nomor from dt01_hrd_klinis_ms a where active='1' and klinis_id=a.pk)urut
-        //                         from dt01_hrd_activity_ms a
-        //                         where a.active='1'
-        //                         and   a.org_id='".$orgid."'
-        //                         and   a.pk='".$pk."'
-
-        //                         union
-
-        //                         select a.activity_id, concat(' [ ',(select concat(name,' ',area)  from dt01_hrd_klinis_ms where active='1' and klinis_id=a.pk),' ] ',activity,' Durasi ',durasi,' Menit')activity, durasi,
-        //                             (select nomor from dt01_hrd_klinis_ms a where active='1' and klinis_id=a.pk)urut
-        //                         from dt01_hrd_activity_ms a
-        //                         where a.active='1'
-        //                         and   a.org_id='".$orgid."'
-        //                         and   a.pk in ( select sub_klinis_id from dt01_hrd_mapping_klinis where active='1' and klinis_id='".$pk."')
-        //                 )x
-        //                 order by x.urut desc, x.activity asc, x.durasi asc
-                                                                    
-        //             ";
-
-        //     $recordset = $this->db->query($query);
-        //     $recordset = $recordset->result();
-        //     return $recordset;
-        // }
 
         function volume($orgid,$activityid,$starttime,$endtime){
             $query =

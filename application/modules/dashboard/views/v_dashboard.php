@@ -63,7 +63,7 @@
         <div class="card card-flush h-100">
             <div class="card-header pt-5">
                 <div class="card-title flex-column">
-                    <h3 class="fw-bolder mb-1">Task Summary</h3>
+                    <h3 class="fw-bolder mb-1">Todo List Summary</h3>
                     <div class="fs-6 fw-bold text-gray-400" id="countoverduelabel"></div>
                 </div>
             </div>
@@ -124,7 +124,7 @@
         <div class="card card-flush h-100">
             <div class="card-header pt-5">
                 <div class="card-title flex-column">
-                    <h3 class="fw-bolder mb-1">Todo</h3>
+                    <h3 class="fw-bolder mb-1">Todo List Yourself</h3>
                     <div class="fs-6 fw-bold text-gray-400" id="info_list_todo"></div>
                 </div>
                 <div class="card-toolbar">
@@ -159,7 +159,7 @@
                             <div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">Todo List</div>
                         </div>
                         <div class="menu-item px-3">
-                            <a href="" data-bs-toggle="modal" data-bs-target="#modal-todolist" class="menu-link px-3">Create Todo List</a>
+                            <a href="" data-bs-toggle="modal" data-bs-target="#modal_dashboard_todo_add" class="menu-link px-3">Create Todo List</a>
                         </div>
                     </div>
                 </div>

@@ -73,10 +73,12 @@ class Activity extends CI_Controller{
 
 	public function volume(){
 		$kegiatanid      = $this->input->post('kegiatan');
+		$kegiatanidarray = explode(":", $kegiatanid);
+
 		$mulaikegiatan   = $this->input->post('mulaikegiatan');
 		$selesaikegiatan = $this->input->post('selesaikegiatan');
 
-		$lisvol = $this->md->volume(ORG_ID, $kegiatanid, $mulaikegiatan, $selesaikegiatan,);
+		$lisvol = $this->md->volume(ORG_ID, $kegiatanidarray[0], $mulaikegiatan, $selesaikegiatan,);
 		$list   = "";
 
 		foreach ($lisvol as $d) {
@@ -87,20 +89,23 @@ class Activity extends CI_Controller{
 	}
 
 	public function insertactivity(){
-		$activityid = $this->input->post("data_activity_primaryactivity_add");
+		$activityid       = $this->input->post("data_activity_primaryactivity_add");
+		$activityIdsArray = explode(":", $activityid);
 
-		$resultcekklinisactivity = $this->md->cekklinisactivity(ORG_ID,$activityid);
+		$resultcekklinisactivity = $this->md->cekklinisactivity(ORG_ID,$activityIdsArray[0]);
 		if($resultcekklinisactivity->pk === ""){
-			$resultcekatasan = $this->md->cekatasan(ORG_ID, $_SESSION['userid'],$activityid);
+			$resultcekatasan = $this->md->cekatasan(ORG_ID, $_SESSION['userid'],$activityIdsArray[0]);
 			$atasanid        = $resultcekatasan->atasan_id;
 		}else{
 			$resultcekatasanid = $this->md->cekatasanid(ORG_ID, $_SESSION['userid']);
 			$atasanid = $resultcekatasanid->atasan_id;			
 		}
-
+		
 		$data['org_id']         = $_SESSION['orgid'];
 		$data['trans_id']       = generateuuid();
-		$data['activity_id']    = $activityid;
+		$data['activity_id']    = $activityIdsArray[0];
+		$data['durasi']         = $activityIdsArray[1];
+		$data['total']          = intval($this->input->post("data_activity_volume_add"))*intval($activityIdsArray[1]);
 		$data['activity']       = $this->input->post("data_activity_description_add");
 		$data['start_date']     = DateTime::createFromFormat("d.m.Y", $this->input->post("data_activity_date_add"))->format("Y-m-d");
 		$data['start_time_in']  = $this->input->post("data_activity_time_start_add");

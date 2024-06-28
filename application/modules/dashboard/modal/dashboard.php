@@ -1,16 +1,15 @@
-<div class="modal fade" id="modal-todolist" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade" id="modal_dashboard_todo_add" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header pb-0">
-                <h1 class="mb-3">Todo List</h1>
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <span class="svg-icon svg-icon-1">
-                        <i class="bi bi-x-lg"></i>
-                    </span>
-                </div>
+            <div class="modal-header pb-0 border-0 justify-content-end">
+                <div class="btn btn-icon btn-sm btn-color-gray-400 btn-active-color-primary" data-bs-toggle="tooltip" data-bs-dismiss="modal" title="" data-bs-original-title="Close Add Schedule Meeting"><span class="svg-icon svg-icon-1"><i class="bi bi-x-lg"></i></span></div>
             </div>
             <form action="<?php echo base_url();?>index.php/dashboard/dashboard/inserttodolist" id="forminserttodolist">
                 <div class="modal-body">
+                    <div class="text-center mb-5">
+                        <h1 class="mb-3">Add Todo List</h1>
+                        <div class="text-muted fw-bold fs-5">Please create a Todo List for yourself</div>
+                    </div>
                     <div class="row">
                         <div class="col-md-12">
                             <label class="d-flex align-items-center fs-5 fw-bold mb-2">
@@ -38,7 +37,7 @@
                                 <span class="required">Prioritas</span>
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Silakan Pilih Prioritas Todo List Anda"></i>
                             </label>
-                            <select data-control="select2" data-dropdown-parent="#modal-todolist" data-placeholder="Silakan Pilih..." class="form-select form-select-solid" name="todolist-prioritas-tambah" id="todolist-prioritas-tambah" required>
+                            <select data-control="select2" data-dropdown-parent="#modal_dashboard_todo_add" data-placeholder="Silakan Pilih..." class="form-select form-select-solid" name="todolist-prioritas-tambah" id="todolist-prioritas-tambah" required>
                                 <?php echo $prioritas;?>
                             </select> 
                         </div>                                                             

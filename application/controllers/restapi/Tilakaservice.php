@@ -138,7 +138,7 @@
                     $body['hmac_nonce']      = "";
                     $response = Tilaka::excutesign(json_encode($body));
 
-                    if($response['status']==="DONE"){
+                    if($response['status']==="DONE" || $response['status']==="FAILED"){
                         $dataupdate['STATUS']="2";
                         $this->md->updateauthurl($dataupdate,$a->URL_ID);
                     }
