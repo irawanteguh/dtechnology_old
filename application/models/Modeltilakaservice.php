@@ -6,11 +6,11 @@
                     "
                         select a.*
                         from dt01_gen_user_data a
-                        where a.active='1'
-                        and   a.org_id='".$orgid."'
+                        where a.active = '1'
+                        and   a.org_id = '".$orgid."'
                         and   a.user_identifier<>''
                         and   a.register_id<>''
-                        and   a.certificate='1'
+                        and   a.certificate = '1'
                     ";
 
             $recordset = $this->db->query($query);
@@ -23,16 +23,17 @@
                     "
                         select x.*
                         from(
-                        select a.NO_FILE, FILENAME, STATUS_SIGN,
-                                (select USER_IDENTIFIER from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)useridentifier,
-                                (select NAME            from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)assignname,
-                                (select DOCUMENT_NAME   from dt01_gen_document_ms where org_id=a.org_id and active='1' and JENIS_DOC=a.JENIS_DOC)jenisdocumen
-                        from dt01_gen_document_file_dt a
-                        where a.active='1'
-                        and   a.org_id='".$orgid."'
-                        and   a.status_sign ='".$status."'
+                            select a.NO_FILE, FILENAME, STATUS_SIGN,
+                                    (select USER_IDENTIFIER from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)useridentifier,
+                                    (select NAME            from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)assignname,
+                                    (select DOCUMENT_NAME   from dt01_gen_document_ms where org_id=a.org_id and active='1' and JENIS_DOC=a.JENIS_DOC)jenisdocumen
+                            from dt01_gen_document_file_dt a
+                            where a.active='1'
+                            and   a.org_id='".$orgid."'
+                            and   a.status_sign ='".$status."'
                         )x
                         where x.useridentifier<>''
+                        LIMIT 10;
                     ";
 
             $recordset = $this->db->query($query);
@@ -45,12 +46,12 @@
                     "
                         select x.*
                         from(
-                        select distinct a.assign,
-                                (select USER_IDENTIFIER from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)useridentifier
-                        from dt01_gen_document_file_dt a
-                        where a.active='1'
-                        and   a.org_id='".$orgid."'
-                        and   a.status_sign ='".$status."'
+                            select distinct a.assign,
+                                    (select USER_IDENTIFIER from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)useridentifier
+                            from dt01_gen_document_file_dt a
+                            where a.active='1'
+                            and   a.org_id='".$orgid."'
+                            and   a.status_sign ='".$status."'
                         )x
                         where x.useridentifier<>''
                     ";
@@ -65,15 +66,15 @@
                     "
                         select x.*
                         from(
-                        select a.NO_FILE, FILENAME, STATUS_SIGN,
-                                (select USER_IDENTIFIER from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)useridentifier,
-                                (select NAME            from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)assignname,
-                                (select DOCUMENT_NAME   from dt01_gen_document_ms where org_id=a.org_id and active='1' and JENIS_DOC=a.JENIS_DOC)jenisdocumen
-                        from dt01_gen_document_file_dt a
-                        where a.active      = '1'
-                        and   a.org_id      = '".$orgid."'
-                        and   a.status_sign = '".$status."'
-                        and   a.assign      = '".$assign."'
+                            select a.NO_FILE, FILENAME, STATUS_SIGN,
+                                    (select USER_IDENTIFIER from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)useridentifier,
+                                    (select NAME            from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)assignname,
+                                    (select DOCUMENT_NAME   from dt01_gen_document_ms where org_id=a.org_id and active='1' and JENIS_DOC=a.JENIS_DOC)jenisdocumen
+                            from dt01_gen_document_file_dt a
+                            where a.active      = '1'
+                            and   a.org_id      = '".$orgid."'
+                            and   a.status_sign = '".$status."'
+                            and   a.assign      = '".$assign."'
                         )x
                         where x.useridentifier<>''
                     ";
