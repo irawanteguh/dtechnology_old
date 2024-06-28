@@ -130,7 +130,7 @@
         }
 
         public function excutesign_POST(){
-            $result = $this->md->dataexecutesign("1");
+            $result = $this->md->dataexecutesign(ORG_ID,"1");
             if(!empty($result)){
                 foreach($result as $a){
                     $body['request_id']      = $a->REQUEST_ID;
@@ -138,18 +138,28 @@
                     $body['hmac_nonce']      = "";
                     $response = Tilaka::excutesign(json_encode($body));
 
-                    if($response['status']==="DONE" || $response['status']==="FAILED"){
+                    if($response['status']==="DONE"){
                         $dataupdate['STATUS']="2";
                         $this->md->updateauthurl($dataupdate,$a->URL_ID);
                     }
-                }
 
-                $this->response($response,REST_Controller::HTTP_OK);
+                    if($response['status']==="FAILED"){
+                        $dataupdate['ACTIVE']="0";
+                        $this->md->updateauthurl($dataupdate,$a->URL_ID);
+
+                        $dataupdatefile['FILENAME']    = "";
+                        $dataupdatefile['STATUS_SIGN'] = "0";
+                        $dataupdatefile['LINK']        = "";
+                        $dataupdatefile['REQUEST_ID']  = "";
+                        $dataupdatefile['NOTE']        = "TTE FAILED, REPROSESS";
+                        $this->md->updaterequestid($dataupdatefile,$a->REEQUEST_ID);
+                    }
+                }
             }
         }
 
         public function statussign_POST(){
-            $result = $this->md->dataexecutesign("2");
+            $result = $this->md->dataexecutesign(ORG_ID,"2");
             if(!empty($result)){
                 foreach($result as $a){
                     $body['request_id'] = $a->REQUEST_ID;

@@ -70,10 +70,10 @@
                                 (select NAME            from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)assignname,
                                 (select DOCUMENT_NAME   from dt01_gen_document_ms where org_id=a.org_id and active='1' and JENIS_DOC=a.JENIS_DOC)jenisdocumen
                         from dt01_gen_document_file_dt a
-                        where a.active='1'
-                        and   a.org_id='".$orgid."'
-                        and   a.status_sign ='".$status."'
-                        and   a.assign='".$assign."'
+                        where a.active      = '1'
+                        and   a.org_id      = '".$orgid."'
+                        and   a.status_sign = '".$status."'
+                        and   a.assign      = '".$assign."'
                         )x
                         where x.useridentifier<>''
                     ";
@@ -83,7 +83,7 @@
             return $recordset;
         }
 
-        function dataexecutesign($status){
+        function dataexecutesign($orgid,$status){
             $query =
                     "
                         select a.*, DATE_FORMAT(CREATED_DATE,'%d.%m.%Y %H:%i:%s')tgljam,
@@ -93,6 +93,7 @@
                                 (select EMAIL from dt01_gen_user_data where active='1' and USER_IDENTIFIER=A.USER_IDENTIFIER)email
                         from dt01_gen_auth_url_sign_dt a
                         where a.active='1'
+                        and   a.org_id='".$orgid."'
                         and   a.status='".$status."'
                         order by created_date desc
                     ";
@@ -123,6 +124,11 @@
 
         function updatelinkdownload($data,$nofile){           
             $sql =   $this->db->update("dt01_gen_document_file_dt",$data,array("FILENAME"=>$nofile));
+            return $sql;
+        }
+
+        function updaterequestid($data,$requestid){           
+            $sql =   $this->db->update("dt01_gen_document_file_dt",$data,array("REQUEST_ID"=>$requestid));
             return $sql;
         }
 
