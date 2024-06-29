@@ -33,7 +33,6 @@
                             and   a.status_sign = '".$status."'
                         )x
                         where x.useridentifier<>''
-                        LIMIT 10;
                     ";
 
             $recordset = $this->db->query($query);
