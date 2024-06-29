@@ -8,9 +8,9 @@
                         from dt01_gen_user_data a
                         where a.active = '1'
                         and   a.org_id = '".$orgid."'
+                        and   a.certificate = '1'
                         and   a.user_identifier<>''
                         and   a.register_id<>''
-                        and   a.certificate = '1'
                     ";
 
             $recordset = $this->db->query($query);
@@ -28,9 +28,9 @@
                                     (select NAME            from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)assignname,
                                     (select DOCUMENT_NAME   from dt01_gen_document_ms where org_id=a.org_id and active='1' and JENIS_DOC=a.JENIS_DOC)jenisdocumen
                             from dt01_gen_document_file_dt a
-                            where a.active='1'
-                            and   a.org_id='".$orgid."'
-                            and   a.status_sign ='".$status."'
+                            where a.active      = '1'
+                            and   a.org_id      = '".$orgid."'
+                            and   a.status_sign = '".$status."'
                         )x
                         where x.useridentifier<>''
                         LIMIT 10;
@@ -93,7 +93,7 @@
                                 (select IDENTITY_NO from dt01_gen_user_data where active='1' and USER_IDENTIFIER=A.USER_IDENTIFIER)noktp,
                                 (select EMAIL from dt01_gen_user_data where active='1' and USER_IDENTIFIER=A.USER_IDENTIFIER)email
                         from dt01_gen_auth_url_sign_dt a
-                        where a.active='1'
+                        where a.active='0'
                         and   a.org_id='".$orgid."'
                         and   a.status='".$status."'
                         order by created_date desc

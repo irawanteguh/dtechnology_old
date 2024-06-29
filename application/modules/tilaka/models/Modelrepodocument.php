@@ -13,7 +13,7 @@
                             from dt01_gen_document_file_dt a
                             where a.active='1'
                             and   a.org_id='".$orgid."'
-                            order by CREATED_DATE desc
+                            order by created_date desc
                         )x
                     ";
 

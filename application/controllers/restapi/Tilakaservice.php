@@ -152,7 +152,7 @@
                         $dataupdatefile['LINK']        = "";
                         $dataupdatefile['REQUEST_ID']  = "";
                         $dataupdatefile['NOTE']        = "TTE FAILED, REPROSESS";
-                        $this->md->updaterequestid($dataupdatefile,$a->REEQUEST_ID);
+                        $this->md->updaterequestid($dataupdatefile,$a->REQUEST_ID);
                     }
                 }
             }
