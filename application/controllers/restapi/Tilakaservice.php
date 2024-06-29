@@ -154,7 +154,11 @@
                         $dataupdatefile['NOTE']        = "TTE FAILED, REPROSESS";
                         $this->md->updaterequestid($dataupdatefile,$a->REQUEST_ID);
                     }
+
+                    $summaryresponsepost[]=$response;
                 }
+
+                $this->response($summaryresponsepost,REST_Controller::HTTP_OK);
             }
         }
 
@@ -184,9 +188,11 @@
                             }
                         }
                     }
+
+                    $summaryresponsepost[]=$response;
                 }
 
-                $this->response($response,REST_Controller::HTTP_OK);
+                $this->response($summaryresponsepost,REST_Controller::HTTP_OK);
             }
         }
 
