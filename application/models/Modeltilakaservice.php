@@ -93,7 +93,7 @@
                                 (select IDENTITY_NO from dt01_gen_user_data where active='1' and USER_IDENTIFIER=A.USER_IDENTIFIER)noktp,
                                 (select EMAIL from dt01_gen_user_data where active='1' and USER_IDENTIFIER=A.USER_IDENTIFIER)email
                         from dt01_gen_auth_url_sign_dt a
-                        where a.active='0'
+                        where a.active='1'
                         and   a.org_id='".$orgid."'
                         and   a.status='".$status."'
                         order by created_date desc
