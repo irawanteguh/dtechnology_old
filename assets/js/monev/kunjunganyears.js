@@ -67,8 +67,8 @@ function kunjungan(){
                     },
                 },
                 series: [
-                    {name:'Pasien Rawat Jalan', data: rj},
-                    {name:'Pasien Rawat Inap', data: ri}
+                    {name:'Outpatients', data: rj},
+                    {name:'Inpatients', data: ri}
                 ],
                 stroke: {
                     show: true,
@@ -93,7 +93,7 @@ function kunjungan(){
                             }
                         },
                         title: {
-                            text: 'Kunjungan pasien rawat jalan tahun ini'
+                            text: 'Outpatient visits this year'
                         }
                     },
                     {
@@ -104,7 +104,7 @@ function kunjungan(){
                             }
                         },
                         title: {
-                            text: 'Kunjungan pasien rawat inap tahun ini'
+                            text: 'Inpatient visits this year'
                         },
                         opposite: true
                     }
@@ -134,7 +134,7 @@ function kunjungan(){
                 },
                 colors: ['#009EF7'],
                 series: [
-                    {name:'Pasien Rawat Jalan', data: rj}
+                    {name:'Outpatients', data: rj}
                 ],
                 stroke: {
                     show : true,
@@ -155,7 +155,7 @@ function kunjungan(){
                         }
                     },
                     title: {
-                        text: 'Kunjungan pasien rawat jalan tahun ini'
+                        text: 'Outpatient visits this year'
                     }
                 },
                 annotations: {
@@ -169,7 +169,7 @@ function kunjungan(){
                                     color: '#fff',
                                     background: '#FF4560'
                                 },
-                                text: 'Rata rata kunjungan pasien rawat jalan '+todesimal(avgrj)
+                                text: 'Average outpatient visits '+todesimal(avgrj)
                             }
                         }
                     ]
@@ -199,7 +199,7 @@ function kunjungan(){
                 },
                 colors: ['#009EF7'],
                 series: [
-                    {name:'Pasien Rawat Inap', data: ri}
+                    {name:'Inpatients', data: ri}
                 ],
                 stroke: {
                     show : true,
@@ -220,7 +220,7 @@ function kunjungan(){
                         }
                     },
                     title: {
-                        text: 'Kunjungan pasien rawat inap tahun ini'
+                        text: 'Inpatient visits this year'
                     }
                 },
                 annotations: {
@@ -234,7 +234,7 @@ function kunjungan(){
                                     color: '#fff',
                                     background: '#FF4560'
                                 },
-                                text: 'Rata rata kunjungan pasien rawat inap '+todesimal(avgri)
+                                text: 'Average number of inpatient visits '+todesimal(avgri)
                             }
                         }
                     ]
@@ -305,8 +305,8 @@ function kunjunganpoli(){
                     }
                 },
                 series: [
-                    {name:'Tahun ini', data: tahunini},
-                    {name:'Tahun lalu', data: tahunlalu}
+                    {name:'This year', data: tahunini},
+                    {name:'Last year', data: tahunlalu}
                 ],
                 tooltip: {
                     shared: true,
@@ -344,7 +344,7 @@ function kunjunganpoli(){
                         align: 'right'
                     },
                     title: {
-                        text: "Polikinik rawat jalan"
+                        text: "Outpatient clinic"
                     }
                 },
             };
