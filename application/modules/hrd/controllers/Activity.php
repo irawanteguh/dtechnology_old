@@ -13,7 +13,7 @@
 		}
 
 		public function masteractivity(){
-            $result = $this->md->masteractivity(ORG_ID);
+            $result = $this->md->masteractivity($_SESSION['orgid']);
             
 			if(!empty($result)){
                 $json["responCode"]="00";
@@ -30,7 +30,7 @@
         }
 
         public function addactivity(){
-            $data['org_id']           = ORG_ID;
+            $data['org_id']           = $_SESSION['orgid'];
             $data['activity_id']      = generateuuid();
             $data['activity']         = $this->input->post("data_activity_name_add");
             $data['durasi']           = $this->input->post("data_activity_durasi_add");

@@ -289,32 +289,37 @@ function datastaff() {
 
                     tableresult +="<tr>";
                     tableresult +="<td>";
-                    tableresult +="<div class='d-flex align-items-center'>";
+                        tableresult +="<div class='d-flex align-items-center'>";
+                            tableresult +="<div class='symbol symbol-45px me-5'>";
+                            if(result[i].image_profile==="N"){
+                                tableresult +="<div class='symbol-label fs-3 bg-light-"+randomColor+" text-"+randomColor+"'>"+result[i].initial+"</div>";
+                            }else{
+                                tableresult +="<img src='"+url+"assets/images/avatars/"+result[i].user_id+".jpeg' alt='"+result[i].name+"'>";
+                            }
+                            tableresult +="</div>";
 
-                        tableresult +="<div class='symbol symbol-45px me-5'>";
-                        if(result[i].image_profile==="N"){
-                            tableresult +="<div class='symbol-label fs-3 bg-light-"+randomColor+" text-"+randomColor+"'>"+result[i].initial+"</div>";
-                        }else{
-                            tableresult +="<img src='"+url+"assets/images/avatars/"+result[i].user_id+".jpeg' alt='"+result[i].name+"'>";
-                        }
+                            tableresult +="<div class='d-flex justify-content-start flex-column'>";
+                            tableresult +="<a href='#' class='text-dark fw-bolder text-hover-primary fs-6'>"+result[i].name+"</a>";
+
+                            if(result[i].kategori_id==="65f1ccae-3ae6-4209-a66e-d7920b5824f5" || result[i].kategori_id==="b9710449-f5e4-4553-a962-f3b0f574dbc4"){
+                                tableresult +="<span class='text-muted fw-bold text-muted d-block fs-7'>"+(result[i].position ? result[i].position : "")+(result[i].fungsionalprimary ? " "+result[i].fungsionalprimary : "")+"</span>";
+                            }else{
+                                tableresult +="<span class='text-muted fw-bold text-muted d-block fs-7'>"+result[i].position+"</span>";
+                            }
+                            tableresult +="</div>";
+
                         tableresult +="</div>";
-
-                        tableresult +="<div class='d-flex justify-content-start flex-column'>";
-                        tableresult +="<a href='#' class='text-dark fw-bolder text-hover-primary fs-6'>"+result[i].name+"</a>";
-                        tableresult +="<span class='text-muted fw-bold text-muted d-block fs-7'>"+result[i].position+"</span>";
-                        
-                        tableresult +="</div>";
-
-                    tableresult +="</div>";
                     tableresult +="</td>";
+
+                    tableresult +="<td>"+(result[i].klinis ? result[i].klinis  : "")+"</td>";
 
                     tableresult +="<td class='text-end'>";
                     tableresult +="<div class='d-flex flex-column w-100 me-2'>";
                         tableresult +="<div class='d-flex flex-stack mb-2'>";
-                            tableresult +="<span class='text-muted me-2 fs-7 fw-bold'>50%</span>";
+                            tableresult +="<span class='text-muted me-2 fs-7 fw-bold'>"+(result[i].resultkpi ? result[i].resultkpi : "0")+"%</span>";
                         tableresult +="</div>";
                         tableresult +="<div class='progress h-6px w-100'>";
-                            tableresult +="<div class='progress-bar bg-primary' role='progressbar' style='width: 50%' aria-valuenow='50' aria-valuemin='0' aria-valuemax='100'></div>";
+                            tableresult +="<div class='progress-bar bg-primary' role='progressbar' style='width:"+(result[i].resultkpi ? result[i].resultkpi : "0")+"%' aria-valuenow='"+(result[i].resultkpi ? result[i].resultkpi : "0")+"' aria-valuemin='0' aria-valuemax='100'></div>";
                         tableresult +="</div>";
                     tableresult +="</div>";
                     tableresult +="</td>";

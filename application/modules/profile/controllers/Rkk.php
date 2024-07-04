@@ -13,7 +13,7 @@
 		}
 
         public function listrkk(){
-            $result = $this->md->listrkk(ORG_ID,$_SESSION['userid']);
+            $result = $this->md->listrkk($_SESSION['orgid'],$_SESSION['userid']);
             
 			if(!empty($result)){
                 $json["responCode"]="00";

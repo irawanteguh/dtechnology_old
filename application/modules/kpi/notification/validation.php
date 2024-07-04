@@ -7,6 +7,6 @@
     </span>
     <div class="d-flex flex-column pe-0 pe-sm-10">
         <h5 class="mb-1">For Your Information</h5>
-        <span>Batas penginputan activity periode <strong><span id="informasiperiodeactivity"></span></strong> sampai dengan <strong><span id="informasibatasactivity"></span></strong></span>
+        <span>Batas personal assessment periode <strong><span id="informasiperiodeassessment"></span></strong> mulai tanggal <strong><span id="informasiperiodeassessmentmulai"></span></strong> sampai dengan <strong><span id="informasiperiodeassessmentselesai"></span></strong></span>
     </div>
 </div>

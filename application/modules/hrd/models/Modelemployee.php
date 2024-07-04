@@ -204,18 +204,18 @@
             $query =
                     "
                         select y.*,
-                            (select level from dt01_gen_level_fungsional_ms where org_id='".$orgid."' and active='1' and level_id=y.levelfungsionalprimaryid)fungsionalprimary
+                            (select level from dt01_gen_level_fungsional_ms where org_id=y.org_id and active='1' and level_id=y.levelfungsionalprimaryid)fungsionalprimary
                         from(
                             select x.*,
-                                (select name             from dt01_gen_user_data   where org_id='".$orgid."' and active='1' and user_id=x.atasanidprimary)atasanprimary,
-                                (select position         from dt01_hrd_position_ms where org_id='".$orgid."' and active='1' and position_id=x.positioidprimary)positionprimary,
-                                (select level_fungsional from dt01_hrd_position_ms where org_id='".$orgid."' and active='1' and position_id=x.positioidprimary)levelfungsionalprimaryid
+                                (select name             from dt01_gen_user_data   where org_id=x.org_id and active='1' and user_id=x.atasanidprimary)atasanprimary,
+                                (select position         from dt01_hrd_position_ms where org_id=x.org_id and active='1' and position_id=x.positioidprimary)positionprimary,
+                                (select level_fungsional from dt01_hrd_position_ms where org_id=x.org_id and active='1' and position_id=x.positioidprimary)levelfungsionalprimaryid
                             from(
-                                select a.user_id, name, email, nik, identity_no, image_profile, upper(LEFT(a.name, 1)) initial,kategori_id, hours_month,
-                                    (select kategori from dt01_hrd_kategori_tenaga_ms where org_id='".$orgid."' and active='1' and kategori_id=a.kategori_id)kategori,
-                                    (select trans_id    from dt01_hrd_position_dt where org_id='".$orgid."' and active='1' and status='1' and position_primary='Y' and user_id=a.user_id)transidprimary,
-                                    (select atasan_id   from dt01_hrd_position_dt where org_id='".$orgid."' and active='1' and status='1' and position_primary='Y' and user_id=a.user_id)atasanidprimary,
-                                    (select position_id from dt01_hrd_position_dt where org_id='".$orgid."' and active='1' and status='1' and position_primary='Y' and user_id=a.user_id)positioidprimary,
+                                select a.org_id, user_id, name, email, nik, identity_no, image_profile, upper(LEFT(a.name, 1)) initial,kategori_id, duty_days, duty_hours, hours_month,
+                                    (select kategori from dt01_hrd_kategori_tenaga_ms where org_id=a.org_id and active='1' and kategori_id=a.kategori_id)kategori,
+                                    (select trans_id    from dt01_hrd_position_dt where org_id=a.org_id and active='1' and status='1' and position_primary='Y' and user_id=a.user_id)transidprimary,
+                                    (select atasan_id   from dt01_hrd_position_dt where org_id=a.org_id and active='1' and status='1' and position_primary='Y' and user_id=a.user_id)atasanidprimary,
+                                    (select position_id from dt01_hrd_position_dt where org_id=a.org_id and active='1' and status='1' and position_primary='Y' and user_id=a.user_id)positioidprimary,
                                     (
                                         SELECT GROUP_CONCAT(
                                                 b.trans_id, ':',
@@ -241,7 +241,6 @@
                                 ".$parameter."
                             )X
                         )y
-
                         order by name asc
                 
                     ";

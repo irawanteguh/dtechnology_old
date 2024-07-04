@@ -1,7 +1,7 @@
 <?php
     class Modelactivity extends CI_Model{
 
-        function calender(){
+        function calender($orgid,$userid){
             $query =
                     "
                         select a.trans_id, status,
@@ -9,6 +9,9 @@
                             DATE_FORMAT(DATE_ADD(a.end_date, INTERVAL 1 DAY), '%Y-%m-%d') end_date,
                             (select activity from dt01_hrd_activity_ms where active='1' and org_id=a.org_id and activity_id=a.activity_id)kegiatanutama
                         from dt01_hrd_activity_dt a
+                        where a.active='1'
+                        and   a.org_id='".$orgid."'
+                        and   a.user_id='".$userid."'
                     ";
 
             $recordset = $this->db->query($query);
@@ -108,6 +111,21 @@
             $recordset = $recordset->result();
             return $recordset;
         }
+
+        public function cekKegiatan($org_id, $user_id, $start_date, $start_time_in, $end_time_out) {
+            $this->db->where('org_id', $org_id);
+            $this->db->where('user_id', $user_id);
+            $this->db->where('start_date', $start_date);
+            $this->db->where("(('$start_time_in' BETWEEN start_time_in AND end_time_out) OR ('$end_time_out' BETWEEN start_time_in AND end_time_out) OR (start_time_in BETWEEN '$start_time_in' AND '$end_time_out') OR (end_time_out BETWEEN '$start_time_in' AND '$end_time_out'))");
+            $query = $this->db->get('dt01_hrd_activity_dt'); // Ganti 'activity_table' dengan nama tabel Anda
+        
+            if ($query->num_rows() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        
 
         function volume($orgid,$activityid,$starttime,$endtime){
             $query =

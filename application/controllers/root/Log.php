@@ -9,7 +9,7 @@
         }
 
         public function log(){
-            $result = $this->md->log(ORG_ID);
+            $result = $this->md->log($_SESSION['orgid']);
             
 			if(!empty($result)){
                 $json["responCode"]="00";

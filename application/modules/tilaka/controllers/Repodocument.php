@@ -14,7 +14,7 @@
 		}
 
 		public function dataupload(){
-            $result = $this->md->dataupload(ORG_ID);
+            $result = $this->md->dataupload($_SESSION['orgid']);
             
 			if(!empty($result)){
                 $json["responCode"]="00";

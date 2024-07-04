@@ -1,5 +1,16 @@
 liststaff();
 
+$('#modal_validation_perilaku').on('show.bs.modal', function (e) {
+    listassement();
+});
+
+function getdata(btn){
+    toastr.clear();
+
+    var userid            = btn.attr("data-userid");
+    $(":hidden[name='modal_validation_perilaku_userid_add']").val(userid);
+};
+
 function liststaff(){
     $.ajax({
         url        : url+"index.php/kpi/validation/liststaff",
@@ -24,9 +35,12 @@ function liststaff(){
             if(data.responCode==="00"){
                 result        = data.responResult;
                 for(var i in result){
+                    // const style       = "display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;";
+                    var   randomIndex = Math.floor(Math.random() * color.length);
+                    var   randomColor = color[randomIndex];
 
-                    var randomIndex = Math.floor(Math.random() * color.length);
-                    var randomColor = color[randomIndex];
+
+                    getvariabel =   "data-userid='"+result[i].user_id+"'";
 
 
                     tableresult +="<tr>";
@@ -61,18 +75,102 @@ function liststaff(){
                     }else{
                         tableresult +="<td>"+(result[i].position ? result[i].position : "")+(result[i].fungsionalprimary ? " "+result[i].fungsionalprimary : "")+"</td>";
                     }
-                    tableresult +="<td><div>"+(result[i].hours_month ? todesimal(result[i].hours_month)  : "")+"</div><div>Minutes</div></td>";
-                    tableresult +="<td><div>"+(result[i].hours_month ? todesimal(result[i].hours_month)  : "")+"</div><div>Minutes</div></td>";
-                    tableresult +="<td><div>"+(result[i].hours_month ? todesimal(result[i].hours_month)  : "")+"</div><div>Minutes</div></td>";
-                    tableresult +="<td class='text-center'>%</td>";
-                    tableresult +="<td class='text-center'>%</td>";
+                    
+                    if(result[i].position_primary==="Y"){
+                        tableresult +="<td>";
+                            tableresult +="<div class='d-flex'>";
+                                tableresult +="<div class='text-start w-50'>Effective</div>";
+                                tableresult +="<div class='text-center w-20'>:</div>";
+                                tableresult +="<div class='text-end w-25'>"+(result[i].hours_month ? todesimal(result[i].hours_month)  : "0")+"</div>";
+                                tableresult +="<div class='ps-5 w-10'>Minutes</div>";
+                            tableresult +="</div>";
+                            tableresult +="<div class='d-flex'>";
+                                tableresult +="<div class='text-start w-50'>Create</div>";
+                                tableresult +="<div class='text-center w-20'>:</div>";
+                                tableresult +="<div class='text-end w-25'>"+(result[i].jmldibuat ? todesimal(result[i].jmldibuat)  : "0")+"</div>";
+                                tableresult +="<div class='ps-5 w-10'>Minutes</div>";
+                            tableresult +="</div>";
+                            tableresult +="<div class='d-flex'>";
+                                tableresult +="<div class='text-start w-50'>Waiting</div>";
+                                tableresult +="<div class='text-center w-20'>:</div>";
+                                tableresult +="<div class='text-end w-25'>"+(result[i].jmlwait ? todesimal(result[i].jmlwait)  : "0")+"</div>";
+                                tableresult +="<div class='ps-5 w-10'>Minutes</div>";
+                            tableresult +="</div>";
+                            tableresult +="<div class='d-flex'>";
+                                tableresult +="<div class='text-start w-50'>Approval</div>";
+                                tableresult +="<div class='text-center w-20'>:</div>";
+                                tableresult +="<div class='text-end w-25'>"+(result[i].jmldisetujui ? todesimal(result[i].jmldisetujui)  : "0")+"</div>";
+                                tableresult +="<div class='ps-5 w-10'>Minutes</div>";
+                            tableresult +="</div>";
+                            tableresult +="<div class='d-flex'>";
+                                tableresult +="<div class='text-start w-50'>Revision</div>";
+                                tableresult +="<div class='text-center w-20'>:</div>";
+                                tableresult +="<div class='text-end w-25'>"+(result[i].jmldirevisi ? todesimal(result[i].jmldirevisi)  : "0")+"</div>";
+                                tableresult +="<div class='ps-5 w-10'>Minutes</div>";
+                            tableresult +="</div>";
+                            tableresult +="<div class='d-flex'>";
+                                tableresult +="<div class='text-start w-50'>Reject</div>";
+                                tableresult +="<div class='text-center w-20'>:</div>";
+                                tableresult +="<div class='text-end w-25'>"+(result[i].jmlditolak ? todesimal(result[i].jmlditolak)  : "0")+"</div>";
+                                tableresult +="<div class='ps-5 w-10'>Minutes</div>";
+                            tableresult +="</div>";
+                        tableresult +="</td>";
+                    }else{
+                        tableresult +="<td>";
+                            tableresult +="<div class='d-flex'>";
+                                tableresult +="<div class='text-start w-50'>Effective</div>";
+                                tableresult +="<div class='text-center w-20'>:</div>";
+                                tableresult +="<div class='text-end w-25'>"+(result[i].hours_month ? todesimal(result[i].hours_month)  : "0")+"</div>";
+                                tableresult +="<div class='ps-5 w-10'>Minutes</div>";
+                            tableresult +="</div>";
+                            tableresult +="<div class='d-flex'>";
+                                tableresult +="<div class='text-start w-50'>Create</div>";
+                                tableresult +="<div class='text-center w-20'>:</div>";
+                                tableresult +="<div class='text-end w-25'>"+(result[i].jmldibuatsec ? todesimal(result[i].jmldibuatsec)  : "0")+"</div>";
+                                tableresult +="<div class='ps-5 w-10'>Minutes</div>";
+                            tableresult +="</div>";
+                            tableresult +="<div class='d-flex'>";
+                                tableresult +="<div class='text-start w-50'>Waiting</div>";
+                                tableresult +="<div class='text-center w-20'>:</div>";
+                                tableresult +="<div class='text-end w-25'>"+(result[i].jmlwaitsec ? todesimal(result[i].jmlwaitsec)  : "0")+"</div>";
+                                tableresult +="<div class='ps-5 w-10'>Minutes</div>";
+                            tableresult +="</div>";
+                            tableresult +="<div class='d-flex'>";
+                                tableresult +="<div class='text-start w-50'>Approval</div>";
+                                tableresult +="<div class='text-center w-20'>:</div>";
+                                tableresult +="<div class='text-end w-25'>"+(result[i].jmldisetujuisec ? todesimal(result[i].jmldisetujuisec)  : "0")+"</div>";
+                                tableresult +="<div class='ps-5 w-10'>Minutes</div>";
+                            tableresult +="</div>";
+                            tableresult +="<div class='d-flex'>";
+                                tableresult +="<div class='text-start w-50'>Revision</div>";
+                                tableresult +="<div class='text-center w-20'>:</div>";
+                                tableresult +="<div class='text-end w-25'>"+(result[i].jmldirevisisec ? todesimal(result[i].jmldirevisisec)  : "0")+"</div>";
+                                tableresult +="<div class='ps-5 w-10'>Minutes</div>";
+                            tableresult +="</div>";
+                            tableresult +="<div class='d-flex'>";
+                                tableresult +="<div class='text-start w-50'>Reject</div>";
+                                tableresult +="<div class='text-center w-20'>:</div>";
+                                tableresult +="<div class='text-end w-25'>"+(result[i].jmlditolaksec ? todesimal(result[i].jmlditolaksec)  : "0")+"</div>";
+                                tableresult +="<div class='ps-5 w-10'>Minutes</div>";
+                            tableresult +="</div>";
+                        tableresult +="</td>";
+                    }
+                    
+
+                    // tableresult +="<td><div>Effective : "+(result[i].hours_month ? todesimal(result[i].hours_month)  : "")+" Minutes</div><div>Actual : "+(result[i].hours_month ? todesimal(result[i].hours_month)  : "")+" Minutes</div><div>Difference : "+(result[i].hours_month ? todesimal(result[i].hours_month)  : "")+" Minutes</div></td>";
+                    tableresult +="<td class='text-center'>"+(result[i].presentasiactivity ? todesimal(result[i].presentasiactivity)  : "0")+"%</td>";
+                    tableresult +="<td class='text-center'>"+(result[i].presentasiperilaku ? todesimal(result[i].presentasiperilaku)  : "0")+"%</td>";
+                    tableresult +="<td class='text-center'>"+(result[i].resultkpi ? todesimal(result[i].resultkpi)  : "0")+"%</td>";
 
                     tableresult += "<td class='text-end'>";
                         tableresult += "<div class='btn-group' role='group'>";
                             tableresult += "<button id='btnGroupDrop1' type='button' class='btn btn-light-primary dropdown-toggle btn-sm' data-bs-toggle='dropdown' aria-expanded='false'>Action</button>";
                             tableresult += "<div class='dropdown-menu' aria-labelledby='btnGroupDrop1'>";
                                 tableresult += "<a class='dropdown-item btn btn-sm' data-kt-drawer-show='true' data-kt-drawer-target='#drawer_employee_registrationkategoritenaga_add' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-pencil'></i> Validation Activites</a>";
-                                tableresult += "<a class='dropdown-item btn btn-sm' data-kt-drawer-show='true' data-kt-drawer-target='#drawer_employee_registrationposition_add' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-person-add'></i> Assessment Personal</a>";
+                                if(result[i].position_primary==="Y"){
+                                    tableresult += "<a class='dropdown-item btn btn-sm' data-kt-drawer-show='true' data-bs-toggle='modal' data-bs-target='#modal_validation_perilaku' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-person-add'></i> Personal Assessment</a>";
+                                }
+                                
                             tableresult +="</div>";
                         tableresult +="</div>";
                     tableresult +="</td>";
@@ -108,3 +206,183 @@ function liststaff(){
     });
     return false;
 };
+
+function listassement(){
+    $.ajax({
+        url        : url+"index.php/kpi/validation/listassement",
+        method     : "POST",
+        dataType   : "JSON",
+        cache      : false,
+        processData: true,
+        beforeSend : function () {
+            $("#personalassessment").html("");
+        },
+        success:function(data){
+            toastr.clear();
+            var tableresult = "";
+            var bodyContents = {};
+
+            if(data.responCode==="00"){
+                var result = data.responResult;
+
+                // First pass: create headers and initialize bodyContents
+                for(var i in result){
+                    if(result[i].jenis === "H"){
+                        tableresult += "<div class='accordion-item'>";
+                        tableresult += "<h2 class='accordion-header' id='"+result[i].assessment_id+"'>";
+                        tableresult += "<button class='accordion-button fs-4 fw-bold collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#accordion_body_"+result[i].assessment_id+"' aria-expanded='false' aria-controls='accordion_body_"+result[i].assessment_id+"'>"+result[i].assessment+"</button>";
+                        tableresult += "</h2>";
+                        tableresult += "<div id='accordion_body_"+result[i].assessment_id+"' class='accordion-collapse collapse' aria-labelledby='accordion_header_"+result[i].assessment_id+"' data-bs-parent='#personalassessment'>";
+                        tableresult += "<div class='accordion-body' id='body_"+result[i].assessment_id+"'></div>";
+                        tableresult += "</div>";
+                        tableresult += "</div>";
+
+                        bodyContents[result[i].assessment_id] = "";
+                    }
+                }
+
+                // Second pass: add details to bodyContents
+                for(var i in result){
+                    if(result[i].jenis === "D"){
+                        if(result[i].kategori_id === "+"){
+                            if(result[i].jenis === "D" && bodyContents[result[i].header_id] !== undefined){
+                                bodyContents[result[i].header_id] += "<label class='fw-bold fs-6 mb-1' for='"+result[i].assessment_id+"'>"+result[i].assessment+" :</label>";
+                            }
+                            bodyContents[result[i].header_id] += "<div class='d-flex flex-wrap justify-content-sm-between'>";
+                            for (var j = 1; j <= 10; j++) {
+                                bodyContents[result[i].header_id] += "<div class='form-check form-check-custom form-check-solid mb-10 me-3'>";
+                                    bodyContents[result[i].header_id] += "<input class='form-check-input' name='"+result[i].assessment_id+"' type='radio' value='"+j+"' id='"+result[i].assessment_id+"_"+j+"'/>";
+                                    bodyContents[result[i].header_id] += "<label class='form-check-label' for='"+result[i].assessment_id+"_"+j+"'>";
+                                        bodyContents[result[i].header_id] += "<div class='fw-bolder text-gray-800'>"+j+"</div>";
+                                    bodyContents[result[i].header_id] += "</label>";
+                                bodyContents[result[i].header_id] += "</div>";
+                            }
+                            bodyContents[result[i].header_id] += "</div>";
+                        }else{
+                            if(result[i].jenis === "D" && bodyContents[result[i].header_id] !== undefined){
+                                bodyContents[result[i].header_id] += "<label class='fw-bold fs-6 mb-1 text-danger' for='"+result[i].assessment_id+"'>"+result[i].assessment+" :</label>";
+                            }
+                            bodyContents[result[i].header_id] += "<div class='d-flex flex-wrap justify-content-sm-between'>";
+                            for (var j = 10; j >= 1; j--) {
+                                var value = 11 - j; // untuk membuat value dari 1 sampai 10
+                                bodyContents[result[i].header_id] += "<div class='form-check form-check-custom form-check-solid mb-10 me-3'>";
+                                    bodyContents[result[i].header_id] += "<input class='form-check-input' name='"+result[i].assessment_id+"' type='radio' value='"+value+"' id='"+result[i].assessment_id+"_"+value+"'/>";
+                                    bodyContents[result[i].header_id] += "<label class='form-check-label' for='"+result[i].assessment_id+"_"+value+"'>";
+                                        bodyContents[result[i].header_id] += "<div class='fw-bolder text-gray-800'>"+j+"</div>";
+                                    bodyContents[result[i].header_id] += "</label>";
+                                bodyContents[result[i].header_id] += "</div>";
+                            }
+                            bodyContents[result[i].header_id] += "</div>";
+                            
+                        }
+                    }
+                    
+                }
+
+                // Third pass: insert bodyContents into accordion-body
+                for(var id in bodyContents){
+                    tableresult = tableresult.replace("<div class='accordion-body' id='body_" + id + "'></div>", "<div class='accordion-body' id='body_" + id + "'>" + bodyContents[id] + "</div>");
+                }
+            }
+
+            $("#personalassessment").html(tableresult);
+        },
+        complete: function () {
+
+        },
+        error: function(xhr, status, error) {
+            Swal.fire({
+                title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
+                html             : "<b>"+error+"</b>",
+                icon             : "error",
+                confirmButtonText: "Please Try Again",
+                buttonsStyling   : false,
+                timerProgressBar : true,
+                timer            : 5000,
+                customClass      : {
+                    confirmButton: "btn btn-danger"
+                },
+                showClass: {popup: "animate__animated animate__fadeInUp animate__faster"},
+                hideClass: {popup: "animate__animated animate__fadeOutDown animate__faster"}
+            });
+        }
+    });
+    return false;
+}
+
+$(document).on("submit", "#forminsertassessment", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var form = $(this);
+    var url  = $(this).attr("action");
+
+    // Collect all checked inputs
+    var assessments = [];
+    $("input[type=radio]:checked").each(function() {
+        assessments.push({
+            assessment_id: $(this).attr('name'),
+            nilai: $(this).val()
+        });
+    });
+
+    // Append assessment data to form data
+    assessments.forEach(function(assessment) {
+        form.append('<input type="hidden" name="assessment_ids[]" value="' + assessment.assessment_id + '">');
+        form.append('<input type="hidden" name="nilai[]" value="' + assessment.nilai + '">');
+    });
+
+    $.ajax({
+        url       : url,
+        data      : form.serialize(),
+        method    : "POST",
+        dataType  : "JSON",
+        cache     : false,
+        beforeSend: function () {
+            toastr.clear();
+            toastr["info"]("Sending request...", "Please wait");
+            $("#btn_personalassessement_add").addClass("disabled");
+        },
+        success: function (data) {
+            toastr.clear();
+
+            if (data.responCode == "00") {
+                toastr[data.responHead](data.responDesc, "INFORMATION");
+                $("#modal_validation_perilaku").modal("hide");
+                liststaff();
+            } else {
+                $("#btn_personalassessement_add").removeClass("disabled");
+                Swal.fire({
+                    title            : "<h1 class='font-weight-bold' style='color:#234974;'>For Your Information</h1>",
+                    html             : "<b>"+data.responDesc+"</b>",
+                    icon             : data.responHead,
+                    confirmButtonText: "Please Try Again",
+                    buttonsStyling   : false,
+                    timerProgressBar : true,
+                    timer            : 5000,
+                    customClass      : {confirmButton: "btn btn-danger"},
+                    showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                    hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+                });
+            };
+        },
+        complete: function () {
+            toastr.clear();
+            $("#btn_personalassessement_add").removeClass("disabled");
+        },
+        error: function(xhr, status, error) {
+            Swal.fire({
+                title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
+                html             : "<b>"+error+"</b>",
+                icon             : "error",
+                confirmButtonText: "Please Try Again",
+                buttonsStyling   : false,
+                timerProgressBar : true,
+                timer            : 5000,
+                customClass      : {confirmButton: "btn btn-danger"},
+                showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+            });
+        }
+    });
+    return false;
+});

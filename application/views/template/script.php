@@ -35,11 +35,7 @@
             foreach ($jsFiles as $jsFile) {
                 $jsFilename = basename($jsFile);
 
-                if($this->uri->segment(1) === "auth"){
-                    if($jsFilename!="log.js"){
-                        echo "\t\t<script type='text/javascript' src='".base_url('assets/js/root/'.$jsFilename)."'></script>".PHP_EOL;
-                    }
-                }else{
+                if($this->uri->segment(1) != "auth"){
                     echo "\t\t<script type='text/javascript' src='".base_url('assets/js/root/'.$jsFilename)."'></script>".PHP_EOL;
                 }
             }

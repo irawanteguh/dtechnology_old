@@ -14,7 +14,7 @@ class Activity extends CI_Controller{
 	}
 
 	public function loadcombobox(){
-		$resultcekklinisid = $this->md->cekklinisid(ORG_ID, $_SESSION['userid']);
+		$resultcekklinisid = $this->md->cekklinisid($_SESSION['orgid'], $_SESSION['userid']);
 
 		if ($resultcekklinisid->klinis_id != "") {
 			$pk = "and klinis_id = '".$resultcekklinisid->klinis_id."'";
@@ -22,7 +22,7 @@ class Activity extends CI_Controller{
 			$pk = "and klinis_id is null";
 		}
 
-		$resultactivity = $this->md->activity(ORG_ID,$_SESSION['userid'],$pk);
+		$resultactivity = $this->md->activity($_SESSION['orgid'],$_SESSION['userid'],$pk);
 		$activity       = "";
 		foreach ($resultactivity as $a) {
 			$activity .= "<option value='" . $a->activity_id . "'>" . $a->activity . "</option>";
@@ -34,7 +34,7 @@ class Activity extends CI_Controller{
 	}
 
 	public function calender(){
-		$result = $this->md->calender();
+		$result = $this->md->calender($_SESSION['orgid'],$_SESSION['userid']);
 		$events = array();
 
 		foreach ($result as $a) {
@@ -78,7 +78,7 @@ class Activity extends CI_Controller{
 		$mulaikegiatan   = $this->input->post('mulaikegiatan');
 		$selesaikegiatan = $this->input->post('selesaikegiatan');
 
-		$lisvol = $this->md->volume(ORG_ID, $kegiatanidarray[0], $mulaikegiatan, $selesaikegiatan,);
+		$lisvol = $this->md->volume($_SESSION['orgid'], $kegiatanidarray[0], $mulaikegiatan, $selesaikegiatan,);
 		$list   = "";
 
 		foreach ($lisvol as $d) {
@@ -88,45 +88,101 @@ class Activity extends CI_Controller{
 		echo $list;
 	}
 
+	// public function insertactivity(){
+	// 	$activityid       = $this->input->post("data_activity_primaryactivity_add");
+	// 	$activityIdsArray = explode(":", $activityid);
+
+	// 	$resultcekklinisactivity = $this->md->cekklinisactivity($_SESSION['orgid'],$activityIdsArray[0]);
+	// 	if($resultcekklinisactivity->pk === ""){
+	// 		$resultcekatasan = $this->md->cekatasan($_SESSION['orgid'], $_SESSION['userid'],$activityIdsArray[0]);
+	// 		$atasanid        = $resultcekatasan->atasan_id;
+	// 	}else{
+	// 		$resultcekatasanid = $this->md->cekatasanid($_SESSION['orgid'], $_SESSION['userid']);
+	// 		$atasanid = $resultcekatasanid->atasan_id;			
+	// 	}
+		
+	// 	$data['org_id']         = $_SESSION['orgid'];
+	// 	$data['trans_id']       = generateuuid();
+	// 	$data['activity_id']    = $activityIdsArray[0];
+	// 	$data['durasi']         = $activityIdsArray[1];
+	// 	$data['total']          = intval($this->input->post("data_activity_volume_add"))*intval($activityIdsArray[1]);
+	// 	$data['activity']       = $this->input->post("data_activity_description_add");
+	// 	$data['start_date']     = DateTime::createFromFormat("d.m.Y", $this->input->post("data_activity_date_add"))->format("Y-m-d");
+	// 	$data['start_time_in']  = $this->input->post("data_activity_time_start_add");
+	// 	$data['start_time_out'] = $this->input->post("data_activity_time_end_add");
+	// 	$data['end_date']       = DateTime::createFromFormat("d.m.Y", $this->input->post("data_activity_date_add"))->format("Y-m-d");
+	// 	$data['end_time_in']    = $this->input->post("data_activity_time_start_add");
+	// 	$data['end_time_out']   = $this->input->post("data_activity_time_end_add");
+	// 	$data['qty']            = $this->input->post("data_activity_volume_add");
+	// 	$data['user_id']        = $_SESSION['userid'];
+	// 	$data['atasan_id']      = $atasanid;
+
+	// 	if ($this->md->insertactivity($data)) {
+	// 		$json['responCode'] = "00";
+	// 		$json['responHead'] = "success";
+	// 		$json['responDesc'] = "Tambah Activity Berhasil";
+	// 	} else {
+	// 		$json['responCode'] = "01";
+	// 		$json['responHead'] = "info";
+	// 		$json['responDesc'] = "Tambah Activity Gagal";
+	// 	}
+
+	// 	echo json_encode($json);
+	// }
+
 	public function insertactivity(){
 		$activityid       = $this->input->post("data_activity_primaryactivity_add");
 		$activityIdsArray = explode(":", $activityid);
-
-		$resultcekklinisactivity = $this->md->cekklinisactivity(ORG_ID,$activityIdsArray[0]);
+	
+		$resultcekklinisactivity = $this->md->cekklinisactivity($_SESSION['orgid'], $activityIdsArray[0]);
 		if($resultcekklinisactivity->pk === ""){
-			$resultcekatasan = $this->md->cekatasan(ORG_ID, $_SESSION['userid'],$activityIdsArray[0]);
+			$resultcekatasan = $this->md->cekatasan($_SESSION['orgid'], $_SESSION['userid'], $activityIdsArray[0]);
 			$atasanid        = $resultcekatasan->atasan_id;
 		}else{
-			$resultcekatasanid = $this->md->cekatasanid(ORG_ID, $_SESSION['userid']);
-			$atasanid = $resultcekatasanid->atasan_id;			
+			$resultcekatasanid = $this->md->cekatasanid($_SESSION['orgid'], $_SESSION['userid']);
+			$atasanid = $resultcekatasanid->atasan_id;            
 		}
 		
-		$data['org_id']         = $_SESSION['orgid'];
-		$data['trans_id']       = generateuuid();
-		$data['activity_id']    = $activityIdsArray[0];
-		$data['durasi']         = $activityIdsArray[1];
-		$data['total']          = intval($this->input->post("data_activity_volume_add"))*intval($activityIdsArray[1]);
-		$data['activity']       = $this->input->post("data_activity_description_add");
-		$data['start_date']     = DateTime::createFromFormat("d.m.Y", $this->input->post("data_activity_date_add"))->format("Y-m-d");
-		$data['start_time_in']  = $this->input->post("data_activity_time_start_add");
-		$data['start_time_out'] = $this->input->post("data_activity_time_end_add");
-		$data['end_date']       = DateTime::createFromFormat("d.m.Y", $this->input->post("data_activity_date_add"))->format("Y-m-d");
-		$data['end_time_in']    = $this->input->post("data_activity_time_start_add");
-		$data['end_time_out']   = $this->input->post("data_activity_time_end_add");
-		$data['qty']            = $this->input->post("data_activity_volume_add");
-		$data['user_id']        = $_SESSION['userid'];
-		$data['atasan_id']      = $atasanid;
-
-		if ($this->md->insertactivity($data)) {
-			$json['responCode'] = "00";
-			$json['responHead'] = "success";
-			$json['responDesc'] = "Tambah Activity Berhasil";
-		} else {
+		$start_date     = DateTime::createFromFormat("d.m.Y", $this->input->post("data_activity_date_add"))->format("Y-m-d");
+		$start_time_in  = $this->input->post("data_activity_time_start_add");
+		$end_time_out   = $this->input->post("data_activity_time_end_add");
+	
+		// Cek apakah ada kegiatan yang bertabrakan
+		$conflict = $this->md->cekKegiatan($_SESSION['orgid'], $_SESSION['userid'], $start_date, $start_time_in, $end_time_out);
+	
+		if ($conflict) {
 			$json['responCode'] = "01";
-			$json['responHead'] = "info";
-			$json['responDesc'] = "Tambah Activity Gagal";
+			$json['responHead'] = "error";
+			$json['responDesc'] = "Terdapat kegiatan lain pada waktu tersebut.";
+		} else {
+			$data['org_id']         = $_SESSION['orgid'];
+			$data['trans_id']       = generateuuid();
+			$data['activity_id']    = $activityIdsArray[0];
+			$data['durasi']         = $activityIdsArray[1];
+			$data['total']          = intval($this->input->post("data_activity_volume_add")) * intval($activityIdsArray[1]);
+			$data['activity']       = $this->input->post("data_activity_description_add");
+			$data['start_date']     = $start_date;
+			$data['start_time_in']  = $start_time_in;
+			$data['start_time_out'] = $end_time_out;
+			$data['end_date']       = $start_date;
+			$data['end_time_in']    = $start_time_in;
+			$data['end_time_out']   = $end_time_out;
+			$data['qty']            = $this->input->post("data_activity_volume_add");
+			$data['user_id']        = $_SESSION['userid'];
+			$data['atasan_id']      = $atasanid;
+	
+			if ($this->md->insertactivity($data)) {
+				$json['responCode'] = "00";
+				$json['responHead'] = "success";
+				$json['responDesc'] = "Tambah Activity Berhasil";
+			} else {
+				$json['responCode'] = "01";
+				$json['responHead'] = "info";
+				$json['responDesc'] = "Tambah Activity Gagal";
+			}
 		}
-
+	
 		echo json_encode($json);
 	}
+	
 }

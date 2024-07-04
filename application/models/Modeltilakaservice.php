@@ -94,7 +94,7 @@
                         from dt01_gen_auth_url_sign_dt a
                         where a.active='1'
                         and   a.org_id='".$orgid."'
-                        and   a.status='".$status."'
+                        '".$status."'
                         order by created_date desc
                     ";
 

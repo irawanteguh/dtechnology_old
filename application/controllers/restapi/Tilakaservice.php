@@ -130,7 +130,8 @@
         }
 
         public function excutesign_POST(){
-            $result = $this->md->dataexecutesign(ORG_ID,"1");
+            $status = "and a.status in ('0','1')";
+            $result = $this->md->dataexecutesign(ORG_ID,$status);
             if(!empty($result)){
                 foreach($result as $a){
                     $body['request_id']      = $a->REQUEST_ID;
@@ -163,7 +164,8 @@
         }
 
         public function statussign_POST(){
-            $result = $this->md->dataexecutesign(ORG_ID,"2");
+            $status ="and a.status='2'";
+            $result = $this->md->dataexecutesign(ORG_ID,$status);
             if(!empty($result)){
                 foreach($result as $a){
                     $body['request_id'] = $a->REQUEST_ID;

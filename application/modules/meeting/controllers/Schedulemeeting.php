@@ -13,7 +13,7 @@
 		}
 
 		public function listmeeting(){
-            $result = $this->md->listmeeting(ORG_ID);
+            $result = $this->md->listmeeting($_SESSION['orgid']);
             
 			if(!empty($result)){
                 $json["responCode"]="00";

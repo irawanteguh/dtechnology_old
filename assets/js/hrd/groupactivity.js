@@ -35,9 +35,11 @@ var processs2 = function (search) {
         search.complete();
     }, 500);
 }
+
 var clear2 = function (search) {
     $("#listactivity div").removeClass('d-none');
 }
+
 element2 = document.querySelector('#kt_docs_search_handler_activity');
 searchObject2 = new KTSearch(element2);
 searchObject2.on("kt.search.process", processs2);
@@ -47,9 +49,9 @@ searchObject2.on("kt.search.clear", clear2);
 daftarjabatan();
 
 function getdata(btn) {
-    var $btn = $(btn);
+    var $btn       = $(btn);
     var positionid = $btn.attr("data-positionid");
-    var position = $btn.attr("data-position");
+    var position   = $btn.attr("data-position");
 
     $(":hidden[name='positionid-mapping']").val(positionid);
     $("#headerlistactivity").html("List Activity : " + position);

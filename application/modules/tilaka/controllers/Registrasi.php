@@ -254,7 +254,7 @@
 
         public function registrasiuser(){
             $userid   = $this->input->post("userid-registrasi");
-            $result   = $this->md->dataregistrasi(ORG_ID,$userid);
+            $result   = $this->md->dataregistrasi($_SESSION['orgid'],$userid);
             $ktp_path = FCPATH."/assets/ktp/".$userid.".jpeg";
             
             if(file_exists($ktp_path)){

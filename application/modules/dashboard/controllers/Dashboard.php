@@ -25,7 +25,7 @@
 		}
 
 		public function todolist(){
-            $result = $this->md->todolist(ORG_ID,$_SESSION['userid']);
+            $result = $this->md->todolist($_SESSION['orgid'],$_SESSION['userid']);
             
 			if(!empty($result)){
                 $json["responCode"]="00";
@@ -42,7 +42,7 @@
         }
 
         public function datastaff(){
-            $result = $this->md->datastaff(ORG_ID,$_SESSION['userid']);
+            $result = $this->md->datastaff($_SESSION['orgid'],$_SESSION['userid']);
             
 			if(!empty($result)){
                 $json["responCode"]="00";
@@ -59,7 +59,7 @@
         }
 
         public function charttodolist(){
-            $result = $this->md->charttodolist(ORG_ID,$_SESSION['userid']);
+            $result = $this->md->charttodolist($_SESSION['orgid'],$_SESSION['userid']);
             
 			if(!empty($result)){
                 $json["responCode"]="00";

@@ -144,7 +144,7 @@
 							<label class="d-flex align-items-center fs-5 fw-bold mb-2">
 								<span class="required">Working Hours a Month</span>
 							</label>
-							<input type="text" class="form-control form-control-solid" id="drawer_data_employee_registrationkategoritenaga_totalhours_add" name="drawer_data_employee_registrationkategoritenaga_totalhours_add" readonly>
+							<input type="text" class="form-control form-control-solid" id="drawer_data_employee_registrationkategoritenaga_totalhours_add" name="drawer_data_employee_registrationkategoritenaga_totalhours_add" value="60" readonly>
 						</div>
 						<input class="btn btn-light-primary" id="btn_registrationkategoritenaga_add" type="submit" value="SIMPAN" name="simpan" >
 					</div>

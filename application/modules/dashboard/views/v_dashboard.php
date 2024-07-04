@@ -212,7 +212,8 @@
                         <thead>
                             <tr class="fw-bolder text-muted">
                                 <th>Name</th>
-                                <th>Progress</th>
+                                <th>Clinical Authority</th>
+                                <th>Result KPI</th>
                             </tr>
                         </thead>
                         <tbody id="datastaff"></tbody>

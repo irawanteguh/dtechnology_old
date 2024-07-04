@@ -15,7 +15,7 @@
 
         public function loadcombobox(){
             $resulttype                 = $this->md->type();
-            $resultmasterclassification = $this->md->masterclassification(ORG_ID);
+            $resultmasterclassification = $this->md->masterclassification($_SESSION['orgid']);
             $resultdutydays             = $this->md->dutydays();
             $resultdutyhours            = $this->md->dutyhours();
 
@@ -49,7 +49,7 @@
 
         public function position(){
             $userid              = $this->input->post('userid');
-            $resultdaftarjabatan = $this->md->daftarjabatan(ORG_ID,$userid);
+            $resultdaftarjabatan = $this->md->daftarjabatan($_SESSION['orgid'],$userid);
             
             $position="";
             foreach($resultdaftarjabatan as $a ){
@@ -62,7 +62,7 @@
         public function namaatasan(){
             $userid               = $this->input->post('userid');
             $parameter            = "and a.user_id <> '".$userid."'";
-            $resultdaftarkaryawan = $this->md->masteremployee(ORG_ID,$parameter);
+            $resultdaftarkaryawan = $this->md->masteremployee($_SESSION['orgid'],$parameter);
             
             $namaatasan   = "";
             foreach($resultdaftarkaryawan as $a ){
@@ -73,7 +73,7 @@
         }
 
         public function masteremployee(){
-            $result = $this->md->masteremployee(ORG_ID,"");
+            $result = $this->md->masteremployee($_SESSION['orgid'],"");
             
 			if(!empty($result)){
                 $json["responCode"]="00";

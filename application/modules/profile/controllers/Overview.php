@@ -17,7 +17,7 @@ class overview extends CI_Controller
 	}
 	public function datauser()
 	{
-		$result = $this->md->datauser(ORG_ID, $_SESSION['userid']);
+		$result = $this->md->datauser($_SESSION['orgid'], $_SESSION['userid']);
 
 		if (!empty($result)) {
 			$json["responCode"] = "00";

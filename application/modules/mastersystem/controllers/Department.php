@@ -13,7 +13,7 @@
 		}
 
 		public function masterdepartment(){
-            $result = $this->md->masterdepartment(ORG_ID);
+            $result = $this->md->masterdepartment($_SESSION['orgid']);
             
 			if(!empty($result)){
                 $json["responCode"]="00";

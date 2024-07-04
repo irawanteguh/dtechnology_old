@@ -13,7 +13,7 @@
 		}
         
         public function datakaryawan(){
-            $result = $this->md->datakaryawan(ORG_ID,$_SESSION['userid']);
+            $result = $this->md->datakaryawan($_SESSION['orgid'],$_SESSION['userid']);
             
 			if(!empty($result)){
                 $json["responCode"]="00";

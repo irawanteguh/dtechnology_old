@@ -47,6 +47,9 @@ function getdata(btn){
     var kategoriid        = btn.attr("data-kategoriid");
     var kategori          = btn.attr("data-kategori");
     var type              = btn.attr("data-type");
+    var dutydays          = btn.attr("data-dutydays");
+    var dutyhours         = btn.attr("data-dutyhours");
+    var hoursmonth        = btn.attr("data-hoursmonth");
     var nik               = btn.attr("data-nik");
 
     namaatasan(userid,atasanidprimary);
@@ -58,6 +61,7 @@ function getdata(btn){
 
 	$("input[name='drawer_data_employee_registrationposition_name_add']").val(name);
     $("input[name='drawer_data_employee_registrationkategoritenaga_name_add']").val(name);
+    $("input[name='drawer_data_employee_registrationkategoritenaga_totalhours_add']").val(hoursmonth);
 
     var $classification = $('#drawer_data_employee_registrationkategoritenaga_classifictionid_add').select2();
         $classification.val(kategoriid).trigger('change');
@@ -80,7 +84,13 @@ function getdata(btn){
     $("input[name='modal_data_employee_registrationposition_atasan_view']").val(atasanprimary);
 
     var $typeid = $('#modal_data_employee_registrationposition_type_edit').select2();
-        $typeid.val(type).trigger('change');
+    $typeid.val(type).trigger('change');
+
+    var $dutydaysid = $('#drawer_data_employee_registrationkategoritenaga_days_add').select2();
+    $dutydaysid.val(dutydays).trigger('change');
+
+    var $dutyhoursid = $('#drawer_data_employee_registrationkategoritenaga_hours_add').select2();
+    $dutyhoursid.val(dutyhours).trigger('change');
 };
 
 
@@ -157,6 +167,9 @@ function masteremployee(){
                                     "data-kategoriid='"+result[i].kategori_id+"'"+
                                     "data-kategori='"+result[i].kategori+"'"+
                                     "data-type='Y'"+
+                                    "data-dutydays='"+result[i].duty_days+"'"+
+                                    "data-dutyhours='"+result[i].duty_hours+"'"+
+                                    "data-hoursmonth='"+result[i].hours_month+"'"+
                                     "data-nik='"+result[i].nik+"'";
 
                     tableresult +="<tr>";

@@ -14,7 +14,7 @@
 
 		public function daftarjabatan(){
 			$search = $this->input->post("search");
-            $result = $this->md->daftarjabatan(ORG_ID,$search);
+            $result = $this->md->daftarjabatan($_SESSION['orgid'],$search);
             
 			if(!empty($result)){
                 $json["responCode"]="00";
@@ -31,7 +31,7 @@
         }
 
         public function addposition(){
-            $data['org_id']           = ORG_ID;
+            $data['org_id']           = $_SESSION['orgid'];
             $data['position_id']      = generateuuid();
             $data['position']         = $this->input->post("data_position_name_add");
             $data['created_by']       = $_SESSION['userid'];

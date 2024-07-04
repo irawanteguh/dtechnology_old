@@ -14,7 +14,7 @@
 
         public function daftarjabatan(){
 			$search = "";
-            $result = $this->md->daftarjabatan(ORG_ID,$search);
+            $result = $this->md->daftarjabatan($_SESSION['orgid'],$search);
             
 			if(!empty($result)){
                 $json["responCode"]="00";
@@ -33,7 +33,7 @@
         public function daftarkegiatan(){
             $search     = "";
             $positionid = $this->input->post("positionid");
-            $result     = $this->md->daftarkegiatan(ORG_ID,$positionid,$search);
+            $result     = $this->md->daftarkegiatan($_SESSION['orgid'],$positionid,$search);
             
 			if(!empty($result)){
                 $json["responCode"]="00";

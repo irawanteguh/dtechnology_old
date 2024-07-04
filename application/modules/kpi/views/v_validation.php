@@ -1,3 +1,5 @@
+<input type="text" id="data_assessment_periodeid_add" name="data_assessment_periodeid_add">
+
 <div class="row gy-5 g-xl-8 mb-xl-8">
 	<div class="col-xl-12">
 		<div class="card card-flush">
@@ -14,11 +16,10 @@
 							<tr class="fw-bolder text-muted bg-light">
 								<th class="ps-4 rounded-start">Name</th>
 								<th>Position</th>
-								<th>Effective Activities</th>
-                                <th>Actual Activities</th>
-                                <th>Difference Activities</th>
-                                <th>Behavior</th>
-                                <th>Result</th>
+								<th>Activities Details</th>
+								<th class="text-center">% Activities</th>
+                                <th class="text-center">% Behavior</th>
+                                <th class="text-center">% Result</th>
 								<th class="pe-4 text-end rounded-end">Actions</th>
 							</tr>
 						</thead>

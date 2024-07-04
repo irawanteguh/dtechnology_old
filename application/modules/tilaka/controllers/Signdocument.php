@@ -30,7 +30,7 @@
 		}
 
 		public function dataexecutesign(){
-            $result = $this->md->dataexecutesign(ORG_ID);
+            $result = $this->md->dataexecutesign($_SESSION['orgid']);
             
 			if(!empty($result)){
                 $json["responCode"]="00";

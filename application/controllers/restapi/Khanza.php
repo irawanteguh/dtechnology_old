@@ -18,7 +18,7 @@
                 foreach($result as $a){
                     $resultcheckdata = $this->md->checkdata($a->nik);
 
-                    $data['ORG_ID']      = ORG_ID;
+                    $data['ORG_ID']      = $_SESSION['orgid'];
                     $data['NIK']         = $a->nik;
                     $data['USERNAME']    = $a->nik;
                     $data['NAME']        = $a->nama;
