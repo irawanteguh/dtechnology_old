@@ -23,13 +23,16 @@
                 foreach($result as $a){
                     $location = PATHFILE_GET_TILAKA."/".$a->NO_FILE.".pdf";
                     if(file_exists($location)){
-                        $response = Tilaka::uploadfile($location);
-                        if($response['success']){
-                            $data['FILENAME']    = $response['filename'];
-                            $data['STATUS_SIGN'] = "1";
-                            $this->md->updatefile($data,$a->NO_FILE);
+                        $fileSize = filesize($location);
+                        if($fileSize!=0){
+                            $response = Tilaka::uploadfile($location);
+                            if($response['success']){
+                                $data['FILENAME']    = $response['filename'];
+                                $data['STATUS_SIGN'] = "1";
+                                $this->md->updatefile($data,$a->NO_FILE);
+                            }
+                            $this->response($response,REST_Controller::HTTP_OK);
                         }
-                        $this->response($response,REST_Controller::HTTP_OK);
                     }
                 }
             }
