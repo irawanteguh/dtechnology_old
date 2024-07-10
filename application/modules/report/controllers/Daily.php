@@ -29,5 +29,56 @@
             echo json_encode($json);
         }
 
+        public function billing_ranap(){
+            $result = $this->md->billing_ranap();
+            
+			if(!empty($result)){
+                $json["responCode"]="00";
+                $json["responHead"]="success";
+                $json["responDesc"]="Data Di Temukan";
+				$json['responResult']=$result;
+            }else{
+                $json["responCode"]="01";
+                $json["responHead"]="info";
+                $json["responDesc"]="Data Tidak Di Temukan";
+            }
+
+            echo json_encode($json);
+        }
+
+        public function billing_bpjs(){
+            $result = $this->md->billing_bpjs();
+            
+			if(!empty($result)){
+                $json["responCode"]="00";
+                $json["responHead"]="success";
+                $json["responDesc"]="Data Di Temukan";
+				$json['responResult']=$result;
+            }else{
+                $json["responCode"]="01";
+                $json["responHead"]="info";
+                $json["responDesc"]="Data Tidak Di Temukan";
+            }
+
+            echo json_encode($json);
+        }
+
+        public function rozi(){
+            $result = $this->md->rozi();
+            
+			if(!empty($result)){
+                $json["responCode"]="00";
+                $json["responHead"]="success";
+                $json["responDesc"]="Data Di Temukan";
+				$json['responResult']=$result;
+            }else{
+                $json["responCode"]="01";
+                $json["responHead"]="info";
+                $json["responDesc"]="Data Tidak Di Temukan";
+            }
+
+            echo json_encode($json);
+        }
+
 	}
 ?>
