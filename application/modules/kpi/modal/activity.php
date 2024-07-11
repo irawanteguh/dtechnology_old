@@ -21,7 +21,7 @@
                             <div class="fv-row">
                                 <label class="fs-6 fw-bold mb-2 required">Activity Date</label>
                                 <input class="form-control form-control-solid flatpickr-input" name="data_activity_date_add" placeholder="Pick a start date" id="data_activity_date_add" type="text">
-                            <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                            </div>
                         </div>
                         <div class="col-md-4 mb-5" data-kt-calendar="datepicker">
                             <div class="fv-row">

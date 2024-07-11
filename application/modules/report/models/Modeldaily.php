@@ -1,7 +1,24 @@
 <?php
     class Modeldaily extends CI_Model{
 
-        function billing(){
+        function provider(){
+            $query =
+                    "
+                        select 0 urut,'X'kd_pj,'All Provider' png_jawab
+                        union
+                        select 1 urut, a.kd_pj, png_jawab
+                        from penjab a
+                        where a.status='1'
+                        and   a.kd_pj<>'-'
+                        order by urut asc, png_jawab asc
+                    ";
+
+            $recordset = $this->db->query($query);
+            $recordset = $recordset->result();
+            return $recordset;
+        }
+
+        function billing($provider,$periode){
             $query =
                     "
                         select x.*,
@@ -27,12 +44,12 @@
                                 (select COALESCE(SUM(totalbiaya), 0) from billing where no_rawat=a.no_rawat and status='Dokter')dokter
                                 
                             from reg_periksa a
-                            where a.status_lanjut='Ralan' and a.kd_pj = 'A09'
-                            and date(tgl_registrasi) = CURDATE()
+                            where a.status_lanjut in ('Ralan','Ranap')
+                            ".$provider."
+                            ".$periode."
                             order by nobilling desc, tgl_registrasi desc
                         )x
                         where x.nobilling<>''
-                        limit 50 
 
                     ";
 
