@@ -108,8 +108,6 @@ function billing(provider,typeperiode,dateperiode){
                     
                 }
 
-                alert(tableresultRI);
-
                 foottableresultRJ +="<tr>";
                 foottableresultRJ +="<td class='ps-4' colspan='10'>Grand Total</td>";
                 foottableresultRJ +="<td class='pe-4'>"+todesimal(total_grandtotalRJ)+"</td>";
