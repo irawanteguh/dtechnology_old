@@ -41,7 +41,7 @@
                     </div>
                     <div class="tab-pane fade" id="tabrawatinap" role="tabpanel">
                         <div class="table-responsive mh-550px scroll-y me-n5 pe-5">
-                            <table class="table align-middle table-row-dashed fs-6 gy-2 hea">
+                            <table class="table align-middle table-row-dashed fs-6 gy-2">
                                 <thead class="align-middle text-center">
                                     <tr class="fw-bolder text-muted bg-light">
                                         <th class="ps-4 rounded-start" rowspan="2">Date</th>

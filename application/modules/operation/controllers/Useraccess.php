@@ -1,20 +1,19 @@
 <?php
 	defined('BASEPATH') OR exit('No direct script access allowed');
-	class Groupactivity extends CI_Controller {
+	class Useraccess extends CI_Controller {
 
 		public function __construct(){
             parent:: __construct();
 			rootsystem::system();
-            $this->load->model("Modelgroupactivity","md");
+			$this->load->model("Modeluseraccess","md");
         }
 
 		public function index(){
-			$this->template->load("template/template-sidebar","v_groupactivity");
+			$this->template->load("template/template-sidebar","v_useraccess");
 		}
 
-        public function daftarjabatan(){
-			$search = "";
-            $result = $this->md->daftarjabatan($_SESSION['orgid'],$search);
+		public function masteruser(){
+            $result = $this->md->masteruser($_SESSION['orgid']);
             
 			if(!empty($result)){
                 $json["responCode"]="00";
@@ -30,9 +29,9 @@
             echo json_encode($json);
         }
 
-        public function daftarkegiatan(){
-            $positionid = $this->input->post("positionid");
-            $result     = $this->md->daftarkegiatan($_SESSION['orgid'],$positionid);
+        public function masterrole(){
+            $userid = $this->input->post("userid");
+            $result = $this->md->masterrole($_SESSION['orgid'],$userid);
             
 			if(!empty($result)){
                 $json["responCode"]="00";
@@ -48,10 +47,10 @@
             echo json_encode($json);
         }
 
-        public function mappingactivity(){
+        public function mappingrole(){
             $switchId    = $this->input->post("switchId");
             $switchValue = $this->input->post("switchValue");
-            $positionid  = $this->input->post("positionid");
+            $userid  = $this->input->post("userid");
 
             if($switchValue==="true"){
                 $data['active']="1";
@@ -60,12 +59,12 @@
             }
 
             
-            $resultcheckdata =  $this->md->checkdata($_SESSION['orgid'],$positionid,$switchId);
+            $resultcheckdata =  $this->md->checkdata($_SESSION['orgid'],$userid,$switchId);
 
             if(!empty($resultcheckdata)){
                 $data['last_update_date']=date("Y-m-d H:i:s");
                 $data['last_update_by']=$_SESSION['userid'];
-                if($this->md->updatemapping($positionid,$switchId,$data)){
+                if($this->md->updatemapping($userid,$switchId,$data)){
                     $json["responCode"]="00";
                     $json["responHead"]="success";
                     $json["responDesc"]="Activity Success";
@@ -76,9 +75,9 @@
                 }
             }else{
                 $data['org_id']           = $_SESSION['orgid'];
-                $data['transaksi_id']     = generateuuid();
-                $data['position_id']      = $positionid;
-                $data['activity_id']      = $switchId;
+                $data['trans_id']     = generateuuid();
+                $data['user_id']      = $userid;
+                $data['role_id']      = $switchId;
                 $data['created_by']       = $_SESSION['userid'];
                 $data['last_update_by']   = $_SESSION['userid'];
                 $data['last_update_date'] = date("Y-m-d H:i:s");
@@ -86,11 +85,11 @@
                 if($this->md->insertmapping($data)){
                     $json["responCode"]="00";
                     $json["responHead"]="success";
-                    $json["responDesc"]="Activity Success";
+                    $json["responDesc"]="Update Data Success";
                 }else{
                     $json["responCode"]="01";
                     $json["responHead"]="info";
-                    $json["responDesc"]="Activity Field";
+                    $json["responDesc"]="Update Data Field";
                 }
             }
 

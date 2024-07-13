@@ -20,7 +20,7 @@
             return $recordset;
         }
 
-        function daftarkegiatan($orgid,$positionid,$parameter){
+        function daftarkegiatan($orgid,$positionid){
             $query =
                     "
                         select x.*,
@@ -38,7 +38,6 @@
                             where a.active='1'
                             and   a.org_id='".$orgid."'
                             and   a.pk=''
-                            and   upper(a.activity) like upper('%".$parameter."%')
                         )x
                         order by urut asc, activity asc, durasi asc
                     ";
