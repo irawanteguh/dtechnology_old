@@ -27,12 +27,16 @@
                         if($fileSize!=0){
                             $response = Tilaka::uploadfile($location);
                             if($response['success']){
+                                $data['NOTE']        = "";
                                 $data['FILENAME']    = $response['filename'];
                                 $data['STATUS_SIGN'] = "1";
                                 $this->md->updatefile($data,$a->NO_FILE);
                             }
                             $this->response($response,REST_Controller::HTTP_OK);
                         }
+                    }else{
+                        $data['NOTE'] = "File Tidak Di Temukan";
+                        $this->md->updatefile($data,$a->NO_FILE);
                     }
                 }
             }
