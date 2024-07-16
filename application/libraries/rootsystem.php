@@ -1,5 +1,5 @@
 <?php
-    class rootsystem {
+    class Rootsystem {
         protected static $app;
         public static $segment1;
         public static $segment2;

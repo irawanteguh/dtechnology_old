@@ -22,105 +22,89 @@
 
             $data['transaksi_id']=generateuuid();
             
-            $data['name']               = $body['sfz']['name'];
-            $data['gender']             = $body['sfz']['sex'];
-            $data['nation']             = $body['sfz']['nation'];
-            $data['qr_code']            = $body['sfz']['qrCode'];
-            $data['birth_date']         = $body['sfz']['birthday'];
-            $data['id_number']          = $body['sfz']['idnumber'];
-            $data['age']                = $body['sfz']['age'];
-            $data['address']            = $body['sfz']['address'];
-            $data['id_card_photo_data'] = $body['sfz']['data'];
-        
-            $data['height'] = $body['hw']['height'];
-            $data['weight'] = $body['hw']['weight'];
-            $data['bmi']    = $body['hw']['bmi'];
-        
-            $data['body_fat_rate']              = $body['fat']['zflv'];
-            $data['basal_metabolism']           = $body['fat']['jcdx'];
-            $data['body_water_content']         = $body['fat']['tsfl'];
-            $data['body_water_rate']            = $body['fat']['tsflv'];
-            $data['body_fat_content']           = $body['fat']['zfl'];
-            $data['body_muscle_content']        = $body['fat']['jrl'];
-            $data['body_muscle_rate']           = $body['fat']['jrlv'];
-            $data['bone_salt']                  = $body['fat']['gy'];
-            $data['fat_free_mass']              = $body['fat']['qztz'];
-            $data['protein_rate']               = $body['fat']['dbzlv'];
-            $data['intracellular_fluid_volume'] = $body['fat']['xbnyl'];
-            $data['extracellular_fluid_volume'] = $body['fat']['xbwyl'];
-            $data['intracellular_fluid_rate']   = $body['fat']['xbnylv'];
-            $data['extracellular_fluid_rate']   = $body['fat']['xbwylv'];
-            $data['protein']                    = $body['fat']['dbz'];
-            $data['visceral_fat_grade']         = $body['fat']['nzzf'];
-            $data['bone_mass']                  = $body['fat']['gl'];
-        
-            $data['systolic_blood_pressure']        = $body['blood']['high'];
-            $data['diastolic_blood_pressure']       = $body['blood']['low'];
-            $data['heart_rate']                     = $body['blood']['rate'];
-            $data['systolic_blood_pressure_value']  = $body['blood']['rhigh'];
-            $data['diastolic_blood_pressure_value'] = $body['blood']['rlow'];
-        
-            $data['blood_oxygen'] = $body['spo2']['sp'];
-        
-            $data['body_temperature'] = $body['tiwen'];
-        
-            $data['ecg_result']                       = $body['ecg']['result'];
-            $data['ecg_waveform_picture_data']        = $body['ecg']['data'];
-            $data['ecg_waveform_picture_data_length'] = $body['ecg']['len'];
-        
-            $data['ecg_report_picture_data'] = $body['ecg12']['data'];
-            $data['ecg_diagnosis_result']    = $body['ecg12']['ecg_result'];
-            $data['ecg_heart_rate']          = $body['ecg12']['heart_rate'];
-            $data['ecg_p_axis']              = $body['ecg12']['p_axis'];
-            $data['ecg_qrs_axis']            = $body['ecg12']['qrs_axis'];
-            $data['ecg_t_axis']              = $body['ecg12']['t_axis'];
-            $data['ecg_pr_interval']         = $body['ecg12']['pr'];
-            $data['ecg_qrs_time_limit']      = $body['ecg12']['qrs'];
-            $data['ecg_qt_interval']         = $body['ecg12']['qt'];
-            $data['ecg_qtc_interval']        = $body['ecg12']['qtc'];
-            $data['ecg_rv5_value']           = $body['ecg12']['rv5'];
-            $data['ecg_sv1_value']           = $body['ecg12']['sv1'];
-            $data['ecg_sample_rate']         = $body['ecg12']['sample_rate'];
-            $data['ecg_sample_duration']     = $body['ecg12']['sample_time'];
-        
-            $data['blood_glucose_type']  = $body['xt']['type'];
-            $data['blood_glucose_level'] = $body['xt']['value'];
-        
-            $data['waistline']      = $body['ytb']['waist'];
-            $data['hipline']        = $body['ytb']['hip'];
-            $data['waist_hip_rate'] = $body['ytb']['whr'];
-        
-            $data['peak_expiratory_flow']        = $body['fgn']['pef'];
-            $data['forced_expiratory_volume_1s'] = $body['fgn']['fev1'];
-            $data['forced_vital_capacity']       = $body['fgn']['fvc'];
-            $data['fev1_fvc_ratio']              = $body['fgn']['bz'];
-        
-            $data['uric_acid_value'] = $body['ns'];
-        
-            $data['cholesterol_value'] = $body['dgc'];
-        
-            $data['tcm_constitution_type'] = $body['zybs'];
-        
-            $data['left_eye_visual_acuity']  = $body['shili']['left_eye'];
-            $data['right_eye_visual_acuity'] = $body['shili']['right_eye'];
-        
-            $data['color_blindness_result'] = $body['semang'];
-        
-            $data['ucla_loneliness_scale_score']                 = $body['xlcp']['ucla'];
-            $data['geriatric_depression_scale_score']            = $body['xlcp']['lnyy'];
-            $data['self_rated_depression_scale_score']           = $body['xlcp']['zpyy'];
-            $data['hamilton_anxiety_scale_score']                = $body['xlcp']['hmdjl'];
-            $data['emotional_health_test_scores']                = $body['xlcp']['qxjkd'];
-            $data['self_measured_health_rating_scale_score']     = $body['xlcp']['zcjkpd'];
-            $data['life_satisfaction_scale_score']               = $body['xlcp']['shmyd'];
-            $data['personality_disorder_personality_test_score'] = $body['xlcp']['rgza'];
-            $data['pstr_adult_stress_test_scores']               = $body['xlcp']['pstr'];
-            $data['harvard_sexuality_test_score']                = $body['xlcp']['hfxx'];
-            $data['emotional_intelligence_test_score']           = $body['xlcp']['eq'];
-            $data['sleep_status_assessment_score']               = $body['xlcp']['smzkpg'];
-        
-            $data['device_code']                 = $body['deviceID'];
-            $data['physical_examination_number'] = $body['examNo'];
+            $data['name']                                        = isset($body['sfz']['name']) ? $body['sfz']['name'] : '';
+            $data['gender']                                      = isset($body['sfz']['sex']) ? $body['sfz']['sex'] : '';
+            $data['nation']                                      = isset($body['sfz']['nation']) ? $body['sfz']['nation'] : '';
+            $data['qr_code']                                     = isset($body['sfz']['qrCode']) ? $body['sfz']['qrCode'] : '';
+            $data['birth_date']                                  = isset($body['sfz']['birthday']) ? $body['sfz']['birthday'] : '';
+            $data['id_number']                                   = isset($body['sfz']['idnumber']) ? $body['sfz']['idnumber'] : '';
+            $data['age']                                         = isset($body['sfz']['age']) ? $body['sfz']['age'] : '';
+            $data['address']                                     = isset($body['sfz']['address']) ? $body['sfz']['address'] : '';
+            $data['id_card_photo_data']                          = isset($body['sfz']['data']) ? $body['sfz']['data'] : '';
+            $data['height']                                      = isset($body['hw']['height']) ? $body['hw']['height'] : '';
+            $data['weight']                                      = isset($body['hw']['weight']) ? $body['hw']['weight'] : '';
+            $data['bmi']                                         = isset($body['hw']['bmi']) ? $body['hw']['bmi'] : '';
+            $data['body_fat_rate']                               = isset($body['fat']['zflv']) ? $body['fat']['zflv'] : '';
+            $data['basal_metabolism']                            = isset($body['fat']['jcdx']) ? $body['fat']['jcdx'] : '';
+            $data['body_water_content']                          = isset($body['fat']['tsfl']) ? $body['fat']['tsfl'] : '';
+            $data['body_water_rate']                             = isset($body['fat']['tsflv']) ? $body['fat']['tsflv'] : '';
+            $data['body_fat_content']                            = isset($body['fat']['zfl']) ? $body['fat']['zfl'] : '';
+            $data['body_muscle_content']                         = isset($body['fat']['jrl']) ? $body['fat']['jrl'] : '';
+            $data['body_muscle_rate']                            = isset($body['fat']['jrlv']) ? $body['fat']['jrlv'] : '';
+            $data['bone_salt']                                   = isset($body['fat']['gy']) ? $body['fat']['gy'] : '';
+            $data['fat_free_mass']                               = isset($body['fat']['qztz']) ? $body['fat']['qztz'] : '';
+            $data['protein_rate']                                = isset($body['fat']['dbzlv']) ? $body['fat']['dbzlv'] : '';
+            $data['intracellular_fluid_volume']                  = isset($body['fat']['xbnyl']) ? $body['fat']['xbnyl'] : '';
+            $data['extracellular_fluid_volume']                  = isset($body['fat']['xbwyl']) ? $body['fat']['xbwyl'] : '';
+            $data['intracellular_fluid_rate']                    = isset($body['fat']['xbnylv']) ? $body['fat']['xbnylv'] : '';
+            $data['extracellular_fluid_rate']                    = isset($body['fat']['xbwylv']) ? $body['fat']['xbwylv'] : '';
+            $data['protein']                                     = isset($body['fat']['dbz']) ? $body['fat']['dbz'] : '';
+            $data['visceral_fat_grade']                          = isset($body['fat']['nzzf']) ? $body['fat']['nzzf'] : '';
+            $data['bone_mass']                                   = isset($body['fat']['gl']) ? $body['fat']['gl'] : '';
+            $data['systolic_blood_pressure']                     = isset($body['blood']['high']) ? $body['blood']['high'] : '';
+            $data['diastolic_blood_pressure']                    = isset($body['blood']['low']) ? $body['blood']['low'] : '';
+            $data['heart_rate']                                  = isset($body['blood']['rate']) ? $body['blood']['rate'] : '';
+            $data['systolic_blood_pressure_value']               = isset($body['blood']['rhigh']) ? $body['blood']['rhigh'] : '';
+            $data['diastolic_blood_pressure_value']              = isset($body['blood']['rlow']) ? $body['blood']['rlow'] : '';
+            $data['blood_oxygen']                                = isset($body['spo2']['sp']) ? $body['spo2']['sp'] : '';
+            $data['body_temperature']                            = isset($body['tiwen']) ? $body['tiwen'] : '';
+            $data['ecg_result']                                  = isset($body['ecg']['result']) ? $body['ecg']['result'] : '';
+            $data['ecg_waveform_picture_data']                   = isset($body['ecg']['data']) ? $body['ecg']['data'] : '';
+            $data['ecg_waveform_picture_data_length']            = isset($body['ecg']['len']) ? $body['ecg']['len'] : '';
+            $data['ecg_report_picture_data']                     = isset($body['ecg12']['data']) ? $body['ecg12']['data'] : '';
+            $data['ecg_diagnosis_result']                        = isset($body['ecg12']['ecg_result']) ? $body['ecg12']['ecg_result'] : '';
+            $data['ecg_heart_rate']                              = isset($body['ecg12']['heart_rate']) ? $body['ecg12']['heart_rate'] : '';
+            $data['ecg_p_axis']                                  = isset($body['ecg12']['p_axis']) ? $body['ecg12']['p_axis'] : '';
+            $data['ecg_qrs_axis']                                = isset($body['ecg12']['qrs_axis']) ? $body['ecg12']['qrs_axis'] : '';
+            $data['ecg_t_axis']                                  = isset($body['ecg12']['t_axis']) ? $body['ecg12']['t_axis'] : '';
+            $data['ecg_pr_interval']                             = isset($body['ecg12']['pr']) ? $body['ecg12']['pr'] : '';
+            $data['ecg_qrs_time_limit']                          = isset($body['ecg12']['qrs']) ? $body['ecg12']['qrs'] : '';
+            $data['ecg_qt_interval']                             = isset($body['ecg12']['qt']) ? $body['ecg12']['qt'] : '';
+            $data['ecg_qtc_interval']                            = isset($body['ecg12']['qtc']) ? $body['ecg12']['qtc'] : '';
+            $data['ecg_rv5_value']                               = isset($body['ecg12']['rv5']) ? $body['ecg12']['rv5'] : '';
+            $data['ecg_sv1_value']                               = isset($body['ecg12']['sv1']) ? $body['ecg12']['sv1'] : '';
+            $data['ecg_sample_rate']                             = isset($body['ecg12']['sample_rate']) ? $body['ecg12']['sample_rate'] : '';
+            $data['ecg_sample_duration']                         = isset($body['ecg12']['sample_time']) ? $body['ecg12']['sample_time'] : '';
+            $data['blood_glucose_type']                          = isset($body['xt']['type']) ? $body['xt']['type'] : '';
+            $data['blood_glucose_level']                         = isset($body['xt']['value']) ? $body['xt']['value'] : '';
+            $data['waistline']                                   = isset($body['ytb']['waist']) ? $body['ytb']['waist'] : '';
+            $data['hipline']                                     = isset($body['ytb']['hip']) ? $body['ytb']['hip'] : '';
+            $data['waist_hip_rate']                              = isset($body['ytb']['whr']) ? $body['ytb']['whr'] : '';
+            $data['peak_expiratory_flow']                        = isset($body['fgn']['pef']) ? $body['fgn']['pef'] : '';
+            $data['forced_expiratory_volume_1s']                 = isset($body['fgn']['fev1']) ? $body['fgn']['fev1'] : '';
+            $data['forced_vital_capacity']                       = isset($body['fgn']['fvc']) ? $body['fgn']['fvc'] : '';
+            $data['fev1_fvc_ratio']                              = isset($body['fgn']['bz']) ? $body['fgn']['bz'] : '';
+            $data['uric_acid_value']                             = isset($body['ns']) ? $body['ns'] : '';
+            $data['cholesterol_value']                           = isset($body['dgc']) ? $body['dgc'] : '';
+            $data['tcm_constitution_type']                       = isset($body['zybs']) ? $body['zybs'] : '';
+            $data['left_eye_visual_acuity']                      = isset($body['shili']['left_eye']) ? $body['shili']['left_eye'] : '';
+            $data['right_eye_visual_acuity']                     = isset($body['shili']['right_eye']) ? $body['shili']['right_eye'] : '';
+            $data['color_blindness_result']                      = isset($body['semang']) ? $body['semang'] : '';
+            $data['ucla_loneliness_scale_score']                 = isset($body['xlcp']['ucla']) ? $body['xlcp']['ucla'] : '';
+            $data['geriatric_depression_scale_score']            = isset($body['xlcp']['lnyy']) ? $body['xlcp']['lnyy'] : '';
+            $data['self_rated_depression_scale_score']           = isset($body['xlcp']['zpyy']) ? $body['xlcp']['zpyy'] : '';
+            $data['hamilton_anxiety_scale_score']                = isset($body['xlcp']['hmdjl']) ? $body['xlcp']['hmdjl'] : '';
+            $data['emotional_health_test_scores']                = isset($body['xlcp']['qxjkd']) ? $body['xlcp']['qxjkd'] : '';
+            $data['self_measured_health_rating_scale_score']     = isset($body['xlcp']['zcjkpd']) ? $body['xlcp']['zcjkpd'] : '';
+            $data['life_satisfaction_scale_score']               = isset($body['xlcp']['shmyd']) ? $body['xlcp']['shmyd'] : '';
+            $data['personality_disorder_personality_test_score'] = isset($body['xlcp']['rgza']) ? $body['xlcp']['rgza'] : '';
+            $data['pstr_adult_stress_test_scores']               = isset($body['xlcp']['pstr']) ? $body['xlcp']['pstr'] : '';
+            $data['harvard_sexuality_test_score']                = isset($body['xlcp']['hfxx']) ? $body['xlcp']['hfxx'] : '';
+            $data['emotional_intelligence_test_score']           = isset($body['xlcp']['eq']) ? $body['xlcp']['eq'] : '';
+            $data['sleep_status_assessment_score']               = isset($body['xlcp']['smzkpg']) ? $body['xlcp']['smzkpg'] : '';
+            $data['device_code']                                 = isset($body['deviceID']) ? $body['deviceID'] : '';
+            $data['physical_examination_number']                 = isset($body['examNo']) ? $body['examNo'] : '';
+
 
             $this->md->insertdata($data);
             $this->response($body,200);

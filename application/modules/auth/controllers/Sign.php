@@ -59,6 +59,25 @@
             echo json_encode($json);
         }
 
+        public function changepassword(){
+            $password = encodedata($this->input->post("newpassword"));
+        
+            $data['PASSWORD'] = $password;
+        
+            if($this->md->updatepassword($data, ORG_ID, $_SESSION['userid'])){
+                $json["responCode"] = "00";
+                $json["responHead"] = "success";
+                $json["responDesc"] = "You have successfully reset your password!";
+            } else {
+                $json["responCode"] = "01";
+                $json["responHead"] = "info";
+                $json["responDesc"] = "Sorry, looks like there are some errors detected, please try again.";
+            }
+        
+            echo json_encode($json);
+        }
+        
+
         public function logoutsystem(){                            
             $this->session->sess_destroy();
             redirect("auth/sign");

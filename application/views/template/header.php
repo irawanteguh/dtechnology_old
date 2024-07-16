@@ -522,7 +522,7 @@
 						</div>
 					</div> -->
 
-					<div class="d-flex align-items-center ms-1 ms-lg-3">
+					<!-- <div class="d-flex align-items-center ms-1 ms-lg-3">
 						<div class="btn btn-icon btn-active-light-primary position-relative w-30px h-30px w-md-40px h-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
 							<span class="svg-icon svg-icon-1">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -729,7 +729,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 
 					<!-- <div class="d-flex align-items-center ms-1 ms-lg-3">
 						<a href="#" class="btn btn-icon btn-icon-muted btn-active-icon-primar ms-1" data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
@@ -913,6 +913,10 @@
 							</div>
 							<div class="separator my-2"></div>
 							<div class="menu-item px-5">
+								<a data-bs-toggle="modal" data-bs-target="#modal_root_change_password" class="menu-link px-5">Change Password</a>
+							</div>
+							<div class="menu-item px-5">
+							
 								<a data-bs-toggle="modal" data-bs-target="#modal-logout" class="menu-link px-5">Sign Out</a>
 							</div>
 							<!-- <div class="separator my-2"></div>

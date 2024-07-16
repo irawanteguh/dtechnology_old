@@ -36,5 +36,10 @@
             return $recordset;
         }
 
+        function updatepassword($data, $orgid, $userid){           
+            $sql =   $this->db->update("dt01_gen_user_data",$data,array("org_id"=>$orgid,"user_id"=>$userid));
+            return $sql;
+        }
+
     }
 ?>
