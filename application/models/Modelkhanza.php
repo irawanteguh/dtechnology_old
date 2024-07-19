@@ -18,7 +18,8 @@
                     "
                         select a.nik
                         from dt01_gen_user_data a
-                        where a.nik='".$nik."'
+                        where a.org_id='".$orgid."'
+                        and   a.nik='".$nik."'
                     ";
 
             $recordset = $this->db->query($query);

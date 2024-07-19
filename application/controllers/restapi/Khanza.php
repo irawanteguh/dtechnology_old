@@ -16,7 +16,7 @@
             $result = $this->md->datapegawai();
             if(!empty($result)){
                 foreach($result as $a){
-                    $resultcheckdata = $this->md->checkdata($a->nik);
+                    $resultcheckdata = $this->md->checkdata(ORG_ID,$a->nik);
 
                     $data['ORG_ID']      = $_SESSION['orgid'];
                     $data['NIK']         = $a->nik;
