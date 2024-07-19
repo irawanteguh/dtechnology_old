@@ -65,29 +65,26 @@
                     <h1 class="mb-3">Result Examination</h1>
                     <div class="text-muted fw-bold fs-5">Result Examination Leka</div>
                 </div>
-                <div class="row">
-                    <div class="table-responsive mh-550px scroll-y me-n5 pe-5">
-                        <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
-                            <thead>
-                                <tr class="fw-bolder text-muted bg-light">
-                                    <th class="ps-4 rounded-start">Examination</th>
-                                    <th>Unit measure</th>
-                                    <th>Result</th>
-                                    <th>Normal Result</th>
-                                    <th class="pe-4 text-end rounded-end">Note</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>asda</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div class=" d-flex justify-content-center">
+                    <div class="col-md-10 row">
+                        <div class="table-responsive mh-550px scroll-y me-n5 pe-5">
+                            <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                                <thead>
+                                    <tr class="fw-bolder text-muted bg-light align-middle">
+                                        <th class="ps-4 rounded-start w-500px">Examination</th>
+                                        <th class="text-center">Unit measure</th>
+                                        <th class="text-center">Result</th>
+                                        <th class="text-center">Normal Result</th>
+                                        <th class="pe-4 text-end rounded-end">Note</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="resultleka"></tbody>
+                            </table>
+                        </div>
                     </div>
-                    <img src="" alt="ECG 12 Image" id="ecg12_image">
                 </div>
             </div>
-            <div class="modal-footer p-1">				
+            <div class="modal-footer p-1">	
                 <input class="btn btn-light-success" id="btn_activity_add" type="submit" value="PRINT" name="simpan" >
                 <input class="btn btn-light-primary" id="btn_activity_add" type="submit" value="DOWNLOAD PDF" name="simpan" >
             </div>
