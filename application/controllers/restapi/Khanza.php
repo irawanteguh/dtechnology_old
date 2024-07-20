@@ -18,7 +18,7 @@
                 foreach($result as $a){
                     $resultcheckdata = $this->md->checkdata(ORG_ID,$a->nik);
 
-                    $data['ORG_ID']      = $_SESSION['orgid'];
+                    $data['ORG_ID']      = ORG_ID;
                     $data['NIK']         = $a->nik;
                     $data['USERNAME']    = $a->nik;
                     $data['NAME']        = $a->nama;
@@ -26,7 +26,7 @@
                     $data['SEX_ID']      = $a->sexid;
                     $data['ADDRESS']     = $a->alamat;
                     $data['SUSPENDED']   = $a->susspended;
-                    $data['CREATED_BY']  = "ab24ee31-f74c-4f86-a07b-27196b57e7a6";
+                    $data['CREATED_BY']  = "55b16625-efca-4093-8df0-20fc838f21b1";
 
                     if(empty($resultcheckdata)){
                         $data['USER_ID']     = generateuuid();

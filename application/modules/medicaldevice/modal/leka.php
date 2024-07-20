@@ -8,8 +8,8 @@
                     </span>
                 </div>
             </div>
-            <form action="<?php echo base_url();?>index.php/hrd/activity/addactivity" id="formaddactivity">
-                <input type="hidden" id="data_leka_transid_edit" name="data_leka_transid_edit">
+            <form action="<?php echo base_url();?>index.php/medicaldevice/leka/updateencounter" id="formeditencounter">
+                <input type="text" id="data_leka_transid_edit" name="data_leka_transid_edit">
                 <div class="modal-body">
                     <div class="text-center mb-5">
                         <h1 class="mb-3">Input Encounter</h1>
@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="modal-footer p-1">				
-                    <input class="btn btn-light-primary" id="btn_activity_add" type="submit" value="SIMPAN DATA" name="simpan" >
+                    <input class="btn btn-light-primary" id="btn_encounter_edit" type="submit" value="SIMPAN DATA" name="simpan" >
                 </div>
             </form>
         </div>
@@ -65,8 +65,11 @@
                     <h1 class="mb-3">Result Examination</h1>
                     <div class="text-muted fw-bold fs-5">Result Examination Leka</div>
                 </div>
-                <div class=" d-flex justify-content-center">
-                    <div class="col-md-10 row">
+                <div class="d-flex justify-content-center">
+                    <div class="col-md-10">
+                        <div>
+                            <img src="" id="photopatient">
+                        </div>
                         <div class="table-responsive mh-550px scroll-y me-n5 pe-5">
                             <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
                                 <thead>
@@ -85,8 +88,7 @@
                 </div>
             </div>
             <div class="modal-footer p-1">	
-                <input class="btn btn-light-success" id="btn_activity_add" type="submit" value="PRINT" name="simpan" >
-                <input class="btn btn-light-primary" id="btn_activity_add" type="submit" value="DOWNLOAD PDF" name="simpan" >
+                <button class="btn btn-light-primary" onclick="printPDF()">PRINT PDF</button>
             </div>
         </div>
     </div>

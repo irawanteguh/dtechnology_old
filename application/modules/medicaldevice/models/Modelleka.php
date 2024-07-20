@@ -271,6 +271,11 @@
             return $recordset;
         }
 
+        function updateencounter($data, $transid){           
+            $sql =   $this->db->update("dt01_receivedata_data_leka",$data,array("transaksi_id"=>$transid));
+            return $sql;
+        }
+
 
     }
 ?>

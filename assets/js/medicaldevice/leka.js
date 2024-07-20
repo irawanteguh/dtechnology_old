@@ -92,9 +92,13 @@ function listexamination(){
                             tableresult += "<button id='btnGroupDrop1' type='button' class='btn btn-light-primary dropdown-toggle btn-sm' data-bs-toggle='dropdown' aria-expanded='false'>Action</button>";
                             tableresult += "<div class='dropdown-menu' aria-labelledby='btnGroupDrop1'>";
                                 tableresult += "<a class='dropdown-item btn btn-sm' data-bs-toggle='modal' data-bs-target='#modal_leka_result' "+getvariabel+" onclick='getdata($(this));'><i class='fa-regular fa-file-pdf'></i> Result</a>";
-                                tableresult += "<a class='dropdown-item btn btn-sm' data-bs-toggle='modal' data-bs-target='#modal_leka_edit' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-pencil'></i> Encounter</a>";
-                                tableresult += "<a class='dropdown-item btn btn-sm' data-kt-drawer-show='true' data-kt-drawer-target='#drawer_employee_registrationposition_add' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-person-add'></i> Send SATUSEHAT</a>";
-                                tableresult += "<a class='dropdown-item btn btn-sm' onclick='getJSON($(this));'><i class='fa-solid fa-file-code'></i> Download File NON FHIR</a>";
+                                
+                                if(result[i].enconuter_id!=null){
+                                    tableresult += "<a class='dropdown-item btn btn-sm' data-kt-drawer-show='true' data-kt-drawer-target='#drawer_employee_registrationposition_add' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-person-add'></i> Send SATUSEHAT</a>";
+                                }else{
+                                    tableresult += "<a class='dropdown-item btn btn-sm' data-bs-toggle='modal' data-bs-target='#modal_leka_edit' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-pencil'></i> Encounter</a>";
+                                }
+                                // tableresult += "<a class='dropdown-item btn btn-sm' onclick='getJSON($(this));'><i class='fa-solid fa-file-code'></i> Download File NON FHIR</a>";
                                 // tableresult += "<a class='dropdown-item btn btn-sm' data-kt-drawer-show='true' data-kt-drawer-target='#drawer_employee_registrationposition_add' "+getvariabel+" onclick='getdata($(this));'><i class='fa-solid fa-file-code'></i> Download FHIR .json</a>";
                                 // tableresult += "<a class='dropdown-item btn btn-sm' data-kt-drawer-show='true' data-kt-drawer-target='#drawer_employee_registrationposition_add' "+getvariabel+" onclick='getdata($(this));'><i class='fa-solid fa-file-code'></i> Download FHIR .txt</a>";
                             tableresult +="</div>";
@@ -108,7 +112,7 @@ function listexamination(){
             }
 
             $("#resultexamination").html(tableresult);
-            $("#info_list_examination").html(todesimal(jml)+" Staff");
+            $("#info_list_examination").html(todesimal(jml)+" Examination");
             toastr[data.responHead](data.responDesc, "INFORMATION");
         },
         complete: function () {
@@ -271,3 +275,79 @@ function getJSON(){
     });
     return false;
 }
+
+function printPDF() {
+    // Get the contents of the modal
+    var printContents = document.querySelector('#modal_leka_result .modal-content').innerHTML;
+    // Open a new window
+    var printWindow = window.open('', '', 'height=700,width=900');
+    // Write the contents to the new window
+    printWindow.document.write('<html><head><title>Result Examination</title>');
+    printWindow.document.write('<style>table, th, td {border: 1px solid black;border-collapse: collapse;}</style>');
+    printWindow.document.write('</head><body >');
+    printWindow.document.write(printContents);
+    printWindow.document.write('</body></html>');
+    // Close the document and call the print method
+    printWindow.document.close();
+    printWindow.print();
+}
+
+$(document).on("submit", "#formeditencounter", function (e) {
+	e.preventDefault();
+	var data = new  FormData(this);
+	$.ajax({
+        url        : url+'index.php/medicaldevice/leka/updateencounter',
+        data       : data,
+        method     : "POST",
+        dataType   : "JSON",
+        cache      : false,
+        processData: false,
+        contentType: false,
+        beforeSend : function () {
+            toastr.clear();
+            toastr["info"]("Sending request...", "Please wait");
+			$("#btn_encounter_edit").addClass("disabled");
+        },
+		success: function (data) {
+            toastr.clear();
+			if(data.responCode === "00"){
+                toastr[data.responHead](data.responDesc, "INFORMATION");
+                $("#modal_leka_edit").modal("hide");
+				listexamination();
+			}else{
+                Swal.fire({
+                    title            : "<h1 class='font-weight-bold' style='color:#234974;'>For Your Information</h1>",
+                    html             : "<b>"+data.responDesc+"</b>",
+                    icon             : data.responHead,
+                    confirmButtonText: "Please Try Again",
+                    buttonsStyling   : false,
+                    timerProgressBar : true,
+                    timer            : 5000,
+                    customClass      : {confirmButton: "btn btn-danger"},
+                    showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                    hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+                });
+                $("#btn_encounter_edit").removeClass("disabled");
+            }
+		},
+        complete: function () {
+            toastr.clear();
+            $("#btn_encounter_edit").removeClass("disabled");
+		},
+        error: function(xhr, status, error) {
+            Swal.fire({
+                title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
+                html             : "<b>"+error+"</b>",
+                icon             : "error",
+                confirmButtonText: "Please Try Again",
+                buttonsStyling   : false,
+                timerProgressBar : true,
+                timer            : 5000,
+                customClass      : {confirmButton: "btn btn-danger"},
+                showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+            });
+		}
+	});
+    return false;
+});
