@@ -319,6 +319,117 @@
             $this->response($response,200);
         }
 
+        public function GetLeka_GET(){
+
+            $data['patientInformation']['name']                  = "";
+            $data['patientInformation']['idnumber']              = "";
+            $data['patientInformation']['sex']                   = "";
+            $data['patientInformation']['birthday']              = "";
+            $data['patientInformation']['age']                   = "";
+            $data['patientInformation']['address']               = "";
+            $data['patientInformation']['nation']                = "";
+
+            $data['result']['height_weight']['height']['value']                                                    = "";
+            $data['result']['height_weight']['height']['normal']                                                   = "";
+            $data['result']['height_weight']['height']['note']                                                     = "";
+            $data['result']['height_weight']['height']['unit']                                                     = "";
+
+            $data['result']['height_weight']['weight']['value']                                                    = "";
+            $data['result']['height_weight']['weight']['normal']                                                   = "";
+            $data['result']['height_weight']['weight']['note']                                                     = "";
+            $data['result']['height_weight']['weight']['unit']                                                     = "";
+
+            $data['result']['height_weight']['bmi']['value']                                                       = "";
+            $data['result']['height_weight']['bmi']['normal']                                                      = "";
+            $data['result']['height_weight']['bmi']['note']                                                        = "";
+            $data['result']['height_weight']['bmi']['unit']                                                     = "";
+
+            $data['result']['body_fat']['body fat rate']['value']                                                          = "";
+            $data['result']['body_fat']['body fat rate']['normal']                                                           = "";
+            $data['result']['body_fat']['body fat rate']['note']                                                            = "";
+            $data['result']['body_fat']['body fat rate']['unit']                                                            = "";
+
+            $data['result']['body_fat']['basal metabolism']['value']                                                        = "";
+            $data['result']['body_fat']['basal metabolism']['normal']                                                        = "";
+            $data['result']['body_fat']['basal metabolism']['note']                                                        = "";
+            $data['result']['body_fat']['basal metabolism']['unit']                                                        = "";
+
+            $data['result']['body_fat']['body water content']                                                      = "";
+            $data['result']['body_fat']['body water rate']                                                         = "";
+            $data['result']['body_fat']['body fat content']                                                        = "";
+            $data['result']['body_fat']['body muscle conten']                                                      = "";
+            $data['result']['body_fat']['body muscle rate']                                                        = "";
+            $data['result']['body_fat']['bone salt']                                                               = "";
+            $data['result']['body_fat']['fat free mass']                                                           = "";
+            $data['result']['body_fat']['Protein rate']                                                            = "";
+            $data['result']['body_fat']['Intracellular fluid volume']                                              = "";
+            $data['result']['body_fat']['Extracellular fluid volume']                                              = "";
+            $data['result']['body_fat']['Intracellular fluid rate']                                                = "";
+            $data['result']['blood_pressure']['systolic blood pressure']                                           = "";
+            $data['result']['blood_pressure']['diastolic blood pressure']                                          = "";
+            $data['result']['blood_pressure']['heart rate']                                                        = "";
+            $data['result']['blood_oxygen']['blood oxygen']                                                        = "";
+            $data['result']['body_temperature']['body temperature']                                                = "";
+            $data['result']['lung_function']['Peak expiratory flow']                                               = "";
+            $data['result']['lung_function']['Forced expiratory volume in the first second']                       = "";
+            $data['result']['lung_function']['forced vital capacity']                                              = "";
+            $data['result']['lung_function']['Forced expiratory volume in the first second/forced vital capacity'] = "";
+            $data['result']['fast_ECG']['ECG result']                                                              = "";
+            $data['result']['fast_ECG']['ECG waveform picture data']                                               = "";
+            $data['result']['fast_ECG']['ECG waveform picture data length']                                        = "";
+            $data['result']['blood_sugar']['Types of blood glucose measurement']                                   = "";
+            $data['result']['blood_sugar']['blood glucose level']                                                  = "";
+            $data['result']['waist_hip_rate']['waistline']                                                         = "";
+            $data['result']['waist_hip_rate']['hipline']                                                           = "";
+            $data['result']['waist_hip_rate']['waist hip rate']                                                    = "";
+            $data['result']['uric_acid']['Uric acid value']                                                        = "";
+            $data['result']['cholesterol']['Cholesterol value']                                                    = "";
+            $data['result']['TCM_constitution_identification']['TCM constitution type']                            = "";
+            $data['result']['TCM_constitution_identification']['Yang deficiency quality score']                    = "";
+            $data['result']['TCM_constitution_identification']['Yin deficiency quality score']                     = "";
+            $data['result']['TCM_constitution_identification']['Qi deficiency quality score']                      = "";
+            $data['result']['TCM_constitution_identification']['Phlegm-dampness score']                            = "";
+            $data['result']['TCM_constitution_identification']['Humidity and heat quality score']                  = "";
+            $data['result']['TCM_constitution_identification']['Blood stasis score']                               = "";
+            $data['result']['TCM_constitution_identification']['Special quality score']                            = "";
+            $data['result']['TCM_constitution_identification']['Qi stagnation quality score']                      = "";
+            $data['result']['TCM_constitution_identification']['Peace and quality score']                          = "";
+            $data['result']['vision']['left eye']                                                                  = "";
+            $data['result']['vision']['Visual acuity of the left eye']                                             = "";
+            $data['result']['vision']['Left eye visual cues']                                                      = "";
+            $data['result']['vision']['right eye']                                                                 = "";
+            $data['result']['vision']['Visual acuity of the right eye']                                            = "";
+            $data['result']['vision']['Visual cues in right eye']                                                  = "";
+            $data['result']['color_blindness']['Color blindness result']                                           = "";
+            $data['result']['psychological_tests']['UCLA Loneliness scale score']                                  = "";
+            $data['result']['psychological_tests']['Geriatric depression Scale score']                             = "";
+            $data['result']['psychological_tests']['Self-rated depression scale score']                            = "";
+            $data['result']['psychological_tests']['Hamilton Anxiety Scale score']                                 = "";
+            $data['result']['psychological_tests']['Emotional health test scores']                                 = "";
+            $data['result']['psychological_tests']['Self-measured health rating scale score']                      = "";
+            $data['result']['psychological_tests']['Life satisfaction Scale scor']                                 = "";
+            $data['result']['psychological_tests']['Personality disorder personality test score']                  = "";
+            $data['result']['psychological_tests']['PSTR Adult stress test scores']                                = "";
+            $data['result']['psychological_tests']['Harvard sexuality test score']                                 = "";
+            $data['result']['psychological_tests']['Emotional intelligence (EQ) test score']                       = "";
+            $data['result']['psychological_tests']['Sleep status assessment score']                                = "";
+            $data['result']['12_lead_ECG']['Ecg report picture data']                                              = "";
+            $data['result']['12_lead_ECG']['diagnosis result']                                                     = "";
+            $data['result']['12_lead_ECG']['heart rate']                                                           = "";
+            $data['result']['12_lead_ECG']['P axis']                                                               = "";
+            $data['result']['12_lead_ECG']['QRS axis']                                                             = "";
+            $data['result']['12_lead_ECG']['T axis']                                                               = "";
+            $data['result']['12_lead_ECG']['PR interval']                                                          = "";
+            $data['result']['12_lead_ECG']['QRS time limit']                                                       = "";
+            $data['result']['12_lead_ECG']['QT interval']                                                          = "";
+            $data['result']['12_lead_ECG']['QTc interval']                                                         = "";
+            $data['result']['12_lead_ECG']['RV5 value']                                                            = "";
+            $data['result']['12_lead_ECG']['SV1 value']                                                            = "";
+            $data['result']['12_lead_ECG']['sampling frequency']                                                   = "";
+            $data['result']['12_lead_ECG']['Sampling duration']                                                    = "";
+
+        }
+
         public function ReceiveDataFHIR_POST(){
             $body = json_decode($this->input->raw_input_stream, true);
 
