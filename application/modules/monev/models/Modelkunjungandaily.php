@@ -12,9 +12,10 @@
                                 count(IF(status_lanjut = 'Ranap', 1, NULL)) jmlri
                                 
                             from reg_periksa a
+                            where a.stts<>'Batal'
                             group by date_format(tgl_registrasi,'%d.%m.%Y')
-                            order by tgl_registrasi asc
                         )x
+                        order by tgl_registrasi asc
                         limit 30;
                     ";
 
