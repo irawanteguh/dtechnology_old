@@ -93,14 +93,15 @@ function listexamination(){
                             tableresult += "<div class='dropdown-menu' aria-labelledby='btnGroupDrop1'>";
                                 tableresult += "<a class='dropdown-item btn btn-sm' data-bs-toggle='modal' data-bs-target='#modal_leka_result' "+getvariabel+" onclick='getdata($(this));'><i class='fa-regular fa-file-pdf'></i> Result</a>";
                                 
-                                if(result[i].enconuter_id!=null){
-                                    tableresult += "<a class='dropdown-item btn btn-sm' data-kt-drawer-show='true' data-kt-drawer-target='#drawer_employee_registrationposition_add' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-person-add'></i> Send SATUSEHAT</a>";
+                                if(result[i].enconuter_id!=null || result[i].enconuter_id!=""){
+                                    tableresult += "<a class='dropdown-item btn btn-sm' "+getvariabel+" onclick='Sendsatusehat($(this));'><i class='bi bi-person-add'></i> Send SATUSEHAT</a>";
                                 }else{
                                     tableresult += "<a class='dropdown-item btn btn-sm' data-bs-toggle='modal' data-bs-target='#modal_leka_edit' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-pencil'></i> Encounter</a>";
                                 }
+                                
                                 // tableresult += "<a class='dropdown-item btn btn-sm' onclick='getJSON($(this));'><i class='fa-solid fa-file-code'></i> Download File NON FHIR</a>";
-                                // tableresult += "<a class='dropdown-item btn btn-sm' data-kt-drawer-show='true' data-kt-drawer-target='#drawer_employee_registrationposition_add' "+getvariabel+" onclick='getdata($(this));'><i class='fa-solid fa-file-code'></i> Download FHIR .json</a>";
-                                // tableresult += "<a class='dropdown-item btn btn-sm' data-kt-drawer-show='true' data-kt-drawer-target='#drawer_employee_registrationposition_add' "+getvariabel+" onclick='getdata($(this));'><i class='fa-solid fa-file-code'></i> Download FHIR .txt</a>";
+                                // tableresult += "<a class='dropdown-item btn btn-sm' "+getvariabel+" onclick='getdata($(this));'><i class='fa-solid fa-file-code'></i> Download FHIR .json</a>";
+                                // tableresult += "<a class='dropdown-item btn btn-sm' "+getvariabel+" onclick='getdata($(this));'><i class='fa-solid fa-file-code'></i> Download FHIR .txt</a>";
                             tableresult +="</div>";
                         tableresult +="</div>";
                     tableresult +="</td>";
@@ -166,7 +167,7 @@ function result(transid){
                             childElements += "<tr>";
                             childElements += "<td class='ps-10'>- "+result[j].examination+"</td>";
                             childElements += "<td class='text-center'>"+result[j].unit+"</td>";
-                            if(result[j].header_id==="007"){
+                            if(result[j].header_id==="012"){
                                 if(result[j].id==="001"){
                                     childElements += "<td colspan='3'><img src='data:image/jpeg;base64," + resultvalue[0] + "' style='height:100%; width:90%;'></td>";
                                 }else{
@@ -177,7 +178,7 @@ function result(transid){
                                     }
                                 }
                             }else{
-                                if(result[j].header_id==="016"){
+                                if(result[j].header_id==="013"){
                                     if(result[j].id==="001"){
                                         childElements += "<td colspan='3'><img src='data:image/jpeg;base64," + decryptPhoto(resultvalue[0]) + "' style='height:100%; width:90%;'></td>";
                                     }else{
@@ -189,9 +190,9 @@ function result(transid){
                             }
                             
                             if (
-                                (result[j].id === "001" && result[j].header_id === "007") ||
-                                (result[j].id === "002" && result[j].header_id === "007") ||
-                                (result[j].id === "001" && result[j].header_id === "016")
+                                (result[j].id === "001" && result[j].header_id === "012") ||
+                                (result[j].id === "002" && result[j].header_id === "012") ||
+                                (result[j].id === "001" && result[j].header_id === "013")
                             ) {
 
                             } else {
@@ -209,7 +210,7 @@ function result(transid){
                 for (var i in result) {
                     if (result[i].jenis === 'H') {
                         tableresult += "<tr>";
-                        tableresult += "<td class='ps-4'><strong>"+result[i].examination+"</strong></td>";
+                        tableresult += "<td class='ps-4' colspan='4'><strong>"+result[i].examination+"</strong></td>";
                         tableresult += "</tr>";
                         tableresult += generateChildElements(result[i].id);
                     }
@@ -217,6 +218,43 @@ function result(transid){
             }
 
             $("#resultleka").html(tableresult);
+            toastr[data.responHead](data.responDesc, "INFORMATION");
+        },
+        complete: function () {
+
+        },
+        error: function(xhr, status, error) {
+            Swal.fire({
+                title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
+                html             : "<b>" + error + "</b>",
+                icon             : "error",
+                confirmButtonText: "Please Try Again",
+                buttonsStyling   : false,
+                timerProgressBar : true,
+                timer            : 5000,
+                customClass      : {confirmButton: "btn btn-danger"},
+                showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+            });
+        }
+    });
+    return false;
+}
+
+function Sendsatusehat(btn){
+    var transaksiid = btn.attr("data_transaksiid");
+    $.ajax({
+        url        : url+"index.php/medicaldevice/leka/Sendsatusehat",
+        data       : {transaksiid:transaksiid},
+        method     : "POST",
+        dataType   : "JSON",
+        cache      : false,
+        processData: true,
+        beforeSend : function () {
+            toastr.clear();
+            toastr["info"]("Sending request...", "Please wait");
+        },
+        success:function(data){
             toastr[data.responHead](data.responDesc, "INFORMATION");
         },
         complete: function () {
@@ -278,7 +316,7 @@ function getJSON(){
 
 function printPDF() {
     // Get the contents of the modal
-    var printContents = document.querySelector('#modal_leka_result .modal-content').innerHTML;
+    var printContents = document.querySelector('#modal_leka_result .modal-body').innerHTML;
     // Open a new window
     var printWindow = window.open('', '', 'height=700,width=900');
     // Write the contents to the new window

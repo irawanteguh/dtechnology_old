@@ -18,6 +18,21 @@
             return $responsecurl;
         }
 
+        public static function getencounter($encounterid){
+            $header = array("Content-Type: application/json","Authorization: Bearer ".Satusehat::oauth()['access_token']);
+
+            $responsecurl = curl([
+                'url'     => BASEURL_SATUSEHAT."/fhir-r4/v1/Encounter/".$encounterid,
+                'method'  => "GET",
+                'header'  => $header,
+                'body'    => "",
+                'savelog' => false,
+                'source'  => "SATUSEHAT-GET-ENCOUNTER"
+            ]);
+
+            return json_decode($responsecurl,TRUE); 
+        }
+
         // public static function masterdomisili($parameter){
         //     $testing = Satusehat::oauth();
         //     $header = array("Content-Type: application/json","Authorization: Bearer ".Satusehat::oauth()['access_token']);

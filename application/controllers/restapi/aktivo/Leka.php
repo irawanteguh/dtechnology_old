@@ -321,258 +321,1236 @@
 
         public function GetLeka_GET(){
 
-            $data['patientInformation']['name']                  = "";
-            $data['patientInformation']['idnumber']              = "";
-            $data['patientInformation']['sex']                   = "";
-            $data['patientInformation']['birthday']              = "";
-            $data['patientInformation']['age']                   = "";
-            $data['patientInformation']['address']               = "";
-            $data['patientInformation']['nation']                = "";
+            $result =$this->md->resultexamination();
 
-            $data['result']['height_weight']['height']['value']                                                    = "";
-            $data['result']['height_weight']['height']['normal']                                                   = "";
-            $data['result']['height_weight']['height']['note']                                                     = "";
-            $data['result']['height_weight']['height']['unit']                                                     = "";
+            $data['patientInformation']['transaksiId'] = $result[0]->TRANSAKSI_ID;
+            $data['patientInformation']['examId']      = $result[0]->EXAM_ID;
+            $data['patientInformation']['nation']      = $result[0]->NATION;
+            $data['patientInformation']['name']        = $result[0]->NAME;
+            $data['patientInformation']['idnumber']    = $result[0]->ID_NUMBER;
+            $data['patientInformation']['sex']         = $result[0]->SEX;
+            $data['patientInformation']['birthday']    = $result[0]->BOD;
+            $data['patientInformation']['age']         = $result[0]->AGE;
+            $data['patientInformation']['address']     = $result[0]->ADDRESS;
+            $data['patientInformation']['nation']      = $result[0]->NATION;
 
-            $data['result']['height_weight']['weight']['value']                                                    = "";
-            $data['result']['height_weight']['weight']['normal']                                                   = "";
-            $data['result']['height_weight']['weight']['note']                                                     = "";
-            $data['result']['height_weight']['weight']['unit']                                                     = "";
+            $data['satuSehat']['Encounter_id']                = $result[0]->ENCOUNTER_ID;
 
-            $data['result']['height_weight']['bmi']['value']                                                       = "";
-            $data['result']['height_weight']['bmi']['normal']                                                      = "";
-            $data['result']['height_weight']['bmi']['note']                                                        = "";
-            $data['result']['height_weight']['bmi']['unit']                                                     = "";
+            $data['result']['height_weight']['height']['value']  = $result[0]->HEIGHT_VALUE;
+            $data['result']['height_weight']['height']['normal'] = $result[0]->HEIGHT_NORMAL;
+            $data['result']['height_weight']['height']['note']   = $result[0]->HEIGHT_NOTE;
+            $data['result']['height_weight']['height']['unit']   = "";
+            $data['result']['height_weight']['weight']['value']  = $result[0]->WEIGHT_VALUE;
+            $data['result']['height_weight']['weight']['normal'] = $result[0]->WEIGHT_NORMAL;
+            $data['result']['height_weight']['weight']['note']   = $result[0]->WEIGHT_NOTE;
+            $data['result']['height_weight']['weight']['unit']   = "";
+            $data['result']['height_weight']['bmi']['value']     = $result[0]->BMI_VALUE;
+            $data['result']['height_weight']['bmi']['normal']    = $result[0]->BMI_NORMAL;
+            $data['result']['height_weight']['bmi']['note']      = $result[0]->BMI_NOTE;
+            $data['result']['height_weight']['bmi']['unit']      = "";
+            //    // $data['result']['height_weight']['height']['value']  = $result[0]->HEIGHT_VALUE;
+            $data['result']['height_weight']['height']['normal'] = $result[0]->HEIGHT_NORMAL;
+            $data['result']['height_weight']['height']['note']   = $result[0]->HEIGHT_NOTE;
+            $data['result']['height_weight']['height']['unit']   = "";
+            $data['result']['height_weight']['weight']['value']  = $result[0]->WEIGHT_VALUE;
+            $data['result']['height_weight']['weight']['normal'] = $result[0]->WEIGHT_NORMAL;
+            $data['result']['height_weight']['weight']['note']   = $result[0]->WEIGHT_NOTE;
+            $data['result']['height_weight']['weight']['unit']   = "";
+            $data['result']['height_weight']['bmi']['value']     = $result[0]->BMI_VALUE;
+            $data['result']['height_weight']['bmi']['normal']    = $result[0]->BMI_NORMAL;
+            $data['result']['height_weight']['bmi']['note']      = $result[0]->BMI_NOTE;
+            $data['result']['height_weight']['bmi']['unit']      = "";
 
-            $data['result']['body_fat']['body fat rate']['value']                                                          = "";
-            $data['result']['body_fat']['body fat rate']['normal']                                                           = "";
-            $data['result']['body_fat']['body fat rate']['note']                                                            = "";
-            $data['result']['body_fat']['body fat rate']['unit']                                                            = "";
+            $data['result']['body_fat']['body_fat_rate']['value']     = $result[0]->FAT_ZFLV_VALUE;
+            $data['result']['body_fat']['body_fat_rate']['normal']    = $result[0]->FAT_ZFLV_NORMAL;
+            $data['result']['body_fat']['body_fat_rate']['note']      = $result[0]->FAT_ZFLV_NOTE;
+            $data['result']['body_fat']['body_fat_rate']['unit']      = "";
+            $data['result']['body_fat']['basal_metabolism']['value']  = $result[0]->FAT_JCDX_VALUE;
+            $data['result']['body_fat']['basal_metabolism']['normal'] = $result[0]->FAT_JCDX_NORMAL;
+            $data['result']['body_fat']['basal_metabolism']['note']   = $result[0]->FAT_JCDX_NOTE;
+            $data['result']['body_fat']['basal_metabolism']['unit']   = "";
 
-            $data['result']['body_fat']['basal metabolism']['value']                                                        = "";
-            $data['result']['body_fat']['basal metabolism']['normal']                                                        = "";
-            $data['result']['body_fat']['basal metabolism']['note']                                                        = "";
-            $data['result']['body_fat']['basal metabolism']['unit']                                                        = "";
+            $data['result']['body_fat']['body_water_content']['value'] = "";
+            $data['result']['body_fat']['body_water_content']['normal'] = "";
+            $data['result']['body_fat']['body_water_content']['note'] = "";
+            $data['result']['body_fat']['body_water_content']['unit'] = "";
 
-            $data['result']['body_fat']['body water content']                                                      = "";
-            $data['result']['body_fat']['body water rate']                                                         = "";
-            $data['result']['body_fat']['body fat content']                                                        = "";
-            $data['result']['body_fat']['body muscle conten']                                                      = "";
-            $data['result']['body_fat']['body muscle rate']                                                        = "";
-            $data['result']['body_fat']['bone salt']                                                               = "";
-            $data['result']['body_fat']['fat free mass']                                                           = "";
-            $data['result']['body_fat']['Protein rate']                                                            = "";
-            $data['result']['body_fat']['Intracellular fluid volume']                                              = "";
-            $data['result']['body_fat']['Extracellular fluid volume']                                              = "";
-            $data['result']['body_fat']['Intracellular fluid rate']                                                = "";
-            $data['result']['blood_pressure']['systolic blood pressure']                                           = "";
-            $data['result']['blood_pressure']['diastolic blood pressure']                                          = "";
-            $data['result']['blood_pressure']['heart rate']                                                        = "";
-            $data['result']['blood_oxygen']['blood oxygen']                                                        = "";
-            $data['result']['body_temperature']['body temperature']                                                = "";
-            $data['result']['lung_function']['Peak expiratory flow']                                               = "";
-            $data['result']['lung_function']['Forced expiratory volume in the first second']                       = "";
-            $data['result']['lung_function']['forced vital capacity']                                              = "";
-            $data['result']['lung_function']['Forced expiratory volume in the first second/forced vital capacity'] = "";
-            $data['result']['fast_ECG']['ECG result']                                                              = "";
-            $data['result']['fast_ECG']['ECG waveform picture data']                                               = "";
-            $data['result']['fast_ECG']['ECG waveform picture data length']                                        = "";
-            $data['result']['blood_sugar']['Types of blood glucose measurement']                                   = "";
-            $data['result']['blood_sugar']['blood glucose level']                                                  = "";
-            $data['result']['waist_hip_rate']['waistline']                                                         = "";
-            $data['result']['waist_hip_rate']['hipline']                                                           = "";
-            $data['result']['waist_hip_rate']['waist hip rate']                                                    = "";
-            $data['result']['uric_acid']['Uric acid value']                                                        = "";
-            $data['result']['cholesterol']['Cholesterol value']                                                    = "";
-            $data['result']['TCM_constitution_identification']['TCM constitution type']                            = "";
-            $data['result']['TCM_constitution_identification']['Yang deficiency quality score']                    = "";
-            $data['result']['TCM_constitution_identification']['Yin deficiency quality score']                     = "";
-            $data['result']['TCM_constitution_identification']['Qi deficiency quality score']                      = "";
-            $data['result']['TCM_constitution_identification']['Phlegm-dampness score']                            = "";
-            $data['result']['TCM_constitution_identification']['Humidity and heat quality score']                  = "";
-            $data['result']['TCM_constitution_identification']['Blood stasis score']                               = "";
-            $data['result']['TCM_constitution_identification']['Special quality score']                            = "";
-            $data['result']['TCM_constitution_identification']['Qi stagnation quality score']                      = "";
-            $data['result']['TCM_constitution_identification']['Peace and quality score']                          = "";
-            $data['result']['vision']['left eye']                                                                  = "";
-            $data['result']['vision']['Visual acuity of the left eye']                                             = "";
-            $data['result']['vision']['Left eye visual cues']                                                      = "";
-            $data['result']['vision']['right eye']                                                                 = "";
-            $data['result']['vision']['Visual acuity of the right eye']                                            = "";
-            $data['result']['vision']['Visual cues in right eye']                                                  = "";
-            $data['result']['color_blindness']['Color blindness result']                                           = "";
-            $data['result']['psychological_tests']['UCLA Loneliness scale score']                                  = "";
-            $data['result']['psychological_tests']['Geriatric depression Scale score']                             = "";
-            $data['result']['psychological_tests']['Self-rated depression scale score']                            = "";
-            $data['result']['psychological_tests']['Hamilton Anxiety Scale score']                                 = "";
-            $data['result']['psychological_tests']['Emotional health test scores']                                 = "";
-            $data['result']['psychological_tests']['Self-measured health rating scale score']                      = "";
-            $data['result']['psychological_tests']['Life satisfaction Scale scor']                                 = "";
-            $data['result']['psychological_tests']['Personality disorder personality test score']                  = "";
-            $data['result']['psychological_tests']['PSTR Adult stress test scores']                                = "";
-            $data['result']['psychological_tests']['Harvard sexuality test score']                                 = "";
-            $data['result']['psychological_tests']['Emotional intelligence (EQ) test score']                       = "";
-            $data['result']['psychological_tests']['Sleep status assessment score']                                = "";
-            $data['result']['12_lead_ECG']['Ecg report picture data']                                              = "";
-            $data['result']['12_lead_ECG']['diagnosis result']                                                     = "";
-            $data['result']['12_lead_ECG']['heart rate']                                                           = "";
-            $data['result']['12_lead_ECG']['P axis']                                                               = "";
-            $data['result']['12_lead_ECG']['QRS axis']                                                             = "";
-            $data['result']['12_lead_ECG']['T axis']                                                               = "";
-            $data['result']['12_lead_ECG']['PR interval']                                                          = "";
-            $data['result']['12_lead_ECG']['QRS time limit']                                                       = "";
-            $data['result']['12_lead_ECG']['QT interval']                                                          = "";
-            $data['result']['12_lead_ECG']['QTc interval']                                                         = "";
-            $data['result']['12_lead_ECG']['RV5 value']                                                            = "";
-            $data['result']['12_lead_ECG']['SV1 value']                                                            = "";
-            $data['result']['12_lead_ECG']['sampling frequency']                                                   = "";
-            $data['result']['12_lead_ECG']['Sampling duration']                                                    = "";
+            $data['result']['body_fat']['body_water_rate']['value'] = "";
+            $data['result']['body_fat']['body_water_rate']['normal'] = "";
+            $data['result']['body_fat']['body_water_rate']['note'] = "";
+            $data['result']['body_fat']['body_water_rate']['unit'] = "";
 
+            $data['result']['body_fat']['body_fat_content']['value'] = "";
+            $data['result']['body_fat']['body_fat_content']['normal'] = "";
+            $data['result']['body_fat']['body_fat_content']['note'] = "";
+            $data['result']['body_fat']['body_fat_content']['unit'] = "";
+
+            $data['result']['body_fat']['body_muscle_content']['value'] = "";
+            $data['result']['body_fat']['body_muscle_content']['normal'] = "";
+            $data['result']['body_fat']['body_muscle_content']['note'] = "";
+            $data['result']['body_fat']['body_muscle_content']['unit'] = "";
+
+            $data['result']['body_fat']['body_muscle_rate']['value'] = "";
+            $data['result']['body_fat']['body_muscle_rate']['normal'] = "";
+            $data['result']['body_fat']['body_muscle_rate']['note'] = "";
+            $data['result']['body_fat']['body_muscle_rate']['unit'] = "";
+
+            $data['result']['body_fat']['bone_salt']['value'] = "";
+            $data['result']['body_fat']['bone_salt']['normal'] = "";
+            $data['result']['body_fat']['bone_salt']['note'] = "";
+            $data['result']['body_fat']['bone_salt']['unit'] = "";
+
+            $data['result']['body_fat']['fat_free_mass']['value'] = "";
+            $data['result']['body_fat']['fat_free_mass']['normal'] = "";
+            $data['result']['body_fat']['fat_free_mass']['note'] = "";
+            $data['result']['body_fat']['fat_free_mass']['unit'] = "";
+
+            $data['result']['body_fat']['protein_rate']['value'] = "";
+            $data['result']['body_fat']['protein_rate']['normal'] = "";
+            $data['result']['body_fat']['protein_rate']['note'] = "";
+            $data['result']['body_fat']['protein_rate']['unit'] = "";
+
+            $data['result']['body_fat']['intracellular_fluid_volume']['value'] = "";
+            $data['result']['body_fat']['intracellular_fluid_volume']['normal'] = "";
+            $data['result']['body_fat']['intracellular_fluid_volume']['note'] = "";
+            $data['result']['body_fat']['intracellular_fluid_volume']['unit'] = "";
+
+            $data['result']['body_fat']['extracellular_fluid_volume']['value'] = "";
+            $data['result']['body_fat']['extracellular_fluid_volume']['normal'] = "";
+            $data['result']['body_fat']['extracellular_fluid_volume']['note'] = "";
+            $data['result']['body_fat']['extracellular_fluid_volume']['unit'] = "";
+
+            $data['result']['body_fat']['intracellular_fluid_rate']['value'] = "";
+            $data['result']['body_fat']['intracellular_fluid_rate']['normal'] = "";
+            $data['result']['body_fat']['intracellular_fluid_rate']['note'] = "";
+            $data['result']['body_fat']['intracellular_fluid_rate']['unit'] = "";
+
+            $data['result']['blood_pressure']['systolic_blood_pressure']['value']   = $result[0]->BLOOD_HIGH_VALUE;
+            $data['result']['blood_pressure']['systolic_blood_pressure']['normal']  = $result[0]->BLOOD_HIGH_NORMAL;
+            $data['result']['blood_pressure']['systolic_blood_pressure']['note']    = $result[0]->BLOOD_HIGH_NOTE;
+            $data['result']['blood_pressure']['systolic_blood_pressure']['unit']    = "";
+            $data['result']['blood_pressure']['diastolic_blood_pressure']['value']  = $result[0]->BLOOD_LOW_VALUE;
+            $data['result']['blood_pressure']['diastolic_blood_pressure']['normal'] = $result[0]->BLOOD_LOW_NORMAL;
+            $data['result']['blood_pressure']['diastolic_blood_pressure']['note']   = $result[0]->BLOOD_LOW_NOTE;
+            $data['result']['blood_pressure']['diastolic_blood_pressure']['unit']   = "";
+            $data['result']['blood_pressure']['heart_rate']['value']                = $result[0]->BLOOD_RATE_VALUE;
+            $data['result']['blood_pressure']['heart_rate']['normal']               = $result[0]->BLOOD_RATE_NORMAL;
+            $data['result']['blood_pressure']['heart_rate']['note']                 = $result[0]->BLOOD_RATE_NOTE;
+            $data['result']['blood_pressure']['heart_rate']['unit']                 = "";
+
+            $data['result']['blood_oxygen']['blood_oxygen']['value']  = $result[0]->SPO2_SP_VALUE;
+            $data['result']['blood_oxygen']['blood_oxygen']['normal'] = $result[0]->SPO2_SP_NORMAL;
+            $data['result']['blood_oxygen']['blood_oxygen']['note']   = $result[0]->SPO2_SP_NOTE;
+            $data['result']['blood_oxygen']['blood_oxygen']['unit']   = "%";
+
+            $data['result']['body_temperature']['body_temperature']['value']  = $result[0]->TIWEN_VALUE;
+            $data['result']['body_temperature']['body_temperature']['normal'] = $result[0]->TIWEN_NORMAL;
+            $data['result']['body_temperature']['body_temperature']['note']   = $result[0]->TIWEN_NOTE;
+            $data['result']['body_temperature']['body_temperature']['unit']   = "";
+
+            $data['result']['lung_function']['peak_expiratory_flow']['value'] = "";
+            $data['result']['lung_function']['peak_expiratory_flow']['normal'] = "";
+            $data['result']['lung_function']['peak_expiratory_flow']['note'] = "";
+            $data['result']['lung_function']['peak_expiratory_flow']['unit'] = "";
+
+            $data['result']['lung_function']['forced_expiratory_volume_in_the_first_second']['value'] = "";
+            $data['result']['lung_function']['forced_expiratory_volume_in_the_first_second']['normal'] = "";
+            $data['result']['lung_function']['forced_expiratory_volume_in_the_first_second']['note'] = "";
+            $data['result']['lung_function']['forced_expiratory_volume_in_the_first_second']['unit'] = "";
+
+            $data['result']['lung_function']['forced_vital_capacity']['value'] = "";
+            $data['result']['lung_function']['forced_vital_capacity']['normal'] = "";
+            $data['result']['lung_function']['forced_vital_capacity']['note'] = "";
+            $data['result']['lung_function']['forced_vital_capacity']['unit'] = "";
+
+            $data['result']['lung_function']['forced_expiratory_volume_in_the_first_second/forced_vital_capacity']['value'] = "";
+            $data['result']['lung_function']['forced_expiratory_volume_in_the_first_second/forced_vital_capacity']['normal'] = "";
+            $data['result']['lung_function']['forced_expiratory_volume_in_the_first_second/forced_vital_capacity']['note'] = "";
+            $data['result']['lung_function']['forced_expiratory_volume_in_the_first_second/forced_vital_capacity']['unit'] = "";
+
+            $data['result']['fast_ECG']['ECG_result']['value'] = "";
+            $data['result']['fast_ECG']['ECG_result']['normal'] = "";
+            $data['result']['fast_ECG']['ECG_result']['note'] = "";
+            $data['result']['fast_ECG']['ECG_result']['unit'] = "";
+
+            $data['result']['fast_ECG']['ECG_waveform_picture_data']['value'] = "";
+            $data['result']['fast_ECG']['ECG_waveform_picture_data']['normal'] = "";
+            $data['result']['fast_ECG']['ECG_waveform_picture_data']['note'] = "";
+            $data['result']['fast_ECG']['ECG_waveform_picture_data']['unit'] = "";
+
+            $data['result']['fast_ECG']['ECG_waveform_picture_data_length']['value'] = "";
+            $data['result']['fast_ECG']['ECG_waveform_picture_data_length']['normal'] = "";
+            $data['result']['fast_ECG']['ECG_waveform_picture_data_length']['note'] = "";
+            $data['result']['fast_ECG']['ECG_waveform_picture_data_length']['unit'] = "";
+
+            $data['result']['blood_sugar']['types_of_blood_glucose_measurement']['value'] = "";
+            $data['result']['blood_sugar']['types_of_blood_glucose_measurement']['normal'] = "";
+            $data['result']['blood_sugar']['types_of_blood_glucose_measurement']['note'] = "";
+            $data['result']['blood_sugar']['types_of_blood_glucose_measurement']['unit'] = "";
+
+            $data['result']['blood_sugar']['blood_glucose_level']['value'] = "";
+            $data['result']['blood_sugar']['blood_glucose_level']['normal'] = "";
+            $data['result']['blood_sugar']['blood_glucose_level']['note'] = "";
+            $data['result']['blood_sugar']['blood_glucose_level']['unit'] = "";
+
+            $data['result']['waist_hip_rate']['waistline']['value'] = "";
+            $data['result']['waist_hip_rate']['waistline']['normal'] = "";
+            $data['result']['waist_hip_rate']['waistline']['note'] = "";
+            $data['result']['waist_hip_rate']['waistline']['unit'] = "";
+
+            $data['result']['waist_hip_rate']['hipline']['value'] = "";
+            $data['result']['waist_hip_rate']['hipline']['normal'] = "";
+            $data['result']['waist_hip_rate']['hipline']['note'] = "";
+            $data['result']['waist_hip_rate']['hipline']['unit'] = "";
+
+            $data['result']['waist_hip_rate']['waist_hip_rate']['value'] = "";
+            $data['result']['waist_hip_rate']['waist_hip_rate']['normal'] = "";
+            $data['result']['waist_hip_rate']['waist_hip_rate']['note'] = "";
+            $data['result']['waist_hip_rate']['waist_hip_rate']['unit'] = "";
+
+            $data['result']['uric_acid']['uric_acid_value']['value'] = "";
+            $data['result']['uric_acid']['uric_acid_value']['normal'] = "";
+            $data['result']['uric_acid']['uric_acid_value']['note'] = "";
+            $data['result']['uric_acid']['uric_acid_value']['unit'] = "";
+
+            $data['result']['cholesterol']['cholesterol_value']['value'] = "";
+            $data['result']['cholesterol']['cholesterol_value']['normal'] = "";
+            $data['result']['cholesterol']['cholesterol_value']['note'] = "";
+            $data['result']['cholesterol']['cholesterol_value']['unit'] = "";
+
+            $data['result']['TCM_constitution_identification']['TCM_constitution_type']['value'] = "";
+            $data['result']['TCM_constitution_identification']['TCM_constitution_type']['normal'] = "";
+            $data['result']['TCM_constitution_identification']['TCM_constitution_type']['note'] = "";
+            $data['result']['TCM_constitution_identification']['TCM_constitution_type']['unit'] = "";
+
+            $data['result']['TCM_constitution_identification']['yang_deficiency_quality_score']['value'] = "";
+            $data['result']['TCM_constitution_identification']['yang_deficiency_quality_score']['normal'] = "";
+            $data['result']['TCM_constitution_identification']['yang_deficiency_quality_score']['note'] = "";
+            $data['result']['TCM_constitution_identification']['yang_deficiency_quality_score']['unit'] = "";
+
+            $data['result']['TCM_constitution_identification']['yin_deficiency_quality_score']['value'] = "";
+            $data['result']['TCM_constitution_identification']['yin_deficiency_quality_score']['normal'] = "";
+            $data['result']['TCM_constitution_identification']['yin_deficiency_quality_score']['note'] = "";
+            $data['result']['TCM_constitution_identification']['yin_deficiency_quality_score']['unit'] = "";
+
+            $data['result']['TCM_constitution_identification']['qi_deficiency_quality_score']['value'] = "";
+            $data['result']['TCM_constitution_identification']['qi_deficiency_quality_score']['normal'] = "";
+            $data['result']['TCM_constitution_identification']['qi_deficiency_quality_score']['note'] = "";
+            $data['result']['TCM_constitution_identification']['qi_deficiency_quality_score']['unit'] = "";
+
+            $data['result']['TCM_constitution_identification']['phlegm_dampness_score']['value'] = "";
+            $data['result']['TCM_constitution_identification']['phlegm_dampness_score']['normal'] = "";
+            $data['result']['TCM_constitution_identification']['phlegm_dampness_score']['note'] = "";
+            $data['result']['TCM_constitution_identification']['phlegm_dampness_score']['unit'] = "";
+
+            $data['result']['TCM_constitution_identification']['humidity_and_heat_quality_score']['value'] = "";
+            $data['result']['TCM_constitution_identification']['humidity_and_heat_quality_score']['normal'] = "";
+            $data['result']['TCM_constitution_identification']['humidity_and_heat_quality_score']['note'] = "";
+            $data['result']['TCM_constitution_identification']['humidity_and_heat_quality_score']['unit'] = "";
+
+            $data['result']['TCM_constitution_identification']['blood_stasis_score']['value'] = "";
+            $data['result']['TCM_constitution_identification']['blood_stasis_score']['normal'] = "";
+            $data['result']['TCM_constitution_identification']['blood_stasis_score']['note'] = "";
+            $data['result']['TCM_constitution_identification']['blood_stasis_score']['unit'] = "";
+
+            $data['result']['TCM_constitution_identification']['special_quality_score']['value'] = "";
+            $data['result']['TCM_constitution_identification']['special_quality_score']['normal'] = "";
+            $data['result']['TCM_constitution_identification']['special_quality_score']['note'] = "";
+            $data['result']['TCM_constitution_identification']['special_quality_score']['unit'] = "";
+
+            $data['result']['TCM_constitution_identification']['qi_stagnation_quality_score']['value'] = "";
+            $data['result']['TCM_constitution_identification']['qi_stagnation_quality_score']['normal'] = "";
+            $data['result']['TCM_constitution_identification']['qi_stagnation_quality_score']['note'] = "";
+            $data['result']['TCM_constitution_identification']['qi_stagnation_quality_score']['unit'] = "";
+
+            $data['result']['TCM_constitution_identification']['peace_and_quality_score']['value'] = "";
+            $data['result']['TCM_constitution_identification']['peace_and_quality_score']['normal'] = "";
+            $data['result']['TCM_constitution_identification']['peace_and_quality_score']['note'] = "";
+            $data['result']['TCM_constitution_identification']['peace_and_quality_score']['unit'] = "";
+
+            $data['result']['vision']['left_eye']['value'] = "";
+            $data['result']['vision']['left_eye']['normal'] = "";
+            $data['result']['vision']['left_eye']['note'] = "";
+            $data['result']['vision']['left_eye']['unit'] = "";
+
+            $data['result']['vision']['visual_acuity_of_the_left_eye']['value'] = "";
+            $data['result']['vision']['visual_acuity_of_the_left_eye']['normal'] = "";
+            $data['result']['vision']['visual_acuity_of_the_left_eye']['note'] = "";
+            $data['result']['vision']['visual_acuity_of_the_left_eye']['unit'] = "";
+
+            $data['result']['vision']['left_eye_visual_cues']['value'] = "";
+            $data['result']['vision']['left_eye_visual_cues']['normal'] = "";
+            $data['result']['vision']['left_eye_visual_cues']['note'] = "";
+            $data['result']['vision']['left_eye_visual_cues']['unit'] = "";
+
+            $data['result']['vision']['right_eye']['value'] = "";
+            $data['result']['vision']['right_eye']['normal'] = "";
+            $data['result']['vision']['right_eye']['note'] = "";
+            $data['result']['vision']['right_eye']['unit'] = "";
+
+            $data['result']['vision']['visual_acuity_of_the_right_eye']['value'] = "";
+            $data['result']['vision']['visual_acuity_of_the_right_eye']['normal'] = "";
+            $data['result']['vision']['visual_acuity_of_the_right_eye']['note'] = "";
+            $data['result']['vision']['visual_acuity_of_the_right_eye']['unit'] = "";
+
+            $data['result']['vision']['visual_cues_in_right_eye']['value'] = "";
+            $data['result']['vision']['visual_cues_in_right_eye']['normal'] = "";
+            $data['result']['vision']['visual_cues_in_right_eye']['note'] = "";
+            $data['result']['vision']['visual_cues_in_right_eye']['unit'] = "";
+
+            $data['result']['color_blindness']['color_blindness_result']['value'] = "";
+            $data['result']['color_blindness']['color_blindness_result']['normal'] = "";
+            $data['result']['color_blindness']['color_blindness_result']['note'] = "";
+            $data['result']['color_blindness']['color_blindness_result']['unit'] = "";
+
+            $data['result']['psychological_tests']['UCLA_loneliness_scale_score']['value'] = "";
+            $data['result']['psychological_tests']['UCLA_loneliness_scale_score']['normal'] = "";
+            $data['result']['psychological_tests']['UCLA_loneliness_scale_score']['note'] = "";
+            $data['result']['psychological_tests']['UCLA_loneliness_scale_score']['unit'] = "";
+
+            $data['result']['psychological_tests']['geriatric_depression_scale_score']['value'] = "";
+            $data['result']['psychological_tests']['geriatric_depression_scale_score']['normal'] = "";
+            $data['result']['psychological_tests']['geriatric_depression_scale_score']['note'] = "";
+            $data['result']['psychological_tests']['geriatric_depression_scale_score']['unit'] = "";
+
+            $data['result']['psychological_tests']['self_rated_depression_scale_score']['value'] = "";
+            $data['result']['psychological_tests']['self_rated_depression_scale_score']['normal'] = "";
+            $data['result']['psychological_tests']['self_rated_depression_scale_score']['note'] = "";
+            $data['result']['psychological_tests']['self_rated_depression_scale_score']['unit'] = "";
+
+            $data['result']['psychological_tests']['hamilton_anxiety_scale_score']['value'] = "";
+            $data['result']['psychological_tests']['hamilton_anxiety_scale_score']['normal'] = "";
+            $data['result']['psychological_tests']['hamilton_anxiety_scale_score']['note'] = "";
+            $data['result']['psychological_tests']['hamilton_anxiety_scale_score']['unit'] = "";
+
+            $data['result']['psychological_tests']['simple_coping_style_score']['value'] = "";
+            $data['result']['psychological_tests']['simple_coping_style_score']['normal'] = "";
+            $data['result']['psychological_tests']['simple_coping_style_score']['note'] = "";
+            $data['result']['psychological_tests']['simple_coping_style_score']['unit'] = "";
+
+            $data['result']['psychological_tests']['subjective_support_score']['value'] = "";
+            $data['result']['psychological_tests']['subjective_support_score']['normal'] = "";
+            $data['result']['psychological_tests']['subjective_support_score']['note'] = "";
+            $data['result']['psychological_tests']['subjective_support_score']['unit'] = "";
+
+            $data['result']['psychological_tests']['objective_support_score']['value'] = "";
+            $data['result']['psychological_tests']['objective_support_score']['normal'] = "";
+            $data['result']['psychological_tests']['objective_support_score']['note'] = "";
+            $data['result']['psychological_tests']['objective_support_score']['unit'] = "";
+
+            $data['result']['psychological_tests']['support_utilization_degree_score']['value'] = "";
+            $data['result']['psychological_tests']['support_utilization_degree_score']['normal'] = "";
+            $data['result']['psychological_tests']['support_utilization_degree_score']['note'] = "";
+            $data['result']['psychological_tests']['support_utilization_degree_score']['unit'] = "";
+
+            $data['result']['12_lead_ECG']['Ecg_report_picture_data']['value'] = "";
+            $data['result']['12_lead_ECG']['Ecg_report_picture_data']['normal'] = "";
+            $data['result']['12_lead_ECG']['Ecg_report_picture_data']['note'] = "";
+            $data['result']['12_lead_ECG']['Ecg_report_picture_data']['unit'] = "";
+            $data['result']['12_lead_ECG']['diagnosis_result']['value'] = "";
+            $data['result']['12_lead_ECG']['diagnosis_result']['normal'] = "";
+            $data['result']['12_lead_ECG']['diagnosis_result']['note'] = "";
+            $data['result']['12_lead_ECG']['diagnosis_result']['unit'] = "";
+            $data['result']['12_lead_ECG']['heart_rate']['value'] = "";
+            $data['result']['12_lead_ECG']['heart_rate']['normal'] = "";
+            $data['result']['12_lead_ECG']['heart_rate']['note'] = "";
+            $data['result']['12_lead_ECG']['heart_rate']['unit'] = "";
+            $data['result']['12_lead_ECG']['P_axis']['value'] = "";
+            $data['result']['12_lead_ECG']['P_axis']['normal'] = "";
+            $data['result']['12_lead_ECG']['P_axis']['note'] = "";
+            $data['result']['12_lead_ECG']['P_axis']['unit'] = "";
+            $data['result']['12_lead_ECG']['QRS_axis']['value'] = "";
+            $data['result']['12_lead_ECG']['QRS_axis']['normal'] = "";
+            $data['result']['12_lead_ECG']['QRS_axis']['note'] = "";
+            $data['result']['12_lead_ECG']['QRS_axis']['unit'] = "";
+            $data['result']['12_lead_ECG']['T_axis']['value'] = "";
+            $data['result']['12_lead_ECG']['T_axis']['normal'] = "";
+            $data['result']['12_lead_ECG']['T_axis']['note'] = "";
+            $data['result']['12_lead_ECG']['T_axis']['unit'] = "";
+            $data['result']['12_lead_ECG']['PR_interval']['value'] = "";
+            $data['result']['12_lead_ECG']['PR_interval']['normal'] = "";
+            $data['result']['12_lead_ECG']['PR_interval']['note'] = "";
+            $data['result']['12_lead_ECG']['PR_interval']['unit'] = "";
+            $data['result']['12_lead_ECG']['QRS_time_limit']['value'] = "";
+            $data['result']['12_lead_ECG']['QRS_time_limit']['normal'] = "";
+            $data['result']['12_lead_ECG']['QRS_time_limit']['note'] = "";
+            $data['result']['12_lead_ECG']['QRS_time_limit']['unit'] = "";
+            $data['result']['12_lead_ECG']['QT_interval']['value'] = "";
+            $data['result']['12_lead_ECG']['QT_interval']['normal'] = "";
+            $data['result']['12_lead_ECG']['QT_interval']['note'] = "";
+            $data['result']['12_lead_ECG']['QT_interval']['unit'] = "";
+            $data['result']['12_lead_ECG']['QTc_interval']['value'] = "";
+            $data['result']['12_lead_ECG']['QTc_interval']['normal'] = "";
+            $data['result']['12_lead_ECG']['QTc_interval']['note'] = "";
+            $data['result']['12_lead_ECG']['QTc_interval']['unit'] = "";
+            $data['result']['12_lead_ECG']['RV5_value']['value'] = "";
+            $data['result']['12_lead_ECG']['RV5_value']['normal'] = "";
+            $data['result']['12_lead_ECG']['RV5_value']['note'] = "";
+            $data['result']['12_lead_ECG']['RV5_value']['unit'] = "";
+            $data['result']['12_lead_ECG']['SV1_value']['value'] = "";
+            $data['result']['12_lead_ECG']['SV1_value']['normal'] = "";
+            $data['result']['12_lead_ECG']['SV1_value']['note'] = "";
+            $data['result']['12_lead_ECG']['SV1_value']['unit'] = "";
+            $data['result']['12_lead_ECG']['sampling_frequency']['value'] = "";
+            $data['result']['12_lead_ECG']['sampling_frequency']['normal'] = "";
+            $data['result']['12_lead_ECG']['sampling_frequency']['note'] = "";
+            $data['result']['12_lead_ECG']['sampling_frequency']['unit'] = "";
+            $data['result']['12_lead_ECG']['sampling_duration']['value'] = "";
+            $data['result']['12_lead_ECG']['sampling_duration']['normal'] = "";
+            $data['result']['12_lead_ECG']['sampling_duration']['note'] = "";
+            $data['result']['12_lead_ECG']['sampling_duration']['unit'] = "";
+
+
+
+
+        
+
+        
+
+            //     $data['result']['body_fat']['body water content']                                                      = "";
+            //     $data['result']['body_fat']['body water rate']                                                         = "";
+            //     $data['result']['body_fat']['body fat content']                                                        = "";
+            //     $data['result']['body_fat']['body muscle conten']                                                      = "";
+            //     $data['result']['body_fat']['body muscle rate']                                                        = "";
+            //     $data['result']['body_fat']['bone salt']                                                               = "";
+            //     $data['result']['body_fat']['fat free mass']                                                           = "";
+            //     $data['result']['body_fat']['Protein rate']                                                            = "";
+            //     $data['result']['body_fat']['Intracellular fluid volume']                                              = "";
+            //     $data['result']['body_fat']['Extracellular fluid volume']                                              = "";
+            //     $data['result']['body_fat']['Intracellular fluid rate']                                                = "";
+            //     $data['result']['blood_pressure']['systolic blood pressure']                                           = "";
+            //     $data['result']['blood_pressure']['diastolic blood pressure']                                          = "";
+            //     $data['result']['blood_pressure']['heart rate']                                                        = "";
+            //     $data['result']['blood_oxygen']['blood oxygen']                                                        = "";
+            //     $data['result']['body_temperature']['body temperature']                                                = "";
+            //     $data['result']['lung_function']['Peak expiratory flow']                                               = "";
+            //     $data['result']['lung_function']['Forced expiratory volume in the first second']                       = "";
+            //     $data['result']['lung_function']['forced vital capacity']                                              = "";
+            //     $data['result']['lung_function']['Forced expiratory volume in the first second/forced vital capacity'] = "";
+            //     $data['result']['fast_ECG']['ECG result']                                                              = "";
+            //     $data['result']['fast_ECG']['ECG waveform picture data']                                               = "";
+            //     $data['result']['fast_ECG']['ECG waveform picture data length']                                        = "";
+            //     $data['result']['blood_sugar']['Types of blood glucose measurement']                                   = "";
+            //     $data['result']['blood_sugar']['blood glucose level']                                                  = "";
+            //     $data['result']['waist_hip_rate']['waistline']                                                         = "";
+            //     $data['result']['waist_hip_rate']['hipline']                                                           = "";
+            //     $data['result']['waist_hip_rate']['waist hip rate']                                                    = "";
+            //     $data['result']['uric_acid']['Uric acid value']                                                        = "";
+            //     $data['result']['cholesterol']['Cholesterol value']                                                    = "";
+            //     $data['result']['TCM_constitution_identification']['TCM constitution type']                            = "";
+            //     $data['result']['TCM_constitution_identification']['Yang deficiency quality score']                    = "";
+            //     $data['result']['TCM_constitution_identification']['Yin deficiency quality score']                     = "";
+            //     $data['result']['TCM_constitution_identification']['Qi deficiency quality score']                      = "";
+            //     $data['result']['TCM_constitution_identification']['Phlegm-dampness score']                            = "";
+            //     $data['result']['TCM_constitution_identification']['Humidity and heat quality score']                  = "";
+            //     $data['result']['TCM_constitution_identification']['Blood stasis score']                               = "";
+            //     $data['result']['TCM_constitution_identification']['Special quality score']                            = "";
+            //     $data['result']['TCM_constitution_identification']['Qi stagnation quality score']                      = "";
+            //     $data['result']['TCM_constitution_identification']['Peace and quality score']                          = "";
+            //     $data['result']['vision']['left eye']                                                                  = "";
+            //     $data['result']['vision']['Visual acuity of the left eye']                                             = "";
+            //     $data['result']['vision']['Left eye visual cues']                                                      = "";
+            //     $data['result']['vision']['right eye']                                                                 = "";
+            //     $data['result']['vision']['Visual acuity of the right eye']                                            = "";
+            //     $data['result']['vision']['Visual cues in right eye']                                                  = "";
+            //     $data['result']['color_blindness']['Color blindness result']                                           = "";
+            //     $data['result']['psychological_tests']['UCLA Loneliness scale score']                                  = "";
+            //     $data['result']['psychological_tests']['Geriatric depression Scale score']                             = "";
+            //     $data['result']['psychological_tests']['Self-rated depression scale score']                            = "";
+            //     $data['result']['psychological_tests']['Hamilton Anxiety Scale score']                                 = "";
+            //     $data['result']['psychological_tests']['Emotional health test scores']                                 = "";
+            //     $data['result']['psychological_tests']['Self-measured health rating scale score']                      = "";
+            //     $data['result']['psychological_tests']['Life satisfaction Scale scor']                                 = "";
+            //     $data['result']['psychological_tests']['Personality disorder personality test score']                  = "";
+            //     $data['result']['psychological_tests']['PSTR Adult stress test scores']                                = "";
+            //     $data['result']['psychological_tests']['Harvard sexuality test score']                                 = "";
+            //     $data['result']['psychological_tests']['Emotional intelligence (EQ) test score']                       = "";
+            //     $data['result']['psychological_tests']['Sleep status assessment score']                                = "";
+            //     $data['result']['12_lead_ECG']['Ecg report picture data']                                              = "";
+            //     $data['result']['12_lead_ECG']['diagnosis result']                                                     = "";
+            //     $data['result']['12_lead_ECG']['heart rate']                                                           = "";
+            //     $data['result']['12_lead_ECG']['P axis']                                                               = "";
+            //     $data['result']['12_lead_ECG']['QRS axis']                                                             = "";
+            //     $data['result']['12_lead_ECG']['T axis']                                                               = "";
+            //     $data['result']['12_lead_ECG']['PR interval']                                                          = "";
+            //     $data['result']['12_lead_ECG']['QRS time limit']                                                       = "";
+            //     $data['result']['12_lead_ECG']['QT interval']                                                          = "";
+            //     $data['result']['12_lead_ECG']['QTc interval']                                                         = "";
+            //     $data['result']['12_lead_ECG']['RV5 value']                                                            = "";
+            //     $data['result']['12_lead_ECG']['SV1 value']                                                            = "";
+            //     $data['result']['12_lead_ECG']['sampling frequency']                                                   = "";
+            //     $data['result']['12_lead_ECG']['Sampling duration'] 
+
+            
+
+            
+
+            
+
+            // $data['result']['body_fat']['body_water_content']['value'] = "";
+            // $data['result']['body_fat']['body_water_content']['normal'] = "";
+            // $data['result']['body_fat']['body_water_content']['note'] = "";
+            // $data['result']['body_fat']['body_water_content']['unit'] = "";
+
+            // $data['result']['body_fat']['body_water_rate']['value'] = "";
+            // $data['result']['body_fat']['body_water_rate']['normal'] = "";
+            // $data['result']['body_fat']['body_water_rate']['note'] = "";
+            // $data['result']['body_fat']['body_water_rate']['unit'] = "";
+
+            // $data['result']['body_fat']['body_fat_content']['value'] = "";
+            // $data['result']['body_fat']['body_fat_content']['normal'] = "";
+            // $data['result']['body_fat']['body_fat_content']['note'] = "";
+            // $data['result']['body_fat']['body_fat_content']['unit'] = "";
+
+            // $data['result']['body_fat']['body_muscle_content']['value'] = "";
+            // $data['result']['body_fat']['body_muscle_content']['normal'] = "";
+            // $data['result']['body_fat']['body_muscle_content']['note'] = "";
+            // $data['result']['body_fat']['body_muscle_content']['unit'] = "";
+
+            // $data['result']['body_fat']['body_muscle_rate']['value'] = "";
+            // $data['result']['body_fat']['body_muscle_rate']['normal'] = "";
+            // $data['result']['body_fat']['body_muscle_rate']['note'] = "";
+            // $data['result']['body_fat']['body_muscle_rate']['unit'] = "";
+
+            // $data['result']['body_fat']['bone_salt']['value'] = "";
+            // $data['result']['body_fat']['bone_salt']['normal'] = "";
+            // $data['result']['body_fat']['bone_salt']['note'] = "";
+            // $data['result']['body_fat']['bone_salt']['unit'] = "";
+
+            // $data['result']['body_fat']['fat_free_mass']['value'] = "";
+            // $data['result']['body_fat']['fat_free_mass']['normal'] = "";
+            // $data['result']['body_fat']['fat_free_mass']['note'] = "";
+            // $data['result']['body_fat']['fat_free_mass']['unit'] = "";
+
+            // $data['result']['body_fat']['protein_rate']['value'] = "";
+            // $data['result']['body_fat']['protein_rate']['normal'] = "";
+            // $data['result']['body_fat']['protein_rate']['note'] = "";
+            // $data['result']['body_fat']['protein_rate']['unit'] = "";
+
+            // $data['result']['body_fat']['intracellular_fluid_volume']['value'] = "";
+            // $data['result']['body_fat']['intracellular_fluid_volume']['normal'] = "";
+            // $data['result']['body_fat']['intracellular_fluid_volume']['note'] = "";
+            // $data['result']['body_fat']['intracellular_fluid_volume']['unit'] = "";
+
+            // $data['result']['body_fat']['extracellular_fluid_volume']['value'] = "";
+            // $data['result']['body_fat']['extracellular_fluid_volume']['normal'] = "";
+            // $data['result']['body_fat']['extracellular_fluid_volume']['note'] = "";
+            // $data['result']['body_fat']['extracellular_fluid_volume']['unit'] = "";
+
+            // $data['result']['body_fat']['intracellular_fluid_rate']['value'] = "";
+            // $data['result']['body_fat']['intracellular_fluid_rate']['normal'] = "";
+            // $data['result']['body_fat']['intracellular_fluid_rate']['note'] = "";
+            // $data['result']['body_fat']['intracellular_fluid_rate']['unit'] = "";
+
+            // $data['result']['blood_pressure']['systolic_blood_pressure']['value'] = "";
+            // $data['result']['blood_pressure']['systolic_blood_pressure']['normal'] = "";
+            // $data['result']['blood_pressure']['systolic_blood_pressure']['note'] = "";
+            // $data['result']['blood_pressure']['systolic_blood_pressure']['unit'] = "";
+
+            // $data['result']['blood_pressure']['diastolic_blood_pressure']['value'] = "";
+            // $data['result']['blood_pressure']['diastolic_blood_pressure']['normal'] = "";
+            // $data['result']['blood_pressure']['diastolic_blood_pressure']['note'] = "";
+            // $data['result']['blood_pressure']['diastolic_blood_pressure']['unit'] = "";
+
+            // $data['result']['blood_pressure']['heart_rate']['value'] = "";
+            // $data['result']['blood_pressure']['heart_rate']['normal'] = "";
+            // $data['result']['blood_pressure']['heart_rate']['note'] = "";
+            // $data['result']['blood_pressure']['heart_rate']['unit'] = "";
+
+            // $data['result']['blood_oxygen']['blood_oxygen']['value'] = "";
+            // $data['result']['blood_oxygen']['blood_oxygen']['normal'] = "";
+            // $data['result']['blood_oxygen']['blood_oxygen']['note'] = "";
+            // $data['result']['blood_oxygen']['blood_oxygen']['unit'] = "";
+
+            // $data['result']['body_temperature']['body_temperature']['value'] = "";
+            // $data['result']['body_temperature']['body_temperature']['normal'] = "";
+            // $data['result']['body_temperature']['body_temperature']['note'] = "";
+            // $data['result']['body_temperature']['body_temperature']['unit'] = "";
+
+            // $data['result']['lung_function']['peak_expiratory_flow']['value'] = "";
+            // $data['result']['lung_function']['peak_expiratory_flow']['normal'] = "";
+            // $data['result']['lung_function']['peak_expiratory_flow']['note'] = "";
+            // $data['result']['lung_function']['peak_expiratory_flow']['unit'] = "";
+
+            // $data['result']['lung_function']['forced_expiratory_volume_in_the_first_second']['value'] = "";
+            // $data['result']['lung_function']['forced_expiratory_volume_in_the_first_second']['normal'] = "";
+            // $data['result']['lung_function']['forced_expiratory_volume_in_the_first_second']['note'] = "";
+            // $data['result']['lung_function']['forced_expiratory_volume_in_the_first_second']['unit'] = "";
+
+            // $data['result']['lung_function']['forced_vital_capacity']['value'] = "";
+            // $data['result']['lung_function']['forced_vital_capacity']['normal'] = "";
+            // $data['result']['lung_function']['forced_vital_capacity']['note'] = "";
+            // $data['result']['lung_function']['forced_vital_capacity']['unit'] = "";
+
+            // $data['result']['lung_function']['forced_expiratory_volume_in_the_first_second_forced_vital_capacity']['value'] = "";
+            // $data['result']['lung_function']['forced_expiratory_volume_in_the_first_second_forced_vital_capacity']['normal'] = "";
+            // $data['result']['lung_function']['forced_expiratory_volume_in_the_first_second_forced_vital_capacity']['note'] = "";
+            // $data['result']['lung_function']['forced_expiratory_volume_in_the_first_second_forced_vital_capacity']['unit'] = "";
+
+            // $data['result']['fast_ECG']['ECG_result']['value'] = "";
+            // $data['result']['fast_ECG']['ECG_result']['normal'] = "";
+            // $data['result']['fast_ECG']['ECG_result']['note'] = "";
+            // $data['result']['fast_ECG']['ECG_result']['unit'] = "";
+
+            // $data['result']['fast_ECG']['ECG_waveform_picture_data']['value'] = "";
+            // $data['result']['fast_ECG']['ECG_waveform_picture_data']['normal'] = "";
+            // $data['result']['fast_ECG']['ECG_waveform_picture_data']['note'] = "";
+            // $data['result']['fast_ECG']['ECG_waveform_picture_data']['unit'] = "";
+
+            // $data['result']['fast_ECG']['ECG_waveform_picture_data_length']['value'] = "";
+            // $data['result']['fast_ECG']['ECG_waveform_picture_data_length']['normal'] = "";
+            // $data['result']['fast_ECG']['ECG_waveform_picture_data_length']['note'] = "";
+            // $data['result']['fast_ECG']['ECG_waveform_picture_data_length']['unit'] = "";
+
+            // $data['result']['blood_sugar']['types_of_blood_glucose_measurement']['value'] = "";
+            // $data['result']['blood_sugar']['types_of_blood_glucose_measurement']['normal'] = "";
+            // $data['result']['blood_sugar']['types_of_blood_glucose_measurement']['note'] = "";
+            // $data['result']['blood_sugar']['types_of_blood_glucose_measurement']['unit'] = "";
+
+            // $data['result']['blood_sugar']['blood_glucose_level']['value'] = "";
+            // $data['result']['blood_sugar']['blood_glucose_level']['normal'] = "";
+            // $data['result']['blood_sugar']['blood_glucose_level']['note'] = "";
+            // $data['result']['blood_sugar']['blood_glucose_level']['unit'] = "";
+
+            // $data['result']['waist_hip_rate']['waistline']['value'] = "";
+            // $data['result']['waist_hip_rate']['waistline']['normal'] = "";
+            // $data['result']['waist_hip_rate']['waistline']['note'] = "";
+            // $data['result']['waist_hip_rate']['waistline']['unit'] = "";
+
+            // $data['result']['waist_hip_rate']['hipline']['value'] = "";
+            // $data['result']['waist_hip_rate']['hipline']['normal'] = "";
+            // $data['result']['waist_hip_rate']['hipline']['note'] = "";
+            // $data['result']['waist_hip_rate']['hipline']['unit'] = "";
+
+            // $data['result']['waist_hip_rate']['waist_hip_rate']['value'] = "";
+            // $data['result']['waist_hip_rate']['waist_hip_rate']['normal'] = "";
+            // $data['result']['waist_hip_rate']['waist_hip_rate']['note'] = "";
+            // $data['result']['waist_hip_rate']['waist_hip_rate']['unit'] = "";
+
+            // $data['result']['uric_acid']['uric_acid_value']['value'] = "";
+            // $data['result']['uric_acid']['uric_acid_value']['normal'] = "";
+            // $data['result']['uric_acid']['uric_acid_value']['note'] = "";
+            // $data['result']['uric_acid']['uric_acid_value']['unit'] = "";
+
+            // $data['result']['cholesterol']['cholesterol_value']['value'] = "";
+            // $data['result']['cholesterol']['cholesterol_value']['normal'] = "";
+            // $data['result']['cholesterol']['cholesterol_value']['note'] = "";
+            // $data['result']['cholesterol']['cholesterol_value']['unit'] = "";
+
+            // $data['result']['TCM_constitution_identification']['TCM_constitution_type']['value'] = "";
+            // $data['result']['TCM_constitution_identification']['TCM_constitution_type']['normal'] = "";
+            // $data['result']['TCM_constitution_identification']['TCM_constitution_type']['note'] = "";
+            // $data['result']['TCM_constitution_identification']['TCM_constitution_type']['unit'] = "";
+
+            // $data['result']['TCM_constitution_identification']['yang_deficiency_quality_score']['value'] = "";
+            // $data['result']['TCM_constitution_identification']['yang_deficiency_quality_score']['normal'] = "";
+            // $data['result']['TCM_constitution_identification']['yang_deficiency_quality_score']['note'] = "";
+            // $data['result']['TCM_constitution_identification']['yang_deficiency_quality_score']['unit'] = "";
+
+            // $data['result']['TCM_constitution_identification']['yin_deficiency_quality_score']['value'] = "";
+            // $data['result']['TCM_constitution_identification']['yin_deficiency_quality_score']['normal'] = "";
+            // $data['result']['TCM_constitution_identification']['yin_deficiency_quality_score']['note'] = "";
+            // $data['result']['TCM_constitution_identification']['yin_deficiency_quality_score']['unit'] = "";
+
+            // $data['result']['TCM_constitution_identification']['qi_deficiency_quality_score']['value'] = "";
+            // $data['result']['TCM_constitution_identification']['qi_deficiency_quality_score']['normal'] = "";
+            // $data['result']['TCM_constitution_identification']['qi_deficiency_quality_score']['note'] = "";
+            // $data['result']['TCM_constitution_identification']['qi_deficiency_quality_score']['unit'] = "";
+
+            // $data['result']['TCM_constitution_identification']['phlegm_dampness_score']['value'] = "";
+            // $data['result']['TCM_constitution_identification']['phlegm_dampness_score']['normal'] = "";
+            // $data['result']['TCM_constitution_identification']['phlegm_dampness_score']['note'] = "";
+            // $data['result']['TCM_constitution_identification']['phlegm_dampness_score']['unit'] = "";
+
+            // $data['result']['TCM_constitution_identification']['humidity_and_heat_quality_score']['value'] = "";
+            // $data['result']['TCM_constitution_identification']['humidity_and_heat_quality_score']['normal'] = "";
+            // $data['result']['TCM_constitution_identification']['humidity_and_heat_quality_score']['note'] = "";
+            // $data['result']['TCM_constitution_identification']['humidity_and_heat_quality_score']['unit'] = "";
+
+            // $data['result']['TCM_constitution_identification']['blood_stasis_score']['value'] = "";
+            // $data['result']['TCM_constitution_identification']['blood_stasis_score']['normal'] = "";
+            // $data['result']['TCM_constitution_identification']['blood_stasis_score']['note'] = "";
+            // $data['result']['TCM_constitution_identification']['blood_stasis_score']['unit'] = "";
+
+            // $data['result']['TCM_constitution_identification']['special_quality_score']['value'] = "";
+            // $data['result']['TCM_constitution_identification']['special_quality_score']['normal'] = "";
+            // $data['result']['TCM_constitution_identification']['special_quality_score']['note'] = "";
+            // $data['result']['TCM_constitution_identification']['special_quality_score']['unit'] = "";
+
+            // $data['result']['TCM_constitution_identification']['qi_stagnation_quality_score']['value'] = "";
+            // $data['result']['TCM_constitution_identification']['qi_stagnation_quality_score']['normal'] = "";
+            // $data['result']['TCM_constitution_identification']['qi_stagnation_quality_score']['note'] = "";
+            // $data['result']['TCM_constitution_identification']['qi_stagnation_quality_score']['unit'] = "";
+
+            // $data['result']['TCM_constitution_identification']['peace_and_quality_score']['value'] = "";
+            // $data['result']['TCM_constitution_identification']['peace_and_quality_score']['normal'] = "";
+            // $data['result']['TCM_constitution_identification']['peace_and_quality_score']['note'] = "";
+            // $data['result']['TCM_constitution_identification']['peace_and_quality_score']['unit'] = "";
+
+            // $data['result']['vision']['left_eye']['value'] = "";
+            // $data['result']['vision']['left_eye']['normal'] = "";
+            // $data['result']['vision']['left_eye']['note'] = "";
+            // $data['result']['vision']['left_eye']['unit'] = "";
+
+            // $data['result']['vision']['visual_acuity_of_the_left_eye']['value'] = "";
+            // $data['result']['vision']['visual_acuity_of_the_left_eye']['normal'] = "";
+            // $data['result']['vision']['visual_acuity_of_the_left_eye']['note'] = "";
+            // $data['result']['vision']['visual_acuity_of_the_left_eye']['unit'] = "";
+
+            // $data['result']['vision']['left_eye_visual_cues']['value'] = "";
+            // $data['result']['vision']['left_eye_visual_cues']['normal'] = "";
+            // $data['result']['vision']['left_eye_visual_cues']['note'] = "";
+            // $data['result']['vision']['left_eye_visual_cues']['unit'] = "";
+
+            // $data['result']['vision']['right_eye']['value'] = "";
+            // $data['result']['vision']['right_eye']['normal'] = "";
+            // $data['result']['vision']['right_eye']['note'] = "";
+            // $data['result']['vision']['right_eye']['unit'] = "";
+
+            // $data['result']['vision']['visual_acuity_of_the_right_eye']['value'] = "";
+            // $data['result']['vision']['visual_acuity_of_the_right_eye']['normal'] = "";
+            // $data['result']['vision']['visual_acuity_of_the_right_eye']['note'] = "";
+            // $data['result']['vision']['visual_acuity_of_the_right_eye']['unit'] = "";
+
+            // $data['result']['vision']['visual_cues_in_right_eye']['value'] = "";
+            // $data['result']['vision']['visual_cues_in_right_eye']['normal'] = "";
+            // $data['result']['vision']['visual_cues_in_right_eye']['note'] = "";
+            // $data['result']['vision']['visual_cues_in_right_eye']['unit'] = "";
+
+            // $data['result']['color_blindness']['color_blindness_result']['value'] = "";
+            // $data['result']['color_blindness']['color_blindness_result']['normal'] = "";
+            // $data['result']['color_blindness']['color_blindness_result']['note'] = "";
+            // $data['result']['color_blindness']['color_blindness_result']['unit'] = "";
+
+            // $data['result']['psychological_tests']['UCLA_loneliness_scale_score']['value'] = "";
+            // $data['result']['psychological_tests']['UCLA_loneliness_scale_score']['normal'] = "";
+            // $data['result']['psychological_tests']['UCLA_loneliness_scale_score']['note'] = "";
+            // $data['result']['psychological_tests']['UCLA_loneliness_scale_score']['unit'] = "";
+
+            // $data['result']['psychological_tests']['geriatric_depression_scale_score']['value'] = "";
+            // $data['result']['psychological_tests']['geriatric_depression_scale_score']['normal'] = "";
+            // $data['result']['psychological_tests']['geriatric_depression_scale_score']['note'] = "";
+            // $data['result']['psychological_tests']['geriatric_depression_scale_score']['unit'] = "";
+
+            // $data['result']['psychological_tests']['self_rated_depression_scale_score']['value'] = "";
+            // $data['result']['psychological_tests']['self_rated_depression_scale_score']['normal'] = "";
+            // $data['result']['psychological_tests']['self_rated_depression_scale_score']['note'] = "";
+            // $data['result']['psychological_tests']['self_rated_depression_scale_score']['unit'] = "";
+
+            // $data['result']['psychological_tests']['hamilton_anxiety_scale_score']['value'] = "";
+            // $data['result']['psychological_tests']['hamilton_anxiety_scale_score']['normal'] = "";
+            // $data['result']['psychological_tests']['hamilton_anxiety_scale_score']['note'] = "";
+            // $data['result']['psychological_tests']['hamilton_anxiety_scale_score']['unit'] = "";
+
+            // $data['result']['psychological_tests']['simple_coping_style_score']['value'] = "";
+            // $data['result']['psychological_tests']['simple_coping_style_score']['normal'] = "";
+            // $data['result']['psychological_tests']['simple_coping_style_score']['note'] = "";
+            // $data['result']['psychological_tests']['simple_coping_style_score']['unit'] = "";
+
+            // $data['result']['psychological_tests']['subjective_support_score']['value'] = "";
+            // $data['result']['psychological_tests']['subjective_support_score']['normal'] = "";
+            // $data['result']['psychological_tests']['subjective_support_score']['note'] = "";
+            // $data['result']['psychological_tests']['subjective_support_score']['unit'] = "";
+
+            // $data['result']['psychological_tests']['objective_support_score']['value'] = "";
+            // $data['result']['psychological_tests']['objective_support_score']['normal'] = "";
+            // $data['result']['psychological_tests']['objective_support_score']['note'] = "";
+            // $data['result']['psychological_tests']['objective_support_score']['unit'] = "";
+
+            // $data['result']['psychological_tests']['support_utilization_degree_score']['value'] = "";
+            // $data['result']['psychological_tests']['support_utilization_degree_score']['normal'] = "";
+            // $data['result']['psychological_tests']['support_utilization_degree_score']['note'] = "";
+            // $data['result']['psychological_tests']['support_utilization_degree_score']['unit'] = "";
+
+            // $data['result']['hearing']['hearing_result']['value'] = "";
+            // $data['result']['hearing']['hearing_result']['normal'] = "";
+            // $data['result']['hearing']['hearing_result']['note'] = "";
+            // $data['result']['hearing']['hearing_result']['unit'] = "";
+
+            // $data['result']['hearing']['listening']['value'] = "";
+            // $data['result']['hearing']['listening']['normal'] = "";
+            // $data['result']['hearing']['listening']['note'] = "";
+            // $data['result']['hearing']['listening']['unit'] = "";
+
+            // $data['result']['osteoporosis']['osteoporosis_result']['value'] = "";
+            // $data['result']['osteoporosis']['osteoporosis_result']['normal'] = "";
+            // $data['result']['osteoporosis']['osteoporosis_result']['note'] = "";
+            // $data['result']['osteoporosis']['osteoporosis_result']['unit'] = "";
+
+            // $data['result']['blood_routine']['red_blood_cell_count']['value'] = "";
+            // $data['result']['blood_routine']['red_blood_cell_count']['normal'] = "";
+            // $data['result']['blood_routine']['red_blood_cell_count']['note'] = "";
+            // $data['result']['blood_routine']['red_blood_cell_count']['unit'] = "";
+
+            // $data['result']['blood_routine']['hemoglobin']['value'] = "";
+            // $data['result']['blood_routine']['hemoglobin']['normal'] = "";
+            // $data['result']['blood_routine']['hemoglobin']['note'] = "";
+            // $data['result']['blood_routine']['hemoglobin']['unit'] = "";
+
+            // $data['result']['blood_routine']['hematocrit']['value'] = "";
+            // $data['result']['blood_routine']['hematocrit']['normal'] = "";
+            // $data['result']['blood_routine']['hematocrit']['note'] = "";
+            // $data['result']['blood_routine']['hematocrit']['unit'] = "";
+
+            // $data['result']['blood_routine']['mean_corpuscular_volume']['value'] = "";
+            // $data['result']['blood_routine']['mean_corpuscular_volume']['normal'] = "";
+            // $data['result']['blood_routine']['mean_corpuscular_volume']['note'] = "";
+            // $data['result']['blood_routine']['mean_corpuscular_volume']['unit'] = "";
+
+            // $data['result']['blood_routine']['mean_corpuscular_hemoglobin']['value'] = "";
+            // $data['result']['blood_routine']['mean_corpuscular_hemoglobin']['normal'] = "";
+            // $data['result']['blood_routine']['mean_corpuscular_hemoglobin']['note'] = "";
+            // $data['result']['blood_routine']['mean_corpuscular_hemoglobin']['unit'] = "";
+
+            // $data['result']['blood_routine']['mean_corpuscular_hemoglobin_concentration']['value'] = "";
+            // $data['result']['blood_routine']['mean_corpuscular_hemoglobin_concentration']['normal'] = "";
+            // $data['result']['blood_routine']['mean_corpuscular_hemoglobin_concentration']['note'] = "";
+            // $data['result']['blood_routine']['mean_corpuscular_hemoglobin_concentration']['unit'] = "";
+
+            // $data['result']['blood_routine']['platelet_distribution_width']['value'] = "";
+            // $data['result']['blood_routine']['platelet_distribution_width']['normal'] = "";
+            // $data['result']['blood_routine']['platelet_distribution_width']['note'] = "";
+            // $data['result']['blood_routine']['platelet_distribution_width']['unit'] = "";
+
+            // $data['result']['blood_routine']['red_blood_cell_distribution_width']['value'] = "";
+            // $data['result']['blood_routine']['red_blood_cell_distribution_width']['normal'] = "";
+            // $data['result']['blood_routine']['red_blood_cell_distribution_width']['note'] = "";
+            // $data['result']['blood_routine']['red_blood_cell_distribution_width']['unit'] = "";
+
+            // $data['result']['blood_routine']['average_red_blood_cell_volume_coefficient_of_variation']['value'] = "";
+            // $data['result']['blood_routine']['average_red_blood_cell_volume_coefficient_of_variation']['normal'] = "";
+            // $data['result']['blood_routine']['average_red_blood_cell_volume_coefficient_of_variation']['note'] = "";
+            // $data['result']['blood_routine']['average_red_blood_cell_volume_coefficient_of_variation']['unit'] = "";
+
+            // $data['result']['blood_routine']['red_blood_cell_distribution_width_stand_deviation']['value'] = "";
+            // $data['result']['blood_routine']['red_blood_cell_distribution_width_stand_deviation']['normal'] = "";
+            // $data['result']['blood_routine']['red_blood_cell_distribution_width_stand_deviation']['note'] = "";
+            // $data['result']['blood_routine']['red_blood_cell_distribution_width_stand_deviation']['unit'] = "";
+
+            // $data['result']['blood_routine']['platelet_count']['value'] = "";
+            // $data['result']['blood_routine']['platelet_count']['normal'] = "";
+            // $data['result']['blood_routine']['platelet_count']['note'] = "";
+            // $data['result']['blood_routine']['platelet_count']['unit'] = "";
+
+            // $data['result']['blood_routine']['leukocyte_count']['value'] = "";
+            // $data['result']['blood_routine']['leukocyte_count']['normal'] = "";
+            // $data['result']['blood_routine']['leukocyte_count']['note'] = "";
+            // $data['result']['blood_routine']['leukocyte_count']['unit'] = "";
+
+            // $data['result']['blood_routine']['neutrophil_count']['value'] = "";
+            // $data['result']['blood_routine']['neutrophil_count']['normal'] = "";
+            // $data['result']['blood_routine']['neutrophil_count']['note'] = "";
+            // $data['result']['blood_routine']['neutrophil_count']['unit'] = "";
+
+            // $data['result']['blood_routine']['lymphocyte_count']['value'] = "";
+            // $data['result']['blood_routine']['lymphocyte_count']['normal'] = "";
+            // $data['result']['blood_routine']['lymphocyte_count']['note'] = "";
+            // $data['result']['blood_routine']['lymphocyte_count']['unit'] = "";
+
+            // $data['result']['blood_routine']['eosinophil_count']['value'] = "";
+            // $data['result']['blood_routine']['eosinophil_count']['normal'] = "";
+            // $data['result']['blood_routine']['eosinophil_count']['note'] = "";
+            // $data['result']['blood_routine']['eosinophil_count']['unit'] = "";
+
+            // $data['result']['blood_routine']['monocyte_count']['value'] = "";
+            // $data['result']['blood_routine']['monocyte_count']['normal'] = "";
+            // $data['result']['blood_routine']['monocyte_count']['note'] = "";
+            // $data['result']['blood_routine']['monocyte_count']['unit'] = "";
+
+            // $data['result']['blood_routine']['basophil_count']['value'] = "";
+            // $data['result']['blood_routine']['basophil_count']['normal'] = "";
+            // $data['result']['blood_routine']['basophil_count']['note'] = "";
+            // $data['result']['blood_routine']['basophil_count']['unit'] = "";
+
+            // $data['result']['blood_routine']['neutrophil_ratio']['value'] = "";
+            // $data['result']['blood_routine']['neutrophil_ratio']['normal'] = "";
+            // $data['result']['blood_routine']['neutrophil_ratio']['note'] = "";
+            // $data['result']['blood_routine']['neutrophil_ratio']['unit'] = "";
+
+            // $data['result']['blood_routine']['lymphocyte_ratio']['value'] = "";
+            // $data['result']['blood_routine']['lymphocyte_ratio']['normal'] = "";
+            // $data['result']['blood_routine']['lymphocyte_ratio']['note'] = "";
+            // $data['result']['blood_routine']['lymphocyte_ratio']['unit'] = "";
+
+            // $data['result']['blood_routine']['eosinophil_ratio']['value'] = "";
+            // $data['result']['blood_routine']['eosinophil_ratio']['normal'] = "";
+            // $data['result']['blood_routine']['eosinophil_ratio']['note'] = "";
+            // $data['result']['blood_routine']['eosinophil_ratio']['unit'] = "";
+
+            // $data['result']['blood_routine']['monocyte_ratio']['value'] = "";
+            // $data['result']['blood_routine']['monocyte_ratio']['normal'] = "";
+            // $data['result']['blood_routine']['monocyte_ratio']['note'] = "";
+            // $data['result']['blood_routine']['monocyte_ratio']['unit'] = "";
+
+            // $data['result']['blood_routine']['basophil_ratio']['value'] = "";
+            // $data['result']['blood_routine']['basophil_ratio']['normal'] = "";
+            // $data['result']['blood_routine']['basophil_ratio']['note'] = "";
+            // $data['result']['blood_routine']['basophil_ratio']['unit'] = "";
+
+            $this->response($data,REST_Controller::HTTP_OK);
         }
 
-        public function ReceiveDataFHIR_POST(){
-            $body = json_decode($this->input->raw_input_stream, true);
+        // public function ReceiveDataFHIR_POST(){
+        //     $body = json_decode($this->input->raw_input_stream, true);
 
-            $data['transaksi_id']                                = generateuuid();
-            $data['name']                                        = $body['sfz']['name'];
-            $data['gender']                                      = $body['sfz']['sex'];
-            $data['nation']                                      = $body['sfz']['nation'];
-            $data['qr_code']                                     = $body['sfz']['qrCode'];
-            $data['birth_date']                                  = $body['sfz']['birthday'];
-            $data['id_number']                                   = $body['sfz']['idnumber'];
-            $data['age']                                         = $body['sfz']['age'];
-            $data['address']                                     = $body['sfz']['address'];
-            $data['id_card_photo_data']                          = $body['sfz']['data'];
-            $data['height']                                      = $body['hw']['height'];
-            $data['weight']                                      = $body['hw']['weight'];
-            $data['bmi']                                         = $body['hw']['bmi'];
-            $data['body_fat_rate']                               = $body['fat']['zflv'];
-            $data['basal_metabolism']                            = $body['fat']['jcdx'];
-            $data['body_water_content']                          = $body['fat']['tsfl'];
-            $data['body_water_rate']                             = $body['fat']['tsflv'];
-            $data['body_fat_content']                            = $body['fat']['zfl'];
-            $data['body_muscle_content']                         = $body['fat']['jrl'];
-            $data['body_muscle_rate']                            = $body['fat']['jrlv'];
-            $data['bone_salt']                                   = $body['fat']['gy'];
-            $data['fat_free_mass']                               = $body['fat']['qztz'];
-            $data['protein_rate']                                = $body['fat']['dbzlv'];
-            $data['intracellular_fluid_volume']                  = $body['fat']['xbnyl'];
-            $data['extracellular_fluid_volume']                  = $body['fat']['xbwyl'];
-            $data['intracellular_fluid_rate']                    = $body['fat']['xbnylv'];
-            $data['extracellular_fluid_rate']                    = $body['fat']['xbwylv'];
-            $data['protein']                                     = $body['fat']['dbz'];
-            $data['visceral_fat_grade']                          = $body['fat']['nzzf'];
-            $data['bone_mass']                                   = $body['fat']['gl'];
-            $data['systolic_blood_pressure']                     = $body['blood']['high'];
-            $data['diastolic_blood_pressure']                    = $body['blood']['low'];
-            $data['heart_rate']                                  = $body['blood']['rate'];
-            $data['systolic_blood_pressure_value']               = $body['blood']['rhigh'];
-            $data['diastolic_blood_pressure_value']              = $body['blood']['rlow'];
-            $data['blood_oxygen']                                = $body['spo2']['sp'];
-            $data['body_temperature']                            = $body['tiwen'];
-            $data['ecg_result']                                  = $body['ecg']['result'];
-            $data['ecg_waveform_picture_data']                   = $body['ecg']['data'];
-            $data['ecg_waveform_picture_data_length']            = $body['ecg']['len'];
-            $data['ecg_report_picture_data']                     = $body['ecg12']['data'];
-            $data['ecg_diagnosis_result']                        = $body['ecg12']['ecg_result'];
-            $data['ecg_heart_rate']                              = $body['ecg12']['heart_rate'];
-            $data['ecg_p_axis']                                  = $body['ecg12']['p_axis'];
-            $data['ecg_qrs_axis']                                = $body['ecg12']['qrs_axis'];
-            $data['ecg_t_axis']                                  = $body['ecg12']['t_axis'];
-            $data['ecg_pr_interval']                             = $body['ecg12']['pr'];
-            $data['ecg_qrs_time_limit']                          = $body['ecg12']['qrs'];
-            $data['ecg_qt_interval']                             = $body['ecg12']['qt'];
-            $data['ecg_qtc_interval']                            = $body['ecg12']['qtc'];
-            $data['ecg_rv5_value']                               = $body['ecg12']['rv5'];
-            $data['ecg_sv1_value']                               = $body['ecg12']['sv1'];
-            $data['ecg_sample_rate']                             = $body['ecg12']['sample_rate'];
-            $data['ecg_sample_duration']                         = $body['ecg12']['sample_time'];
-            $data['blood_glucose_type']                          = $body['xt']['type'];
-            $data['blood_glucose_level']                         = $body['xt']['value'];
-            $data['waistline']                                   = $body['ytb']['waist'];
-            $data['hipline']                                     = $body['ytb']['hip'];
-            $data['waist_hip_rate']                              = $body['ytb']['whr'];
-            $data['peak_expiratory_flow']                        = $body['fgn']['pef'];
-            $data['forced_expiratory_volume_1s']                 = $body['fgn']['fev1'];
-            $data['forced_vital_capacity']                       = $body['fgn']['fvc'];
-            $data['fev1_fvc_ratio']                              = $body['fgn']['bz'];
-            $data['uric_acid_value']                             = $body['ns'];
-            $data['cholesterol_value']                           = $body['dgc'];
-            $data['tcm_constitution_type']                       = $body['zybs'];
-            $data['left_eye_visual_acuity']                      = $body['shili']['left_eye'];
-            $data['right_eye_visual_acuity']                     = $body['shili']['right_eye'];
-            $data['color_blindness_result']                      = $body['semang'];
-            $data['ucla_loneliness_scale_score']                 = $body['xlcp']['ucla'];
-            $data['geriatric_depression_scale_score']            = $body['xlcp']['lnyy'];
-            $data['self_rated_depression_scale_score']           = $body['xlcp']['zpyy'];
-            $data['hamilton_anxiety_scale_score']                = $body['xlcp']['hmdjl'];
-            $data['emotional_health_test_scores']                = $body['xlcp']['qxjkd'];
-            $data['self_measured_health_rating_scale_score']     = $body['xlcp']['zcjkpd'];
-            $data['life_satisfaction_scale_score']               = $body['xlcp']['shmyd'];
-            $data['personality_disorder_personality_test_score'] = $body['xlcp']['rgza'];
-            $data['pstr_adult_stress_test_scores']               = $body['xlcp']['pstr'];
-            $data['harvard_sexuality_test_score']                = $body['xlcp']['hfxx'];
-            $data['emotional_intelligence_test_score']           = $body['xlcp']['eq'];
-            $data['sleep_status_assessment_score']               = $body['xlcp']['smzkpg'];
-            $data['device_code']                                 = $body['deviceID'];
-            $data['physical_examination_number']                 = $body['examNo'];
+        //     $data['transaksi_id']                                = generateuuid();
+        //     $data['name']                                        = $body['sfz']['name'];
+        //     $data['gender']                                      = $body['sfz']['sex'];
+        //     $data['nation']                                      = $body['sfz']['nation'];
+        //     $data['qr_code']                                     = $body['sfz']['qrCode'];
+        //     $data['birth_date']                                  = $body['sfz']['birthday'];
+        //     $data['id_number']                                   = $body['sfz']['idnumber'];
+        //     $data['age']                                         = $body['sfz']['age'];
+        //     $data['address']                                     = $body['sfz']['address'];
+        //     $data['id_card_photo_data']                          = $body['sfz']['data'];
+        //     $data['height']                                      = $body['hw']['height'];
+        //     $data['weight']                                      = $body['hw']['weight'];
+        //     $data['bmi']                                         = $body['hw']['bmi'];
+        //     $data['body_fat_rate']                               = $body['fat']['zflv'];
+        //     $data['basal_metabolism']                            = $body['fat']['jcdx'];
+        //     $data['body_water_content']                          = $body['fat']['tsfl'];
+        //     $data['body_water_rate']                             = $body['fat']['tsflv'];
+        //     $data['body_fat_content']                            = $body['fat']['zfl'];
+        //     $data['body_muscle_content']                         = $body['fat']['jrl'];
+        //     $data['body_muscle_rate']                            = $body['fat']['jrlv'];
+        //     $data['bone_salt']                                   = $body['fat']['gy'];
+        //     $data['fat_free_mass']                               = $body['fat']['qztz'];
+        //     $data['protein_rate']                                = $body['fat']['dbzlv'];
+        //     $data['intracellular_fluid_volume']                  = $body['fat']['xbnyl'];
+        //     $data['extracellular_fluid_volume']                  = $body['fat']['xbwyl'];
+        //     $data['intracellular_fluid_rate']                    = $body['fat']['xbnylv'];
+        //     $data['extracellular_fluid_rate']                    = $body['fat']['xbwylv'];
+        //     $data['protein']                                     = $body['fat']['dbz'];
+        //     $data['visceral_fat_grade']                          = $body['fat']['nzzf'];
+        //     $data['bone_mass']                                   = $body['fat']['gl'];
+        //     $data['systolic_blood_pressure']                     = $body['blood']['high'];
+        //     $data['diastolic_blood_pressure']                    = $body['blood']['low'];
+        //     $data['heart_rate']                                  = $body['blood']['rate'];
+        //     $data['systolic_blood_pressure_value']               = $body['blood']['rhigh'];
+        //     $data['diastolic_blood_pressure_value']              = $body['blood']['rlow'];
+        //     $data['blood_oxygen']                                = $body['spo2']['sp'];
+        //     $data['body_temperature']                            = $body['tiwen'];
+        //     $data['ecg_result']                                  = $body['ecg']['result'];
+        //     $data['ecg_waveform_picture_data']                   = $body['ecg']['data'];
+        //     $data['ecg_waveform_picture_data_length']            = $body['ecg']['len'];
+        //     $data['ecg_report_picture_data']                     = $body['ecg12']['data'];
+        //     $data['ecg_diagnosis_result']                        = $body['ecg12']['ecg_result'];
+        //     $data['ecg_heart_rate']                              = $body['ecg12']['heart_rate'];
+        //     $data['ecg_p_axis']                                  = $body['ecg12']['p_axis'];
+        //     $data['ecg_qrs_axis']                                = $body['ecg12']['qrs_axis'];
+        //     $data['ecg_t_axis']                                  = $body['ecg12']['t_axis'];
+        //     $data['ecg_pr_interval']                             = $body['ecg12']['pr'];
+        //     $data['ecg_qrs_time_limit']                          = $body['ecg12']['qrs'];
+        //     $data['ecg_qt_interval']                             = $body['ecg12']['qt'];
+        //     $data['ecg_qtc_interval']                            = $body['ecg12']['qtc'];
+        //     $data['ecg_rv5_value']                               = $body['ecg12']['rv5'];
+        //     $data['ecg_sv1_value']                               = $body['ecg12']['sv1'];
+        //     $data['ecg_sample_rate']                             = $body['ecg12']['sample_rate'];
+        //     $data['ecg_sample_duration']                         = $body['ecg12']['sample_time'];
+        //     $data['blood_glucose_type']                          = $body['xt']['type'];
+        //     $data['blood_glucose_level']                         = $body['xt']['value'];
+        //     $data['waistline']                                   = $body['ytb']['waist'];
+        //     $data['hipline']                                     = $body['ytb']['hip'];
+        //     $data['waist_hip_rate']                              = $body['ytb']['whr'];
+        //     $data['peak_expiratory_flow']                        = $body['fgn']['pef'];
+        //     $data['forced_expiratory_volume_1s']                 = $body['fgn']['fev1'];
+        //     $data['forced_vital_capacity']                       = $body['fgn']['fvc'];
+        //     $data['fev1_fvc_ratio']                              = $body['fgn']['bz'];
+        //     $data['uric_acid_value']                             = $body['ns'];
+        //     $data['cholesterol_value']                           = $body['dgc'];
+        //     $data['tcm_constitution_type']                       = $body['zybs'];
+        //     $data['left_eye_visual_acuity']                      = $body['shili']['left_eye'];
+        //     $data['right_eye_visual_acuity']                     = $body['shili']['right_eye'];
+        //     $data['color_blindness_result']                      = $body['semang'];
+        //     $data['ucla_loneliness_scale_score']                 = $body['xlcp']['ucla'];
+        //     $data['geriatric_depression_scale_score']            = $body['xlcp']['lnyy'];
+        //     $data['self_rated_depression_scale_score']           = $body['xlcp']['zpyy'];
+        //     $data['hamilton_anxiety_scale_score']                = $body['xlcp']['hmdjl'];
+        //     $data['emotional_health_test_scores']                = $body['xlcp']['qxjkd'];
+        //     $data['self_measured_health_rating_scale_score']     = $body['xlcp']['zcjkpd'];
+        //     $data['life_satisfaction_scale_score']               = $body['xlcp']['shmyd'];
+        //     $data['personality_disorder_personality_test_score'] = $body['xlcp']['rgza'];
+        //     $data['pstr_adult_stress_test_scores']               = $body['xlcp']['pstr'];
+        //     $data['harvard_sexuality_test_score']                = $body['xlcp']['hfxx'];
+        //     $data['emotional_intelligence_test_score']           = $body['xlcp']['eq'];
+        //     $data['sleep_status_assessment_score']               = $body['xlcp']['smzkpg'];
+        //     $data['device_code']                                 = $body['deviceID'];
+        //     $data['physical_examination_number']                 = $body['examNo'];
 
 
-            $this->md->insertdata($data);
+        //     $this->md->insertdata($data);
 
-            //!!!!!!!!Start FHIR
-            $bodyFHIR       = [];
-            $identifier1    = [];
-            $identifier2    = [];
-            $subject        = [];
-            $categorycoding = [];
+        //     //!!!!!!!!Start FHIR
+        //     $bodyFHIR       = [];
+        //     $identifier1    = [];
+        //     $identifier2    = [];
+        //     $performer = [];
+        //     $subject        = [];
+        //     $categorycoding = [];
 
-            $imtscale                   = [];
-            $imtscaleresourcecodecoding = [];
+        //     $imtscale                   = [];
+        //     $imtscaleresourcecodecoding = [];
 
-            $categorycoding['code']    = "vital-signs";
-            $categorycoding['display'] = "Vital Signs";
-            $categorycoding['system']  = "http://terminology.hl7.org/CodeSystem/observation-category";
-            $identifier1['system']     = "http://sys-ids.kemkes.go.id/observation/".ORGID_SATUSEHAT;
-            $identifier1['use']        = "official";
-            $identifier1['value']      = $body['examNo'];
-            $identifier2['system']     = "http://sys-ids.kemkes.go.id/observation/".ORGID_SATUSEHAT;
-            $identifier2['use']        = "official";
-            $identifier2['value']      = generateuuid();
-            $subject['display']        = $body['sfz']['name'];
-            $subject['reference']      = "Patient/".$body['sfz']['idnumber'];
+        //     $categorycoding['code']    = "vital-signs";
+        //     $categorycoding['display'] = "Vital Signs";
+        //     $categorycoding['system']  = "http://terminology.hl7.org/CodeSystem/observation-category";
+        //     $identifier1['system']     = "http://sys-ids.kemkes.go.id/observation/".ORGID_SATUSEHAT;
+        //     $identifier1['use']        = "official";
+        //     $identifier1['value']      = $body['examNo'];
+        //     $identifier2['system']     = "http://sys-ids.kemkes.go.id/observation/".ORGID_SATUSEHAT;
+        //     $identifier2['use']        = "official";
+        //     $identifier2['value']      = generateuuid();
+            
+        //     $subject['display']        = $body['sfz']['name'];
+        //     $subject['reference']      = "Patient/".$body['sfz']['idnumber'];
 
-            $imtscaleresourcecodecoding['code']    = "39156-5";
-            $imtscaleresourcecodecoding['display'] = "Body mass index (BMI) [Ratio]";
-            $imtscaleresourcecodecoding['system']  = "http://loinc.org";
+        //     $imtscaleresourcecodecoding['code']    = "39156-5";
+        //     $imtscaleresourcecodecoding['display'] = "Body mass index (BMI) [Ratio]";
+        //     $imtscaleresourcecodecoding['system']  = "http://loinc.org";
 
-            $imtscaleresource['category'][]['coding'][]  = $categorycoding;
-            $imtscaleresource['code']['coding'][]        = $imtscaleresourcecodecoding;
-            // $imtscaleresource['effectiveDateTime']       = $a->TRIAGE;
-            // $imtscaleresource['encounter']               = $encounter;
-            $imtscaleresource['identifier'][]            = $identifier1;
-            $imtscaleresource['identifier'][]            = $identifier2;
-            // $imtscaleresource['issued']                  = $a->TRIAGE;
-            // $imtscaleresource['performer'][]             = $performer;
-            $imtscaleresource['resourceType']            = "Observation";
-            $imtscaleresource['status']                  = "final";
-            $imtscaleresource['subject']                 = $subject;
-            $imtscaleresource['valueQuantity']['code']   = "kg/m2";
-            $imtscaleresource['valueQuantity']['system'] = "http://unitsofmeasure.org";
-            $imtscaleresource['valueQuantity']['unit']   = "kg/m2";
-            $imtscaleresource['valueQuantity']['value']  = $body['hw']['bmi'];
+        //     $imtscaleresource['category'][]['coding'][]  = $categorycoding;
+        //     $imtscaleresource['code']['coding'][]        = $imtscaleresourcecodecoding;
+        //     // $imtscaleresource['effectiveDateTime']       = $a->TRIAGE;
+        //     // $imtscaleresource['encounter']               = $encounter;
+        //     $imtscaleresource['identifier'][]            = $identifier1;
+        //     $imtscaleresource['identifier'][]            = $identifier2;
+        //     // $imtscaleresource['issued']                  = $a->TRIAGE;
+        //     // $imtscaleresource['performer'][]             = $performer;
+        //     $imtscaleresource['resourceType']            = "Observation";
+        //     $imtscaleresource['status']                  = "final";
+        //     $imtscaleresource['subject']                 = $subject;
+        //     $imtscaleresource['valueQuantity']['code']   = "kg/m2";
+        //     $imtscaleresource['valueQuantity']['system'] = "http://unitsofmeasure.org";
+        //     $imtscaleresource['valueQuantity']['unit']   = "kg/m2";
+        //     $imtscaleresource['valueQuantity']['value']  = $body['hw']['bmi'];
 
-            $imtscale['fullUrl']           = "urn:uuid:".generateuuid();
-            $imtscale['request']['method'] = "POST";
-            $imtscale['request']['url']    = "Observation";
-            $imtscale['resource']          = $imtscaleresource;
+        //     $imtscale['fullUrl']           = "urn:uuid:".generateuuid();
+        //     $imtscale['request']['method'] = "POST";
+        //     $imtscale['request']['url']    = "Observation";
+        //     $imtscale['resource']          = $imtscaleresource;
 
-            $bodyFHIR['resourceType'] = "Bundle";
-            $bodyFHIR['type']         = "transaction";
-            $bodyFHIR['entry'][]      = $imtscale;
+        //     $bodyFHIR['resourceType'] = "Bundle";
+        //     $bodyFHIR['type']         = "transaction";
+        //     $bodyFHIR['entry'][]      = $imtscale;
 
-            $response = Satusehat::postbundle(json_encode($bodyFHIR));
-            $this->response($response,200);
+        //     $response = Satusehat::postbundle(json_encode($bodyFHIR));
+        //     $this->response($response,200);
+        // }
+
+        public function SatuSehat_POST(){
+            $transsaksiid="9ee99380-a6f6-4707-87fb-ba3e4183810c";
+            $resultexamination = $this->md->resultexamination(ORG_ID,$transsaksiid);
+
+            if(!empty($resultexamination)){
+                $responsegetencounter = Satusehat::getencounter($resultexamination[0]->ENCOUNTER_ID);
+             
+                $bodyFHIR                   = [];
+                $categorycoding             = [];
+                $encounter                  = [];
+                $identifier1                = [];
+                $identifier2                = [];
+                $performer                  = [];
+                $subject                    = [];
+                
+                $imtscale                   = [];
+                $imtscaleresource           = [];
+                $imtscaleresourcecodecoding = [];
+
+                $height                   = [];
+                $heightresource           = [];
+                $heightresourcecodecoding = [];
+
+                $weight                   = [];
+                $weightresource           = [];
+                $weightresourcecodecoding = [];
+
+                $systol                   = [];
+                $systolresource           = [];
+                $systolresourcecodecoding = [];
+
+                $diastol                   = [];
+                $diastolresource           = [];
+                $diastolresourcecodecoding = [];
+
+                $temp                   = [];
+                $tempresource           = [];
+                $tempresourcecodecoding = [];
+
+                $categorycoding['code']    = "vital-signs";
+                $categorycoding['display'] = "Vital Signs";
+                $categorycoding['system']  = "http://terminology.hl7.org/CodeSystem/observation-category";
+                $encounter['display']      = "Kunjungan Rawat Jalan";
+                $encounter['reference']    = "Encounter/".$resultexamination[0]->ENCOUNTER_ID;
+                $identifier1['system']     = "http://sys-ids.kemkes.go.id/observation/".ORGID_SATUSEHAT;
+                $identifier1['use']        = "official";
+                $identifier1['value']      = $resultexamination[0]->EXAM_ID;
+                $identifier2['system']     = "http://sys-ids.kemkes.go.id/observation/".ORGID_SATUSEHAT;
+                $identifier2['use']        = "official";
+                $identifier2['value']      = generateuuid();
+                $performer['display']      = $responsegetencounter['participant'][0]['individual']['display'];
+                $performer['reference']    = $responsegetencounter['participant'][0]['individual']['reference'];
+                $subject['display']        = $responsegetencounter['subject']['display'];
+                $subject['reference']      = $responsegetencounter['subject']['reference'];
+
+                $imtscaleresourcecodecoding['code']    = "39156-5";
+                $imtscaleresourcecodecoding['display'] = "Body mass index (BMI) [Ratio]";
+                $imtscaleresourcecodecoding['system']  = "http://loinc.org";
+
+                $heightresourcecodecoding['code']    = "8302-2";
+                $heightresourcecodecoding['display'] = "Body height";
+                $heightresourcecodecoding['system']  = "http://loinc.org";
+
+                $weightresourcecodecoding['code']    = "29463-7";
+                $weightresourcecodecoding['display'] = "Body weight";
+                $weightresourcecodecoding['system']  = "http://loinc.org";
+
+                $systolresourcecodecoding['code']    = "8480-6";
+                $systolresourcecodecoding['display'] = "Systolic blood pressure";
+                $systolresourcecodecoding['system']  = "http://loinc.org";
+
+                $diastolresourcecodecoding['code']    = "8462-4";
+                $diastolresourcecodecoding['display'] = "Diastolic blood pressure";
+                $diastolresourcecodecoding['system']  = "http://loinc.org";
+
+                $tempresourcecodecoding['code']    = "8310-5";
+                $tempresourcecodecoding['display'] = "Body temperature";
+                $tempresourcecodecoding['system']  = "http://loinc.org";
+
+                $imtscaleresource['category'][]['coding'][]  = $categorycoding;
+                $imtscaleresource['code']['coding'][]        = $imtscaleresourcecodecoding;
+                $imtscaleresource['effectiveDateTime']       = $resultexamination[0]->assessmentdate."+00:00";
+                $imtscaleresource['encounter']               = $encounter;
+                $imtscaleresource['identifier'][]            = $identifier1;
+                $imtscaleresource['identifier'][]            = $identifier2;
+                $imtscaleresource['issued']                  = $resultexamination[0]->assessmentdate."+00:00";
+                $imtscaleresource['performer'][]             = $performer;
+                $imtscaleresource['resourceType']            = "Observation";
+                $imtscaleresource['status']                  = "final";
+                $imtscaleresource['subject']                 = $subject;
+                $imtscaleresource['valueQuantity']['code']   = "kg/m2";
+                $imtscaleresource['valueQuantity']['system'] = "http://unitsofmeasure.org";
+                $imtscaleresource['valueQuantity']['unit']   = "kg/m2";
+                $imtscaleresource['valueQuantity']['value']  = floatval($resultexamination[0]->BMI_VALUE);
+
+                $heightresource['category'][]['coding'][]  = $categorycoding;
+                $heightresource['code']['coding'][]        = $heightresourcecodecoding;
+                $heightresource['effectiveDateTime']       = $resultexamination[0]->assessmentdate."+00:00";
+                $heightresource['encounter']               = $encounter;
+                $heightresource['identifier'][]            = $identifier1;
+                $heightresource['identifier'][]            = $identifier2;
+                $heightresource['issued']                  = $resultexamination[0]->assessmentdate."+00:00";
+                $heightresource['performer'][]             = $performer;
+                $heightresource['resourceType']            = "Observation";
+                $heightresource['status']                  = "final";
+                $heightresource['subject']                 = $subject;
+                $heightresource['valueQuantity']['code']   = "cm";
+                $heightresource['valueQuantity']['system'] = "http://unitsofmeasure.org";
+                $heightresource['valueQuantity']['unit']   = "cm";
+                $heightresource['valueQuantity']['value']  = floatval($resultexamination[0]->HEIGHT_VALUE);
+
+                $weightresource['category'][]['coding'][]  = $categorycoding;
+                $weightresource['code']['coding'][]        = $weightresourcecodecoding;
+                $weightresource['effectiveDateTime']       = $resultexamination[0]->assessmentdate."+00:00";
+                $weightresource['encounter']               = $encounter;
+                $weightresource['identifier'][]            = $identifier1;
+                $weightresource['identifier'][]            = $identifier2;
+                $weightresource['issued']                  = $resultexamination[0]->assessmentdate."+00:00";
+                $weightresource['performer'][]             = $performer;
+                $weightresource['resourceType']            = "Observation";
+                $weightresource['status']                  = "final";
+                $weightresource['subject']                 = $subject;
+                $weightresource['valueQuantity']['code']   = "kg";
+                $weightresource['valueQuantity']['system'] = "http://unitsofmeasure.org";
+                $weightresource['valueQuantity']['unit']   = "kg";
+                $weightresource['valueQuantity']['value']  = floatval($resultexamination[0]->WEIGHT_VALUE);
+
+                $systolresource['category'][]['coding'][]  = $categorycoding;
+                $systolresource['code']['coding'][]        = $systolresourcecodecoding;
+                $systolresource['effectiveDateTime']       = $resultexamination[0]->assessmentdate."+00:00";
+                $systolresource['encounter']               = $encounter;
+                $systolresource['identifier'][]            = $identifier1;
+                $systolresource['identifier'][]            = $identifier2;
+                $systolresource['issued']                  = $resultexamination[0]->assessmentdate."+00:00";
+                $systolresource['performer'][]             = $performer;
+                $systolresource['resourceType']            = "Observation";
+                $systolresource['status']                  = "final";
+                $systolresource['subject']                 = $subject;
+                $systolresource['valueQuantity']['code']   = "mm[Hg]";
+                $systolresource['valueQuantity']['system'] = "http://unitsofmeasure.org";
+                $systolresource['valueQuantity']['unit']   = "mm[Hg]";
+                $systolresource['valueQuantity']['value']  = floatval($resultexamination[0]->BLOOD_HIGH_VALUE);
+
+                $diastolresource['category'][]['coding'][]  = $categorycoding;
+                $diastolresource['code']['coding'][]        = $diastolresourcecodecoding;
+                $diastolresource['effectiveDateTime']       = $resultexamination[0]->assessmentdate."+00:00";
+                $diastolresource['encounter']               = $encounter;
+                $diastolresource['identifier'][]            = $identifier1;
+                $diastolresource['identifier'][]            = $identifier2;
+                $diastolresource['issued']                  = $resultexamination[0]->assessmentdate."+00:00";
+                $diastolresource['performer'][]             = $performer;
+                $diastolresource['resourceType']            = "Observation";
+                $diastolresource['status']                  = "final";
+                $diastolresource['subject']                 = $subject;
+                $diastolresource['valueQuantity']['code']   = "mm[Hg]";
+                $diastolresource['valueQuantity']['system'] = "http://unitsofmeasure.org";
+                $diastolresource['valueQuantity']['unit']   = "mm[Hg]";
+                $diastolresource['valueQuantity']['value']  = floatval($resultexamination[0]->BLOOD_LOW_NOTE);
+
+                $tempresource['category'][]['coding'][]  = $categorycoding;
+                $tempresource['code']['coding'][]        = $tempresourcecodecoding;
+                $tempresource['effectiveDateTime']       = $resultexamination[0]->assessmentdate."+00:00";
+                $tempresource['encounter']               = $encounter;
+                $tempresource['identifier'][]            = $identifier1;
+                $tempresource['identifier'][]            = $identifier2;
+                $tempresource['issued']                  = $resultexamination[0]->assessmentdate."+00:00";
+                $tempresource['performer'][]             = $performer;
+                $tempresource['resourceType']            = "Observation";
+                $tempresource['status']                  = "final";
+                $tempresource['subject']                 = $subject;
+                $tempresource['valueQuantity']['code']   = "Cel";
+                $tempresource['valueQuantity']['system'] = "http://unitsofmeasure.org";
+                $tempresource['valueQuantity']['unit']   = "C";
+                $tempresource['valueQuantity']['value']  = floatval($resultexamination[0]->TIWEN_VALUE);
+
+                $imtscale['fullUrl']           = "urn:uuid:".generateuuid();
+                $imtscale['request']['method'] = "POST";
+                $imtscale['request']['url']    = "Observation";
+                $imtscale['resource']          = $imtscaleresource;
+                $height['fullUrl']             = "urn:uuid:".generateuuid();
+                $height['request']['method']   = "POST";
+                $height['request']['url']      = "Observation";
+                $height['resource']            = $heightresource;
+                $weight['fullUrl']             = "urn:uuid:".generateuuid();
+                $weight['request']['method']   = "POST";
+                $weight['request']['url']      = "Observation";
+                $weight['resource']            = $weightresource;
+                $systol['fullUrl']             = "urn:uuid:".generateuuid();
+                $systol['request']['method']   = "POST";
+                $systol['request']['url']      = "Observation";
+                $systol['resource']            = $systolresource;
+                $diastol['fullUrl']            = "urn:uuid:".generateuuid();
+                $diastol['request']['method']  = "POST";
+                $diastol['request']['url']     = "Observation";
+                $diastol['resource']           = $diastolresource;
+                $temp['fullUrl']               = "urn:uuid:".generateuuid();
+                $temp['request']['method']     = "POST";
+                $temp['request']['url']        = "Observation";
+                $temp['resource']              = $tempresource;
+                
+                $bodyFHIR['resourceType'] = "Bundle";
+                $bodyFHIR['type']         = "transaction";
+                $bodyFHIR['entry'][]      = $imtscale;
+                $bodyFHIR['entry'][]      = $height;
+                $bodyFHIR['entry'][]      = $weight;
+                $bodyFHIR['entry'][]      = $systol;
+                $bodyFHIR['entry'][]      = $diastol;
+                $bodyFHIR['entry'][]      = $temp;
+
+                $response = Satusehat::postbundle(json_encode($bodyFHIR));
+                $this->response($response,200);
+            }
+
+            
         }
 
     }

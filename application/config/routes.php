@@ -13,7 +13,10 @@
 
     $route['authsatusehat']   = 'restapi/Leka/auth';
     $route['ReceiveData']     = 'restapi/aktivo/Leka/ReceiveData';
+    $route['GetLeka']         = 'restapi/aktivo/Leka/GetLeka';
     $route['ReceiveDataFHIR'] = 'restapi/aktivo/Leka/ReceiveDataFHIR';
+
+    $route['SatuSehat'] = 'restapi/aktivo/Leka/SatuSehat';
 
     $route['404_override']         = '';
     $route['translate_uri_dashes'] = FALSE;

@@ -7,7 +7,7 @@
 		<div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto shadow-lg">
 			<form class="form w-100" action="<?php echo base_url();?>index.php/auth/sign/signin" novalidate="novalidate" id="kt_sign_in_form" method="post">
 				<div class="text-center mb-10">
-					<h1 class="text-dark mb-3">Single Sign On</h1>
+					<h1 class="text-dark mb-3">Welcome</h1>
 				</div>
 				<div class="fv-row mb-10">
 					<label class="form-label fs-6 fw-bolder text-dark">Username</label>

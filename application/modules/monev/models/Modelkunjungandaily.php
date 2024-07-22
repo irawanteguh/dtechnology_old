@@ -5,13 +5,13 @@
         function totalkunjungan(){
             $query =
                     "
-                        select date_format(tgl_registrasi,'%d.%m.%Y')periode, date_format(tgl_registrasi,'%d.%m')label,
+                        select tgl_registrasi, date_format(tgl_registrasi,'%d.%m.%Y')periode, date_format(tgl_registrasi,'%d.%m')label,
                             count(IF(status_lanjut = 'Ralan', 1, NULL)) jmlrj,
                             count(IF(status_lanjut = 'Ranap', 1, NULL)) jmlri
                             
                         from reg_periksa a
                         group by date_format(tgl_registrasi,'%d.%m.%Y')
-                        order by periode desc
+                        order by tgl_registrasi asc
                         limit 30;
                     ";
 

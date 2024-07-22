@@ -13,6 +13,7 @@
                         where a.org_id='".$orgid."'
                         and   a.active='1'
                         and   a.status in ('0','1')
+                        order by created_date desc
                     ";
 
             $recordset = $this->db->query($query);
