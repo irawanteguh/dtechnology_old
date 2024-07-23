@@ -72,7 +72,8 @@ function billing(provider,typeperiode,dateperiode){
             if(data.responCode==="00"){
                 var result        = data.responResult;
                 for(var i in result){
-                    if(result[i].status_lanjut='Ralan'){
+
+                    if(result[i].status_lanjut==='Ralan'){
                         tableresultRJ +="<tr>";
                         tableresultRJ +="<td class='ps-4'>"+result[i].tgl_registrasi+" "+result[i].jam_reg+"</td>";
                         tableresultRJ +="<td><div>"+result[i].no_rkm_medis+"</div><div>"+result[i].namapasien+"</div></td>";

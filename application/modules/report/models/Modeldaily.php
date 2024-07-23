@@ -44,7 +44,7 @@
                                 (select COALESCE(SUM(totalbiaya), 0) from billing where no_rawat=a.no_rawat and status='Dokter')dokter
                                 
                             from reg_periksa a
-                            where a.status_lanjut in ('Ralan','Ranap')
+                            where a.stts<>'Batal'
                             ".$provider."
                             ".$periode."
                             order by nobilling desc, tgl_registrasi desc

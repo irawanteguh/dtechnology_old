@@ -92,8 +92,8 @@ function listexamination(){
                             tableresult += "<button id='btnGroupDrop1' type='button' class='btn btn-light-primary dropdown-toggle btn-sm' data-bs-toggle='dropdown' aria-expanded='false'>Action</button>";
                             tableresult += "<div class='dropdown-menu' aria-labelledby='btnGroupDrop1'>";
                                 tableresult += "<a class='dropdown-item btn btn-sm' data-bs-toggle='modal' data-bs-target='#modal_leka_result' "+getvariabel+" onclick='getdata($(this));'><i class='fa-regular fa-file-pdf'></i> Result</a>";
-                                
-                                if(result[i].enconuter_id!=null || result[i].enconuter_id!=""){
+
+                                if(result[i].encounter_id!=null){
                                     tableresult += "<a class='dropdown-item btn btn-sm' "+getvariabel+" onclick='Sendsatusehat($(this));'><i class='bi bi-person-add'></i> Send SATUSEHAT</a>";
                                 }else{
                                     tableresult += "<a class='dropdown-item btn btn-sm' data-bs-toggle='modal' data-bs-target='#modal_leka_edit' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-pencil'></i> Encounter</a>";

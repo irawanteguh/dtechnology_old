@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-center row">
-                    <form action="<?php echo base_url();?>index.php/auth/sign/changepassword" id="formnewpassword" method="post">
+                    <form action="<?php echo base_url();?>auth/sign/changepassword" id="formnewpassword" method="post">
                         <div class="mb-10 fv-row" data-kt-password-meter="true">
                             <div class="mb-1">
                                 <label class="form-label fw-bolder text-dark fs-6">Password</label>

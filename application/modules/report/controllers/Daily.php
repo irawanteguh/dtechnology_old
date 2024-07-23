@@ -46,7 +46,8 @@
                 $periode ="and date_format(a.tgl_registrasi, '%d.%m.%Y')='".$dateperiode."'";
             }
 
-            $result = $this->md->billing($provider,$periode);
+            // $result = $this->md->billing($provider,$periode);
+            $result = $this->md->billing("","");
             
 			if(!empty($result)){
                 $json["responCode"]="00";

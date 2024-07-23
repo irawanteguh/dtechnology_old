@@ -9,7 +9,7 @@
                 </div>
             </div>
             <form action="<?php echo base_url();?>index.php/medicaldevice/leka/updateencounter" id="formeditencounter">
-                <input type="text" id="data_leka_transid_edit" name="data_leka_transid_edit">
+                <input type="hidden" id="data_leka_transid_edit" name="data_leka_transid_edit">
                 <div class="modal-body">
                     <div class="text-center mb-5">
                         <h1 class="mb-3">Input Encounter</h1>

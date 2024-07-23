@@ -1,7 +1,7 @@
 <?php
     defined('BASEPATH') OR exit('No direct script access allowed');
 
-    $route['default_controller'] = 'Landingpage/landingpage';
+    $route['default_controller'] = 'landingpage/landingpage';
     $route['authtilaka']         = 'restapi/Tilakaservice/auth';
     $route['uploadallfile']      = 'restapi/Tilakaservice/uploadallfile';
     $route['requestsign']        = 'restapi/Tilakaservice/requestsign';
