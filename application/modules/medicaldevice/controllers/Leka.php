@@ -13,7 +13,7 @@
 		}
 
 		public function listexamination(){
-            $result = $this->md->listexamination();
+            $result = $this->md->listexamination($_SESSION['orgid']);
             
 			if(!empty($result)){
                 $json["responCode"]="00";
@@ -31,7 +31,7 @@
 
         public function result(){
             $transid =$this->input->post("transid");
-            $result = $this->md->result(ORG_ID,$transid);
+            $result = $this->md->result($_SESSION['orgid'],$transid);
             
 			if(!empty($result)){
                 $json["responCode"]="00";
@@ -69,7 +69,7 @@
 
         public function Sendsatusehat(){
             $transsaksiid=$this->input->post("transaksiid");            
-            $resultexamination = $this->md->resultexaminationsatusehat(ORG_ID,$transsaksiid);
+            $resultexamination = $this->md->resultexaminationsatusehat($_SESSION['orgid'],$transsaksiid);
 
             if(!empty($resultexamination)){
                 $responsegetencounter = Satusehat::getencounter($resultexamination[0]->ENCOUNTER_ID);
@@ -279,7 +279,7 @@
                 $response = Satusehat::postbundle(json_encode($bodyFHIR));
                 if(isset($response['entry'])){
                     foreach($response['entry'] as $a){
-                        $simpanlog['ORG_ID']        = ORG_ID;
+                        $simpanlog['ORG_ID']        = $_SESSION['orgid'];
                         $simpanlog['TRANSAKSI_ID']  = generateuuid();
                         $simpanlog['TRANS_ID']      = $resultexamination[0]->TRANSAKSI_ID;
                         $simpanlog['LOCATION']      = $a['response']['location'];

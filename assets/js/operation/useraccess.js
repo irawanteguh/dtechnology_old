@@ -91,11 +91,13 @@ function masterrole() {
                     tableresult += "<span class='fs-6 text-gray-800 me-2'>" + result[i].role + "</span>";
                     tableresult += "</div>";
                     tableresult += "<div class='fw-bold d-flex justify-content-end'>";
+
                     if (result[i].transidmapping != null) {
                         tableresult += "<div class='form-check form-switch form-check-custom form-check-solid'><input class='form-check-input h-20px w-30px' type='checkbox' id='" + result[i].role_id + "' checked='checked' /></div>";
                     } else {
                         tableresult += "<div class='form-check form-switch form-check-custom form-check-solid'><input class='form-check-input h-20px w-30px' type='checkbox' id='" + result[i].role_id + "' /></div>";
                     }
+                    
                     tableresult += "</div>";
                     tableresult += "</div>";
                 }

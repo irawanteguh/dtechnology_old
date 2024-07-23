@@ -1,13 +1,12 @@
 <?php
     class Modelsign extends CI_Model{
 
-        function login($orgid,$username,$password){
+        function login($username,$password){
             $query =
                     "
                         select a.user_id
                         from dt01_gen_user_data a
-                        where a.org_id='".$orgid."'
-                        and   a.active='1'
+                        where a.active='1'
                         and   a.username='".$username."'
                         and   a.password='".$password."'
                     ";
@@ -17,7 +16,7 @@
             return $recordset;
         }
 
-        function datasession($orgid,$userid){
+        function datasession($userid){
             $query =
                     "
                         select a.user_id, name, image_profile, org_id, username, suspended, upper(LEFT(a.name, 1)) initial, email, address,
@@ -27,7 +26,6 @@
 
                         from dt01_gen_user_data a
                         where a.active='1'
-                        and   a.org_id='".$orgid."'
                         and   a.user_id='".$userid."'
                     ";
 

@@ -27,7 +27,7 @@
 
 
 		public function masteremployee(){
-            $result = $this->md->masteremployee(ORG_ID);
+            $result = $this->md->masteremployee($_SESSION['orgid']);
             
 			if(!empty($result)){
                 $json["responCode"]="00";

@@ -75,9 +75,9 @@
                 }
             }else{
                 $data['org_id']           = $_SESSION['orgid'];
-                $data['trans_id']     = generateuuid();
-                $data['user_id']      = $userid;
-                $data['role_id']      = $switchId;
+                $data['trans_id']         = generateuuid();
+                $data['user_id']          = $userid;
+                $data['role_id']          = $switchId;
                 $data['created_by']       = $_SESSION['userid'];
                 $data['last_update_by']   = $_SESSION['userid'];
                 $data['last_update_date'] = date("Y-m-d H:i:s");

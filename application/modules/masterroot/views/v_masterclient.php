@@ -23,7 +23,7 @@
                             <div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">Master Client</div>
                         </div>
                         <div class="menu-item px-3">
-                            <a href="" data-bs-toggle="modal" data-bs-target="#modal-todolist" class="menu-link px-3">Add Client</a>
+                            <a href="" data-bs-toggle="modal" data-bs-target="#modal_client_add" class="menu-link px-3">Add Client</a>
                         </div>
                     </div>
                 </div>
@@ -35,10 +35,12 @@
                             <tr class="fw-bolder text-muted bg-light">
                                 <th class="ps-4 rounded-start">Id</th>
                                 <th>Code</th>
-                                <th>Hospital Name</th>
+                                <th>Client Name</th>
                                 <th>Website</th>
+                                <th>Administrator</th>
                                 <!-- <th>Trial</th> -->
-                                <th class="pe-4 text-end rounded-end">Active</th>
+                                <th>Active</th>
+                                <th class="pe-4 text-end rounded-end"></th>
                             </tr>
                         </thead>
                         <tbody class="align-middle" id="resultmasterclient"></tbody>

@@ -7,6 +7,18 @@
         return vsprintf("%s%s-%s-%s-%s-%s%s%s", str_split(bin2hex($data), 4));
     }
 
+    function generateUniqueCode() {
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $uniqueCode = '';
+        
+        for ($i = 0; $i < 6; $i++) {
+            $uniqueCode .= $characters[rand(0, $charactersLength - 1)];
+        }
+    
+        return $uniqueCode;
+    }
+
     function encodedata($data){
         $i2 = 0;
         $s = "";

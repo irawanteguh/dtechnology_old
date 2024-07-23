@@ -16,10 +16,10 @@
             $username        = $this->input->post("username");
             $password        = encodedata($this->input->post("password"));
 
-            $checkauth =$this->md->login(ORG_ID,$username,$password);
+            $checkauth =$this->md->login($username,$password);
             
             if(!empty($checkauth)){
-                $datasession = $this->md->datasession(ORG_ID,$checkauth->user_id);
+                $datasession = $this->md->datasession($checkauth->user_id);
 
                 $sessiondata = array(
                     "orgid"        => $datasession->org_id,
@@ -64,7 +64,7 @@
         
             $data['PASSWORD'] = $password;
         
-            if($this->md->updatepassword($data, ORG_ID, $_SESSION['userid'])){
+            if($this->md->updatepassword($data, $_SESSION['orgid'], $_SESSION['userid'])){
                 $json["responCode"] = "00";
                 $json["responHead"] = "success";
                 $json["responDesc"] = "You have successfully reset your password!";

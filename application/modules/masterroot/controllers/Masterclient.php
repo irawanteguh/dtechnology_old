@@ -29,5 +29,109 @@
             echo json_encode($json);
         }
 
+        public function addclient(){
+            $orgid = generateuuid();
+            $uniqe = generateUniqueCode();
+
+            $data['org_id']            = $orgid;
+            $data['code']              = $uniqe;
+            $data['org_name']          = $this->input->post("data_client_name_add");
+            $data['website']           = $this->input->post("data_client_website_add");
+            $data['trial']             = "N";
+            $data['created_by']        = $_SESSION['userid'];
+            $data['created_date']      = date("Y-m-d H:i:s");
+            $data['last_updated_by']   = $_SESSION['userid'];
+            $data['last_updated_date'] = date("Y-m-d H:i:s");
+
+            if($this->md->insertmasterclient($data)){
+                $userid = generateuuid();
+                $roleid = generateuuid();
+
+                $datausser['org_id']     = $orgid;
+                $datausser['user_id']    = $userid;
+                $datausser['username']   = "Admin_".$uniqe;
+                $datausser['nik']        = $uniqe;
+                $datausser['name']       = "Administrator ".$this->input->post("data_client_name_add");
+                $datausser['created_by'] = $userid;
+                $this->md->insertuseradministrator($datausser);
+
+                
+                $dataroles['org_id']     = $orgid;
+                $dataroles['role_id']    = $roleid;
+                $dataroles['role']       = "IT Operation";
+                $dataroles['created_by'] = $userid;
+                $this->md->insertrolems($dataroles);
+
+                $dataroles['org_id']     = $orgid;
+                $dataroles['role_id']    = generateuuid();
+                $dataroles['role']       = "Default";
+                $dataroles['created_by'] = $userid;
+                $this->md->insertrolems($dataroles);
+
+                $datarolesaccess['org_id']     = $orgid;
+                $datarolesaccess['trans_id']   = generateuuid();
+                $datarolesaccess['user_id']    = $userid;
+                $datarolesaccess['role_id']    = $roleid;
+                $datarolesaccess['created_by'] = $userid;
+                $this->md->insertroleaccess($datarolesaccess);
+
+                $resultmodulesms = $this->md->modulesms();
+                foreach ($resultmodulesms as $a) {
+                    $dataroledt['org_id']     = $orgid;
+                    $dataroledt['trans_id']   = generateuuid();
+                    $dataroledt['role_id']    = $roleid;
+                    $dataroledt['modules_id'] = $a->modules_id;
+                    $dataroledt['active']     = $a->active;
+                    $dataroledt['created_by'] = $userid;
+
+                    $this->md->insertroledt($dataroledt);
+                }
+
+                $resultmasterenvironment = $this->md->masterenvironment();
+                foreach ($resultmasterenvironment as $a) {
+                    $dataenvi['org_id']           = $orgid;
+                    $dataenvi['env_id']           = generateuuid();
+                    $dataenvi['environment_name'] = $a->environment_name;
+                    if($a->environment_name==="ORG_ID"){
+                        $dataenvi['dev']         = $orgid;
+                        $dataenvi['prod']        = $orgid;
+                    }else{
+                        $dataenvi['dev']         = $a->dev;
+                        $dataenvi['prod']        = $a->prod;
+                    }
+                    $dataenvi['created_by']  = $_SESSION['userid'];
+
+                    $this->md->insertenviroment($dataenvi);
+                }
+
+                $json['responCode']="00";
+                $json['responHead']="success";
+                $json['responDesc']="Data Added Successfully";
+            } else {
+                $json['responCode']="01";
+                $json['responHead']="info";
+                $json['responDesc']="Data Failed to Add";
+            }
+
+            echo json_encode($json);
+        }
+
+        public function updateclient() {
+            $data['org_name'] = $this->input->post("data_client_name_edit");
+            $data['website']  = $this->input->post("data_client_website_edit");
+            
+            if($this->md->updatemasterclient($data, $this->input->post('data_client_orgid_edit'))){
+                $json['responCode']="00";
+                $json['responHead']="success";
+                $json['responDesc']="Data Update Successful";
+            }else{
+                $json['responCode']="01";
+                $json['responHead']="info";
+                $json['responDesc']="Data Update Failed";
+            }
+
+            echo json_encode($json);
+        }
+
 	}
 ?>

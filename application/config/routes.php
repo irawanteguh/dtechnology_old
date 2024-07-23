@@ -8,15 +8,12 @@
     $route['excutesign']         = 'restapi/Tilakaservice/excutesign';
     $route['statussign']         = 'restapi/Tilakaservice/statussign';
     $route['appkyc']             = 'restapi/Tilakaservice/checkdataapprovalkyc';
+
     $route['pegawai']            = 'restapi/Khanza/pegawai';
+    
     $route['masterDomisili']     = 'restapi/satusehat/MasterDomisili/domisili';
 
-    $route['authsatusehat']   = 'restapi/Leka/auth';
-    $route['ReceiveData']     = 'restapi/aktivo/Leka/ReceiveData';
-    $route['GetLeka']         = 'restapi/aktivo/Leka/GetLeka';
-    $route['ReceiveDataFHIR'] = 'restapi/aktivo/Leka/ReceiveDataFHIR';
-
-    $route['SatuSehat'] = 'restapi/aktivo/Leka/SatuSehat';
+    $route['ReceiveData/(:any)']     = 'restapi/aktivo/Leka/ReceiveData/$1';
 
     $route['404_override']         = '';
     $route['translate_uri_dashes'] = FALSE;

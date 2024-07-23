@@ -5,20 +5,22 @@
         public static $environmentSettings;
 
         public static function loadEnvironment() {
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
+
             self::$appInstance = get_instance();
             self::$appInstance->load->model("ModelRoot");
-
-            $dtechClientId = "10c84edd-500b-49e3-93a5-a2c8cd2c8524";
-            $server        = "DEV";
-
-            self::$environmentSettings = self::$appInstance->ModelRoot->environment($dtechClientId);
+            
+            $orgId = isset($_SESSION['orgid']) ? $_SESSION['orgid'] : '';
+            self::$environmentSettings = self::$appInstance->ModelRoot->environment($orgId);
 
             if (!empty(self::$environmentSettings)) {
                 foreach (self::$environmentSettings as $setting) {
                     if (!defined($setting['ENVIRONMENT_NAME'])) {
-                        if($server==="DEV"){
+                        if (getenv('SERVER') === "DEV") {
                             define($setting['ENVIRONMENT_NAME'], $setting['DEV']);
-                        }else{
+                        } else {
                             define($setting['ENVIRONMENT_NAME'], $setting['PROD']);
                         }
                     }

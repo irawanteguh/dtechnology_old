@@ -20,6 +20,20 @@
             $recordset = $recordset->result();
             return $recordset;
         }
+
+        function masterorganization($code){
+            $query =
+                    "
+                        select a.org_id
+                        from dt01_gen_organization_ms a
+                        where a.active='1'
+                        and   a.code='".$code."'
+                    ";
+
+            $recordset = $this->db->query($query);
+            $recordset = $recordset->result();
+            return $recordset;
+        }
         
         
     }

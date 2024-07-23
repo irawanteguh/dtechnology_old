@@ -14,12 +14,10 @@
             parent:: __construct();
             rootsystem::system();
 
-			$db = $this->load->database(getenv('DB_PROFILE'), TRUE);
-
-			self::$host         = $db->hostname;
-			self::$user         = $db->username;
-			self::$password     = $db->password;
-			self::$database     = $db->database;
+			self::$host         = getenv('DB_HOSTNAME');
+			self::$user         = getenv('DB_USERNAME');
+			self::$password     = getenv('DB_PASSWORD');
+			self::$database     = getenv('DB_NAME');
 			self::$pathdatabase = FCPATH."database/";
 			self::$backupPath   = self::$pathdatabase.date('Y-m-d-H-i-s').'.sql';
         }
