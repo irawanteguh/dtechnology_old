@@ -1,4 +1,4 @@
-log();
+// log();
 
 function log(){
     $.ajax({

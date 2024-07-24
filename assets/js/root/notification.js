@@ -1,5 +1,5 @@
 
-information();
+// information();
 
 function information(){
     $.ajax({
