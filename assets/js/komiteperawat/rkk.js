@@ -89,7 +89,7 @@ function masteremployee(){
                     tableresult +="<td><div>"+(result[i].kategori ? result[i].kategori : "")+"</div><div>" + (result[i].klinis ? result[i].klinis : "") + "</div></td>";
                     tableresult +="<td><div>"+(result[i].positionprimary ? result[i].positionprimary : "")+" "+(result[i].funsgionalprimary ? result[i].funsgionalprimary : "")+"</div><div>"+(result[i].atasanprimary ? result[i].atasanprimary : "")+"</div></td>"
 
-                    tableresult += "<td class='text-end pe-4'>";
+                    tableresult += "<td class='text-end'>";
                         tableresult += "<div class='btn-group' role='group'>";
                             tableresult += "<button id='btnGroupDrop1' type='button' class='btn btn-light-primary dropdown-toggle btn-sm' data-bs-toggle='dropdown' aria-expanded='false'>Action</button>";
                             tableresult += "<div class='dropdown-menu' aria-labelledby='btnGroupDrop1'>";

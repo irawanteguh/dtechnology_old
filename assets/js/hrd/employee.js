@@ -161,7 +161,7 @@ function masteremployee(){
                                     "data-name='"+result[i].name+"'"+
                                     "data-positioidprimary='"+result[i].positioidprimary+"'"+
                                     "data-positionprimary='"+result[i].positionprimary+"'"+
-                                    "data-funsgionalprimary='"+result[i].funsgionalprimary+"'"+
+                                    "data-funsgionalprimary='"+result[i].fungsionalprimary+"'"+
                                     "data-atasanidprimary='"+result[i].atasanidprimary+"'"+
                                     "data-atasanprimary='"+result[i].atasanprimary+"'"+
                                     "data-kategoriid='"+result[i].kategori_id+"'"+
@@ -208,7 +208,7 @@ function masteremployee(){
                         if (userProfile.length === 6) {
                             var transid    = userProfile[0];
                             var positionid = userProfile[1];
-                            var atasanid = userProfile[2];
+                            var atasanid   = userProfile[2];
                             var position   = userProfile[3];
                             var level      = userProfile[4];
                             var atasan     = userProfile[5];
@@ -216,7 +216,7 @@ function masteremployee(){
                         } else if (userProfile.length === 5) { 
                             var transid    = userProfile[0];
                             var positionid = userProfile[1];
-                            var atasanid = userProfile[2];
+                            var atasanid   = userProfile[2];
                             var position   = userProfile[3];
                             var level      = "";
                             var atasan     = userProfile[4];
