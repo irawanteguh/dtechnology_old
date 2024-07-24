@@ -66,9 +66,26 @@
                     <div class="text-muted fw-bold fs-5">Result Examination Leka</div>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <div class="col-md-10">
-                        <div>
-                            <img src="" id="photopatient">
+                    <div class="col-xl-10">
+                        <div class="d-flex justify-content-between mb-10 row">
+                            <div class="col-xl-5 row">
+                                <span>Transaction Number : <strong id="transaksiid"></strong></span>
+                                <span>Encounter Id : <strong id="encounterid"></strong></span>
+                                <span>Device Id : <strong id="deviceid"></strong></span>
+                                <span>Examination Id : <strong id="examid"></strong></span>
+                                <span>Id Number : <strong id="idnumber"></strong></span>
+                            </div>
+                            <div class="col-xl-5 row">
+                                <span>Patient Name : <strong id="patientname"></strong></span>
+                                <span>Sex : <strong id="sex"></strong></span>
+                                <span>Birth Of Date : <strong id="bod"></strong></span>
+                                <span>Age : <strong id="age"></strong></span>
+                                <span>Nation : <strong id="nation"></strong></span>
+                                <span>Address : <strong id="address"></strong></span>
+                            </div>
+                            <div class="col-xl-2">
+                                <img src="" alt="" id="photopatient" name="photopatient">
+                            </div>                            
                         </div>
                         <div class="table-responsive mh-550px scroll-y me-n5 pe-5">
                             <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">

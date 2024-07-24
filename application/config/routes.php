@@ -13,7 +13,9 @@
     
     $route['masterDomisili']     = 'restapi/satusehat/MasterDomisili/domisili';
 
-    $route['ReceiveData/(:any)']     = 'restapi/aktivo/Leka/ReceiveData/$1';
+    $route['ReceiveData/(:any)']          = 'restapi/aktivo/Leka/ReceiveData/$1';
+    $route['ListExamination/(:any)']      = 'restapi/aktivo/Leka/ListExamination/$1';
+    $route['GetResultLeka/(:any)/(:any)'] = 'restapi/aktivo/Leka/GetResultLeka/$1/$2';
 
     $route['404_override']         = '';
     $route['translate_uri_dashes'] = FALSE;

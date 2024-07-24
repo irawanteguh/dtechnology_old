@@ -12,11 +12,6 @@
             $this->load->model("Modelleka","md");
         }
 
-        public function auth_GET(){
-            $response = Satusehat::oauth();
-            $this->response($response,REST_Controller::HTTP_OK);
-        }
-
         public function ReceiveData_POST($code){
             $resultmasterorganization = $this->md->masterorganization($code);
 
@@ -322,6 +317,74 @@
                 $this->response($response,200);
             }
             
+        }
+
+        public function ListExamination_GET($code){
+            $resultmasterorganization = $this->md->masterorganization($code);
+
+            if(!empty($resultmasterorganization)){
+                $response = [];
+                $list     = [];
+                $result   = $this->md->listexamination($resultmasterorganization[0]->org_id);
+
+                foreach ($result as $a) {
+                    $list['transaksi_id'] = $a->transaksi_id;
+                    $list['encounter_id'] = $a->encounter_id;
+                    $list['device_id']    = $a->device_id;
+                    $list['exam_id']      = $a->exam_id;
+                    $list['id_number']    = $a->id_number;
+                    $list['name']         = $a->name;
+                    $list['sex']          = $a->sex;
+                    $list['bod']          = $a->bod;
+                    $list['age']          = $a->age;
+                    $list['nation']       = $a->nation;
+                    $list['address']      = $a->address;
+                    $list['photo']        = $a->photo;
+
+                    $response['ListExamination'][]=$list;
+                }
+                $this->response($response, REST_Controller::HTTP_OK);
+            }
+            
+        }
+
+        public function GetResultLeka_GET($code,$transid){
+            $resultmasterorganization = $this->md->masterorganization($code);
+            if (!empty($resultmasterorganization)) {
+                $response = [];
+                $result = $this->md->resultexamination($resultmasterorganization[0]->org_id,$transid);
+
+                foreach ($result as $a) {
+                    if ($a->jenis === "H") {
+                        $header = str_replace(" ", "", $a->examination);
+                        $response[$a->id] = [$header => []];
+                    }
+                }
+
+                foreach ($result as $a) {
+                    if ($a->jenis === "D" && isset($response[$a->header_id])) {
+                        $header = array_keys($response[$a->header_id])[0];
+                        $response[$a->header_id][$header][] = [
+                            'examination' => $a->examination,
+                            'unit'        => $a->unit,
+                            'value'       => explode(";",$a->resultdata)[0],
+                            'normal'      => explode(";",$a->resultdata)[1],
+                            'note'        => explode(";",$a->resultdata)[2]
+                        ];
+                    }
+                }
+
+                $formattedResponse = [];
+                foreach ($response as $headerGroup) {
+                    foreach ($headerGroup as $header => $children) {
+                        $formattedResponse[$header] = $children;
+                    }
+                }
+
+                $this->response($formattedResponse, REST_Controller::HTTP_OK);
+            }
+
+
         }
 
     }
