@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function() {
             displayError(form.querySelector("input[name='confirm-password']"), "Passwords do not match.");
         }
 
-        if (passwordMeter.getScore() < 3) {
+        if (passwordMeter.getScore() < 80) {
             isValid = false;
             displayError(form.querySelector("input[name='newpassword']"), "Password strength is too weak. It must reach at least 3 bars.");
         }
@@ -78,7 +78,6 @@ document.addEventListener("DOMContentLoaded", function() {
         element.parentElement.appendChild(errorMessage);
     }
 
-    // Form submit handler
     form.addEventListener("submit", function(event) {
         event.preventDefault();
 
@@ -145,6 +144,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
     });
+    
 });
 
 
