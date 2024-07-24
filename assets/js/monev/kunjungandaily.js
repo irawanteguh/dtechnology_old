@@ -79,7 +79,7 @@ function totalkunjungan(){
                             }
                         },
                         title: {
-                            text: 'Outpatient visits this year'
+                            text: 'Outpatient visits Last 30 Days Data'
                         }
                     },
                     {
@@ -90,7 +90,7 @@ function totalkunjungan(){
                             }
                         },
                         title: {
-                            text: 'Inpatient visits this year'
+                            text: 'Inpatient visits Last 30 Days Data'
                         },
                         opposite: true
                     }
