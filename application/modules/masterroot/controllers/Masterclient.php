@@ -99,7 +99,8 @@
                         $dataenvi['dev']         = $a->dev;
                         $dataenvi['prod']        = $a->prod;
                     }
-                    $dataenvi['created_by']  = $_SESSION['userid'];
+                    $dataenvi['urut']       = $a->urut;
+                    $dataenvi['created_by'] = $_SESSION['userid'];
 
                     $this->md->insertenviroment($dataenvi);
                 }

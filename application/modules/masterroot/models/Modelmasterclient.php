@@ -29,6 +29,7 @@
                                 when a.modules_id='07eab05f-be52-45ce-8a53-8dd69df443f4' then '1'
                                 when a.modules_id='f48e1e18-d42f-4d70-83e1-6210cdc22e5a' then '1'
                                 when a.modules_id='f9afc38a-bb61-4f98-b593-211766ec6133' then '1'
+                                when a.modules_id='04ee7f51-5847-4099-9d70-7b4f4d9a989c' then '1'
                                 else
                                 '0'
                             end active
@@ -46,28 +47,28 @@
         function masterenvironment(){
             $query =
                     "
-                        select 'AUTHURL_SATUSEHAT' environment_name, 'https://api-satusehat-stg.dto.kemkes.go.id/oauth2/v1' dev, 'https://api-satusehat-stg.dto.kemkes.go.id/oauth2/v1' prod union
-                        select 'BASEURL_SATUSEHAT' environment_name, 'https://api-satusehat-stg.kemkes.go.id' dev, 'https://api-satusehat-stg.kemkes.go.id' prod union
-                        select 'CLIENT_ID_TILAKA' environment_name, '' dev, '' prod union
-                        select 'CLIENT_SECRET_TILAKA' environment_name, '' dev, '' prod union
-                        select 'CLIENTID_SATUSEHAT' environment_name, '' dev, '' prod union
-                        select 'CLIENTSECRET_SATUSEHAT' environment_name, '' dev, '' prod union
-                        select 'COORDINATE_X' environment_name, '10' dev, '10' prod union
-                        select 'COORDINATE_Y' environment_name, '10' dev, '10' prod union
-                        select 'END_VALID_ACTIVITY' environment_name, '5' dev, '5' prod union
-                        select 'END_VALID_ASSESSMENT' environment_name, '2' dev, '2' prod union
-                        select 'HEIGHT' environment_name, '70' dev, '70' prod union
-                        select 'MAX_VALUE_ACTIVITY' environment_name, '70' dev, '70' prod union
-                        select 'MAX_VALUE_ASSESSMENT' environment_name, '30' dev, '30' prod union
-                        select 'ORG_ID' environment_name, '' dev, '' prod union
-                        select 'ORGID_SATUSEHAT' environment_name, '' dev, '' prod union
-                        select 'PAGE' environment_name, '1' de, '1' prodv union
-                        select 'PATHFILE_GET_TILAKA' environment_name, '' dev, '' prod  union
-                        select 'PATHFILE_POST_TILAKA' environment_name, '' dev, '' prod union
-                        select 'START_VALID_ASSESSMENT' environment_name, '1' dev, '1' prod union
-                        select 'TILAKA_BASE_URL' environment_name, 'https://sb-api.tilaka.id/' dev, 'https://api.tilaka.id/' prod union
-                        select 'TILAKALITE_URL' environment_name, '' dev, '' prod union
-                        select 'WIDTH' environment_name, '550' dev, '550' prod 
+                        select 'ORGID_SATUSEHAT' environment_name, '' dev, '' prod,  1 urut union
+                        select 'CLIENTID_SATUSEHAT' environment_name, '' dev, '' prod,  2 urut union
+                        select 'CLIENTSECRET_SATUSEHAT' environment_name, '' dev, '' prod,  3 urut union
+                        select 'AUTHURL_SATUSEHAT' environment_name, 'https://api-satusehat-stg.dto.kemkes.go.id/oauth2/v1' dev, 'https://api-satusehat-stg.dto.kemkes.go.id/oauth2/v1' prod,  4 urut union
+                        select 'BASEURL_SATUSEHAT' environment_name, 'https://api-satusehat-stg.kemkes.go.id' dev, 'https://api-satusehat-stg.kemkes.go.id' prod,  5 urut union
+                        select 'CLIENT_ID_TILAKA' environment_name, '' dev, '' prod,  6 urut union
+                        select 'CLIENT_SECRET_TILAKA' environment_name, '' dev, '' prod,  7 urut union
+                        select 'TILAKA_BASE_URL' environment_name, 'https://sb-api.tilaka.id/' dev, 'https://api.tilaka.id/' prod,  8 urut union
+                        select 'TILAKALITE_URL' environment_name, '' dev, '' prod,  9 urut union
+                        select 'PATHFILE_POST_TILAKA' environment_name, '' dev, '' prod,  10 urut union
+                        select 'PATHFILE_GET_TILAKA' environment_name, '' dev, '' prod,  11 urut  union
+                        select 'HEIGHT' environment_name, '70' dev, '70' prod,  12 urut union
+                        select 'WIDTH' environment_name, '550' dev, '550' prod,  13 urut union
+                        select 'COORDINATE_X' environment_name, '10' dev, '10' prod,  14 urut union
+                        select 'COORDINATE_Y' environment_name, '10' dev, '10' prod,  15 urut union
+                        select 'PAGE' environment_name, '1' de, '1' prodv,  16 urut union
+                        select 'ORG_ID' environment_name, '' dev, '' prod,  17 urut union
+                        select 'MAX_VALUE_ACTIVITY' environment_name, '70' dev, '70' prod,  18 urut union
+                        select 'MAX_VALUE_ASSESSMENT' environment_name, '30' dev, '30' prod,  19 urut union
+                        select 'END_VALID_ACTIVITY' environment_name, '5' dev, '5' prod,  20 urut union
+                        select 'START_VALID_ASSESSMENT' environment_name, '1' dev, '1' prod,  21 urut union
+                        select 'END_VALID_ASSESSMENT' environment_name, '2' dev, '2' prod,  22 urut
                     ";
 
             $recordset = $this->db->query($query);
