@@ -31,7 +31,6 @@ function viewdoc(btn){
     $("#viewdoc").html(viewfile);
 };
 
-
 function dataupload(){
     $.ajax({
         url     : url+"index.php/tilaka/repodocument/dataupload",
@@ -54,24 +53,34 @@ function dataupload(){
 
                 for(var i in result){
                     tableresult +="<tr>";
-                    if(result[i].STATUS_SIGN==="0"){
-                        tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>New</span></td>"; 
+                    if(result[i].STATUS_FILE==="0"){
+                        tableresult +="<td class='ps-4'><span class='badge badge-light-primary fs-7 fw-bold'>Files Uploaded DTechonolgy</span></td>";
                     }else{
-                        if(result[i].STATUS_SIGN==="1"){
-                            tableresult +="<td class='ps-4'><span class='badge badge-light-primary fs-7 fw-bold'>Files Uploaded</span></td>"; 
+                        if(result[i].STATUS_SIGN==="0"){
+                            tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>New</span></td>"; 
                         }else{
-                            if(result[i].STATUS_SIGN==="2"){
-                                tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>Request Sign Success</span></td>"; 
+                            if(result[i].STATUS_SIGN==="1"){
+                                tableresult +="<td class='ps-4'><span class='badge badge-light-primary fs-7 fw-bold'>Files Uploaded Tilaka Lite</span></td>"; 
                             }else{
-                                if(result[i].STATUS_SIGN==="3"){
-                                    tableresult +="<td class='ps-4'><span class='adge badge-light-danger fs-7 fw-bold'>Request Sign Field</span></td>";
+                                if(result[i].STATUS_SIGN==="2"){
+                                    tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>Request Sign Success</span></td>"; 
                                 }else{
-                                    tableresult +="<td class='ps-4'><span class='badge badge-light-success fs-7 fw-bold'>Sign Success</span></td>"; 
+                                    if(result[i].STATUS_SIGN==="3"){
+                                        tableresult +="<td class='ps-4'><span class='adge badge-light-danger fs-7 fw-bold'>Request Sign Field</span></td>";
+                                    }else{
+                                        tableresult +="<td class='ps-4'><span class='badge badge-light-success fs-7 fw-bold'>Sign Success</span></td>"; 
+                                    }
                                 }
                             }
                         }
+                        
                     }
-                    tableresult +="<td><div>"+(result[i].jenisdocumen ? result[i].jenisdocumen : "-")+"</div><div><a href='#' data-bs-toggle='modal' data-bs-target='#modal_view_pdf' data-dirfile='"+pathposttilaka+"/"+(result[i].NO_FILE ? result[i].NO_FILE : "")+".pdf' onclick='viewdoc(this)'>"+(result[i].NO_FILE ? result[i].NO_FILE : "-")+"</a></div><div>"+(result[i].FILENAME ? result[i].FILENAME : "-")+"</div></td>";
+                    if(result[i].STATUS_FILE==="0"){
+                        tableresult +="<td><div>"+(result[i].jenisdocumen ? result[i].jenisdocumen : "-")+"</div><div><a href='#' data-bs-toggle='modal' data-bs-target='#modal_upload_document'>"+(result[i].NO_FILE ? result[i].NO_FILE : "-")+"</a></div><div>"+(result[i].FILENAME ? result[i].FILENAME : "-")+"</div></td>";
+                    }else{
+                        tableresult +="<td><div>"+(result[i].jenisdocumen ? result[i].jenisdocumen : "-")+"</div><div><a href='#' data-bs-toggle='modal' data-bs-target='#modal_view_pdf' data-dirfile='"+pathposttilaka+"/"+(result[i].NO_FILE ? result[i].NO_FILE : "")+".pdf' onclick='viewdoc(this)'>"+(result[i].NO_FILE ? result[i].NO_FILE : "-")+"</a></div><div>"+(result[i].FILENAME ? result[i].FILENAME : "-")+"</div></td>";
+                    }
+                    
                     tableresult +="<td><div>"+(result[i].pasien_idx ? result[i].pasien_idx : "-")+"</div><div>"+(result[i].transaksi_idx ? result[i].transaksi_idx : "-")+"</div></td>";
                     tableresult +="<td><div>"+(result[i].assignname ? result[i].assignname : "")+"</div><div>"+(result[i].useridentifier ? result[i].useridentifier : "<i class='bi bi-x-octagon text-danger'></i>")+"</div></td>";
                     tableresult +="<td>"+(result[i].tgljam ? result[i].tgljam : "")+"</td>";
@@ -97,7 +106,7 @@ function dataupload(){
             }
 
             $("#resultrepodocument").html(tableresult);
-            $("#info_list_document").html(jml);
+            $("#info_list_document").html(jml+" Document");
 
             document.querySelectorAll("[data-kt-table-widget-4='expand_row']").forEach(button => {
                 button.addEventListener('click', function() {
@@ -150,3 +159,49 @@ function dataupload(){
     });
     return false;
 };
+
+$(document).on("submit", "#formsigndocument", function (e) {
+	e.preventDefault();
+	var form = $(this);
+    var url  = $(this).attr("action");
+
+	$.ajax({
+        url       : url,
+        data      : form.serialize(),
+        method    : "POST",
+        dataType  : "JSON",
+        cache     : false,
+        beforeSend: function () {
+            toastr.clear();
+            toastr["info"]("Sending request...", "Please wait");
+			$("#btn_sign_document").addClass("disabled");
+        },
+		success: function (data) {
+            toastr.clear();
+
+            if(data.responCode == "00"){
+                dataupload();
+                $('#modal_sign_add').modal('hide');
+			}
+			toastr[data.responHead](data.responDesc, "INFORMATION");
+		},
+        complete: function () {
+            $("#btn_sign_document").removeClass("disabled");
+		},
+        error: function(xhr, status, error) {
+            Swal.fire({
+                title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
+                html             : "<b>"+error+"</b>",
+                icon             : "error",
+                confirmButtonText: "Please Try Again",
+                buttonsStyling   : false,
+                timerProgressBar : true,
+                timer            : 5000,
+                customClass      : {confirmButton: "btn btn-danger"},
+                showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+            });
+		}		
+	});
+    return false;
+});

@@ -34,13 +34,12 @@ function dataexecutesign(){
                         tableresult +="<td><div class='badge badge-light-success fw-bolder'>The signing process is ongoing</div></td>";  
                     }
                     tableresult +="<td>"+(result[i].USER_IDENTIFIER ? result[i].USER_IDENTIFIER : "")+"</td>";
-                    tableresult +="<td>"+(result[i].nik ? result[i].nik : "")+"</td>";
                     tableresult +="<td>"+(result[i].name ? result[i].name : "")+"</td>";
-                    tableresult +="<td>"+(result[i].noktp ? result[i].noktp : "")+"</td>";
+                    tableresult +="<td><div>"+(result[i].nik ? result[i].nik : "")+"</div><div>"+(result[i].noktp ? result[i].noktp : "")+"</div></td>";
                     tableresult +="<td>"+(result[i].email ? result[i].email : "")+"</td>";
                     tableresult +="<td>"+(result[i].tgljam ? result[i].tgljam : "")+"</td>";
                     if(result[i].STATUS==="0"){
-                        tableresult +="<td class='text-end'><a class='btn btn-sm btn-light-primary' href='"+result[i].URL+"&redirect_url="+url+"index.php/tilaka/signdocument'>Sign</a></td>";
+                        tableresult +="<td class='pe-4 text-end'><a class='btn btn-sm btn-light-primary' href='"+result[i].URL+"&redirect_url="+url+"index.php/tilaka/signdocument'>Sign</a></td>";
                     }
                     tableresult +="</tr>";
                 }

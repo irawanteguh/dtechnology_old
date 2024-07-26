@@ -30,7 +30,17 @@
 		}
 
 		public function dataexecutesign(){
-            $result = $this->md->dataexecutesign($_SESSION['orgid']);
+            $resultcheckroleaccess = $this->md->checkroleaccess($_SESSION['orgid'],$_SESSION['userid']);
+
+            if(!empty($resultcheckroleaccess)){
+                $parameter ="and a.org_id='".$_SESSION['orgid']."'";
+            }else{
+                $resultcheckuseridentifier = $this->md->checkuseridentifier($_SESSION['orgid'],$_SESSION['userid']);
+                $parameter ="and a.org_id='".$_SESSION['orgid']."' and user_identifier='".$resultcheckuseridentifier[0]->user_identifier."'";
+            }
+
+            $result = $this->md->dataexecutesign($parameter);
+            
             
 			if(!empty($result)){
                 $json["responCode"]="00";
