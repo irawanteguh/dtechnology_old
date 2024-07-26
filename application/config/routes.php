@@ -16,6 +16,8 @@
     $route['ReceiveData/(:any)']          = 'restapi/aktivo/Leka/ReceiveData/$1';
     $route['ListExamination/(:any)']      = 'restapi/aktivo/Leka/ListExamination/$1';
     $route['GetResultLeka/(:any)/(:any)'] = 'restapi/aktivo/Leka/GetResultLeka/$1/$2';
+    $route['UpdateLeka/(:any)']           = 'restapi/aktivo/Leka/UpdateLeka/$1';
+    $route['Sendsatusehat/(:any)']        = 'restapi/aktivo/Leka/Sendsatusehat/$1';
 
     $route['404_override']         = '';
     $route['translate_uri_dashes'] = FALSE;
