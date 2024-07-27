@@ -113,7 +113,7 @@
                     $data['NOTE']        = "";
                     $data['FILENAME']    = $response['filename'];
                     $data['STATUS_SIGN'] = "1";
-                    $this->md->updatefile($data,$a->NO_FILE);
+                    $this->md->updatefile($data,$nofile);
                 }
 
                 echo "Upload Success";
