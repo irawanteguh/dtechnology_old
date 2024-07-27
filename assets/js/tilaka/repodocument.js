@@ -4,6 +4,29 @@ dataupload();
 //     dataupload();
 // }, 10000);
 
+function uploadfile(btn){
+	var nofile  = $(btn).attr("data_dirfile");
+
+    var myDropzone = new Dropzone("#file_doc", {
+        url             : url + "index.php/tilaka/repodocument/uploadfile?nofile="+nofile,
+        acceptedFiles   : '.PDF',
+        paramName       : "file",
+        dictDefaultMessage: "Drop files here or click to upload",
+        maxFiles        : 1,
+        maxFilesize     : 10,
+        addRemoveLinks  : true,
+        autoProcessQueue: true,
+        accept: function(file, done) {
+            done();
+        }
+    });
+
+    myDropzone.on("success", function(file, response) {
+        dataupload(); 
+        $('#modal_upload_document').modal('hide');
+    });
+};
+
 function viewdoc(btn){
     var filename     = $(btn).attr("data-dirfile");
     var responsefile = jQuery.ajax({url: filename, type: 'HEAD', async: false}).status;
@@ -54,13 +77,13 @@ function dataupload(){
                 for(var i in result){
                     tableresult +="<tr>";
                     if(result[i].STATUS_FILE==="0"){
-                        tableresult +="<td class='ps-4'><span class='badge badge-light-primary fs-7 fw-bold'>Files Uploaded DTechonolgy</span></td>";
+                        tableresult +="<td class='ps-4'><span class='badge badge-light-primary fs-7 fw-bold' title='File Belum Terupload Ke Dtechnology'>Files Uploaded DTechonolgy</span></td>";
                     }else{
                         if(result[i].STATUS_SIGN==="0"){
                             tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>New</span></td>"; 
                         }else{
                             if(result[i].STATUS_SIGN==="1"){
-                                tableresult +="<td class='ps-4'><span class='badge badge-light-primary fs-7 fw-bold'>Files Uploaded Tilaka Lite</span></td>"; 
+                                tableresult +="<td class='ps-4'><span class='badge badge-light-primary fs-7 fw-bold' title='File Belum Terupload Ke Tilaka Lite'>Files Uploaded Tilaka Lite</span></td>"; 
                             }else{
                                 if(result[i].STATUS_SIGN==="2"){
                                     tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>Request Sign Success</span></td>"; 
@@ -76,15 +99,19 @@ function dataupload(){
                         
                     }
                     if(result[i].STATUS_FILE==="0"){
-                        tableresult +="<td><div>"+(result[i].jenisdocumen ? result[i].jenisdocumen : "-")+"</div><div><a href='#' data-bs-toggle='modal' data-bs-target='#modal_upload_document'>"+(result[i].NO_FILE ? result[i].NO_FILE : "-")+"</a></div><div>"+(result[i].FILENAME ? result[i].FILENAME : "-")+"</div></td>";
+                        tableresult +="<td><div>"+(result[i].jenisdocumen ? result[i].jenisdocumen : "-")+"</div><div><a href='#' data-bs-toggle='modal' data-bs-target='#modal_upload_document' data_dirfile='"+result[i].NO_FILE+"' onclick='uploadfile(this)'>"+(result[i].NO_FILE ? result[i].NO_FILE : "-")+"</a></div><div>"+(result[i].FILENAME ? result[i].FILENAME : "-")+"</div></td>";
                     }else{
-                        tableresult +="<td><div>"+(result[i].jenisdocumen ? result[i].jenisdocumen : "-")+"</div><div><a href='#' data-bs-toggle='modal' data-bs-target='#modal_view_pdf' data-dirfile='"+pathposttilaka+"/"+(result[i].NO_FILE ? result[i].NO_FILE : "")+".pdf' onclick='viewdoc(this)'>"+(result[i].NO_FILE ? result[i].NO_FILE : "-")+"</a></div><div>"+(result[i].FILENAME ? result[i].FILENAME : "-")+"</div></td>";
+                        if(result[i].SOURCE_FILE==="DTECHNOLOGY"){
+                            tableresult +="<td><div>"+(result[i].jenisdocumen ? result[i].jenisdocumen : "-")+"</div><div><a href='#' data-bs-toggle='modal' data-bs-target='#modal_view_pdf' data-dirfile='"+url+"/assets/document/"+(result[i].NO_FILE ? result[i].NO_FILE : "")+".pdf' onclick='viewdoc(this)'>"+(result[i].NO_FILE ? result[i].NO_FILE : "-")+"</a></div><div>"+(result[i].FILENAME ? result[i].FILENAME : "-")+"</div></td>";
+                        }else{
+                            tableresult +="<td><div>"+(result[i].jenisdocumen ? result[i].jenisdocumen : "-")+"</div><div><a href='#' data-bs-toggle='modal' data-bs-target='#modal_view_pdf' data-dirfile='"+pathposttilaka+"/"+(result[i].NO_FILE ? result[i].NO_FILE : "")+".pdf' onclick='viewdoc(this)'>"+(result[i].NO_FILE ? result[i].NO_FILE : "-")+"</a></div><div>"+(result[i].FILENAME ? result[i].FILENAME : "-")+"</div></td>";
+                        }
+                        
                     }
                     
                     tableresult +="<td><div>"+(result[i].pasien_idx ? result[i].pasien_idx : "-")+"</div><div>"+(result[i].transaksi_idx ? result[i].transaksi_idx : "-")+"</div></td>";
                     tableresult +="<td><div>"+(result[i].assignname ? result[i].assignname : "")+"</div><div>"+(result[i].useridentifier ? result[i].useridentifier : "<i class='bi bi-x-octagon text-danger'></i>")+"</div></td>";
-                    tableresult +="<td>"+(result[i].tgljam ? result[i].tgljam : "")+"</td>";
-                    // tableresult +="<td>"+(result[i].useridentifier ? result[i].useridentifier : "<i class='bi bi-x-octagon text-danger'></i>") +"</td>";
+                    tableresult +="<td><div>"+(result[i].createdby ? result[i].createdby : "")+"</div><div>"+(result[i].tgljam ? result[i].tgljam : "")+"</div></td>";
                     tableresult += "<td class='pe-4 text-end'>";
                     tableresult += "<button type='button' class='btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px' data-kt-table-widget-4='expand_row'>";
                     tableresult += "<i class='bi bi-plus fs-4 m-0 toggle-off'></i>";

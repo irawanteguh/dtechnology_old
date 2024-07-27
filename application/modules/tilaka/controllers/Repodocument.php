@@ -40,7 +40,7 @@
             if(!empty($resultcheckroleaccess)){
                 $parameter ="and a.org_id='".$_SESSION['orgid']."'";
             }else{
-                $parameter ="and a.org_id='".$_SESSION['orgid']."' and assign='".$_SESSION['username']."'";
+                $parameter ="and a.org_id='".$_SESSION['orgid']."' and assign='".$_SESSION['username']."' or created_by='".$_SESSION['userid']."'";
             }
 
             $result = $this->md->dataupload($parameter);
@@ -84,8 +84,41 @@
                 $json['responDesc']="Data Failed to Add";
             }
             
-
             echo json_encode($json);
+        }
+
+        public function uploadfile(){
+            $nofile = $_GET['nofile'];
+
+            $config['upload_path']   = './assets/document/';
+            $config['allowed_types'] = 'pdf';
+            $config['file_name']     = $nofile;
+            $config['overwrite']     = TRUE;
+            $this->load->library('upload', $config);
+
+            if (!$this->upload->do_upload('file')) {
+                $error = array('error' => $this->upload->display_errors());
+                log_message('error', 'File upload error: ' . implode(' ', $error));
+                echo json_encode($error);
+            } else {
+                $upload_data = $this->upload->data();
+
+                $data['STATUS_FILE']="1";
+                $data['SOURCE_FILE']="DTECHNOLOGY";
+                $this->md->updatefile($data, $nofile);
+
+                $location ="./assets/document/".$nofile;
+                $response = Tilaka::uploadfile($location);
+                if($response['success']){
+                    $data['NOTE']        = "";
+                    $data['FILENAME']    = $response['filename'];
+                    $data['STATUS_SIGN'] = "1";
+                    $this->md->updatefile($data,$a->NO_FILE);
+                }
+
+                echo "Upload Success";
+            }
+
         }
 
 	}

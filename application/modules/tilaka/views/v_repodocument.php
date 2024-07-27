@@ -38,7 +38,7 @@
 								<th>Filename</th>
 								<th>Information</th>
 								<th>Assign By</th>
-								<th>Created Date</th>
+								<th>Created</th>
 								<th class="pe-4 text-end rounded-end">Note</th>
 							</tr>
 						</thead>
