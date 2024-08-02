@@ -35,7 +35,10 @@
                             <tr class="fw-bolder text-muted bg-light">
                                 <th class="ps-4 rounded-start">Username</th>
                                 <th>Name</th>
-                                <th class="pe-4 text-end rounded-end"></th>
+                                <th>Role</th>
+                                <th>Last Login</th>
+                                <th>Join Date</th>
+                                <th class="pe-4 text-end rounded-end">Actions</th>
                             </tr>
                         </thead>
                         <tbody class="align-middle" id="resultmasteruser"></tbody>

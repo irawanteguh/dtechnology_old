@@ -1,5 +1,5 @@
-<div class="row gy-5 g-xl-8 mb-xl-8">
-	<div class="col-xl-12">
+<div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-5 g-xl-9" id="resultmasterrole">
+	<!-- <div class="col-xl-12">
 		<div class="card card-flush">
 			<div class="card-header pt-5" id="">
 				<h3 class="card-title align-items-start flex-column">
@@ -45,5 +45,5 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 </div>

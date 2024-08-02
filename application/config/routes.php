@@ -19,6 +19,7 @@
     $route['UpdateLeka/(:any)']           = 'restapi/aktivo/Leka/UpdateLeka/$1';
     $route['Sendsatusehat/(:any)']        = 'restapi/aktivo/Leka/Sendsatusehat/$1';
 
+    $route['403_override']         = 'errors/error_403';
     $route['404_override']         = '';
     $route['translate_uri_dashes'] = FALSE;
 ?>

@@ -28,5 +28,28 @@
 
             echo json_encode($json);
         }
+
+        public function addrole(){
+
+            $data['org_id']            = $_SESSION['orgid'];
+            $data['role_id']           = generateuuid();
+            $data['role']              = $this->input->post("data_role_name_add");
+            $data['created_by']        = $_SESSION['userid'];
+            $data['created_date']      = date("Y-m-d H:i:s");
+            $data['last_updated_by']   = $_SESSION['userid'];
+            $data['last_updated_date'] = date("Y-m-d H:i:s");
+
+            if($this->md->insertrole($data)){
+                $json['responCode']="00";
+                $json['responHead']="success";
+                $json['responDesc']="Data Added Successfully";
+            } else {
+                $json['responCode']="01";
+                $json['responHead']="info";
+                $json['responDesc']="Data Failed to Add";
+            }
+
+            echo json_encode($json);
+        }
 	}
 ?>
