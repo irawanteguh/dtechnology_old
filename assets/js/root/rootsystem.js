@@ -147,5 +147,31 @@ document.addEventListener("DOMContentLoaded", function() {
     
 });
 
+function formatDate(date) {
+    const day = date.getDate();
+    const suffix = getDaySuffix(day);
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const month = monthNames[date.getMonth()];
+    const year = date.getFullYear();
 
+    let hours = date.getHours();
+    const minutes = date.getMinutes();
+    const ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    const minutesFormatted = minutes < 10 ? '0' + minutes : minutes;
 
+    return `${day}${suffix} ${month}, ${year} - ${hours}:${minutesFormatted} ${ampm}`;
+}
+
+function getDaySuffix(day) {
+    if (day >= 11 && day <= 13) {
+        return 'th';
+    }
+    switch (day % 10) {
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+    }
+}

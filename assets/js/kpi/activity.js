@@ -3,10 +3,6 @@ var currentViewDate; // Variable to store the current view date
 
 calendar();
 
-$('#modal_activity_add').on('hidden.bs.modal', function () {
-    calendar.gotoDate(currentViewDate); // Go to the stored view date when the modal is closed
-});
-
 $('#modal_activity_userguides').on('hidden.bs.modal', function (e) {
     $('#modal_activity_add').modal('show');
 });
@@ -118,18 +114,35 @@ function calendar() {
         },
         eventDrop: function(info) {},
         eventClick: function(info) {
-            Swal.fire({
-                title            : "<h1 class='font-weight-bold' style='color:#234974;'>For Your Information</h1>",
-                html             : "<b>Sorry, the function is still in the developer development stage</b>",
-                icon             : "error",
-                confirmButtonText: "Please Try Again",
-                buttonsStyling   : false,
-                timerProgressBar : true,
-                timer            : 5000,
-                customClass      : {confirmButton: "btn btn-danger"},
-                showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
-                hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
-            });
+            var startDate = new Date(info.event.start);
+            var endDate = new Date(info.event.extendedProps.endateview);
+            
+
+            startDate.setDate(startDate.getDate());
+            endDate.setDate(endDate.getDate() - 1);
+
+            var startDateString = formatDate(startDate);
+            var endDateString = formatDate(endDate);
+
+            $(":hidden[name='transidactivityview']").val(info.event.extendedProps.transid);
+            $('#eventname').html(info.event.title);
+            $('#eventdescription').html(info.event.extendedProps.kegiatandetail);
+            $('#eventstartdate').html(startDateString);
+            $('#eventenddate').html(endDateString);
+            $('#modal_activity_view').modal('show');
+
+            // Swal.fire({
+            //     title            : "<h1 class='font-weight-bold' style='color:#234974;'>For Your Information</h1>",
+            //     html             : "<b>Sorry, the function is still in the developer development stage</b>",
+            //     icon             : "error",
+            //     confirmButtonText: "Please Try Again",
+            //     buttonsStyling   : false,
+            //     timerProgressBar : true,
+            //     timer            : 5000,
+            //     customClass      : {confirmButton: "btn btn-danger"},
+            //     showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+            //     hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+            // });
         },
         aspectRatio: 2.4
     });
@@ -237,4 +250,74 @@ $(document).on("submit", "#forminsertactivity", function (e) {
         }
     });
     return false;
+});
+
+document.getElementById('kt_modal_view_event_delete').addEventListener('click', function() {
+    Swal.fire({
+        title             : 'Are you sure?',
+        text              : "You won't be able to revert this!",
+        icon              : 'warning',
+        showCancelButton  : true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor : '#d33',
+        confirmButtonText : 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var transid = document.getElementById('transidactivityview').value;
+            $.ajax({
+                url        : url + "index.php/kpi/activity/hapusactivity",
+                data       : { transid: transid },
+                type       : 'POST',
+                dataType   : "JSON",
+                cache      : false,
+                processData: true,
+                success: function(data) {
+                    if (data.responCode === "00") {
+                        Swal.fire({
+                            title            : "<h1 class='font-weight-bold' style='color:#234974;'>Success</h1>",
+                            html             : "<b>The position has been deleted.</b>",
+                            icon             : data.responHead,
+                            confirmButtonText: 'Yeah, got it!',
+                            customClass      : {confirmButton: 'btn btn-success'},
+                            timerProgressBar : true,
+                            timer            : 2000,
+                            showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                            hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+                        }).then(() => {
+                            $("#modal_activity_view").modal("hide"); // Hide the modal
+                            currentViewDate = calendar.getDate(); // Update the current view date
+                            calendar.refetchEvents(); // Refetch events to update the calendar
+                        });
+                    } else {
+                        Swal.fire({
+                            title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
+                            html             : "<b>The position could not be deleted.</b>",
+                            icon             : "error",
+                            confirmButtonText: "Please Try Again",
+                            buttonsStyling   : false,
+                            timerProgressBar : true,
+                            timer            : 5000,
+                            customClass      : {confirmButton: "btn btn-danger"},
+                            showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                            hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+                        });
+                    }
+                },
+                error: function() {
+                    Swal.fire({
+                        title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
+                        html             : "<b>There was a problem with the server.</b>",
+                        icon             : "error",
+                        confirmButtonText: "Please Try Again",
+                        buttonsStyling   : false,
+                        timerProgressBar : true,
+                        timer            : 5000,
+                        customClass      : {confirmButton: "btn btn-danger"},
+                        showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                        hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+                    });
+                }
+            });
+        }
+    });
 });

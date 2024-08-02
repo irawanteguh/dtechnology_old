@@ -39,8 +39,10 @@ class Activity extends CI_Controller{
 
 		foreach ($result as $a) {
 
-			$data['title'] = $a->kegiatanutama;
-			$data['start'] = $a->start_date;
+			$data['transid']        = $a->trans_id;
+			$data['title']          = $a->kegiatanutama;
+			$data['kegiatandetail'] = $a->activity;
+			$data['start']          = $a->start_date;
 
 			if(!empty($a->end_date)){
 				$data['end'] = $a->end_date;
@@ -64,7 +66,8 @@ class Activity extends CI_Controller{
 				$data['color']     = '#dc3545';
 			}
 
-
+			$data['endateview'] = $a->end_date_view;
+			
 			$events[] = $data;
 		};
 
@@ -87,48 +90,6 @@ class Activity extends CI_Controller{
 
 		echo $list;
 	}
-
-	// public function insertactivity(){
-	// 	$activityid       = $this->input->post("data_activity_primaryactivity_add");
-	// 	$activityIdsArray = explode(":", $activityid);
-
-	// 	$resultcekklinisactivity = $this->md->cekklinisactivity($_SESSION['orgid'],$activityIdsArray[0]);
-	// 	if($resultcekklinisactivity->pk === ""){
-	// 		$resultcekatasan = $this->md->cekatasan($_SESSION['orgid'], $_SESSION['userid'],$activityIdsArray[0]);
-	// 		$atasanid        = $resultcekatasan->atasan_id;
-	// 	}else{
-	// 		$resultcekatasanid = $this->md->cekatasanid($_SESSION['orgid'], $_SESSION['userid']);
-	// 		$atasanid = $resultcekatasanid->atasan_id;			
-	// 	}
-		
-	// 	$data['org_id']         = $_SESSION['orgid'];
-	// 	$data['trans_id']       = generateuuid();
-	// 	$data['activity_id']    = $activityIdsArray[0];
-	// 	$data['durasi']         = $activityIdsArray[1];
-	// 	$data['total']          = intval($this->input->post("data_activity_volume_add"))*intval($activityIdsArray[1]);
-	// 	$data['activity']       = $this->input->post("data_activity_description_add");
-	// 	$data['start_date']     = DateTime::createFromFormat("d.m.Y", $this->input->post("data_activity_date_add"))->format("Y-m-d");
-	// 	$data['start_time_in']  = $this->input->post("data_activity_time_start_add");
-	// 	$data['start_time_out'] = $this->input->post("data_activity_time_end_add");
-	// 	$data['end_date']       = DateTime::createFromFormat("d.m.Y", $this->input->post("data_activity_date_add"))->format("Y-m-d");
-	// 	$data['end_time_in']    = $this->input->post("data_activity_time_start_add");
-	// 	$data['end_time_out']   = $this->input->post("data_activity_time_end_add");
-	// 	$data['qty']            = $this->input->post("data_activity_volume_add");
-	// 	$data['user_id']        = $_SESSION['userid'];
-	// 	$data['atasan_id']      = $atasanid;
-
-	// 	if ($this->md->insertactivity($data)) {
-	// 		$json['responCode'] = "00";
-	// 		$json['responHead'] = "success";
-	// 		$json['responDesc'] = "Tambah Activity Berhasil";
-	// 	} else {
-	// 		$json['responCode'] = "01";
-	// 		$json['responHead'] = "info";
-	// 		$json['responDesc'] = "Tambah Activity Gagal";
-	// 	}
-
-	// 	echo json_encode($json);
-	// }
 
 	public function insertactivity(){
 		$activityid       = $this->input->post("data_activity_primaryactivity_add");
@@ -182,6 +143,24 @@ class Activity extends CI_Controller{
 			}
 		}
 	
+		echo json_encode($json);
+	}
+
+	public function hapusactivity(){
+		$transid           = $this->input->post("transid");
+
+		$data['active'] = "0";
+
+		if($this->md->updateactivity($data,$transid)){
+			$json['responCode']="00";
+			$json['responHead']="success";
+			$json['responDesc']="Data Updated Successfully";
+		}else{
+			$json['responCode']="01";
+			$json['responHead']="error";
+			$json['responDesc']="Data failed to update";
+		}
+
 		echo json_encode($json);
 	}
 	

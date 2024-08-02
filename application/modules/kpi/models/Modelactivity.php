@@ -4,9 +4,10 @@
         function calender($orgid,$userid){
             $query =
                     "
-                        select a.trans_id, status,
+                        select a.trans_id, status, activity,
                             concat(DATE_FORMAT(a.start_date, '%Y-%m-%d'),'T',start_time_in,':00') start_date,
                             DATE_FORMAT(DATE_ADD(a.end_date, INTERVAL 1 DAY), '%Y-%m-%d') end_date,
+                            concat(DATE_FORMAT(DATE_ADD(a.end_date, INTERVAL 1 DAY), '%Y-%m-%d'),'T',a.end_time_in,':00') end_date_view,
                             (select activity from dt01_hrd_activity_ms where active='1' and org_id=a.org_id and activity_id=a.activity_id)kegiatanutama
                         from dt01_hrd_activity_dt a
                         where a.active='1'
@@ -116,6 +117,7 @@
             $this->db->where('org_id', $org_id);
             $this->db->where('user_id', $user_id);
             $this->db->where('start_date', $start_date);
+            $this->db->where('active', "1");
             $this->db->where("(('$start_time_in' BETWEEN start_time_in AND end_time_out) OR ('$end_time_out' BETWEEN start_time_in AND end_time_out) OR (start_time_in BETWEEN '$start_time_in' AND '$end_time_out') OR (end_time_out BETWEEN '$start_time_in' AND '$end_time_out'))");
             $query = $this->db->get('dt01_hrd_activity_dt'); // Ganti 'activity_table' dengan nama tabel Anda
         
@@ -188,6 +190,12 @@
 
         function insertactivity($data){           
             $sql =   $this->db->insert("dt01_hrd_activity_dt",$data);
+            return $sql;
+        }
+
+
+        function updateactivity($data,$transid){           
+            $sql =   $this->db->update("dt01_hrd_activity_dt",$data,array("trans_id"=>$transid));
             return $sql;
         }
 
