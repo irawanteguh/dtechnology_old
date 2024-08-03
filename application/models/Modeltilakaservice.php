@@ -23,12 +23,13 @@
                     "
                         select x.*
                         from(
-                            select a.NO_FILE, STATUS_SIGN,
+                            select a.NO_FILE, STATUS_SIGN, SOURCE_FILE,
                                     (select USER_IDENTIFIER from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)useridentifier,
                                     (select NAME            from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)assignname,
                                     (select DOCUMENT_NAME   from dt01_gen_document_ms where org_id=a.org_id and active='1' and JENIS_DOC=a.JENIS_DOC)jenisdocumen
                             from dt01_gen_document_file_dt a
                             where a.active      = '1'
+                            and   a.status_file = '1'
                             and   a.org_id      = '".$orgid."'
                             and   a.status_sign = '".$status."'
                         )x
@@ -90,7 +91,8 @@
                                 (select NAME from dt01_gen_user_data where active='1' and USER_IDENTIFIER=A.USER_IDENTIFIER)name,
                                 (select NIK from dt01_gen_user_data where active='1' and USER_IDENTIFIER=A.USER_IDENTIFIER)nik,
                                 (select IDENTITY_NO from dt01_gen_user_data where active='1' and USER_IDENTIFIER=A.USER_IDENTIFIER)noktp,
-                                (select EMAIL from dt01_gen_user_data where active='1' and USER_IDENTIFIER=A.USER_IDENTIFIER)email
+                                (select EMAIL from dt01_gen_user_data where active='1' and USER_IDENTIFIER=A.USER_IDENTIFIER)email,
+                                (Select distinct source_file from dt01_gen_document_file_dt where active='1' and org_id=a.org_id and request_id=a.request_id)sourcefile
                         from dt01_gen_auth_url_sign_dt a
                         where a.active='1'
                         and   a.org_id='".$orgid."'

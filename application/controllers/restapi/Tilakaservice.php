@@ -21,7 +21,12 @@
             $result = $this->md->dataupload(ORG_ID,"0");
             if(!empty($result)){
                 foreach($result as $a){
-                    $location = PATHFILE_GET_TILAKA."/".$a->NO_FILE.".pdf";
+                    if($a->SOURCE_FILE==="DTECHNOLOGY"){
+                        $location = FCPATH."/assets/document/".$a->NO_FILE.".pdf";
+                    }else{
+                        $location = PATHFILE_GET_TILAKA."/".$a->NO_FILE.".pdf";
+                    }
+                    
                     if(file_exists($location)){
                         $fileSize = filesize($location);
                         if($fileSize!=0){
@@ -192,7 +197,12 @@
                             $fileContent = file_get_contents(htmlspecialchars_decode($a['presigned_url']));
                             if ($fileContent !== false) {
                                 $resultchecknofile = $this->md->checknofile($filename);
-                                $destinationPath   = PATHFILE_POST_TILAKA.DIRECTORY_SEPARATOR.$resultchecknofile[0]->NO_FILE.".pdf";
+                                if($a->sourcefile==="DTECHNOLOGY"){
+                                    $location = FCPATH."/assets/document/".$a->NO_FILE.".pdf";
+                                }else{
+                                    $destinationPath   = PATHFILE_POST_TILAKA.DIRECTORY_SEPARATOR.$resultchecknofile[0]->NO_FILE.".pdf";
+                                }
+                                
                                 file_put_contents($destinationPath, $fileContent);
                             }
                         }

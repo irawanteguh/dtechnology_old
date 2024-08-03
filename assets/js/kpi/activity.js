@@ -118,7 +118,7 @@ function calendar() {
             var endDate = new Date(info.event.extendedProps.endateview);
             
 
-            startDate.setDate(startDate.getDate());
+            startDate.setDate(startDate.getDate() - 1);
             endDate.setDate(endDate.getDate() - 1);
 
             var startDateString = formatDate(startDate);
