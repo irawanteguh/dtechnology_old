@@ -91,7 +91,10 @@
             <div class="modal-body">
                 <div id="viewdoc" style="height:600px;"></div>
             </div>
-            <div class="modal-footer p-1">				
+            <div class="modal-footer p-1">
+                <!-- Button to open the file in a new tab -->
+                <button type="button" class="btn btn-primary me-3" id="openInNewTabButton">Open File in New Tab</button>
+                <!-- Close button -->
                 <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Close</button>
             </div>
         </div>

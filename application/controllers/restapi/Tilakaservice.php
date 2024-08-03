@@ -187,18 +187,18 @@
                         $dataupdate['STATUS']="3";
                         $this->md->updateauthurl($dataupdate,$a->URL_ID);
     
-                        foreach($response['list_pdf'] as $a){
-                            $filename           = $a['filename'];
+                        foreach($response['list_pdf'] as $listpdfs){
+                            $filename           = $listpdfs['filename'];
 
                             $updatefile['STATUS_SIGN'] = "4";
-                            $updatefile['LINK']        = $a['presigned_url'];
+                            $updatefile['LINK']        = $listpdfs['presigned_url'];
                             $this->md->updatelinkdownload($updatefile,$filename);
 
-                            $fileContent = file_get_contents(htmlspecialchars_decode($a['presigned_url']));
+                            $fileContent = file_get_contents(htmlspecialchars_decode($listpdfs['presigned_url']));
                             if ($fileContent !== false) {
                                 $resultchecknofile = $this->md->checknofile($filename);
                                 if($a->sourcefile==="DTECHNOLOGY"){
-                                    $location = FCPATH."/assets/document/".$a->NO_FILE.".pdf";
+                                    $destinationPath = FCPATH."/assets/document/".$resultchecknofile[0]->NO_FILE.".pdf";
                                 }else{
                                     $destinationPath   = PATHFILE_POST_TILAKA.DIRECTORY_SEPARATOR.$resultchecknofile[0]->NO_FILE.".pdf";
                                 }
