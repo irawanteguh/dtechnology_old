@@ -20,6 +20,6 @@
     $route['Sendsatusehat/(:any)']        = 'restapi/aktivo/Leka/Sendsatusehat/$1';
 
     $route['403_override']         = 'errors/error_403';
-    $route['404_override']         = '';
+    $route['404_override']         = 'errors/error_404';
     $route['translate_uri_dashes'] = FALSE;
 ?>

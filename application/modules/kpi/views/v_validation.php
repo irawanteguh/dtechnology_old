@@ -16,6 +16,7 @@
 							<tr class="fw-bolder text-muted bg-light">
 								<th class="ps-4 rounded-start">Name</th>
 								<th>Position</th>
+								<th class="text-center">Status</th>
 								<th>Activities Details</th>
 								<th class="text-center">% Activities</th>
                                 <th class="text-center">% Behavior</th>

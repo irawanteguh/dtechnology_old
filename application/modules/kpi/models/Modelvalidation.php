@@ -55,7 +55,7 @@
         function detailactivity($orgid,$atasanid,$userid){
             $query =
                     "
-                        select a.trans_id, activity_id, activity,
+                        select a.trans_id, activity_id, activity, date_format(start_date,'%d.%m.%Y')start_date, start_time_in, start_time_out, qty,
                             (select activity from dt01_hrd_activity_ms where org_id=a.org_id and active='1' and activity_id=a.activity_id)kegiatanutama
                         from dt01_hrd_activity_dt a
                         where a.active='1'

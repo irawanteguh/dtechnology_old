@@ -101,6 +101,18 @@ function liststaff(){
                     }else{
                         tableresult +="<td>"+(result[i].position ? result[i].position : "")+(result[i].fungsionalprimary ? " "+result[i].fungsionalprimary : "")+"</td>";
                     }
+
+                    if(result[i].position_primary==="Y"){
+                        if(result[i].jmldisetujui >= result[i].hours_month ){
+                            tableresult +="<td class='text-center'><i class='fa-solid fa-circle-check text-success fa-2x'></i></td>";
+                        }else{
+                            tableresult +="<td class='text-center'><i class='fa-solid fa-triangle-exclamation text-danger fa-2x fa-fade'></i></td>";
+                        }
+                        
+                    }else{
+                        tableresult +="<td class='text-center'><i class='fa-regular fa-circle-question text-warning fa-2x'></i></td>";
+                    }
+                    
                     
                     if(result[i].position_primary==="Y"){
                         tableresult +="<td>";
@@ -116,12 +128,22 @@ function liststaff(){
                                 tableresult +="<div class='text-end w-25'>"+(result[i].jmldibuat ? todesimal(result[i].jmldibuat)  : "0")+"</div>";
                                 tableresult +="<div class='ps-5 w-10'>Minutes</div>";
                             tableresult +="</div>";
-                            tableresult +="<div class='d-flex'>";
-                                tableresult +="<div class='text-start w-50'>Waiting</div>";
-                                tableresult +="<div class='text-center w-20'>:</div>";
-                                tableresult +="<div class='text-end w-25'>"+(result[i].jmlwait ? todesimal(result[i].jmlwait)  : "0")+"</div>";
-                                tableresult +="<div class='ps-5 w-10'>Minutes</div>";
-                            tableresult +="</div>";
+                            if(result[i].jmlwait > 0){
+                                tableresult +="<div class='d-flex text-danger fa-fade'>";
+                                    tableresult +="<div class='text-start w-50'>Waiting</div>";
+                                    tableresult +="<div class='text-center w-20'>:</div>";
+                                    tableresult +="<div class='text-end w-25'>"+(result[i].jmlwait ? todesimal(result[i].jmlwait)  : "0")+"</div>";
+                                    tableresult +="<div class='ps-5 w-10'>Minutes</div>";
+                                tableresult +="</div>";
+                            }else{
+                                tableresult +="<div class='d-flex'>";
+                                    tableresult +="<div class='text-start w-50'>Waiting</div>";
+                                    tableresult +="<div class='text-center w-20'>:</div>";
+                                    tableresult +="<div class='text-end w-25'>"+(result[i].jmlwait ? todesimal(result[i].jmlwait)  : "0")+"</div>";
+                                    tableresult +="<div class='ps-5 w-10'>Minutes</div>";
+                                tableresult +="</div>";
+                            }
+                            
                             tableresult +="<div class='d-flex'>";
                                 tableresult +="<div class='text-start w-50'>Approval</div>";
                                 tableresult +="<div class='text-center w-20'>:</div>";
@@ -155,12 +177,22 @@ function liststaff(){
                                 tableresult +="<div class='text-end w-25'>"+(result[i].jmldibuatsec ? todesimal(result[i].jmldibuatsec)  : "0")+"</div>";
                                 tableresult +="<div class='ps-5 w-10'>Minutes</div>";
                             tableresult +="</div>";
-                            tableresult +="<div class='d-flex'>";
-                                tableresult +="<div class='text-start w-50'>Waiting</div>";
-                                tableresult +="<div class='text-center w-20'>:</div>";
-                                tableresult +="<div class='text-end w-25'>"+(result[i].jmlwaitsec ? todesimal(result[i].jmlwaitsec)  : "0")+"</div>";
-                                tableresult +="<div class='ps-5 w-10'>Minutes</div>";
-                            tableresult +="</div>";
+                            if(result[i].jmlwaitsec > 0){
+                                tableresult +="<div class='d-flex text-danger fa-fade'>";
+                                    tableresult +="<div class='text-start w-50'>Waiting</div>";
+                                    tableresult +="<div class='text-center w-20'>:</div>";
+                                    tableresult +="<div class='text-end w-25'>"+(result[i].jmlwaitsec ? todesimal(result[i].jmlwaitsec)  : "0")+"</div>";
+                                    tableresult +="<div class='ps-5 w-10'>Minutes</div>";
+                                tableresult +="</div>";
+                            }else{
+                                tableresult +="<div class='d-flex'>";
+                                    tableresult +="<div class='text-start w-50'>Waiting</div>";
+                                    tableresult +="<div class='text-center w-20'>:</div>";
+                                    tableresult +="<div class='text-end w-25'>"+(result[i].jmlwaitsec ? todesimal(result[i].jmlwaitsec)  : "0")+"</div>";
+                                    tableresult +="<div class='ps-5 w-10'>Minutes</div>";
+                                tableresult +="</div>";
+                            }
+                            
                             tableresult +="<div class='d-flex'>";
                                 tableresult +="<div class='text-start w-50'>Approval</div>";
                                 tableresult +="<div class='text-center w-20'>:</div>";
@@ -256,6 +288,8 @@ function detailactivity(btn){
                     tableresult +="<tr>";
                     tableresult +="<td class='ps-4'><input class='form-check-input h-20px w-20px' type='checkbox' name='pilih["+result[i].trans_id+"]' value='"+result[i].trans_id+"'></td>";
                     tableresult +="<td><div>"+result[i].kegiatanutama+"</div><div class='font-italic'>"+result[i].activity+"</div></td>";
+                    tableresult +="<td class='text-center'>"+result[i].qty+"</td>";
+                    tableresult +="<td class='pe-4 text-end'><div>"+result[i].start_date+"</div><div class='font-italic'>"+result[i].start_time_in+" - "+result[i].start_time_out+"</div></td>";
                     tableresult +="</tr>";
                 }
             }

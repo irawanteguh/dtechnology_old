@@ -53,7 +53,8 @@
                                 <tr class="fw-bolder text-muted bg-light">
                                     <th class="ps-4 rounded-start"><input class="form-check-input h-20px w-20px" type="checkbox" id="checkall" name="checkall"> Select</th>
                                     <th>Activity</th>
-                                    <th class="pe-4 text-end rounded-end">Actions</th>
+                                    <th class="text-center">Volume</th>
+                                    <th class="pe-4 text-end rounded-end">Date Time</th>
                                 </tr>
                             </thead>
                             <tbody class="text-gray-600 fw-bold" id="resultactivity"></tbody>

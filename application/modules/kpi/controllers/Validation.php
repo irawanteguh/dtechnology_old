@@ -128,7 +128,10 @@ class Validation extends CI_Controller{
         $valid = ($status === 'approve') ? '1' : '9';
     
         foreach($pilih as $transid => $value ) {
-            $data['STATUS']=$valid;
+            $data['STATUS']        = $valid;
+            $data['VALIDASI_BY']   = $_SESSION['userid'];
+            $data['VALIDASI_DATE'] = (new DateTime())->format('Y-m-d H:i:s');
+            
             $hasil = $this->md->validasikegiatan($data,$transid);
         }
 
