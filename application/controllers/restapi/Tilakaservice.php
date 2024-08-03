@@ -127,17 +127,8 @@
                         }
                     }
 
-                    $summaryresponse['useridentifier'] = $a->useridentifier;
-                    $summaryresponse['message']        = $response['message'];
-                    $summaryresponse['success']        = $response['success'];
-                    foreach($listfile as $a){
-                        $summaryresponse['filename'][] = $a->NO_FILE.".pdf";
-                    }
-
-                    $summaryresponsepost[]=$summaryresponse;
+                    $this->response($response,REST_Controller::HTTP_OK);
                 }
-
-                $this->response($summaryresponsepost,REST_Controller::HTTP_OK);
             }
         }
 
