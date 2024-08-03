@@ -14,6 +14,7 @@
                             from dt01_gen_document_file_dt a
                             where a.active='1'
                             ".$parameter." 
+                            and a.created_date >= NOW() - INTERVAL 3 DAY
                         )x
                         order by created_date desc
                     ";
