@@ -30,12 +30,12 @@
                                     (select sum(total) from dt01_hrd_activity_dt where active=a.active and org_id=a.org_id and user_id=a.user_id and status='0')jmlwait,
                                     (select sum(total) from dt01_hrd_activity_dt where active=a.active and org_id=a.org_id and user_id=a.user_id and status='1')jmldisetujui,
                                     (select sum(total) from dt01_hrd_activity_dt where active=a.active and org_id=a.org_id and user_id=a.user_id and status='2')jmldirevisi,
-                                    (select sum(total) from dt01_hrd_activity_dt where active=a.active and org_id=a.org_id and user_id=a.user_id and status='3')jmlditolak,
+                                    (select sum(total) from dt01_hrd_activity_dt where active=a.active and org_id=a.org_id and user_id=a.user_id and status='9')jmlditolak,
                                     (select sum(total) from dt01_hrd_activity_dt where active=a.active and org_id=a.org_id and user_id=a.user_id and atasan_id=a.atasan_id)jmldibuatsec,
                                     (select sum(total) from dt01_hrd_activity_dt where active=a.active and org_id=a.org_id and user_id=a.user_id and atasan_id=a.atasan_id and status='0')jmlwaitsec,
                                     (select sum(total) from dt01_hrd_activity_dt where active=a.active and org_id=a.org_id and user_id=a.user_id and atasan_id=a.atasan_id and status='1')jmldisetujuisec,
                                     (select sum(total) from dt01_hrd_activity_dt where active=a.active and org_id=a.org_id and user_id=a.user_id and atasan_id=a.atasan_id and status='2')jmldirevisisec,
-                                    (select sum(total) from dt01_hrd_activity_dt where active=a.active and org_id=a.org_id and user_id=a.user_id and atasan_id=a.atasan_id and status='3')jmlditolaksec
+                                    (select sum(total) from dt01_hrd_activity_dt where active=a.active and org_id=a.org_id and user_id=a.user_id and atasan_id=a.atasan_id and status='9')jmlditolaksec
 
                                 from dt01_hrd_position_dt a
                                 where a.active='1'
@@ -45,6 +45,24 @@
                             )x
                         )y   
                         order by position_primary desc, name asc         
+                    ";
+
+            $recordset = $this->db->query($query);
+            $recordset = $recordset->result();
+            return $recordset;
+        }
+
+        function detailactivity($orgid,$atasanid,$userid){
+            $query =
+                    "
+                        select a.trans_id, activity_id, activity,
+                            (select activity from dt01_hrd_activity_ms where org_id=a.org_id and active='1' and activity_id=a.activity_id)kegiatanutama
+                        from dt01_hrd_activity_dt a
+                        where a.active='1'
+                        and   a.status='0'
+                        and   a.org_id='".$orgid."'
+                        and   a.atasan_id='".$atasanid."'
+                        and   a.user_id='".$userid."'       
                     ";
 
             $recordset = $this->db->query($query);
@@ -90,6 +108,11 @@
 
         function insertassessment($data){           
             $sql =   $this->db->insert("dt01_hrd_assessment_dt",$data);
+            return $sql;
+        }
+
+        function validasikegiatan($data,$transid){           
+            $sql =   $this->db->update("dt01_hrd_activity_dt",$data,array("trans_id"=>$transid));
             return $sql;
         }
 

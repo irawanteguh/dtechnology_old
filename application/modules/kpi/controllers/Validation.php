@@ -47,6 +47,23 @@ class Validation extends CI_Controller{
         echo json_encode($json);
     }
 
+    public function detailactivity(){
+        $result = $this->md->detailactivity($_SESSION['orgid'],$_SESSION['userid'],$this->input->post("userid"));
+        
+        if(!empty($result)){
+            $json["responCode"]="00";
+            $json["responHead"]="success";
+            $json["responDesc"]="Data Di Temukan";
+            $json['responResult']=$result;
+        }else{
+            $json["responCode"]="01";
+            $json["responHead"]="info";
+            $json["responDesc"]="Data Tidak Di Temukan";
+        }
+
+        echo json_encode($json);
+    }
+
     public function insertassessment(){
         $assessment_ids = $this->input->post('assessment_ids');
         $nilai          = $this->input->post('nilai');
@@ -102,6 +119,26 @@ class Validation extends CI_Controller{
     
         echo json_encode($json);
     }
+
+
+    public function validationactivity() {
+        $pilih = $this->input->post('pilih');
+        $status = $this->input->post('status');
+    
+        $valid = ($status === 'approve') ? '1' : '9';
+    
+        foreach($pilih as $transid => $value ) {
+            $data['STATUS']=$valid;
+            $hasil = $this->md->validasikegiatan($data,$transid);
+        }
+
+        $json['responCode']="00";
+        $json['responHead']="success";
+        $json['responDesc']="Validasi Success";
+
+        echo json_encode($json);
+    }
+    
     
     
 }

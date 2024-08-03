@@ -134,6 +134,19 @@ function todolist() {
 
                     
                 }
+            }else{
+                Swal.fire({
+                    title: "<h1 class='font-weight-bold' style='color:#234974;'>For Your Information</h1>",
+                    html: "<b>" + data.responDesc + "</b>",
+                    icon: data.responHead,
+                    confirmButtonText: "Please Try Again",
+                    buttonsStyling: false,
+                    timerProgressBar: true,
+                    timer: 5000,
+                    customClass: { confirmButton: "btn btn-danger" },
+                    showClass: { popup: "animate__animated animate__fadeInUp animate__faster" },
+                    hideClass: { popup: "animate__animated animate__fadeOutDown animate__faster" }
+                });
             }
 
             $("#kt_activity_today").html(tableresultToday);
@@ -150,6 +163,9 @@ function todolist() {
 
             $("#info_list_todo").html(allcount+" Task");
         },
+        complete: function() {
+            toastr.clear();
+        },
         error: function(xhr, status, error) {
             Swal.fire({
                 title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
@@ -163,10 +179,7 @@ function todolist() {
                 showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
                 hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
             });
-        },
-        complete: function() {
-            toastr.clear();
-        }
+        }        
     });
     return false;
 }
@@ -246,6 +259,9 @@ function charttodolist() {
                 });
             }
         },
+        complete: function() {
+            toastr.clear();
+        },
         error: function(xhr, status, error) {
             Swal.fire({
                 title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
@@ -259,10 +275,7 @@ function charttodolist() {
                 showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
                 hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
             });
-        },
-        complete: function() {
-            toastr.clear();
-        }
+        }        
     });
     return false;
 };
@@ -326,6 +339,19 @@ function datastaff() {
 
                     tableresult +="</tr>";
                 }
+            }else{
+                Swal.fire({
+                    title: "<h1 class='font-weight-bold' style='color:#234974;'>For Your Information</h1>",
+                    html: "<b>" + data.responDesc + "</b>",
+                    icon: data.responHead,
+                    confirmButtonText: "Please Try Again",
+                    buttonsStyling: false,
+                    timerProgressBar: true,
+                    timer: 5000,
+                    customClass: { confirmButton: "btn btn-danger" },
+                    showClass: { popup: "animate__animated animate__fadeInUp animate__faster" },
+                    hideClass: { popup: "animate__animated animate__fadeOutDown animate__faster" }
+                });
             }
 
             $("#datastaff").html(tableresult);

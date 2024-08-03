@@ -118,8 +118,14 @@
             $this->db->where('user_id', $user_id);
             $this->db->where('start_date', $start_date);
             $this->db->where('active', "1");
-            $this->db->where("(('$start_time_in' BETWEEN start_time_in AND end_time_out) OR ('$end_time_out' BETWEEN start_time_in AND end_time_out) OR (start_time_in BETWEEN '$start_time_in' AND '$end_time_out') OR (end_time_out BETWEEN '$start_time_in' AND '$end_time_out'))");
-            $query = $this->db->get('dt01_hrd_activity_dt'); // Ganti 'activity_table' dengan nama tabel Anda
+            $this->db->where_in('status', ["0", "1"]); // Check for status '0' or '1'
+            $this->db->where("(
+                ('$start_time_in' BETWEEN start_time_in AND end_time_out) 
+                OR ('$end_time_out' BETWEEN start_time_in AND end_time_out) 
+                OR (start_time_in BETWEEN '$start_time_in' AND '$end_time_out') 
+                OR (end_time_out BETWEEN '$start_time_in' AND '$end_time_out')
+            )");
+            $query = $this->db->get('dt01_hrd_activity_dt'); // Change 'activity_table' to your table name
         
             if ($query->num_rows() > 0) {
                 return true;
@@ -127,6 +133,7 @@
                 return false;
             }
         }
+        
         
 
         function volume($orgid,$activityid,$starttime,$endtime){

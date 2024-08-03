@@ -1,5 +1,29 @@
 liststaff();
 
+$('#modal_validation_kegiatan').on('shown.bs.modal', function() {
+    $('#checkall').prop('checked', false);
+    $('#resultactivity input[type="checkbox"]').prop('checked', false);
+});
+
+
+document.getElementById('checkall').addEventListener('change', function() {
+    var checkboxes = document.querySelectorAll('#resultactivity input[type="checkbox"]');
+    checkboxes.forEach(function(checkbox) {
+        checkbox.checked = this.checked;
+    }, this);
+});
+
+$(document).on("click",".btn-validasi", function(e){            
+    e.preventDefault();
+    simpanvalidasi(this);
+});
+
+$(document).on("click",".btn-validation-kegiatan", function(e){            
+    e.preventDefault();
+    detailactivity($(this));
+});
+
+
 $('#modal_validation_perilaku').on('show.bs.modal', function (e) {
     listassement();
 });
@@ -7,8 +31,10 @@ $('#modal_validation_perilaku').on('show.bs.modal', function (e) {
 function getdata(btn){
     toastr.clear();
 
-    var userid            = btn.attr("data-userid");
+    var userid = btn.attr("data-userid");
+
     $(":hidden[name='modal_validation_perilaku_userid_add']").val(userid);
+    $(":hidden[name='modal_validation_acivity_userid']").val(userid);
 };
 
 function liststaff(){
@@ -102,12 +128,12 @@ function liststaff(){
                                 tableresult +="<div class='text-end w-25'>"+(result[i].jmldisetujui ? todesimal(result[i].jmldisetujui)  : "0")+"</div>";
                                 tableresult +="<div class='ps-5 w-10'>Minutes</div>";
                             tableresult +="</div>";
-                            tableresult +="<div class='d-flex'>";
-                                tableresult +="<div class='text-start w-50'>Revision</div>";
-                                tableresult +="<div class='text-center w-20'>:</div>";
-                                tableresult +="<div class='text-end w-25'>"+(result[i].jmldirevisi ? todesimal(result[i].jmldirevisi)  : "0")+"</div>";
-                                tableresult +="<div class='ps-5 w-10'>Minutes</div>";
-                            tableresult +="</div>";
+                            // tableresult +="<div class='d-flex'>";
+                            //     tableresult +="<div class='text-start w-50'>Revision</div>";
+                            //     tableresult +="<div class='text-center w-20'>:</div>";
+                            //     tableresult +="<div class='text-end w-25'>"+(result[i].jmldirevisi ? todesimal(result[i].jmldirevisi)  : "0")+"</div>";
+                            //     tableresult +="<div class='ps-5 w-10'>Minutes</div>";
+                            // tableresult +="</div>";
                             tableresult +="<div class='d-flex'>";
                                 tableresult +="<div class='text-start w-50'>Reject</div>";
                                 tableresult +="<div class='text-center w-20'>:</div>";
@@ -141,12 +167,12 @@ function liststaff(){
                                 tableresult +="<div class='text-end w-25'>"+(result[i].jmldisetujuisec ? todesimal(result[i].jmldisetujuisec)  : "0")+"</div>";
                                 tableresult +="<div class='ps-5 w-10'>Minutes</div>";
                             tableresult +="</div>";
-                            tableresult +="<div class='d-flex'>";
-                                tableresult +="<div class='text-start w-50'>Revision</div>";
-                                tableresult +="<div class='text-center w-20'>:</div>";
-                                tableresult +="<div class='text-end w-25'>"+(result[i].jmldirevisisec ? todesimal(result[i].jmldirevisisec)  : "0")+"</div>";
-                                tableresult +="<div class='ps-5 w-10'>Minutes</div>";
-                            tableresult +="</div>";
+                            // tableresult +="<div class='d-flex'>";
+                            //     tableresult +="<div class='text-start w-50'>Revision</div>";
+                            //     tableresult +="<div class='text-center w-20'>:</div>";
+                            //     tableresult +="<div class='text-end w-25'>"+(result[i].jmldirevisisec ? todesimal(result[i].jmldirevisisec)  : "0")+"</div>";
+                            //     tableresult +="<div class='ps-5 w-10'>Minutes</div>";
+                            // tableresult +="</div>";
                             tableresult +="<div class='d-flex'>";
                                 tableresult +="<div class='text-start w-50'>Reject</div>";
                                 tableresult +="<div class='text-center w-20'>:</div>";
@@ -166,9 +192,9 @@ function liststaff(){
                         tableresult += "<div class='btn-group' role='group'>";
                             tableresult += "<button id='btnGroupDrop1' type='button' class='btn btn-light-primary dropdown-toggle btn-sm' data-bs-toggle='dropdown' aria-expanded='false'>Action</button>";
                             tableresult += "<div class='dropdown-menu' aria-labelledby='btnGroupDrop1'>";
-                                tableresult += "<a class='dropdown-item btn btn-sm' data-kt-drawer-show='true' data-kt-drawer-target='#drawer_employee_registrationkategoritenaga_add' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-pencil'></i> Validation Activites</a>";
+                                tableresult += "<a class='dropdown-item btn btn-sm btn-validation-kegiatan' data-bs-toggle='modal' data-bs-target='#modal_validation_kegiatan' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-pencil'></i> Validation Activites</a>";
                                 if(result[i].position_primary==="Y"){
-                                    tableresult += "<a class='dropdown-item btn btn-sm' data-kt-drawer-show='true' data-bs-toggle='modal' data-bs-target='#modal_validation_perilaku' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-person-add'></i> Personal Assessment</a>";
+                                    tableresult += "<a class='dropdown-item btn btn-sm' data-bs-toggle='modal' data-bs-target='#modal_validation_perilaku' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-person-add'></i> Personal Assessment</a>";
                                 }
                                 
                             tableresult +="</div>";
@@ -206,6 +232,58 @@ function liststaff(){
     });
     return false;
 };
+
+function detailactivity(btn){
+    var userid   = btn.attr("data-userid");
+    $.ajax({
+        url        : url+"index.php/kpi/validation/detailactivity",
+        data       : {userid:userid},
+        method     : "POST",
+        dataType   : "JSON",
+        cache      : false,
+        processData: true,
+        beforeSend : function () {
+            $("#resultactivity").html("");
+        },
+        success:function(data){
+            toastr.clear();
+            var tableresult = "";
+
+            if(data.responCode==="00"){
+                var result = data.responResult;
+
+                for(var i in result){
+                    tableresult +="<tr>";
+                    tableresult +="<td class='ps-4'><input class='form-check-input h-20px w-20px' type='checkbox' name='pilih["+result[i].trans_id+"]' value='"+result[i].trans_id+"'></td>";
+                    tableresult +="<td><div>"+result[i].kegiatanutama+"</div><div class='font-italic'>"+result[i].activity+"</div></td>";
+                    tableresult +="</tr>";
+                }
+            }
+
+            $("#resultactivity").html(tableresult);
+        },
+        complete: function () {
+
+        },
+        error: function(xhr, status, error) {
+            Swal.fire({
+                title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
+                html             : "<b>"+error+"</b>",
+                icon             : "error",
+                confirmButtonText: "Please Try Again",
+                buttonsStyling   : false,
+                timerProgressBar : true,
+                timer            : 5000,
+                customClass      : {
+                    confirmButton: "btn btn-danger"
+                },
+                showClass: {popup: "animate__animated animate__fadeInUp animate__faster"},
+                hideClass: {popup: "animate__animated animate__fadeOutDown animate__faster"}
+            });
+        }
+    });
+    return false;
+}
 
 function listassement(){
     $.ajax({
@@ -386,3 +464,60 @@ $(document).on("submit", "#forminsertassessment", function (e) {
     });
     return false;
 });
+
+function simpanvalidasi(button) {
+    toastr["info"]('Mohon Menunggu Kami Sedang Melakukan Penyimpanan Data', "INFORMATION");
+    var form = $("#fromvalidationactivity");
+    var url = form.attr("action");
+    var status = $(button).attr('name');
+
+    var formData = form.serialize();
+    formData += '&status=' + encodeURIComponent(status);
+
+    $.ajax({
+        url: url,
+        data: formData,
+        method: "POST",
+        dataType: "JSON",
+        cache: false,
+        success: function (data, textStatus, jqXHR) {
+    
+            if (data.responCode === "00") {
+                toastr[data.responHead](data.responDesc, "INFORMATION");
+                $('#modal_validation_kegiatan').modal('hide');
+                liststaff();
+            } else {
+                $(".btn-validasi").removeClass("disabled");
+                Swal.fire({
+                    title: "<h1 class='font-weight-bold' style='color:#234974;'>For Your Information</h1>",
+                    html: "<b>" + data.responDesc + "</b>",
+                    icon: data.responHead,
+                    confirmButtonText: "Please Try Again",
+                    buttonsStyling: false,
+                    timerProgressBar: true,
+                    timer: 5000,
+                    customClass: { confirmButton: "btn btn-danger" },
+                    showClass: { popup: "animate__animated animate__fadeInUp animate__faster" },
+                    hideClass: { popup: "animate__animated animate__fadeOutDown animate__faster" }
+                });
+            }
+        },
+        error: function(xhr, status, error) {
+            Swal.fire({
+                title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
+                html             : "<b>"+error+"</b>",
+                icon             : "error",
+                confirmButtonText: "Please Try Again",
+                buttonsStyling   : false,
+                timerProgressBar : true,
+                timer            : 5000,
+                customClass      : {confirmButton: "btn btn-danger"},
+                showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+            });
+        }
+    });
+
+    return false;
+}
+
