@@ -189,7 +189,7 @@
                             if ($fileContent !== false) {
                                 $resultchecknofile = $this->md->checknofile($filename);
                                 if($a->sourcefile==="DTECHNOLOGY"){
-                                    $destinationPath = FCPATH."/assets/document/".$resultchecknofile[0]->NO_FILE.".pdf";
+                                    $destinationPath = FCPATH."/assets/document/".$a[0]->NO_FILE.".pdf";
                                 }else{
                                     $destinationPath   = PATHFILE_POST_TILAKA.DIRECTORY_SEPARATOR.$resultchecknofile[0]->NO_FILE.".pdf";
                                 }
