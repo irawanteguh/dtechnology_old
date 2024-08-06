@@ -23,7 +23,8 @@ RewriteRule ^(.*)$ index.php/$1 [L]
 </IfModule>
 
 Header set X-XSS-Protection "1; mode=block"
-Header set X-Frame-Options "DENY"
+#Header set X-Frame-Options "DENY"
+Header set X-Frame-Options "ALLOWALL"
 Header set X-Content-Type-Options "nosniff"
 
 <LimitExcept GET POST>

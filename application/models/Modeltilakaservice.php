@@ -21,19 +21,17 @@
         function dataupload($orgid,$status){
             $query =
                     "
-                        select x.*
-                        from(
-                            select a.NO_FILE, STATUS_SIGN, SOURCE_FILE,
-                                    (select USER_IDENTIFIER from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)useridentifier,
-                                    (select NAME            from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)assignname,
-                                    (select DOCUMENT_NAME   from dt01_gen_document_ms where org_id=a.org_id and active='1' and JENIS_DOC=a.JENIS_DOC)jenisdocumen
-                            from dt01_gen_document_file_dt a
-                            where a.active      = '1'
-                            and   a.status_file = '1'
-                            and   a.org_id      = '".$orgid."'
-                            and   a.status_sign = '".$status."'
-                        )x
-                        where x.useridentifier<>''
+                        select a.NO_FILE, STATUS_SIGN, SOURCE_FILE,
+                                (select USER_IDENTIFIER from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)useridentifier,
+                                (select NAME            from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)assignname,
+                                (select DOCUMENT_NAME   from dt01_gen_document_ms where org_id=a.org_id and active='1' and JENIS_DOC=a.JENIS_DOC)jenisdocumen
+                        from dt01_gen_document_file_dt a
+                        where a.active      = '1'
+                        and   a.status_file = '1'
+                        and   a.org_id      = '".$orgid."'
+                        and   a.status_sign = '".$status."'
+                        and   a.assign  = (select assign from dt01_gen_user_data where org_id=a.org_id and active='1' and nik=a.assign and user_identifier<>'')
+                        limit 50;
                     ";
 
             $recordset = $this->db->query($query);
@@ -44,16 +42,14 @@
         function userrequestsign($orgid,$status){
             $query =
                     "
-                        select x.*
-                        from(
-                            select distinct a.assign,
-                                    (select USER_IDENTIFIER from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)useridentifier
-                            from dt01_gen_document_file_dt a
-                            where a.active='1'
-                            and   a.org_id='".$orgid."'
-                            and   a.status_sign ='".$status."'
-                        )x
-                        where x.useridentifier<>''
+                        select distinct a.assign,
+                                (select USER_IDENTIFIER from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)useridentifier,
+                                (select name from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)assignname
+                        from dt01_gen_document_file_dt a
+                        where a.active='1'
+                        and   a.org_id='".$orgid."'
+                        and   a.status_sign ='".$status."'
+                        and   a.assign  = (select assign from dt01_gen_user_data where org_id=a.org_id and active='1' and nik=a.assign and user_identifier<>'')
                     ";
 
             $recordset = $this->db->query($query);

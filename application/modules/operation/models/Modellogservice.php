@@ -9,6 +9,7 @@
                         where a.org_id='".$orgid."'
                         ".$parameter."
                         order by request_id desc
+                        limit 20
                     ";
 
             $recordset = $this->db->query($query);

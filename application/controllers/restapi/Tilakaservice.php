@@ -18,9 +18,15 @@
         }
 
         public function uploadallfile_POST(){
+            $summaryresponse = [];
+            $responseupload  = [];
+
             $result = $this->md->dataupload(ORG_ID,"0");
             if(!empty($result)){
                 foreach($result as $a){
+                    $response    = [];
+                    $responseall = [];
+
                     if($a->SOURCE_FILE==="DTECHNOLOGY"){
                         $location = FCPATH."/assets/document/".$a->NO_FILE.".pdf";
                     }else{
@@ -37,27 +43,44 @@
                                 $data['STATUS_SIGN'] = "1";
                                 $this->md->updatefile($data,$a->NO_FILE);
                             }
-                            $this->response($response,REST_Controller::HTTP_OK);
+                            $responseall['Response'] = $response;
                         }
                     }else{
                         $data['NOTE'] = "File Tidak Di Temukan";
                         $this->md->updatefile($data,$a->NO_FILE);
+                        $responseall['Response'] = "File Tidak Di Temukan";
                     }
+
+                    $responseall['NoFile']                   = $a->NO_FILE;
+                    $responseall['Type']                     = $a->jenisdocumen;
+                    $responseall['Directory']                = $location;
+                    $responseall['Source']                   = $a->SOURCE_FILE;
+                    $responseall['Assign']['UserIdentifier'] = $a->useridentifier;
+                    $responseall['Assign']['Name']           = $a->assignname;
+
+                    $responseupload[]=$responseall;
                 }
+            }else{
+                $responseupload['Response'] = "Tidak Ada List File Untuk Di Upload Ke Tilaka Lite";
             }
+
+            $summaryresponse[]=$responseupload;
+            $this->response($summaryresponse,REST_Controller::HTTP_OK);
         }
 
         public function requestsign_POST(){
-            $summaryresponsepost = [];
+            $summaryresponse = [];
+            $responseupload  = [];
+            
             $result = $this->md->userrequestsign(ORG_ID,"1");
 
             if(!empty($result)){
                 foreach($result as $a){
-                    $requestid       = "";
-                    $body            = [];
-                    $signatures      = [];
-                    $response        = [];
-                    $summaryresponse = [];
+                    $requestid   = "";
+                    $body        = [];
+                    $signatures  = [];
+                    $response    = [];
+                    $responseall = [];
 
                     // $filename             = "Assign by : ".$a->assignname;
                     // $errorCorrectionLevel = "H";
@@ -127,16 +150,31 @@
                         }
                     }
 
-                    $this->response($response,REST_Controller::HTTP_OK);
+                    $responseall['Assign']['UserIdentifier'] = $a->useridentifier;
+                    $responseall['Assign']['Name']           = $a->assignname;
+                    $responseall['Response']                 = $response;
+                    $responseupload[]=$responseall;
                 }
+            }else{
+                $responseupload['Response'] = "Tidak Ada List Untuk Di Lakukan Request Sign";
             }
+
+            $summaryresponse[]=$responseupload;
+            $this->response($summaryresponse,REST_Controller::HTTP_OK);
         }
 
         public function excutesign_POST(){
-            $status = "and a.status in ('0','1')";
+            $summaryresponse = [];
+            $responseupload  = [];
+
+            // $status = "and a.status in ('0','1')";
+            $status = "and a.status ='1' ";
             $result = $this->md->dataexecutesign(ORG_ID,$status);
             if(!empty($result)){
                 foreach($result as $a){
+                    $response    = [];
+                    $responseall = [];
+
                     $body['request_id']      = $a->REQUEST_ID;
                     $body['user_identifier'] = $a->USER_IDENTIFIER;
                     $body['hmac_nonce']      = "";
@@ -159,11 +197,17 @@
                         $this->md->updaterequestid($dataupdatefile,$a->REQUEST_ID);
                     }
 
-                    $summaryresponsepost[]=$response;
+                    $responseall['Assign']['UserIdentifier'] = $a->USER_IDENTIFIER;
+                    $responseall['Assign']['Name']           = $a->name;
+                    $responseall['Response']                 = $response;
+                    $responseupload[]=$responseall;
                 }
-
-                $this->response($summaryresponsepost,REST_Controller::HTTP_OK);
+            }else{
+                $responseupload['Response'] = "Tidak Ada List Untuk Di Execute";
             }
+
+            $summaryresponse[]=$responseupload;
+            $this->response($summaryresponse,REST_Controller::HTTP_OK);
         }
 
         public function statussign_POST(){
@@ -198,10 +242,8 @@
                             }
                         }
                     }
-
                     $summaryresponsepost[]=$response;
                 }
-
                 $this->response($summaryresponsepost,REST_Controller::HTTP_OK);
             }
         }
