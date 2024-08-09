@@ -111,9 +111,13 @@ function dataupload(){
                                     tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>Request Sign Success</span></td>"; 
                                 }else{
                                     if(result[i].STATUS_SIGN==="3"){
-                                        tableresult +="<td class='ps-4'><span class='adge badge-light-danger fs-7 fw-bold'>Request Sign Field</span></td>";
+                                        tableresult +="<td class='ps-4'><span class='badge badge-light-danger fs-7 fw-bold'>Request Sign Field</span></td>";
                                     }else{
-                                        tableresult +="<td class='ps-4'><span class='badge badge-light-success fs-7 fw-bold'>Sign Success</span></td>"; 
+                                        if(result[i].STATUS_SIGN==="4"){
+                                            tableresult +="<td class='ps-4'><span class='badge badge-light-success fs-7 fw-bold'>Sign Success</span></td>"; 
+                                        }else{
+                                            tableresult +="<td class='ps-4'><span class='badge badge-light-danger fs-7 fw-bold'>Sign Field</span></td>";
+                                        }
                                     }
                                 }
                             }

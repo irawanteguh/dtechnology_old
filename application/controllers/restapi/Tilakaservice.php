@@ -21,7 +21,9 @@
             $summaryresponse = [];
             $responseupload  = [];
 
-            $result = $this->md->dataupload(ORG_ID,"0");
+            $status ="and a.status_sign in ('0','5')";
+
+            $result = $this->md->dataupload(ORG_ID,$status);
             if(!empty($result)){
                 foreach($result as $a){
                     $response    = [];
@@ -37,6 +39,7 @@
                         $fileSize = filesize($location);
                         if($fileSize!=0){
                             $response = Tilaka::uploadfile($location);
+                            
                             if($response['success']){
                                 $data['NOTE']        = "";
                                 $data['FILENAME']    = $response['filename'];
@@ -44,10 +47,16 @@
                                 $this->md->updatefile($data,$a->NO_FILE);
                             }
                             $responseall['Response'] = $response;
+                        }else{
+                            $data['NOTE'] = "File Corrupted, File Size : ".$fileSize;
+                            $this->md->updatefile($data,$a->NO_FILE);
+
+                            $responseall['Response'] = "File Corrupted, File Size : ".$fileSize;
                         }
                     }else{
                         $data['NOTE'] = "File Tidak Di Temukan";
                         $this->md->updatefile($data,$a->NO_FILE);
+
                         $responseall['Response'] = "File Tidak Di Temukan";
                     }
 
@@ -225,21 +234,28 @@
                         foreach($response['list_pdf'] as $listpdfs){
                             $filename           = $listpdfs['filename'];
 
-                            $updatefile['STATUS_SIGN'] = "4";
-                            $updatefile['LINK']        = $listpdfs['presigned_url'];
-                            $this->md->updatelinkdownload($updatefile,$filename);
-
-                            $fileContent = file_get_contents(htmlspecialchars_decode($listpdfs['presigned_url']));
-                            if ($fileContent !== false) {
-                                $resultchecknofile = $this->md->checknofile($filename);
-                                if($a->sourcefile==="DTECHNOLOGY"){
-                                    $destinationPath = FCPATH."/assets/document/".$a[0]->NO_FILE.".pdf";
-                                }else{
-                                    $destinationPath   = PATHFILE_POST_TILAKA.DIRECTORY_SEPARATOR.$resultchecknofile[0]->NO_FILE.".pdf";
+                            if($listpdfs['error']===false){
+                                $updatefile['STATUS_SIGN'] = "4";
+                                $updatefile['LINK']        = $listpdfs['presigned_url'];
+                               
+                                $fileContent = file_get_contents(htmlspecialchars_decode($listpdfs['presigned_url']));
+                                if ($fileContent !== false) {
+                                    $resultchecknofile = $this->md->checknofile($filename);
+                                    if($a->sourcefile==="DTECHNOLOGY"){
+                                        $destinationPath = FCPATH."/assets/document/".$a[0]->NO_FILE.".pdf";
+                                    }else{
+                                        $destinationPath   = PATHFILE_POST_TILAKA.DIRECTORY_SEPARATOR.$resultchecknofile[0]->NO_FILE.".pdf";
+                                    }
+                                    
+                                    file_put_contents($destinationPath, $fileContent);
                                 }
-                                
-                                file_put_contents($destinationPath, $fileContent);
+                            }else{
+                                $updatefile['STATUS_SIGN'] = "5";
+                                $updatefile['LINK']        = $listpdfs['presigned_url'];
                             }
+
+                            $this->md->updatelinkdownload($updatefile,$filename);
+                            
                         }
                     }
                     $summaryresponsepost[]=$response;
