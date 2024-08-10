@@ -22,7 +22,6 @@
             $responseupload  = [];
 
             $status ="and a.status_sign in ('0','5')";
-
             $result = $this->md->dataupload(ORG_ID,$status);
             if(!empty($result)){
                 foreach($result as $a){
