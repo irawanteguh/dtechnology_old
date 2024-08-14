@@ -225,36 +225,57 @@
                 foreach($result as $a){
                     $body['request_id'] = $a->REQUEST_ID;
                     $response = Tilaka::excutesignstatus(json_encode($body));
-    
+                    
                     if($response['success']){
-                        $dataupdate['STATUS']="3";
-                        $this->md->updateauthurl($dataupdate,$a->URL_ID);
-    
                         foreach($response['list_pdf'] as $listpdfs){
-                            $filename           = $listpdfs['filename'];
-
+                            
                             if($listpdfs['error']===false){
+                                $filename = $listpdfs['filename'];
+
+                                $dataupdate['STATUS']="3";
+                                $this->md->updateauthurl($dataupdate,$a->URL_ID);
+            
                                 $updatefile['STATUS_SIGN'] = "4";
                                 $updatefile['LINK']        = $listpdfs['presigned_url'];
-                               
+                                $this->md->updatelinkdownload($updatefile,$filename);
+
                                 $fileContent = file_get_contents(htmlspecialchars_decode($listpdfs['presigned_url']));
                                 if ($fileContent !== false) {
                                     $resultchecknofile = $this->md->checknofile($filename);
                                     if($a->sourcefile==="DTECHNOLOGY"){
-                                        $destinationPath = FCPATH."/assets/document/".$a[0]->NO_FILE.".pdf";
+                                        $destinationPath = FCPATH."/assets/document/".$resultchecknofile[0]->NO_FILE.".pdf";
                                     }else{
                                         $destinationPath   = PATHFILE_POST_TILAKA.DIRECTORY_SEPARATOR.$resultchecknofile[0]->NO_FILE.".pdf";
                                     }
-                                    
                                     file_put_contents($destinationPath, $fileContent);
                                 }
-                            }else{
-                                $updatefile['STATUS_SIGN'] = "5";
-                                $updatefile['LINK']        = $listpdfs['presigned_url'];
                             }
 
-                            $this->md->updatelinkdownload($updatefile,$filename);
                             
+
+                            // if($listpdfs['error']===false){
+                            //     $dataupdate['STATUS']="3";
+                            //     $this->md->updateauthurl($dataupdate,$a->URL_ID);
+            
+                            //     $updatefile['STATUS_SIGN'] = "4";
+                            //     $updatefile['LINK']        = $listpdfs['presigned_url'];
+                               
+                            //     $fileContent = file_get_contents(htmlspecialchars_decode($listpdfs['presigned_url']));
+                            //     if ($fileContent !== false) {
+                            //         $resultchecknofile = $this->md->checknofile($filename);
+                            //         if($a->sourcefile==="DTECHNOLOGY"){
+                            //             $destinationPath = FCPATH."/assets/document/".$resultchecknofile[0]->NO_FILE.".pdf";
+                            //         }else{
+                            //             $destinationPath   = PATHFILE_POST_TILAKA.DIRECTORY_SEPARATOR.$resultchecknofile[0]->NO_FILE.".pdf";
+                            //         }
+                            //         file_put_contents($destinationPath, $fileContent);
+                            //     }
+                            // }else{
+                            //     $updatefile['STATUS_SIGN'] = "5";
+                            //     $updatefile['LINK']        = $listpdfs['presigned_url'];
+                            // }
+
+                            // $this->md->updatelinkdownload($updatefile,$filename);
                         }
                     }
                     $summaryresponsepost[]=$response;
