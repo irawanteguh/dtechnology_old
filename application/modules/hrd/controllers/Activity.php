@@ -34,6 +34,7 @@
             $data['activity_id']      = generateuuid();
             $data['activity']         = $this->input->post("data_activity_name_add");
             $data['durasi']           = $this->input->post("data_activity_durasi_add");
+            $data['pk']               = "";
             $data['created_by']       = $_SESSION['userid'];
             $data['last_update_by']   = $_SESSION['userid'];
             $data['last_update_date'] = date("Y-m-d H:i:s");
