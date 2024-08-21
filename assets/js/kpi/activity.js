@@ -130,19 +130,6 @@ function calendar() {
             $('#eventstartdate').html(startDateString);
             $('#eventenddate').html(endDateString);
             $('#modal_activity_view').modal('show');
-
-            // Swal.fire({
-            //     title            : "<h1 class='font-weight-bold' style='color:#234974;'>For Your Information</h1>",
-            //     html             : "<b>Sorry, the function is still in the developer development stage</b>",
-            //     icon             : "error",
-            //     confirmButtonText: "Please Try Again",
-            //     buttonsStyling   : false,
-            //     timerProgressBar : true,
-            //     timer            : 5000,
-            //     customClass      : {confirmButton: "btn btn-danger"},
-            //     showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
-            //     hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
-            // });
         },
         aspectRatio: 2.4
     });

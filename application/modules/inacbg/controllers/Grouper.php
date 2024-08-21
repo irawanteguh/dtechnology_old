@@ -29,5 +29,32 @@
             echo json_encode($json);
         }
 
+        public function kelasperawatan(){
+            $type   = $this->input->post("type");
+            $result = $this->md->kelasperawatan($type);
+            $kelas  = "";
+
+            foreach ($result as $a) {
+                $kelas .= "<option value='" . $a->value . "'>" . $a->keterangan . "</option>";
+            }
+
+            echo $kelas;
+        }
+
+        public function claim_print(){
+            $body = [];
+
+            $nosep = $this->input->post("nosep");
+            $nosep ="16120507422";
+            
+
+            $body['metadata']['method'] = "claim_print";
+            $body['data']['nomor_sep']  = $nosep;
+
+            $reponse = Inacbg::sendata_claimprint(json_encode($body));
+
+            echo $reponse;
+        }
+
 	}
 ?>

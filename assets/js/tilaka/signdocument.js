@@ -18,28 +18,26 @@ function dataexecutesign(){
         success:function(data){
             var result      = "";
             var tableresult = "";
-            var getvariabel = "";
             
             if(data.responCode==="00"){
                 result        = data.responResult;
                 for(var i in result){
-                    getvariabel =   "data-urlid='"+result[i].URL_ID+"'"+
-                                    "data-requestid='"+result[i].REQUEST_ID+"'"+
-                                    "data-useridentifier='"+result[i].USER_IDENTIFIER+"'";
 
                     tableresult +="<tr>";
-                    if(result[i].STATUS==="0"){
-                        tableresult +="<td><div class='badge badge-light-warning fw-bolder'>Waiting Sign</div></td>";
+                    if(result[i].STATUS_SIGN==="2"){
+                        tableresult +="<td class='ps-4'><div class='badge badge-light-warning fw-bolder'>Request Sign</div></td>";
                     }else{
-                        tableresult +="<td><div class='badge badge-light-success fw-bolder'>The signing process is ongoing</div></td>";  
+                        tableresult +="<td class='ps-4'><div class='badge badge-light-info fw-bolder'>Request Execute File</div></td>";  
                     }
                     tableresult +="<td>"+(result[i].USER_IDENTIFIER ? result[i].USER_IDENTIFIER : "")+"</td>";
                     tableresult +="<td>"+(result[i].name ? result[i].name : "")+"</td>";
                     tableresult +="<td><div>"+(result[i].nik ? result[i].nik : "")+"</div><div>"+(result[i].noktp ? result[i].noktp : "")+"</div></td>";
                     tableresult +="<td>"+(result[i].email ? result[i].email : "")+"</td>";
                     tableresult +="<td>"+(result[i].tgljam ? result[i].tgljam : "")+"</td>";
-                    if(result[i].STATUS==="0"){
+                    if(result[i].STATUS_SIGN==="2"){
                         tableresult +="<td class='pe-4 text-end'><a class='btn btn-sm btn-light-primary' href='"+result[i].URL+"&redirect_url="+url+"index.php/tilaka/signdocument'>Sign</a></td>";
+                    }else{
+                        tableresult +="<td></td>";
                     }
                     tableresult +="</tr>";
                 }
@@ -49,11 +47,22 @@ function dataexecutesign(){
             toastr[data.responHead](data.responDesc, "INFORMATION");
 
         },
-        error: function(xhr, status, error) {
-            toastr["error"]("Terjadi kesalahan : "+error, "Opps !");
-		},
 		complete: function () {
 			toastr.clear();
+		},
+        error: function(xhr, status, error) {
+            Swal.fire({
+                title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
+                html             : "<b>"+error+"</b>",
+                icon             : "error",
+                confirmButtonText: "Please Try Again",
+                buttonsStyling   : false,
+                timerProgressBar : true,
+                timer            : 5000,
+                customClass      : {confirmButton: "btn btn-danger"},
+                showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+            });
 		}
     });
     return false;

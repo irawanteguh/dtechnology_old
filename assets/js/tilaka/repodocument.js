@@ -98,25 +98,30 @@ function dataupload(){
 
                 for(var i in result){
                     tableresult +="<tr>";
+
                     if(result[i].STATUS_FILE==="0"){
-                        tableresult +="<td class='ps-4'><span class='badge badge-light-primary fs-7 fw-bold' title='File Belum Terupload Ke Dtechnology'>Files Uploaded DTechonolgy</span></td>";
+                        tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>Waiting Upload File</span></td>";
                     }else{
                         if(result[i].STATUS_SIGN==="0"){
-                            tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>New</span></td>"; 
+                            tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>Waiting Request Upload Tilaka Lite</span></td>"; 
                         }else{
                             if(result[i].STATUS_SIGN==="1"){
-                                tableresult +="<td class='ps-4'><span class='badge badge-light-primary fs-7 fw-bold' title='File Belum Terupload Ke Tilaka Lite'>Files Uploaded Tilaka Lite</span></td>"; 
+                                tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>Waiting Request Sign</span></td>"; 
                             }else{
                                 if(result[i].STATUS_SIGN==="2"){
-                                    tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>Request Sign Success</span></td>"; 
+                                    tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>Request Sign</span></td>"; 
                                 }else{
                                     if(result[i].STATUS_SIGN==="3"){
-                                        tableresult +="<td class='ps-4'><span class='badge badge-light-danger fs-7 fw-bold'>Request Sign Field</span></td>";
+                                        tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>Request Execute File</span></td>";
                                     }else{
                                         if(result[i].STATUS_SIGN==="4"){
-                                            tableresult +="<td class='ps-4'><span class='badge badge-light-success fs-7 fw-bold'>Sign Success</span></td>"; 
+                                            tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>Request Download File</span></td>"; 
                                         }else{
-                                            tableresult +="<td class='ps-4'><span class='badge badge-light-danger fs-7 fw-bold'>Sign Field</span></td>";
+                                            if(result[i].STATUS_SIGN==="5"){
+                                                tableresult +="<td class='ps-4'><span class='badge badge-light-success fs-7 fw-bold'>Finish</span></td>"; 
+                                            }else{
+                                                tableresult +="<td class='ps-4'><span class='badge badge-light-danger fs-7 fw-bold'>Unknown</span></td>";
+                                            }
                                         }
                                     }
                                 }

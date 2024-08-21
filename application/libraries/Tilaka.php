@@ -63,6 +63,51 @@
             return json_decode($responsecurl,TRUE); 
         }
 
+        public static function checkregistrasiuser($body){
+            $header = array("Content-Type: application/json","Authorization: Bearer ".Tilaka::oauth()['access_token']);
+
+            $responsecurl = curl([
+                'url'     => TILAKA_BASE_URL."userregstatus",
+                'method'  => "POST",
+                'header'  => $header,
+                'body'    => $body,
+                'savelog' => true,
+                'source'  => "TILAKA-CHECKREGISTRASIUSER"
+            ]);
+
+            return json_decode($responsecurl,TRUE); 
+        }
+
+        public static function checkcertificateuser($body){
+            $header = array("Content-Type: application/json","Authorization: Bearer ".Tilaka::oauth()['access_token']);
+
+            $responsecurl = curl([
+                'url'     => TILAKA_BASE_URL."checkcertstatus",
+                'method'  => "POST",
+                'header'  => $header,
+                'body'    => $body,
+                'savelog' => true,
+                'source'  => "TILAKA-CHECKCERTIFICATEUSER"
+            ]);
+
+            return json_decode($responsecurl,TRUE); 
+        }
+
+        public static function revoke($body){
+            $header = array("Content-Type: application/json","Authorization: Bearer ".Tilaka::oauth()['access_token']);
+
+            $responsecurl = curl([
+                'url'     => TILAKA_BASE_URL."requestRevokeCertificate",
+                'method'  => "POST",
+                'header'  => $header,
+                'body'    => $body,
+                'savelog' => true,
+                'source'  => "TILAKA-REVOKE"
+            ]);
+
+            return json_decode($responsecurl,TRUE); 
+        }
+
         public static function uploadfile($location){
             $header = array("Authorization: Bearer ".Tilaka::oauth()['access_token']);
             
@@ -131,52 +176,6 @@
             return json_decode($responsecurl,TRUE); 
         }
 
-        public static function checkregistrasiuser($body){
-            $header = array("Content-Type: application/json","Authorization: Bearer ".Tilaka::oauth()['access_token']);
-
-            $responsecurl = curl([
-                'url'     => TILAKA_BASE_URL."userregstatus",
-                'method'  => "POST",
-                'header'  => $header,
-                'body'    => $body,
-                'savelog' => true,
-                'source'  => "TILAKA-CHECKREGISTRASIUSER"
-            ]);
-
-            return json_decode($responsecurl,TRUE); 
-        }
-
-        public static function checkcertificateuser($body){
-            $header = array("Content-Type: application/json","Authorization: Bearer ".Tilaka::oauth()['access_token']);
-
-            $responsecurl = curl([
-                'url'     => TILAKA_BASE_URL."checkcertstatus",
-                'method'  => "POST",
-                'header'  => $header,
-                'body'    => $body,
-                'savelog' => true,
-                'source'  => "TILAKA-CHECKCERTIFICATEUSER"
-            ]);
-
-            return json_decode($responsecurl,TRUE); 
-        }
-
-        public static function revoke($body){
-            $header = array("Content-Type: application/json","Authorization: Bearer ".Tilaka::oauth()['access_token']);
-
-            $responsecurl = curl([
-                'url'     => TILAKA_BASE_URL."requestRevokeCertificate",
-                'method'  => "POST",
-                'header'  => $header,
-                'body'    => $body,
-                'savelog' => true,
-                'source'  => "TILAKA-REVOKE"
-            ]);
-
-            return json_decode($responsecurl,TRUE); 
-        }
-        
-        
     }
 
 ?>

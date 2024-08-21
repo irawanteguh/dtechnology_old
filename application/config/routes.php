@@ -2,12 +2,13 @@
     defined('BASEPATH') OR exit('No direct script access allowed');
 
     $route['default_controller'] = 'landingpage/landingpage';
-    $route['authtilaka']         = 'restapi/Tilakaservice/auth';
-    $route['uploadallfile']      = 'restapi/Tilakaservice/uploadallfile';
-    $route['requestsign']        = 'restapi/Tilakaservice/requestsign';
-    $route['excutesign']         = 'restapi/Tilakaservice/excutesign';
-    $route['statussign']         = 'restapi/Tilakaservice/statussign';
-    $route['appkyc']             = 'restapi/Tilakaservice/checkdataapprovalkyc';
+
+    $route['authtilaka']         = 'restapi/tilaka/TilakaserviceV5/auth';
+    $route['uploadallfile']      = 'restapi/tilaka/TilakaserviceV5/uploadallfile';
+    $route['requestsign']        = 'restapi/tilaka/TilakaserviceV5/requestsign';
+    $route['excutesign']         = 'restapi/tilaka/TilakaserviceV5/excutesign';
+    $route['statussign']         = 'restapi/tilaka/TilakaserviceV5/statussign';
+    $route['appkyc']             = 'restapi/tilaka/TilakaserviceV5/checkdataapprovalkyc';
 
     $route['pegawai']            = 'restapi/Khanza/pegawai';
     

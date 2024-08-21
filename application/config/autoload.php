@@ -2,7 +2,7 @@
     defined('BASEPATH') OR exit('No direct script access allowed');
 
     $autoload['packages']  = array(APPPATH.'third_party/MX/');
-    $autoload['libraries'] = array('database','session','template','tilaka','satusehat');
+    $autoload['libraries'] = array('database','session','template','tilaka','satusehat','inacbg');
     $autoload['drivers']   = array();
     $autoload['helper']    = array('url','file','rootsystem','curl');
     $autoload['config']    = array();

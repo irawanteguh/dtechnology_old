@@ -93,7 +93,6 @@ function getdata(btn){
     $dutyhoursid.val(dutyhours).trigger('change');
 };
 
-
 function namaatasan(userid,atasanidprimary){
 	$.ajax({
 		url     : url+"index.php/hrd/employee/namaatasan",

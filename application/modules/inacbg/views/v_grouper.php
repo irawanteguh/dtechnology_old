@@ -4,7 +4,7 @@
 			<div class="card-header pt-5" id="">
 				<h3 class="card-title align-items-start flex-column">
 					<span class="card-label fw-bolder fs-3 mb-1">List Of Grouper</span>
-					<span class="text-muted mt-1 fw-bold fs-7" id="info_list_employee"></span>
+					<span class="text-muted mt-1 fw-bold fs-7" id="info_list_grouper"></span>
 				</h3>
 				<!-- <div class="card-toolbar">
 					<button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
@@ -33,7 +33,7 @@
 						<thead>
 							<tr class="fw-bolder text-muted bg-light">
 								<th class="ps-4 rounded-start">Name</th>
-                                <th>Medical Record</th>
+                                <th>No Identity</th>
 								<th>Information</th>
                                 <th>Provider</th>
 								<th>Type</th>

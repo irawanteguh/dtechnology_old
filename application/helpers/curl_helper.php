@@ -22,6 +22,18 @@
         
         $response        = curl_exec($curl);
 
+        $source = explode("-",$config['source']);
+        $source = $source[0];
+
+        if($source==="EKLAIM"){
+            $first    = strpos($response, "\n")+1;
+            $last     = strrpos($response, "\n")-1;
+            $response = substr($response,$first,strlen($response)-$first-$last);
+            $response = Inacbg::inacbg_decrypt($response,KEY_EKLAIM);
+        }
+
+        echo $response;
+        
         $response_header       = json_encode(curl_getinfo($curl));
         $request_headers       = json_encode(function_exists('apache_request_headers') ? apache_request_headers() : array());
         $request_url           = curl_getinfo($curl, CURLINFO_EFFECTIVE_URL);
