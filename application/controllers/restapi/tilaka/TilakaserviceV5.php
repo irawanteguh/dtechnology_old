@@ -186,15 +186,26 @@
 
                     $response = Tilaka::excutesign(json_encode($body));
 
-                    if($response['success']){
-                        if($response['status']==="DONE"){
-                            $data['STATUS_SIGN']="4";
-                            $this->md->updatefile($data,$a->no_file);
-                        }
+                    if($response['status']==="DONE"){
+                        $data['STATUS_SIGN']="4";
+                        $this->md->updatefile($data,$a->no_file);
+                    }
+
+                    if($response['status']==="FAILED"){
+                        $data['STATUS_SIGN']     = "0";
+                        $data['STATUS_FILE']     = "1";
+                        $data['REQUEST_ID']      = "";
+                        $data['LINK']            = "";
+                        $data['NOTE']            = "";
+                        $data['USER_IDENTIFIER'] = "";
+                        $data['URL']             = "";
+                        $this->md->updatefile($data,$a->no_file);
                     }
 
                     $responseall['Assign']['UserIdentifier'] = $a->user_identifier;
-                    $responseall['Assign']['Name']           = $a->name;
+                    $responseall['Assign']['Name']           = $a->assignname;
+                    $responseall['File']['Filename']         = $a->no_file;
+                    $responseall['File']['RequestId']        = $a->request_id;
                     $responseall['Response']                 = $response;
                     $responseservice[]=$responseall;
                 }

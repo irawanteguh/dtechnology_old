@@ -1,10 +1,10 @@
 <?php
     class Modelsigndocument extends CI_Model{
 
-        function dataexecutesign($orgid, $parameter){
+        function dataexecutesign($parameter){
             $query =
                     "
-                        select a.USER_IDENTIFIER, URL, STATUS_SIGN, date_format(a.CREATED_DATE,'%d.%m.%Y %H:%i:%s')tgljam,
+                        select distinct a.REQUEST_ID, USER_IDENTIFIER, URL, STATUS_SIGN,
                             (select NAME from dt01_gen_user_data where active='1' and USER_IDENTIFIER=A.USER_IDENTIFIER)name,
                             (select NIK from dt01_gen_user_data where active='1' and USER_IDENTIFIER=A.USER_IDENTIFIER)nik,
                             (select IDENTITY_NO from dt01_gen_user_data where active='1' and USER_IDENTIFIER=A.USER_IDENTIFIER)noktp,
@@ -12,7 +12,6 @@
                             
                         from dt01_gen_document_file_dt a
                         where a.active='1'
-                        and   a.org_id='".$orgid."'
                         and   a.status_sign in ('2','3')
                         ".$parameter."
                         order by created_date desc

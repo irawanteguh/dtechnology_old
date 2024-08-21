@@ -38,7 +38,6 @@
                                 <th>Name</th>
                                 <th>Identity No</th>
                                 <th>Email Address</th>
-                                <th>Created Date</th>
                                 <th class="pe-4 rounded-end"></th>
                             </tr>
                         </thead>

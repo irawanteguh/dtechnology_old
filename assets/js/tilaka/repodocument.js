@@ -99,45 +99,54 @@ function dataupload(){
                 for(var i in result){
                     tableresult +="<tr>";
 
-                    if(result[i].STATUS_FILE==="0"){
-                        tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>Waiting Upload File</span></td>";
-                    }else{
-                        if(result[i].STATUS_SIGN==="0"){
-                            tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>Waiting Request Upload Tilaka Lite</span></td>"; 
+                    
+
+                    if(result[i].STATUS_SIGN==="0"){
+                        if(result[i].STATUS_FILE==="0"){
+                            tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>Waiting Upload File</span></td>";
                         }else{
-                            if(result[i].STATUS_SIGN==="1"){
-                                tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>Waiting Request Sign</span></td>"; 
+                            tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>Waiting Request Upload Tilaka Lite</span></td>";
+                        }
+                    }else{
+                        if(result[i].STATUS_SIGN==="1"){
+                            tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>Waiting Request Sign</span></td>"; 
+                        }else{
+                            if(result[i].STATUS_SIGN==="2"){
+                                tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>Request Sign</span></td>"; 
                             }else{
-                                if(result[i].STATUS_SIGN==="2"){
-                                    tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>Request Sign</span></td>"; 
+                                if(result[i].STATUS_SIGN==="3"){
+                                    tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>Request Execute File</span></td>";
                                 }else{
-                                    if(result[i].STATUS_SIGN==="3"){
-                                        tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>Request Execute File</span></td>";
+                                    if(result[i].STATUS_SIGN==="4"){
+                                        tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>Request Download File</span></td>"; 
                                     }else{
-                                        if(result[i].STATUS_SIGN==="4"){
-                                            tableresult +="<td class='ps-4'><span class='badge badge-light-info fs-7 fw-bold'>Request Download File</span></td>"; 
+                                        if(result[i].STATUS_SIGN==="5"){
+                                            tableresult +="<td class='ps-4'><span class='badge badge-light-success fs-7 fw-bold'>Finish</span></td>"; 
                                         }else{
-                                            if(result[i].STATUS_SIGN==="5"){
-                                                tableresult +="<td class='ps-4'><span class='badge badge-light-success fs-7 fw-bold'>Finish</span></td>"; 
-                                            }else{
-                                                tableresult +="<td class='ps-4'><span class='badge badge-light-danger fs-7 fw-bold'>Unknown</span></td>";
-                                            }
+                                            tableresult +="<td class='ps-4'><span class='badge badge-light-danger fs-7 fw-bold'>Unknown</span></td>";
                                         }
                                     }
                                 }
                             }
                         }
-                        
                     }
-                    if(result[i].STATUS_FILE==="0"){
-                        tableresult +="<td><div>"+(result[i].jenisdocumen ? result[i].jenisdocumen : "-")+"</div><div><a href='#' data-bs-toggle='modal' data-bs-target='#modal_upload_document' data_dirfile='"+result[i].NO_FILE+"' onclick='uploadfile(this)'>"+(result[i].NO_FILE ? result[i].NO_FILE : "-")+"</a></div><div>"+(result[i].FILENAME ? result[i].FILENAME : "-")+"</div></td>";
+
+                    if(result[i].STATUS_SIGN==="0"){
+                        if(result[i].SOURCE_FILE==="DTECHNOLOGY"){
+                            if(result[i].STATUS_FILE==="0"){
+                                tableresult +="<td><div>"+(result[i].jenisdocumen ? result[i].jenisdocumen : "-")+"</div><div><a href='#' data-bs-toggle='modal' data-bs-target='#modal_upload_document' data_dirfile='"+result[i].NO_FILE+"' onclick='uploadfile(this)'>"+(result[i].NO_FILE ? result[i].NO_FILE : "-")+"</a></div><div>"+(result[i].FILENAME ? result[i].FILENAME : "-")+"</div></td>";
+                            }else{
+                                tableresult +="<td><div>"+(result[i].jenisdocumen ? result[i].jenisdocumen : "-")+"</div><div><a href='#' data-bs-toggle='modal' data-bs-target='#modal_view_pdf' data-dirfile='"+url+"assets/document/"+(result[i].NO_FILE ? result[i].NO_FILE : "")+".pdf' onclick='viewdoc(this)'>"+(result[i].NO_FILE ? result[i].NO_FILE : "-")+"</a></div><div>"+(result[i].FILENAME ? result[i].FILENAME : "-")+"</div></td>";
+                            }
+                        }else{
+                            tableresult +="<td><div>"+(result[i].jenisdocumen ? result[i].jenisdocumen : "-")+"</div><div><a href='#' data-bs-toggle='modal' data-bs-target='#modal_view_pdf' data-dirfile='"+pathposttilaka+"/"+(result[i].NO_FILE ? result[i].NO_FILE : "")+".pdf' onclick='viewdoc(this)'>"+(result[i].NO_FILE ? result[i].NO_FILE : "-")+"</a></div><div>"+(result[i].FILENAME ? result[i].FILENAME : "-")+"</div></td>";
+                        }
                     }else{
                         if(result[i].SOURCE_FILE==="DTECHNOLOGY"){
                             tableresult +="<td><div>"+(result[i].jenisdocumen ? result[i].jenisdocumen : "-")+"</div><div><a href='#' data-bs-toggle='modal' data-bs-target='#modal_view_pdf' data-dirfile='"+url+"assets/document/"+(result[i].NO_FILE ? result[i].NO_FILE : "")+".pdf' onclick='viewdoc(this)'>"+(result[i].NO_FILE ? result[i].NO_FILE : "-")+"</a></div><div>"+(result[i].FILENAME ? result[i].FILENAME : "-")+"</div></td>";
                         }else{
                             tableresult +="<td><div>"+(result[i].jenisdocumen ? result[i].jenisdocumen : "-")+"</div><div><a href='#' data-bs-toggle='modal' data-bs-target='#modal_view_pdf' data-dirfile='"+pathposttilaka+"/"+(result[i].NO_FILE ? result[i].NO_FILE : "")+".pdf' onclick='viewdoc(this)'>"+(result[i].NO_FILE ? result[i].NO_FILE : "-")+"</a></div><div>"+(result[i].FILENAME ? result[i].FILENAME : "-")+"</div></td>";
                         }
-                        
                     }
                     
                     tableresult +="<td><div>"+(result[i].pasien_idx ? result[i].pasien_idx : "-")+"</div><div>"+(result[i].transaksi_idx ? result[i].transaksi_idx : "-")+"</div></td>";

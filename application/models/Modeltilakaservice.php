@@ -50,7 +50,6 @@
                         and   a.org_id='".$orgid."'
                         ".$status."
                         and   a.user_identifier<>''
-                        limit 50;
                     ";
 
             $recordset = $this->db->query($query);
