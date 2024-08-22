@@ -72,6 +72,7 @@
             $data['assign']        = $assign;
             $data['pasien_idx']    = $info1;
             $data['transaksi_idx'] = $info2;
+            $data['source_file']   = "DTECHNOLOGY";
             $data['created_by']    = $_SESSION['userid'];
 
             if($this->md->insertsigndocument($data)){

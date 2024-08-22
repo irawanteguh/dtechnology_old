@@ -95,6 +95,7 @@
                     $data           = [];
                     $body           = [];
                     $signatures     = [];
+                    $nofile         = [];
 
                     $requestid   = generateuuid();
 
@@ -113,7 +114,9 @@
                         $listpdf           = [];
                         $listpdfsignatures = [];
 
-                        $filename          = FCPATH."assets/document/".$files->filename.".pdf";
+                        $nofile[]          = $files->no_file;
+
+                        $filename          = FCPATH."assets/document/".$files->no_file.".pdf";
                         $pdfParse          = new Pdfparse($filename);
                         $specimentposition = $pdfParse->findText('$');
 
@@ -148,14 +151,19 @@
                         foreach($response['auth_urls'] as $authurls){
                             $data['REQUEST_ID']  = $requestid;
                             $data['STATUS_SIGN'] = "2";
-                            $data['URL']         = $authurls['url'];
-
-                            $this->md->updatefile($data,$a->no_file);
+                            $data['URL']         = $authurls['url'];   
+                        }
+                    }else{
+                        foreach($listfile as $a){
+                            $data['REQUEST_ID']  = $requestid;
+                            $data['NOTE']        = $response['message'];
                         }
                     }
 
-                    $responseall['Assign']['UserIdentifier'] = $a->user_identifier;
-                    $responseall['Assign']['Name']           = $a->assignname;
+                    foreach($nofile as $a){
+                        $this->md->updatefile($data,$a);
+                    }                    
+
                     $responseall['ResponseTilaka']           = $response;
                     $responseservice[]=$responseall;
                 }
@@ -172,7 +180,7 @@
             $responseservice = [];
 
             $status ="and a.status_sign ='3'";
-            $result = $this->md->userrequestsign(ORG_ID,$status);
+            $result = $this->md->dataexecute(ORG_ID,$status);
 
             if(!empty($result)){
                 foreach($result as $a){
@@ -202,6 +210,8 @@
                         $this->md->updatefile($data,$a->no_file);
                     }
 
+                    
+
                     $responseall['Assign']['UserIdentifier'] = $a->user_identifier;
                     $responseall['Assign']['Name']           = $a->assignname;
                     $responseall['File']['Filename']         = $a->no_file;
@@ -222,14 +232,13 @@
             $responseservice = [];
 
             $status ="and a.status_sign ='4'";
-            $result = $this->md->userrequestsign(ORG_ID,$status);
+            $result = $this->md->dataexecute(ORG_ID,$status);
 
             if(!empty($result)){
                 foreach($result as $a){
                     $responseall = [];
                     $response    = [];
                     $body        = [];
-                    $data        = [];
 
                     $body['request_id'] = $a->request_id;
                     $response = Tilaka::excutesignstatus(json_encode($body));
@@ -237,19 +246,28 @@
                     if($response['success']){
                         foreach($response['list_pdf'] as $listpdfs){
                             if($listpdfs['error']===false){
-                                
+                                $data = [];
+                                $filename    = $listpdfs['filename'];
                                 $fileContent = file_get_contents(htmlspecialchars_decode($listpdfs['presigned_url']));
-                                if($fileContent !== false){
-                                    if($a->source_file==="DTECHNOLOGY"){
-                                        $destinationPath = FCPATH."/assets/document/".$a->no_file.".pdf";
-                                    }else{
-                                        $destinationPath = PATHFILE_POST_TILAKA.DIRECTORY_SEPARATOR.$a->no_file.".pdf";
-                                    }
 
-                                    if(file_put_contents($destinationPath, $fileContent)){
-                                        $data['STATUS_SIGN'] = "5";
-                                        $data['LINK']        = $listpdfs['presigned_url'];
-                                        $this->md->updatefile($data,$a->no_file);
+                                if($fileContent !== false){
+                                    $resultchecknofile = $this->md->checknofile($filename);
+                                    
+                                    if(!empty($resultchecknofile)){
+                                        $resultchecknofile = $resultchecknofile[0]->NO_FILE;
+
+                                        if($a->source_file==="DTECHNOLOGY"){
+                                            $destinationPath = FCPATH."/assets/document/".$resultchecknofile.".pdf";
+                                        }else{
+                                            $destinationPath = PATHFILE_POST_TILAKA.DIRECTORY_SEPARATOR.$resultchecknofile.".pdf";
+                                        }
+    
+                                        if(file_put_contents($destinationPath,$fileContent)){
+                                            $data['STATUS_SIGN'] = "5";
+                                            $data['LINK']        = $listpdfs['presigned_url'];
+                                            
+                                            $this->md->updatefile($data,$resultchecknofile);
+                                        }
                                     }
                                 }
                             }
@@ -265,10 +283,8 @@
                 $responseservice['ResponseDTechnology'] = "Tidak File Yang Sudah Selesai";
             }
 
-
             $summaryresponse[]=$responseservice;
             $this->response($summaryresponse,REST_Controller::HTTP_OK);
-
         }
     }
 

@@ -1,23 +1,6 @@
 <?php
     class Modeltilakaservice extends CI_Model{
 
-        // function checkdataapprovalkyc($orgid){
-        //     $query =
-        //             "
-        //                 select a.*
-        //                 from dt01_gen_user_data a
-        //                 where a.active = '1'
-        //                 and   a.org_id = '".$orgid."'
-        //                 and   a.certificate = '1'
-        //                 and   a.user_identifier<>''
-        //                 and   a.register_id<>''
-        //             ";
-
-        //     $recordset = $this->db->query($query);
-        //     $recordset = $recordset->result();
-        //     return $recordset;
-        // }
-
         function dataupload($orgid,$status){
             $query =
                     "
@@ -43,13 +26,28 @@
         function userrequestsign($orgid,$status){
             $query =
                     "
-                        select distinct a.assign, no_file, user_identifier, request_id, source_file,
+                        select distinct a.assign, user_identifier,
                                 (select name from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)assignname
                         from dt01_gen_document_file_dt a
                         where a.active='1'
                         and   a.org_id='".$orgid."'
                         ".$status."
-                        and   a.user_identifier<>''
+                    ";
+
+            $recordset = $this->db->query($query);
+            $recordset = $recordset->result();
+            return $recordset;
+        }
+
+        function dataexecute($orgid,$status){
+            $query =
+                    "
+                        select distinct a.assign, user_identifier, request_id, user_identifier, no_file, source_file,
+                                (select name from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)assignname
+                        from dt01_gen_document_file_dt a
+                        where a.active='1'
+                        and   a.org_id='".$orgid."'
+                        ".$status."
                     ";
 
             $recordset = $this->db->query($query);
@@ -75,63 +73,27 @@
             return $recordset;
         }
 
-        // function dataexecutesign($orgid,$status){
-        //     $query =
-        //             "
-        //                 select a.*, DATE_FORMAT(CREATED_DATE,'%d.%m.%Y %H:%i:%s')tgljam,
-        //                         (select NAME from dt01_gen_user_data where active='1' and USER_IDENTIFIER=A.USER_IDENTIFIER)name,
-        //                         (select NIK from dt01_gen_user_data where active='1' and USER_IDENTIFIER=A.USER_IDENTIFIER)nik,
-        //                         (select IDENTITY_NO from dt01_gen_user_data where active='1' and USER_IDENTIFIER=A.USER_IDENTIFIER)noktp,
-        //                         (select EMAIL from dt01_gen_user_data where active='1' and USER_IDENTIFIER=A.USER_IDENTIFIER)email,
-        //                         (Select distinct source_file from dt01_gen_document_file_dt where active='1' and source_file<>'' and org_id=a.org_id and request_id=a.request_id)sourcefile
-        //                 from dt01_gen_auth_url_sign_dt a
-        //                 where a.active='1'
-        //                 and   a.org_id='".$orgid."'
-        //                 ".$status."
-        //                 order by created_date desc
-        //             ";
+        function checknofile($filename){
+            $query =
+                    "
+                        select a.NO_FILE
+                        from dt01_gen_document_file_dt a
+                        where a.active='1'
+                        and   a.filename='".$filename."'
+                    ";
 
-        //     $recordset = $this->db->query($query);
-        //     $recordset = $recordset->result();
-        //     return $recordset;
-        // }
-
-        // function checknofile($filename){
-        //     $query =
-        //             "
-        //                 select a.NO_FILE
-        //                 from dt01_gen_document_file_dt a
-        //                 where a.active='1'
-        //                 and   a.filename='".$filename."'
-        //             ";
-
-        //     $recordset = $this->db->query($query);
-        //     $recordset = $recordset->result();
-        //     return $recordset;
-        // }
+            $recordset = $this->db->query($query);
+            $recordset = $recordset->result();
+            return $recordset;
+        }
 
         function updatefile($data,$nofile){           
             $sql =   $this->db->update("dt01_gen_document_file_dt",$data,array("NO_FILE"=>$nofile));
             return $sql;
         }
 
-        // function updatelinkdownload($data,$nofile){           
-        //     $sql =   $this->db->update("dt01_gen_document_file_dt",$data,array("FILENAME"=>$nofile));
-        //     return $sql;
-        // }
-
         function updaterequestid($data,$requestid){           
             $sql =   $this->db->update("dt01_gen_document_file_dt",$data,array("REQUEST_ID"=>$requestid));
-            return $sql;
-        }
-
-        function insertauthurl($data){           
-            $sql =   $this->db->insert("dt01_gen_auth_url_sign_dt",$data);
-            return $sql;
-        }
-
-        function updateauthurl($data,$urlid){           
-            $sql =   $this->db->update("dt01_gen_auth_url_sign_dt",$data,array("URL_ID"=>$urlid));
             return $sql;
         }
 
