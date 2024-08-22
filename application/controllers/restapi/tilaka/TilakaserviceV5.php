@@ -116,7 +116,12 @@
 
                         $nofile[]          = $files->no_file;
 
-                        $filename          = FCPATH."assets/document/".$files->no_file.".pdf";
+                        if($files->source_file==="DTECHNOLOGY"){
+                            $filename = FCPATH."assets/document/".$files->no_file.".pdf";
+                        }else{
+                            $filename = PATHFILE_GET_TILAKA."/".$files->no_file.".pdf";
+                        }
+                        
                         $pdfParse          = new Pdfparse($filename);
                         $specimentposition = $pdfParse->findText('$');
 

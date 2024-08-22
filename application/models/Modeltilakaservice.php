@@ -58,7 +58,7 @@
         function filerequestsign($orgid,$status,$assign){
             $query =
                     "
-                        select a.no_file, filename, status_sign, user_identifier,
+                        select a.no_file, filename, status_sign, user_identifier, source_file,
                                 (select NAME            from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)assignname,
                                 (select DOCUMENT_NAME   from dt01_gen_document_ms where org_id=a.org_id and active='1' and JENIS_DOC=a.JENIS_DOC)jenisdocumen
                         from dt01_gen_document_file_dt a
