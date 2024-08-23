@@ -10,11 +10,11 @@
                                 (select DOCUMENT_NAME   from dt01_gen_document_ms where org_id=a.org_id and active='1' and JENIS_DOC=a.JENIS_DOC)jenisdocumen
                         from dt01_gen_document_file_dt a
                         where a.active      = '1'
-                        and   a.status_file = '1'
                         and   a.org_id      = '".$orgid."'
                         ".$status."
                         and   a.assign  = (select assign from dt01_gen_user_data where org_id=a.org_id and active='1' and nik=a.assign and user_identifier<>'')
                         order by note asc
+                        limit 100;
                     ";
 
             $recordset = $this->db->query($query);
@@ -47,6 +47,7 @@
                         where a.active='1'
                         and   a.org_id='".$orgid."'
                         ".$status."
+                        limit 50;
                     ";
 
             $recordset = $this->db->query($query);

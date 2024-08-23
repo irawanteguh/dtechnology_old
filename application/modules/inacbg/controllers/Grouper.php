@@ -48,7 +48,7 @@
             $nosep ="16120507422";
             
 
-            $body['metadata']['method'] = "claim_print";
+            $body['metadata']['method'] = "claim_printX";
             $body['data']['nomor_sep']  = $nosep;
 
             $reponse = Inacbg::sendata_claimprint(json_encode($body));

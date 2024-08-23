@@ -59,18 +59,19 @@
                             }
                             $responseall['ResponseTilaka'] = $response;
                         }else{
+                            $data['ACTIVE']     = "0";
                             $data['NOTE'] = "File Corrupted, File Size : ".$fileSize;
                             $responseall['ResponseDTechnology'] = "File Corrupted, File Size : ".$fileSize;
                         }
                     }else{
+                        $data['ACTIVE']     = "0";
                         $data['NOTE'] = "File Tidak Di Temukan";
                         $responseall['ResponseDTechnology'] = "File Tidak Di Temukan";
                     }
 
                     $this->md->updatefile($data,$a->NO_FILE);
+                    $responseservice[]=$responseall;
                 }
-
-                $responseservice[]=$responseall;
             }else{
                 $responseservice['ResponseDTechnology'] = "Tidak Ada List File Untuk Di Upload Ke Tilaka Lite";
             }
@@ -122,32 +123,34 @@
                             $filename = PATHFILE_GET_TILAKA."/".$files->no_file.".pdf";
                         }
                         
-                        $pdfParse          = new Pdfparse($filename);
-                        $specimentposition = $pdfParse->findText('$');
-
-                        if(isset($specimentposition['content']['$'][0]['x']) && isset($specimentposition['content']['$'][0]['y']) && isset($specimentposition['content']['$'][0]['page'])){
-                            $coordinatex = floatval($specimentposition['content']['$'][0]['x']);
-                            $coordinatey = floatval($specimentposition['content']['$'][0]['y']);
-                            $page        = floatval($specimentposition['content']['$'][0]['page']);
-                        }else{
-                            $coordinatex = floatval(COORDINATE_X);
-                            $coordinatey = floatval(COORDINATE_Y);
-                            $page        = floatval(PAGE);
+                        if(file_exists($filename)){
+                            // $pdfParse          = new Pdfparse($filename);
+                            // $specimentposition = $pdfParse->findText('$');
+    
+                            // if(isset($specimentposition['content']['$'][0]['x']) && isset($specimentposition['content']['$'][0]['y']) && isset($specimentposition['content']['$'][0]['page'])){
+                            //     $coordinatex = floatval($specimentposition['content']['$'][0]['x']);
+                            //     $coordinatey = floatval($specimentposition['content']['$'][0]['y']);
+                            //     $page        = floatval($specimentposition['content']['$'][0]['page']);
+                            // }else{
+                                $coordinatex = floatval(COORDINATE_X);
+                                $coordinatey = floatval(COORDINATE_Y);
+                                $page        = floatval(PAGE);
+                            // }
+    
+                            $listpdfsignatures['user_identifier'] = $a->user_identifier;
+                            $listpdfsignatures['reason']          = "Assign By ".$a->assignname;
+                            $listpdfsignatures['width']           = floatval(WIDTH);
+                            $listpdfsignatures['height']          = floatval(HEIGHT);
+                            $listpdfsignatures['coordinate_x']    = $coordinatex;
+                            $listpdfsignatures['coordinate_y']    = $coordinatey;
+                            $listpdfsignatures['page_number']     = $page;
+                            $listpdfsignatures['qrcombine']       = "QRONLY";
+    
+                            $listpdf['filename']     = $files->filename;
+                            $listpdf['signatures'][] = $listpdfsignatures;
+    
+                            $body['list_pdf'][]=$listpdf;
                         }
-
-                        $listpdfsignatures['user_identifier'] = $a->user_identifier;
-                        $listpdfsignatures['reason']          = "Assign By ".$a->assignname;
-                        $listpdfsignatures['width']           = floatval(WIDTH);
-                        $listpdfsignatures['height']          = floatval(HEIGHT);
-                        $listpdfsignatures['coordinate_x']    = $coordinatex;
-                        $listpdfsignatures['coordinate_y']    = $coordinatey;
-                        $listpdfsignatures['page_number']     = $page;
-                        $listpdfsignatures['qrcombine']       = "QRONLY";
-
-                        $listpdf['filename']     = $files->filename;
-                        $listpdf['signatures'][] = $listpdfsignatures;
-
-                        $body['list_pdf'][]=$listpdf;
                     }
 
                     $response = Tilaka::requestsign(json_encode($body));
@@ -250,7 +253,7 @@
 
                     if($response['success']){
                         foreach($response['list_pdf'] as $listpdfs){
-                            if($listpdfs['error']===false){
+                            // if($listpdfs['error']===false){
                                 $data = [];
                                 $filename    = $listpdfs['filename'];
                                 $fileContent = file_get_contents(htmlspecialchars_decode($listpdfs['presigned_url']));
@@ -275,7 +278,7 @@
                                         }
                                     }
                                 }
-                            }
+                            // }
                         }
                     }
 
