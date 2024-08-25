@@ -84,8 +84,8 @@
             $summaryresponse = [];
             $responseservice = [];
 
-            $status ="and a.status_sign ='1'";
-            $result = $this->md->userrequestsign(ORG_ID,$status);
+            $status ="and a.status_sign ='1' limit 50;";
+            $result = $this->md->listrequestsign(ORG_ID,$status);
 
             if(!empty($result)){
                 foreach($result as $a){
@@ -187,8 +187,8 @@
             $summaryresponse = [];
             $responseservice = [];
 
-            $status ="and a.status_sign ='3'";
-            $result = $this->md->dataexecute(ORG_ID,$status);
+            $status ="and a.status_sign ='3' limit 50;";
+            $result = $this->md->listexecute(ORG_ID,$status);
 
             if(!empty($result)){
                 foreach($result as $a){
@@ -239,8 +239,7 @@
             $summaryresponse = [];
             $responseservice = [];
 
-            $status ="and a.status_sign ='4'";
-            $result = $this->md->dataexecute(ORG_ID,$status);
+            $result = $this->md->listdownload(ORG_ID);
 
             if(!empty($result)){
                 foreach($result as $a){
@@ -254,28 +253,23 @@
                     if($response['success']){
                         foreach($response['list_pdf'] as $listpdfs){
                             // if($listpdfs['error']===false){
-                                $data = [];
-                                $filename    = $listpdfs['filename'];
+                                $data        = [];
+                                $nofile      = preg_match('/_(.*?)\.pdf$/', $listpdfs['filename'], $matches) ? $matches[1] : '';
                                 $fileContent = file_get_contents(htmlspecialchars_decode($listpdfs['presigned_url']));
 
                                 if($fileContent !== false){
-                                    $resultchecknofile = $this->md->checknofile($filename);
-                                    
-                                    if(!empty($resultchecknofile)){
-                                        $resultchecknofile = $resultchecknofile[0]->NO_FILE;
 
-                                        if($a->source_file==="DTECHNOLOGY"){
-                                            $destinationPath = FCPATH."/assets/document/".$resultchecknofile.".pdf";
-                                        }else{
-                                            $destinationPath = PATHFILE_POST_TILAKA.DIRECTORY_SEPARATOR.$resultchecknofile.".pdf";
-                                        }
-    
-                                        if(file_put_contents($destinationPath,$fileContent)){
-                                            $data['STATUS_SIGN'] = "5";
-                                            $data['LINK']        = $listpdfs['presigned_url'];
-                                            
-                                            $this->md->updatefile($data,$resultchecknofile);
-                                        }
+                                    if($a->source_file==="DTECHNOLOGY"){
+                                        $destinationPath = FCPATH."/assets/document/".$nofile.".pdf";
+                                    }else{
+                                        $destinationPath = PATHFILE_POST_TILAKA.DIRECTORY_SEPARATOR.$nofile.".pdf";
+                                    }
+
+                                    if(file_put_contents($destinationPath,$fileContent)){
+                                        $data['STATUS_SIGN'] = "5";
+                                        $data['LINK']        = $listpdfs['presigned_url'];
+                                        
+                                        $this->md->updatefile($data,$nofile);
                                     }
                                 }
                             // }

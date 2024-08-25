@@ -22,7 +22,7 @@
             return $recordset;
         }
 
-        function userrequestsign($orgid,$status){
+        function listrequestsign($orgid,$status){
             $query =
                     "
                         select distinct a.assign, user_identifier,
@@ -31,23 +31,6 @@
                         where a.active='1'
                         and   a.org_id='".$orgid."'
                         ".$status."
-                    ";
-
-            $recordset = $this->db->query($query);
-            $recordset = $recordset->result();
-            return $recordset;
-        }
-
-        function dataexecute($orgid,$status){
-            $query =
-                    "
-                        select distinct a.assign, user_identifier, request_id, user_identifier, no_file, source_file,
-                                (select name from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)assignname
-                        from dt01_gen_document_file_dt a
-                        where a.active='1'
-                        and   a.org_id='".$orgid."'
-                        ".$status."
-                        limit 50;
                     ";
 
             $recordset = $this->db->query($query);
@@ -73,19 +56,40 @@
             return $recordset;
         }
 
-        function checknofile($filename){
+        function listexecute($orgid,$status){
             $query =
                     "
-                        select a.NO_FILE
+                        select distinct a.assign, user_identifier, request_id, user_identifier, no_file, source_file,
+                                (select name from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)assignname
                         from dt01_gen_document_file_dt a
                         where a.active='1'
-                        and   a.filename='".$filename."'
+                        and   a.org_id='".$orgid."'
+                        ".$status."
                     ";
 
             $recordset = $this->db->query($query);
             $recordset = $recordset->result();
             return $recordset;
         }
+
+        function listdownload($orgid){
+            $query =
+                    "
+                        select distinct a.request_id, source_file, user_identifier,
+                                (select name from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)assignname
+                        from dt01_gen_document_file_dt a
+                        where a.active='1'
+                        and   a.user_identifier='cakraandhika02'
+                        and   a.org_id='".$orgid."'
+                        and   a.status_sign ='4'
+                    ";
+
+            $recordset = $this->db->query($query);
+            $recordset = $recordset->result();
+            return $recordset;
+        }
+
+        
 
         function updatefile($data,$nofile){           
             $sql =   $this->db->update("dt01_gen_document_file_dt",$data,array("NO_FILE"=>$nofile));
