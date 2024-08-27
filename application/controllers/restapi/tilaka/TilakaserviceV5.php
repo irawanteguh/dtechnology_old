@@ -124,18 +124,25 @@
                         }
                         
                         if(file_exists($filename)){
-                            // $pdfParse          = new Pdfparse($filename);
-                            // $specimentposition = $pdfParse->findText('$');
-    
-                            // if(isset($specimentposition['content']['$'][0]['x']) && isset($specimentposition['content']['$'][0]['y']) && isset($specimentposition['content']['$'][0]['page'])){
-                            //     $coordinatex = floatval($specimentposition['content']['$'][0]['x']);
-                            //     $coordinatey = floatval($specimentposition['content']['$'][0]['y']);
-                            //     $page        = floatval($specimentposition['content']['$'][0]['page']);
-                            // }else{
+                            if($files->source_file==="DTECHNOLOGY"){
+                                $pdfParse          = new Pdfparse($filename);
+                                $specimentposition = $pdfParse->findText('$');
+        
+                                if(isset($specimentposition['content']['$'][0]['x']) && isset($specimentposition['content']['$'][0]['y']) && isset($specimentposition['content']['$'][0]['page'])){
+                                    $coordinatex = floatval($specimentposition['content']['$'][0]['x'])-(floatval(WIDTH)/2);
+                                    $coordinatey = floatval($specimentposition['content']['$'][0]['y'])-(floatval(HEIGHT)/2);
+                                    $page        = floatval($specimentposition['content']['$'][0]['page']);
+                                }else{
+                                    $coordinatex = floatval(COORDINATE_X);
+                                    $coordinatey = floatval(COORDINATE_Y);
+                                    $page        = floatval(PAGE);
+                                }
+                            }else{
                                 $coordinatex = floatval(COORDINATE_X);
                                 $coordinatey = floatval(COORDINATE_Y);
                                 $page        = floatval(PAGE);
-                            // }
+                            }
+                            
     
                             $listpdfsignatures['user_identifier'] = $a->user_identifier;
                             $listpdfsignatures['reason']          = "Assign By ".$a->assignname;
