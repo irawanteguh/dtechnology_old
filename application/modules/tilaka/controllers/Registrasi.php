@@ -291,7 +291,7 @@
                 $ktp_data    = file_get_contents($ktp_path);
                 $ktp_encoded = base64_encode($ktp_data);
     
-                $responseuuid = Tilaka::uuid();
+                $responseuuid = Tilaka::uuid($result->NAME_IDENTITY,$result->EMAIL);
 
                 if($responseuuid!=null){
                     if($responseuuid['success']){
