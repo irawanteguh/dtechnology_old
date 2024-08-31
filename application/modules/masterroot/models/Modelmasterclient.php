@@ -27,7 +27,6 @@
                                 when a.modules_id='d97e8a15-4a46-4389-a8ff-ab0f694d6d95' then '1'
                                 when a.modules_id='5e9a1b26-93fe-4dbc-af0e-2967710e4483' then '1'
                                 when a.modules_id='07eab05f-be52-45ce-8a53-8dd69df443f4' then '1'
-                                when a.modules_id='f48e1e18-d42f-4d70-83e1-6210cdc22e5a' then '1'
                                 when a.modules_id='f9afc38a-bb61-4f98-b593-211766ec6133' then '1'
                                 when a.modules_id='04ee7f51-5847-4099-9d70-7b4f4d9a989c' then '1'
                                 else

@@ -14,7 +14,7 @@
             return $recordset;
         }
 
-        function checkdata($nik){
+        function checkdata($orgid,$nik){
             $query =
                     "
                         select a.nik

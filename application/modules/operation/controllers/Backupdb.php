@@ -14,10 +14,10 @@
             parent:: __construct();
             rootsystem::system();
 
-			self::$host         = getenv('DB_HOSTNAME');
-			self::$user         = getenv('DB_USERNAME');
-			self::$password     = getenv('DB_PASSWORD');
-			self::$database     = getenv('DB_NAME');
+			self::$host         = $this->db->hostname;
+			self::$user         = $this->db->username;
+			self::$password     = $this->db->password;
+			self::$database     = $this->db->database;
 			self::$pathdatabase = FCPATH."database/";
 			self::$backupPath   = self::$pathdatabase.date('Y-m-d-H-i-s').'.sql';
         }
@@ -61,7 +61,6 @@
 				mkdir(self::$pathdatabase, 0777, true);      
 			};
 			
-			// Koneksi ke database
 			$conn = new mysqli(self::$host, self::$user, self::$password, self::$database);
 			
 			// Periksa koneksi

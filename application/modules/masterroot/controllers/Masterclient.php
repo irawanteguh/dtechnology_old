@@ -44,45 +44,60 @@
             $data['last_updated_date'] = date("Y-m-d H:i:s");
 
             if($this->md->insertmasterclient($data)){
-                $userid = generateuuid();
-                $roleid = generateuuid();
+                $userid        = generateuuid();
+                $roleidIT      = generateuuid();
+                $roleidDefault = generateuuid();
 
-                $datausser['org_id']     = $orgid;
-                $datausser['user_id']    = $userid;
-                $datausser['username']   = "Admin_".$uniqe;
-                $datausser['nik']        = $uniqe;
-                $datausser['name']       = "Administrator ".$this->input->post("data_client_name_add");
-                $datausser['created_by'] = $userid;
+                $datausser['org_id']          = $orgid;
+                $datausser['user_id']         = $userid;
+                $datausser['username']        = "Admin_".$uniqe;
+                $datausser['nik']             = $uniqe;
+                $datausser['name']            = "Administrator ".$this->input->post("data_client_name_add");
+                $datausser['created_by']      = $userid;
+                $dataroles['last_updated_by'] = $userid;
                 $this->md->insertuseradministrator($datausser);
 
                 
-                $dataroles['org_id']     = $orgid;
-                $dataroles['role_id']    = $roleid;
-                $dataroles['role']       = "IT Operation";
-                $dataroles['created_by'] = $userid;
+                $dataroles['org_id']          = $orgid;
+                $dataroles['trans_id']        = generateuuid();
+                $dataroles['role_id']         = $roleidIT;
+                $dataroles['role']            = "IT Operation";
+                $dataroles['created_by']      = $userid;
+                $dataroles['last_updated_by'] = $userid;
                 $this->md->insertrolems($dataroles);
 
-                $dataroles['org_id']     = $orgid;
-                $dataroles['role_id']    = generateuuid();
-                $dataroles['role']       = "Default";
-                $dataroles['created_by'] = $userid;
+                $dataroles['org_id']          = $orgid;
+                $dataroles['trans_id']        = generateuuid();
+                $dataroles['role_id']         = $roleidDefault;
+                $dataroles['role']            = "Default";
+                $dataroles['created_by']      = $userid;
+                $dataroles['last_updated_by'] = $userid;
+                $this->md->insertrolems($dataroles);
+
+                $dataroles['org_id']          = $orgid;
+                $dataroles['trans_id']        = generateuuid();
+                $dataroles['role_id']         = "34c2e933-4b1b-47cd-8497-71de44ac4e01";
+                $dataroles['role']            = "Admin Tilaka";
+                $dataroles['created_by']      = $userid;
+                $dataroles['last_updated_by'] = $userid;
                 $this->md->insertrolems($dataroles);
 
                 $datarolesaccess['org_id']     = $orgid;
                 $datarolesaccess['trans_id']   = generateuuid();
                 $datarolesaccess['user_id']    = $userid;
-                $datarolesaccess['role_id']    = $roleid;
+                $datarolesaccess['role_id']    = $roleidIT;
                 $datarolesaccess['created_by'] = $userid;
                 $this->md->insertroleaccess($datarolesaccess);
 
                 $resultmodulesms = $this->md->modulesms();
                 foreach ($resultmodulesms as $a) {
-                    $dataroledt['org_id']     = $orgid;
-                    $dataroledt['trans_id']   = generateuuid();
-                    $dataroledt['role_id']    = $roleid;
-                    $dataroledt['modules_id'] = $a->modules_id;
-                    $dataroledt['active']     = $a->active;
-                    $dataroledt['created_by'] = $userid;
+                    $dataroledt['org_id']         = $orgid;
+                    $dataroledt['trans_id']       = generateuuid();
+                    $dataroledt['role_id']        = $roleidIT;
+                    $dataroledt['modules_id']     = $a->modules_id;
+                    $dataroledt['active']         = $a->active;
+                    $dataroledt['created_by']     = $userid;
+                    $dataroledt['last_update_by'] = $userid;
 
                     $this->md->insertroledt($dataroledt);
                 }
