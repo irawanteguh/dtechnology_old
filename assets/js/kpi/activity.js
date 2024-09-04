@@ -23,13 +23,56 @@ flatpickr('[name="data_activity_date_add"]', {
     }
 });
 
-Inputmask({
-    "mask": "99:99"
-}).mask("#data_activity_time_start_add");
 
-Inputmask({
-    "mask": "99:99"
-}).mask("#data_activity_time_end_add");
+flatpickr('[name="data_activity_time_start_add"]', {
+    enableTime   : true,
+    time_24hr    : true,
+    noCalendar   : true,
+    dateFormat   : "H:i",
+    defaultHour  : new Date().getHours(),
+    defaultMinute: new Date().getMinutes(),
+    allowInput   : true, // Mengizinkan input manual
+    onChange: function(selectedDates, dateStr, instance) {
+        checkTime();
+    },
+    onClose: function(selectedDates, dateStr, instance) {
+        // Validasi input manual
+        var timeFormat = /^([01]\d|2[0-3]):([0-5]\d)$/;
+        if (!timeFormat.test(dateStr)) {
+            alert("Format waktu tidak valid. Harap gunakan format HH:mm.");
+            instance.clear(); // Menghapus input jika format tidak valid
+        }
+    }
+});
+
+flatpickr('[name="data_activity_time_end_add"]', {
+    enableTime   : true,
+    time_24hr    : true,
+    noCalendar   : true,
+    dateFormat   : "H:i",
+    defaultHour  : new Date().getHours(),
+    defaultMinute: new Date().getMinutes(),
+    allowInput   : true, // Mengizinkan input manual
+    onChange: function(selectedDates, dateStr, instance) {
+        checkTime();
+    },
+    onClose: function(selectedDates, dateStr, instance) {
+        // Validasi input manual
+        var timeFormat = /^([01]\d|2[0-3]):([0-5]\d)$/;
+        if (!timeFormat.test(dateStr)) {
+            alert("Format waktu tidak valid. Harap gunakan format HH:mm.");
+            instance.clear(); // Menghapus input jika format tidak valid
+        }
+    }
+});
+
+// Inputmask({
+//     "mask": "99:99"
+// }).mask("#data_activity_time_start_add");
+
+// Inputmask({
+//     "mask": "99:99"
+// }).mask("#data_activity_time_end_add");
 
 // flatpickr('[name="data_activity_time_start_add"]', {
 //     enableTime   : true,
