@@ -32,6 +32,7 @@ flatpickr('[name="data_activity_time_start_add"]', {
     defaultHour  : new Date().getHours(),
     defaultMinute: new Date().getMinutes(),
     allowInput   : true, // Mengizinkan input manual
+    minuteIncrement  : 1,
     onChange: function(selectedDates, dateStr, instance) {
         checkTime();
     },
@@ -53,6 +54,7 @@ flatpickr('[name="data_activity_time_end_add"]', {
     defaultHour  : new Date().getHours(),
     defaultMinute: new Date().getMinutes(),
     allowInput   : true, // Mengizinkan input manual
+    minuteIncrement  : 1,
     onChange: function(selectedDates, dateStr, instance) {
         checkTime();
     },
@@ -65,6 +67,7 @@ flatpickr('[name="data_activity_time_end_add"]', {
         }
     }
 });
+
 
 // Inputmask({
 //     "mask": "99:99"
