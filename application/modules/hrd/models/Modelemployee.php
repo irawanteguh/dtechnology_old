@@ -22,7 +22,7 @@
             return $recordset;
         }
 
-        function daftarjabatan($orgid,$userid){
+        function daftarjabatan($orgid){
             $query =
                     "
                         select a.position_id, position,
@@ -31,7 +31,6 @@
                         from dt01_hrd_position_ms a
                         where a.active='1'
                         and   a.org_id='".$orgid."'
-                        and   a.position_id not in (select position_id from dt01_hrd_position_dt where active='1' and org_id=a.org_id and status='1' and user_id='".$userid."')
                         order by level DESC, position asc, rvu desc
                     ";
 

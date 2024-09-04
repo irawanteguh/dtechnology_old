@@ -23,29 +23,37 @@ flatpickr('[name="data_activity_date_add"]', {
     }
 });
 
-flatpickr('[name="data_activity_time_start_add"]', {
-    enableTime   : true,
-    time_24hr    : true,
-    noCalendar   : true,
-    dateFormat   : "H:i",
-    defaultHour  : new Date().getHours(),
-    defaultMinute: new Date().getMinutes(),
-    onChange: function(selectedDates, dateStr, instance) {
-        checkTime();
-    }
-});
+Inputmask({
+    "mask": "99:99"
+}).mask("#data_activity_time_start_add");
 
-flatpickr('[name="data_activity_time_end_add"]', {
-    enableTime: true,
-    time_24hr : true,
-    noCalendar: true,
-    dateFormat: "H:i",
-    defaultHour  : new Date().getHours(),
-    defaultMinute: new Date().getMinutes(),
-    onChange: function(selectedDates, dateStr, instance) {
-        checkTime();
-    }
-});
+Inputmask({
+    "mask": "99:99"
+}).mask("#data_activity_time_end_add");
+
+// flatpickr('[name="data_activity_time_start_add"]', {
+//     enableTime   : true,
+//     time_24hr    : true,
+//     noCalendar   : true,
+//     dateFormat   : "H:i",
+//     defaultHour  : new Date().getHours(),
+//     defaultMinute: new Date().getMinutes(),
+//     onChange: function(selectedDates, dateStr, instance) {
+//         checkTime();
+//     }
+// });
+
+// flatpickr('[name="data_activity_time_end_add"]', {
+//     enableTime: true,
+//     time_24hr : true,
+//     noCalendar: true,
+//     dateFormat: "H:i",
+//     defaultHour  : new Date().getHours(),
+//     defaultMinute: new Date().getMinutes(),
+//     onChange: function(selectedDates, dateStr, instance) {
+//         checkTime();
+//     }
+// });
 
 function calendar() {
     var e = document.getElementById("kt_calendar_app");

@@ -48,8 +48,7 @@
 		}
 
         public function position(){
-            $userid              = $this->input->post('userid');
-            $resultdaftarjabatan = $this->md->daftarjabatan($_SESSION['orgid'],$userid);
+            $resultdaftarjabatan = $this->md->daftarjabatan($_SESSION['orgid']);
             
             $position="";
             foreach($resultdaftarjabatan as $a ){

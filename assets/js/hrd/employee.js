@@ -53,7 +53,7 @@ function getdata(btn){
     var nik               = btn.attr("data-nik");
 
     namaatasan(userid,atasanidprimary);
-    position(userid);
+    position(positioidprimary);
 
     //Drawer
 	$(":hidden[name='drawer_data_employee_registrationposition_userid_add']").val(userid);
@@ -112,16 +112,19 @@ function namaatasan(userid,atasanidprimary){
 	return false;
 };
 
-function position(userid){
+function position(positioidprimary){
 	$.ajax({
 		url     : url+"index.php/hrd/employee/position",
-		data    : {userid:userid},
 		method  : "POST",
 		dataType: "html",
 		cache   : false,
 		success : function (data) {
 			$("select[name='drawer_data_employee_registrationposition_positionid_add']").html(data);
             $("select[name='modal_data_employee_registrationposition_positionid_edit']").html(data);
+		},
+        complete: function () {
+            var $positionid = $('#modal_data_employee_registrationposition_positionid_edit').select2();
+            $positionid.val(positioidprimary).trigger('change');
 		}
 	});
 	return false;
