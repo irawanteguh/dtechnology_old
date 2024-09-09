@@ -1,1 +1,2 @@
 <a class="btn btn-light-primary" onclick="backupsystem()"><i class="fa-solid fa-database"></i> BACKUP DB</a>
+<a class="btn btn-light-primary" onclick="backuptable()"><i class="fa-solid fa-database"></i> BACKUP TABLE</a>
