@@ -143,8 +143,8 @@ function calendar() {
                 var batasperiodeid = $("input[name='data_activity_periodeid_add']").val();
 
                 var pilihtgl  = info.dateStr;
-                pilihtgl  = String(pilihtgl);
-                pilihtgl  = pilihtgl.substr(8,2)+'.'+pilihtgl.substr(5,2)+'.'+pilihtgl.substr(0,4);
+                    pilihtgl  = String(pilihtgl);
+                    pilihtgl  = pilihtgl.substr(8,2)+'.'+pilihtgl.substr(5,2)+'.'+pilihtgl.substr(0,4);
                 var periodeid = pilihtgl.substr(3,7);
 
                 if (batasperiodeid === periodeid || periodeid > batasperiodeid) {
