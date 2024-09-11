@@ -29,14 +29,12 @@ function todolist() {
             $("#kt_activity_week").html("");
             $("#kt_activity_month").html("");
             $("#kt_activity_year").html("");
-
             $("#allcount").html("");
             $("#counttodolist").html("");
             $("#countwaiting").html("");
             $("#countoverdue").html("");
             $("#countdone").html("");
             $("#countoverduelabel").html("");
-
             $("#info_list_todo").html("");
         },
         success: function(data) {
@@ -53,6 +51,7 @@ function todolist() {
 
             if (data.responCode === "00") {
                 result = data.responResult;
+
                 for (var i in result) {
 
                     if(result[i].statusshow === "1"){
@@ -131,22 +130,20 @@ function todolist() {
                             done ++;
                         }
                     }
-
-                    
                 }
             }else{
-                Swal.fire({
-                    title: "<h1 class='font-weight-bold' style='color:#234974;'>For Your Information</h1>",
-                    html: "<b>" + data.responDesc + "</b>",
-                    icon: data.responHead,
-                    confirmButtonText: "Please Try Again",
-                    buttonsStyling: false,
-                    timerProgressBar: true,
-                    timer: 5000,
-                    customClass: { confirmButton: "btn btn-danger" },
-                    showClass: { popup: "animate__animated animate__fadeInUp animate__faster" },
-                    hideClass: { popup: "animate__animated animate__fadeOutDown animate__faster" }
-                });
+                // Swal.fire({
+                //     title: "<h1 class='font-weight-bold' style='color:#234974;'>For Your Information</h1>",
+                //     html: "<b>" + data.responDesc + "</b>",
+                //     icon: data.responHead,
+                //     confirmButtonText: "Please Try Again",
+                //     buttonsStyling: false,
+                //     timerProgressBar: true,
+                //     timer: 5000,
+                //     customClass: { confirmButton: "btn btn-danger" },
+                //     showClass: { popup: "animate__animated animate__fadeInUp animate__faster" },
+                //     hideClass: { popup: "animate__animated animate__fadeOutDown animate__faster" }
+                // });
             }
 
             $("#kt_activity_today").html(tableresultToday);
@@ -340,18 +337,18 @@ function datastaff() {
                     tableresult +="</tr>";
                 }
             }else{
-                Swal.fire({
-                    title: "<h1 class='font-weight-bold' style='color:#234974;'>For Your Information</h1>",
-                    html: "<b>" + data.responDesc + "</b>",
-                    icon: data.responHead,
-                    confirmButtonText: "Please Try Again",
-                    buttonsStyling: false,
-                    timerProgressBar: true,
-                    timer: 5000,
-                    customClass: { confirmButton: "btn btn-danger" },
-                    showClass: { popup: "animate__animated animate__fadeInUp animate__faster" },
-                    hideClass: { popup: "animate__animated animate__fadeOutDown animate__faster" }
-                });
+                // Swal.fire({
+                //     title: "<h1 class='font-weight-bold' style='color:#234974;'>For Your Information</h1>",
+                //     html: "<b>" + data.responDesc + "</b>",
+                //     icon: data.responHead,
+                //     confirmButtonText: "Please Try Again",
+                //     buttonsStyling: false,
+                //     timerProgressBar: true,
+                //     timer: 5000,
+                //     customClass: { confirmButton: "btn btn-danger" },
+                //     showClass: { popup: "animate__animated animate__fadeInUp animate__faster" },
+                //     hideClass: { popup: "animate__animated animate__fadeOutDown animate__faster" }
+                // });
             }
 
             $("#datastaff").html(tableresult);
@@ -376,49 +373,6 @@ function datastaff() {
     });
     return false;
 };
-
-$(document).on("submit", "#forminserttodolist", function (e) {
-	e.preventDefault();
-	var data = new  FormData(this);
-	$.ajax({
-        url        : url+'index.php/dashboard/dashboard/inserttodolist',
-        data       : data,
-        method     : "POST",
-        dataType   : "JSON",
-        cache      : false,
-        processData: false,
-        contentType: false,
-        beforeSend : function () {
-            toastr.clear();
-            toastr["info"]("Sending request...", "Please wait");
-        },
-		success: function (data) {
-			if(data.responCode === "00"){
-				todolist();
-			}
-
-			toastr[data.responHead](data.responDesc, "INFORMATION");
-		},
-        complete: function () {
-            $('#modal-todolist').modal('hide');
-		},
-        error: function(xhr, status, error) {
-            Swal.fire({
-                title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
-                html             : "<b>"+error+"</b>",
-                icon             : "error",
-                confirmButtonText: "Please Try Again",
-                buttonsStyling   : false,
-                timerProgressBar : true,
-                timer            : 5000,
-                customClass      : {confirmButton: "btn btn-danger"},
-                showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
-                hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
-            });
-		}
-	});
-    return false;
-});
 
 function toggleStrikeThrough(checkbox) {
     var status = checkbox.checked ? 1 : 0;
@@ -483,3 +437,46 @@ function deletetodolist(element) {
         }
     });
 }
+
+$(document).on("submit", "#forminserttodolist", function (e) {
+	e.preventDefault();
+	var data = new  FormData(this);
+	$.ajax({
+        url        : url+'index.php/dashboard/dashboard/inserttodolist',
+        data       : data,
+        method     : "POST",
+        dataType   : "JSON",
+        cache      : false,
+        processData: false,
+        contentType: false,
+        beforeSend : function () {
+            toastr.clear();
+            toastr["info"]("Sending request...", "Please wait");
+        },
+		success: function (data) {
+			if(data.responCode === "00"){
+				todolist();
+			}
+
+			toastr[data.responHead](data.responDesc, "INFORMATION");
+		},
+        complete: function () {
+            $('#modal-todolist').modal('hide');
+		},
+        error: function(xhr, status, error) {
+            Swal.fire({
+                title            : "<h1 class='font-weight-bold' style='color:#234974;'>I'm Sorry</h1>",
+                html             : "<b>"+error+"</b>",
+                icon             : "error",
+                confirmButtonText: "Please Try Again",
+                buttonsStyling   : false,
+                timerProgressBar : true,
+                timer            : 5000,
+                customClass      : {confirmButton: "btn btn-danger"},
+                showClass        : {popup: "animate__animated animate__fadeInUp animate__faster"},
+                hideClass        : {popup: "animate__animated animate__fadeOutDown animate__faster"}
+            });
+		}
+	});
+    return false;
+});

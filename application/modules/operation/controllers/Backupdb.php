@@ -19,7 +19,7 @@
 			self::$password     = $this->db->password;
 			self::$database     = $this->db->database;
 			self::$pathdatabase = FCPATH."database/";
-			self::$backupPath   = self::$pathdatabase.date('Y-m-d-H-i-s').'.sql';
+			self::$backupPath   = self::$pathdatabase.date('Y-m-d-H:i:s').'.sql';
         }
 
 		public function index(){
