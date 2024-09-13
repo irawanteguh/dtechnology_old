@@ -55,7 +55,7 @@
                                 $data['NOTE']            = "";
                                 $data['FILENAME']        = $response['filename'];
                                 $data['USER_IDENTIFIER'] = $a->useridentifier;
-                                $data['STATUS_SIGN']     = "1"; //File Berhasil Upload Ke Tilaka Lite
+                                $data['STATUS_SIGN']     = "1";
                             }
                             $responseall['ResponseTilaka'] = $response;
                         }else{
@@ -269,7 +269,7 @@
                                     if($a->source_file==="DTECHNOLOGY"){
                                         $destinationPath = FCPATH."/assets/document/".$nofile.".pdf";
                                     }else{
-                                        $destinationPath = PATHFILE_POST_TILAKA."/".$nofile.".pdf";
+                                        $destinationPath = PATHFILE_POST_TILAKA.DIRECTORY_SEPARATOR.$nofile.".pdf";
                                     }
 
                                     if(file_put_contents($destinationPath,$fileContent)){
