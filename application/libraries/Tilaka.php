@@ -108,58 +108,17 @@
             return json_decode($responsecurl,TRUE); 
         }
 
-        public static function uploadfile($location){
-            $header = array("Authorization: Bearer ".Tilaka::oauth()['access_token']);
-            
-            $mimedoc =mime_content_type($location);
-            $infodoc =pathinfo($location);
-            $namedoc =$infodoc['basename'];
-
-            $requestbody = array(
-                'file' => new CURLFILE($location,$mimedoc,$namedoc)
-            );
-
-            $responsecurl = curl([
-                'url'     => TILAKALITE_URL."api/v1/upload",
-                'method'  => "POST",
-                'header'  => $header,
-                'body'    => $requestbody,
-                'savelog' => false,
-                'source'  => "TILAKA-UPLOADFILE"
-            ]);
-
-            return json_decode($responsecurl,TRUE); 
-        }
-
         // public static function uploadfile($location){
         //     $header = array("Authorization: Bearer ".Tilaka::oauth()['access_token']);
             
-        //     $infodoc = pathinfo($location);
-        //     $extension = strtolower($infodoc['extension']);
-            
-        //     switch ($extension) {
-        //         case 'pdf':
-        //             $mimedoc = 'application/pdf';
-        //             break;
-        //         case 'jpg':
-        //         case 'jpeg':
-        //             $mimedoc = 'image/jpeg';
-        //             break;
-        //         case 'png':
-        //             $mimedoc = 'image/png';
-        //             break;
-        //         // Tambahkan MIME type lain sesuai kebutuhan
-        //         default:
-        //             $mimedoc = 'application/octet-stream'; // Default MIME type
-        //             break;
-        //     }
-            
-        //     $namedoc = $infodoc['basename'];
-        
+        //     $mimedoc =mime_content_type($location);
+        //     $infodoc =pathinfo($location);
+        //     $namedoc =$infodoc['basename'];
+
         //     $requestbody = array(
-        //         'file' => new CURLFILE($location, $mimedoc, $namedoc)
+        //         'file' => new CURLFILE($location,$mimedoc,$namedoc)
         //     );
-        
+
         //     $responsecurl = curl([
         //         'url'     => TILAKALITE_URL."api/v1/upload",
         //         'method'  => "POST",
@@ -168,9 +127,50 @@
         //         'savelog' => false,
         //         'source'  => "TILAKA-UPLOADFILE"
         //     ]);
-        
-        //     return json_decode($responsecurl, TRUE); 
+
+        //     return json_decode($responsecurl,TRUE); 
         // }
+
+        public static function uploadfile($location){
+            $header = array("Authorization: Bearer ".Tilaka::oauth()['access_token']);
+            
+            $infodoc = pathinfo($location);
+            $extension = strtolower($infodoc['extension']);
+            
+            switch ($extension) {
+                case 'pdf':
+                    $mimedoc = 'application/pdf';
+                    break;
+                case 'jpg':
+                case 'jpeg':
+                    $mimedoc = 'image/jpeg';
+                    break;
+                case 'png':
+                    $mimedoc = 'image/png';
+                    break;
+                // Tambahkan MIME type lain sesuai kebutuhan
+                default:
+                    $mimedoc = 'application/octet-stream'; // Default MIME type
+                    break;
+            }
+            
+            $namedoc = $infodoc['basename'];
+        
+            $requestbody = array(
+                'file' => new CURLFILE($location, $mimedoc, $namedoc)
+            );
+        
+            $responsecurl = curl([
+                'url'     => TILAKALITE_URL."api/v1/upload",
+                'method'  => "POST",
+                'header'  => $header,
+                'body'    => $requestbody,
+                'savelog' => false,
+                'source'  => "TILAKA-UPLOADFILE"
+            ]);
+        
+            return json_decode($responsecurl, TRUE); 
+        }
         
         public static function requestsign($body){
             $header = array("Content-Type: application/json","Authorization: Bearer ".Tilaka::oauth()['access_token']);
