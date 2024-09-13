@@ -269,7 +269,7 @@
                                     if($a->source_file==="DTECHNOLOGY"){
                                         $destinationPath = FCPATH."/assets/document/".$nofile.".pdf";
                                     }else{
-                                        $destinationPath = PATHFILE_POST_TILAKA.DIRECTORY_SEPARATOR.$nofile.".pdf";
+                                        $destinationPath = PATHFILE_POST_TILAKA."/".$nofile.".pdf";
                                     }
 
                                     if(file_put_contents($destinationPath,$fileContent)){
