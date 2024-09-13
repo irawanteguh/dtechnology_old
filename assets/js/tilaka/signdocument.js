@@ -41,7 +41,7 @@ function dataexecutesign(){
                     tableresult +="<td>"+(result[i].email ? result[i].email : "")+"</td>";
 
                     if(result[i].STATUS_SIGN==="2"){
-                        tableresult +="<td class='pe-4 text-end'>"+btnnote+"<a class='btn btn-sm btn-light-primary' href='"+result[i].URL+"&redirect_url="+url+"index.php/tilaka/signdocument'>Sign</a></td>";
+                        tableresult +="<td class='text-end'>"+btnnote+"<a class='btn btn-sm btn-light-primary' href='"+result[i].URL+"&redirect_url="+url+"index.php/tilaka/signdocument'>Sign</a></td>";
                     }else{
                         tableresult +="<td>"+btnnote+"</td>";
                     }

@@ -38,7 +38,7 @@
                                 <th>Name</th>
                                 <th>Identity No</th>
                                 <th>Email Address</th>
-                                <th class="pe-4 rounded-end"></th>
+                                <th class="pe-4 rounded-end text-end">Action</th>
                             </tr>
                         </thead>
                         <tbody class="text-gray-600 fw-bold" id="resultsigndocument"></tbody>
