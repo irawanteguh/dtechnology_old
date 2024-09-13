@@ -24,7 +24,7 @@ function dataexecutesign(){
                 result        = data.responResult;
                 for(var i in result){
 
-                    btnnote = "<button type='button' class='btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px' data-kt-table-widget-4='expand_row'>";
+                    btnnote = "<button type='button' class='btn btn-sm btn-icon btn-light btn-active-light-primary toggle me-4' data-kt-table-widget-4='expand_row'>";
                     btnnote += "<i class='bi bi-plus fs-4 m-0 toggle-off'></i>";
                     btnnote += "<i class='bi bi-dash fs-4 m-0 toggle-on'></i>";
                     btnnote += "</button>";
