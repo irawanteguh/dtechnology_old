@@ -132,91 +132,106 @@
         // }
 
         public static function uploadfile($location){
-            $header = array("Authorization: Bearer ".Tilaka::oauth()['access_token']);
+            $oauthResponse = Tilaka::oauth();
+            if(isset($oauthResponse['access_token'])){
+                $header = array("Authorization: Bearer ".$oauthResponse['access_token']);
+                $infodoc = pathinfo($location);
+                $extension = strtolower($infodoc['extension']);
+                
+                switch ($extension) {
+                    case 'pdf':
+                        $mimedoc = 'application/pdf';
+                        break;
+                    case 'jpg':
+                    case 'jpeg':
+                        $mimedoc = 'image/jpeg';
+                        break;
+                    case 'png':
+                        $mimedoc = 'image/png';
+                        break;
+                    // Tambahkan MIME type lain sesuai kebutuhan
+                    default:
+                        $mimedoc = 'application/octet-stream'; // Default MIME type
+                        break;
+                }
+                
+                $namedoc = $infodoc['basename'];
             
-            $infodoc = pathinfo($location);
-            $extension = strtolower($infodoc['extension']);
+                $requestbody = array(
+                    'file' => new CURLFILE($location, $mimedoc, $namedoc)
+                );
             
-            switch ($extension) {
-                case 'pdf':
-                    $mimedoc = 'application/pdf';
-                    break;
-                case 'jpg':
-                case 'jpeg':
-                    $mimedoc = 'image/jpeg';
-                    break;
-                case 'png':
-                    $mimedoc = 'image/png';
-                    break;
-                // Tambahkan MIME type lain sesuai kebutuhan
-                default:
-                    $mimedoc = 'application/octet-stream'; // Default MIME type
-                    break;
+                $responsecurl = curl([
+                    'url'     => TILAKALITE_URL."api/v1/upload",
+                    'method'  => "POST",
+                    'header'  => $header,
+                    'body'    => $requestbody,
+                    'savelog' => false,
+                    'source'  => "TILAKA-UPLOADFILE"
+                ]);
+            
+                return json_decode($responsecurl, TRUE); 
+            }else{
+                return json_decode(Tilaka::oauth(), TRUE); 
             }
-            
-            $namedoc = $infodoc['basename'];
-        
-            $requestbody = array(
-                'file' => new CURLFILE($location, $mimedoc, $namedoc)
-            );
-        
-            $responsecurl = curl([
-                'url'     => TILAKALITE_URL."api/v1/upload",
-                'method'  => "POST",
-                'header'  => $header,
-                'body'    => $requestbody,
-                'savelog' => false,
-                'source'  => "TILAKA-UPLOADFILE"
-            ]);
-        
-            return json_decode($responsecurl, TRUE); 
         }
         
         public static function requestsign($body){
-            $header = array("Content-Type: application/json","Authorization: Bearer ".Tilaka::oauth()['access_token']);
+            $oauthResponse = Tilaka::oauth();
+            if(isset($oauthResponse['access_token'])){
+                $header = array("Content-Type: application/json","Authorization: Bearer ".Tilaka::oauth()['access_token']);
 
-            $responsecurl = curl([
-                'url'     => TILAKALITE_URL."api/v1/requestsign",
-                'method'  => "POST",
-                'header'  => $header,
-                'body'    => $body,
-                'savelog' => true,
-                'source'  => "TILAKA-REQSIGN"
-            ]);
-
-            return json_decode($responsecurl,TRUE); 
+                $responsecurl = curl([
+                    'url'     => TILAKALITE_URL."api/v1/requestsign",
+                    'method'  => "POST",
+                    'header'  => $header,
+                    'body'    => $body,
+                    'savelog' => true,
+                    'source'  => "TILAKA-REQSIGN"
+                ]);
+                return json_decode($responsecurl,TRUE); 
+            }else{
+                return json_decode(Tilaka::oauth(), TRUE); 
+            }
         }
 
         public static function excutesign($body){
-            $header = array("Content-Type: application/json","Authorization: Bearer ".Tilaka::oauth()['access_token']);
+            $oauthResponse = Tilaka::oauth();
+            if(isset($oauthResponse['access_token'])){
+                $header = array("Content-Type: application/json","Authorization: Bearer ".$oauthResponse['access_token']);
 
-            $responsecurl = curl([
-                'url'     => TILAKALITE_URL."api/v1/executesign",
-                'method'  => "POST",
-                'header'  => $header,
-                'body'    => $body,
-                'savelog' => true,
-                'source'  => "TILAKA-EXECUTESIGN"
-            ]);
-
-            return json_decode($responsecurl,TRUE); 
+                $responsecurl = curl([
+                    'url'     => TILAKALITE_URL."api/v1/executesign",
+                    'method'  => "POST",
+                    'header'  => $header,
+                    'body'    => $body,
+                    'savelog' => true,
+                    'source'  => "TILAKA-EXECUTESIGN"
+                ]);
+                return json_decode($responsecurl,TRUE); 
+            }else{
+                return json_decode(Tilaka::oauth(), TRUE); 
+            }
         }
 
         public static function excutesignstatus($body){
-            $header = array("Content-Type: application/json","Authorization: Bearer ".Tilaka::oauth()['access_token']);
+            $oauthResponse = Tilaka::oauth();
+            if(isset($oauthResponse['access_token'])){
+                $header = array("Content-Type: application/json","Authorization: Bearer ".$oauthResponse['access_token']);
 
-            $responsecurl = curl([
-                'url'     => TILAKALITE_URL."api/v1/checksignstatus",
-                'method'  => "POST",
-                'header'  => $header,
-                'body'    => $body,
-                'savelog' => true,
-                'source'  => "TILAKA-SIGNSTATUS"
-            ]);
-
-            return json_decode($responsecurl,TRUE); 
+                $responsecurl = curl([
+                    'url'     => TILAKALITE_URL."api/v1/checksignstatus",
+                    'method'  => "POST",
+                    'header'  => $header,
+                    'body'    => $body,
+                    'savelog' => true,
+                    'source'  => "TILAKA-SIGNSTATUS"
+                ]);
+                return json_decode($responsecurl,TRUE); 
+            }else{
+                return json_decode(Tilaka::oauth(),TRUE); 
+            }
         }
-
     }
 
 ?>
