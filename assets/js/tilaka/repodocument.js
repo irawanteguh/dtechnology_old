@@ -36,11 +36,9 @@ function viewdoc(btn) {
     }).status;
 
     if (responsefile === 200) {
-        // Display the PDF in the modal
         var viewfile = "<embed src='" + filename + "' width='100%' height='100%' type='application/pdf' id='view'>";
         $("#viewdoc").html(viewfile);
         
-        // Set the filename in the button's data attribute
         $('#openInNewTabButton').data('filename', filename);
     } else {
         var viewfile = `
@@ -59,22 +57,16 @@ function viewdoc(btn) {
         `;
         $("#viewdoc").html(viewfile);
         
-        // Clear the filename in the button's data attribute if file not found
         $('#openInNewTabButton').data('filename', '');
     }
 }
 
-// Add click event listener to the "Open in New Tab" button
 $('#openInNewTabButton').on('click', function() {
     var filename = $(this).data('filename');
     if (filename) {
         window.open(filename, '_blank');
     }
 });
-
-
-
-
 
 function dataupload(){
     $.ajax({
