@@ -29,6 +29,8 @@ function uploadfile(btn){
 
 function viewdoc(btn) {
     var filename = $(btn).attr("data-dirfile");
+        filename = filename.replace('/www/wwwroot/', 'http://');
+      
     var responsefile = jQuery.ajax({
         url: filename,
         type: 'HEAD',
@@ -56,7 +58,6 @@ function viewdoc(btn) {
             </div>
         `;
         $("#viewdoc").html(viewfile);
-        
         $('#openInNewTabButton').data('filename', '');
     }
 }
