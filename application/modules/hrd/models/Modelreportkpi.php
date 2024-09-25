@@ -15,6 +15,24 @@
             return $recordset;
         }
 
+        function kepatuhaninput($orgid,$periodeid){
+            $query =
+                    "
+                        select round((dibuat/efektif)*100,2) presentasi
+                        from(
+                            select sum(a.hours_month)efektif,
+                                (select sum(total) from dt01_hrd_activity_dt where active=a.active and org_id=a.org_id and date_format(start_date, '%m.%Y')='".$periodeid."')dibuat
+                            from dt01_gen_user_data a
+                            where a.org_id='".$orgid."'
+                            and   a.active='1'
+                        )x       
+                    ";
+
+            $recordset = $this->db->query($query);
+            $recordset = $recordset->result();
+            return $recordset;
+        }
+
         function reportkpi($orgid,$periodeid){
             $query =
                     "

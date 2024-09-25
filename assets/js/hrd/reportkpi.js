@@ -5,6 +5,7 @@ $(document).on("click",".btn-apply", function(e){
     var periode    = $("select[name='toolbar_report_kpi']").val();
 
     liststaff(periode);
+    kepatuhaninput(periode);
 });
 
 function liststaff(periode){
@@ -61,6 +62,64 @@ function liststaff(periode){
                 hideClass: {popup: "animate__animated animate__fadeOutDown animate__faster"}
             });
 		}
+    });
+    return false;
+};
+
+function kepatuhaninput(periode){
+    $.ajax({
+        url: url + "index.php/hrd/reportkpi/kepatuhaninput",
+        data :{periode:periode},
+        method: "GET",
+        dataType: "JSON",
+        success: function (data) {
+            var result = data.responResult;
+            var chart  = am4core.create("responseauth", am4charts.GaugeChart);
+
+            chart.innerRadius = -15;
+
+            var axis = chart.xAxes.push(new am4charts.ValueAxis());
+            axis.min = 0;
+            axis.max = 100;
+            axis.strictMinMax = true;
+
+            var colorSet = new am4core.ColorSet();
+
+            var range0 = axis.axisRanges.create();
+            range0.value                = 0;
+            range0.endValue             = 50;
+            range0.axisFill.fillOpacity = 1;
+            range0.axisFill.fill        = colorSet.getIndex(0);
+            range0.axisFill.zIndex      = - 1;
+
+            var range1 = axis.axisRanges.create();
+            range1.value                = 50;
+            range1.endValue             = 75;
+            range1.axisFill.fillOpacity = 1;
+            range1.axisFill.fill        = colorSet.getIndex(2);
+            range1.axisFill.zIndex      = -1;
+
+            var range2 = axis.axisRanges.create();
+            range2.value                = 75;
+            range2.endValue             = 100;
+            range2.axisFill.fillOpacity = 1;
+            range2.axisFill.fill        = colorSet.getIndex(4);
+            range2.axisFill.zIndex      = -1;
+
+            var label = chart.radarContainer.createChild(am4core.Label);
+            label.isMeasured = false;
+            label.fontSize = "1em";
+            label.horizontalCenter = "middle";
+            label.verticalCenter = "bottom";
+            label.text = result[0].presentasi+" %";
+
+            var hand = chart.hands.push(new am4charts.ClockHand());
+            hand.innerRadius = am4core.percent(20);
+            hand.pin.disabled = true;
+            // hand.fill = am4core.color("#ffffff");
+            // hand.stroke = am4core.color("#ffffff");
+            hand.showValue(parseInt(result[0].presentasi));
+        }
     });
     return false;
 };

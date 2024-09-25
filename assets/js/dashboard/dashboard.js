@@ -13,6 +13,7 @@ $('#modal-todolist').on('shown.bs.modal', function (e) {
 flatpickr('[name="todolist-duedate-tambah"]', {
     enableTime: false,
     dateFormat: "d.m.Y",
+    minDate: "today", // Mencegah pemilihan tanggal sebelum hari ini
     onChange: function(selectedDates, dateStr, instance) {
         instance.close();
     }
@@ -461,7 +462,7 @@ $(document).on("submit", "#forminserttodolist", function (e) {
 			toastr[data.responHead](data.responDesc, "INFORMATION");
 		},
         complete: function () {
-            $('#modal-todolist').modal('hide');
+            $('#modal_dashboard_todo_add').modal('hide');
 		},
         error: function(xhr, status, error) {
             Swal.fire({

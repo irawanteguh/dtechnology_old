@@ -44,7 +44,7 @@
                     </div>
                 </div> 
                 <div class="modal-footer p-1">	
-                    <input class="btn btn-light-primary" id="btnproses" type="submit" value="SIMPAN" name="simpan" >			
+                    <input class="btn btn-light-primary" id="btnproses" type="submit" value="SAVE" name="simpan" >			
                 </div>  
             </form>  
         </div>
