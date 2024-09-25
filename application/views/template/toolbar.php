@@ -20,10 +20,9 @@
 				$filetoolbar = APPPATH . 'modules/' . $this->uri->segment(1) . '/toolbar/' . $this->uri->segment(2) . ".php";
 				$filefilter = APPPATH . 'modules/' . $this->uri->segment(1) . '/filter/' . $this->uri->segment(2) . ".php";
 
-				if (file_exists($filetoolbar)) {
+				if(file_exists($filetoolbar)){
 					echo '<div class="me-4">';
-
-					if (file_exists($filefilter)) {
+					if(file_exists($filefilter)){
 						echo '
 							<a href="#" class="btn btn-sm btn-flex btn-light btn-active-primary fw-bolder" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
 								<span class="svg-icon svg-icon-5 svg-icon-gray-500 me-1">
@@ -50,11 +49,10 @@
 							</div>
 						';
 					}
-
 					echo '</div>';
 					include_once($filetoolbar);
 				} else {
-					if (file_exists($filefilter)) {
+					if(file_exists($filefilter)){
 						echo '
 							<a href="#" class="btn btn-sm btn-flex btn-light btn-active-primary fw-bolder" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
 								<span class="svg-icon svg-icon-5 svg-icon-gray-500 me-1">

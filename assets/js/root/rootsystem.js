@@ -6,7 +6,6 @@ function todesimal(bilangan){
 };
 
 if (window.location.href !== url+'index.php/auth/sign') {
-
     var sessiontimeout = function() {
         var timeout = function() {
             $.sessionTimeout({
@@ -174,4 +173,13 @@ function getDaySuffix(day) {
         case 3: return 'rd';
         default: return 'th';
     }
+}
+
+function exportTableToExcel(tableID, filename = ''){
+    $("#"+tableID).table2excel({
+        exclude: ".excludeThisClass",
+        name: "Worksheet Name",
+        filename: filename+".xls", // do include extension
+        preserveColors: false // set to true if you want background colors and font colors preserved
+    });
 }

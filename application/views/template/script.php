@@ -27,6 +27,7 @@
 
         echo "\t\t<script type='text/javascript' src='" . base_url('assets/vendors/bootstrap-session-timeout/bootstrap-session-timeout.js') . "'></script>" . PHP_EOL;
         echo "\t\t<script type='text/javascript' src='" . base_url('assets/vendors/fullcalendar/fullcalendar.bundle.js') . "'></script>" . PHP_EOL;
+        echo "\t\t<script type='text/javascript' src='" . base_url('assets/vendors/table2excel/jquery.table2excel.min.js') . "'></script>" . PHP_EOL;
 
         $jspathroot = FCPATH.'assets/js/root/';
         if (is_dir($jspathroot)) {
