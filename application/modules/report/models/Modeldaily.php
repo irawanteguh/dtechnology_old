@@ -49,7 +49,6 @@
                             ".$periode."
                             order by nobilling desc, tgl_registrasi desc
                         )x
-                        where x.nobilling<>''
 
                     ";
 

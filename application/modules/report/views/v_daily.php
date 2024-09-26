@@ -19,6 +19,7 @@
                                     <tr class="fw-bolder text-muted bg-light">
                                         <th class="ps-4 rounded-start" rowspan="2">Date</th>
                                         <th rowspan="2">Patient Information</th>
+                                        <th rowspan="2">Billing Id</th>
                                         <th rowspan="2">Polyclinic</th>
                                         <th rowspan="2">Provider</th>
                                         <th rowspan="2">REG</th>
@@ -46,7 +47,8 @@
                                     <tr class="fw-bolder text-muted bg-light">
                                         <th class="ps-4 rounded-start" rowspan="2">Date</th>
                                         <th rowspan="2">Patient Information</th>
-                                        <th rowspan="2">Polyclinic</th>
+                                        <th rowspan="2">Billing Id</th>
+                                        <th rowspan="2">Room</th>
                                         <th rowspan="2">Provider</th>
                                         <th rowspan="2">REG</th>
                                         <th colspan="3">PENUNJANG</th>
