@@ -23,7 +23,6 @@ flatpickr('[name="data_activity_date_add"]', {
     }
 });
 
-
 flatpickr('[name="data_activity_time_start_add"]', {
     enableTime   : true,
     time_24hr    : true,
@@ -68,39 +67,6 @@ flatpickr('[name="data_activity_time_end_add"]', {
     }
 });
 
-
-// Inputmask({
-//     "mask": "99:99"
-// }).mask("#data_activity_time_start_add");
-
-// Inputmask({
-//     "mask": "99:99"
-// }).mask("#data_activity_time_end_add");
-
-// flatpickr('[name="data_activity_time_start_add"]', {
-//     enableTime   : true,
-//     time_24hr    : true,
-//     noCalendar   : true,
-//     dateFormat   : "H:i",
-//     defaultHour  : new Date().getHours(),
-//     defaultMinute: new Date().getMinutes(),
-//     onChange: function(selectedDates, dateStr, instance) {
-//         checkTime();
-//     }
-// });
-
-// flatpickr('[name="data_activity_time_end_add"]', {
-//     enableTime: true,
-//     time_24hr : true,
-//     noCalendar: true,
-//     dateFormat: "H:i",
-//     defaultHour  : new Date().getHours(),
-//     defaultMinute: new Date().getMinutes(),
-//     onChange: function(selectedDates, dateStr, instance) {
-//         checkTime();
-//     }
-// });
-
 function calendar() {
     var e = document.getElementById("kt_calendar_app");
     calendar = new FullCalendar.Calendar(e, {
@@ -121,6 +87,11 @@ function calendar() {
         fixedWeekCount: true,
         timeZone      : 'Asia/Jakarta',
         themeSystem   : "bootstrap5",
+        eventTimeFormat: { // Format for displaying time in 24-hour format
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false // Disable 12-hour (AM/PM) format
+        },
         select        : function (e) {},
         dateClick: function(info) {
             var today = new Date();
@@ -168,15 +139,10 @@ function calendar() {
         },
         eventDrop: function(info) {},
         eventClick: function(info) {
-            var startDate = new Date(info.event.start);
-            var endDate = new Date(info.event.extendedProps.endateview);
-            
-
-            startDate.setDate(startDate.getDate() - 1);
-            endDate.setDate(endDate.getDate() - 1);
-
-            var startDateString = formatDate(startDate);
-            var endDateString = formatDate(endDate);
+            var startDate       = new Date(info.event.start);
+            var endDate         = new Date(info.event.end);
+            var startDateString = startDate.toISOString().replace('T', ' ').substring(0, 19);
+            var endDateString   = endDate.toISOString().replace('T', ' ').substring(0, 19);
 
             $(":hidden[name='transidactivityview']").val(info.event.extendedProps.transid);
             $('#eventname').html(info.event.title);

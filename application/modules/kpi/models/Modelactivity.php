@@ -6,8 +6,7 @@
                     "
                         select a.trans_id, status, activity,
                             concat(DATE_FORMAT(a.start_date, '%Y-%m-%d'),'T',start_time_in,':00') start_date,
-                            DATE_FORMAT(DATE_ADD(a.end_date, INTERVAL 1 DAY), '%Y-%m-%d') end_date,
-                            concat(DATE_FORMAT(DATE_ADD(a.end_date, INTERVAL 1 DAY), '%Y-%m-%d'),'T',a.end_time_out,':00') end_date_view,
+                            concat(DATE_FORMAT(a.end_date, '%Y-%m-%d'),'T',end_time_out,':00') end_date,
                             (select activity from dt01_hrd_activity_ms where active='1' and org_id=a.org_id and activity_id=a.activity_id)kegiatanutama
                         from dt01_hrd_activity_dt a
                         where a.active='1'

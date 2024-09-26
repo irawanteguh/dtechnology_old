@@ -43,12 +43,7 @@ class Activity extends CI_Controller{
 			$data['title']          = $a->kegiatanutama;
 			$data['kegiatandetail'] = $a->activity;
 			$data['start']          = $a->start_date;
-
-			if(!empty($a->end_date)){
-				$data['end'] = $a->end_date;
-			} else {
-				$data['end'] = $a->start_date;
-			}
+			$data['end']            = $a->end_date;
 
 			if($a->status === "0"){
 				$data['color']     = '#0d6efd';
@@ -65,8 +60,6 @@ class Activity extends CI_Controller{
 			if($a->status === "9"){
 				$data['color']     = '#dc3545';
 			}
-
-			$data['endateview'] = $a->end_date_view;
 			
 			$events[] = $data;
 		};
