@@ -32,8 +32,8 @@ function liststaff(periode){
                     tableresult +="<tr>";
                     tableresult +="<td class='ps-4'>"+result[i].name+"</td>";
                     tableresult +="<td class='text-left'>"+(result[i].position ? result[i].position : "")+"</td>";
-                    tableresult +="<td class='text-center'>"+result[i].presentasiperilaku+"%</td>";
                     tableresult +="<td class='text-center'>"+result[i].presentasiactivity+"%</td>";
+                    tableresult +="<td class='text-center'>"+result[i].presentasiperilaku+"%</td>";
                     tableresult +="<td class='text-center'>"+result[i].resultkpi+"%</td>";
                     tableresult +="<td class='pe-4 text-end'><a class='btn btn-primary btn-sm'>Detail</a></td>";
                     tableresult +="</tr>";
