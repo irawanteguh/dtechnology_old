@@ -13,6 +13,7 @@
                         from dt01_gen_document_file_dt a
                         where a.active='1'
                         and   a.status_sign in ('2','3')
+                        and   a.user_identifier<>''
                         ".$parameter."
                         order by created_date desc
                     ";
