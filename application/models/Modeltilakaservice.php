@@ -30,6 +30,7 @@
                                 (select name from dt01_gen_user_data   where org_id=a.org_id and active='1' and nik=a.assign)assignname
                         from dt01_gen_document_file_dt a
                         where a.active='1'
+                        and   a.assign='2201412'
                         and   a.org_id='".$orgid."'
                         ".$status."
                     ";
