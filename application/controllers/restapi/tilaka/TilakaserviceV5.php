@@ -171,6 +171,7 @@
                     }else{
                         foreach($listfile as $a){
                             $data['REQUEST_ID']  = $requestid;
+                            $data['STATUS_SIGN'] = "0";
                             $data['NOTE']        = $response['message'];
                         }
                     }
