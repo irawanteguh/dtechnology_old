@@ -103,7 +103,7 @@ function liststaff(){
                     }
 
                     if(result[i].position_primary==="Y"){
-                        if(result[i].jmldisetujui >= result[i].hours_month ){
+                        if(parseInt(result[i].jmldisetujui) >= parseInt(result[i].hours_month) ){
                             tableresult +="<td class='text-center'><i class='fa-solid fa-circle-check text-success fa-2x'></i></td>";
                         }else{
                             tableresult +="<td class='text-center'><i class='fa-solid fa-triangle-exclamation text-danger fa-2x fa-fade'></i></td>";
@@ -287,7 +287,7 @@ function detailactivity(btn){
                 for(var i in result){
                     tableresult +="<tr>";
                     tableresult +="<td class='ps-4'><input class='form-check-input h-20px w-20px' type='checkbox' name='pilih["+result[i].trans_id+"]' value='"+result[i].trans_id+"'></td>";
-                    tableresult +="<td><div>"+result[i].kegiatanutama+"</div><div class='font-italic'>"+result[i].activity+"</div></td>";
+                    tableresult +="<td><div class='font-weight-bold'>"+result[i].kegiatanutama+"</div><div class='font-italic'>"+result[i].activity+"</div></td>";
                     tableresult +="<td class='text-center'>"+result[i].qty+"</td>";
                     tableresult +="<td class='pe-4 text-end'><div>"+result[i].start_date+"</div><div class='font-italic'>"+result[i].start_time_in+" - "+result[i].start_time_out+"</div></td>";
                     tableresult +="</tr>";
