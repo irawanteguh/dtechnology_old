@@ -72,7 +72,7 @@
 								<input class="form-control form-control-solid ps-12" placeholder="Select a date" name="drawer_data_employee_registrationposition_date_add" id="drawer_data_employee_registrationposition_date_add" value="<?php $d=strtotime("now"); echo date('d.m.Y', $d);?>" required/>
 							</div> 
 						</div>
-						<input class="btn btn-light-primary" id="btn_position_registrasi" type="submit" value="SIMPAN" name="simpan" >
+						<input class="btn btn-light-primary" id="btn_position_registrasi" type="submit" value="SAVE" name="simpan" >
 					</div>
 				</div>
 			</div>
@@ -146,7 +146,7 @@
 							</label>
 							<input type="text" class="form-control form-control-solid" id="drawer_data_employee_registrationkategoritenaga_totalhours_add" name="drawer_data_employee_registrationkategoritenaga_totalhours_add" value="60" readonly>
 						</div>
-						<input class="btn btn-light-primary" id="btn_registrationkategoritenaga_add" type="submit" value="SIMPAN" name="simpan" >
+						<input class="btn btn-light-primary" id="btn_registrationkategoritenaga_add" type="submit" value="SAVE" name="simpan" >
 					</div>
 				</div>
 			</div>

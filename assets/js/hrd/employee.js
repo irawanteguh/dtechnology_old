@@ -252,6 +252,8 @@ function masteremployee(){
                             tableresult += "<div class='dropdown-menu' aria-labelledby='btnGroupDrop1'>";
                                 tableresult += "<a class='dropdown-item btn btn-sm' data-kt-drawer-show='true' data-kt-drawer-target='#drawer_employee_registrationkategoritenaga_add' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-pencil'></i> Classification Category</a>";
                                 tableresult += "<a class='dropdown-item btn btn-sm' data-kt-drawer-show='true' data-kt-drawer-target='#drawer_employee_registrationposition_add' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-person-add'></i> Positioning</a>";
+                                tableresult += "<div class='separator my-2'></div>";
+                                tableresult += "<a class='dropdown-item btn btn-sm btn-light-danger' data-kt-drawer-show='true' data-kt-drawer-target='#drawer_employee_registrationposition_add' "+getvariabel+" onclick='getdata($(this));'><i class='bi bi-trash-fill'></i> Non Active</a>";
                             tableresult +="</div>";
                         tableresult +="</div>";
                     tableresult +="</td>";

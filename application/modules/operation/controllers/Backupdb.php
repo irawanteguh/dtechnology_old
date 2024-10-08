@@ -56,42 +56,32 @@
 		}
 
         function backupdatabase(){
-
 			if(!is_dir(self::$pathdatabase)){
 				mkdir(self::$pathdatabase, 0777, true);      
 			};
 			
 			$conn = new mysqli(self::$host, self::$user, self::$password, self::$database);
-			
-			// Periksa koneksi
 			if ($conn->connect_error) {
 				die("Koneksi ke database gagal: " . $conn->connect_error);
 			}
 			
-			// Mendapatkan daftar tabel dari database
 			$tables = array();
 			$result = $conn->query("SHOW TABLES LIKE 'dt01\_%'");
 			while($row = $result->fetch_row()){
 				$tables[] = $row[0];
 			}
 			
-			// Loop melalui tabel dan membuat file backup
 			$handle = fopen(self::$backupPath,'w+');
 			foreach($tables as $table){
 				$result = $conn->query("SELECT * FROM $table");
 				$numColumns = $result->field_count;
 				
-				// Tulis query DROP TABLE jika file backup baru
-				// if (ftell($handle) == 0){
-					fwrite($handle, "DROP TABLE IF EXISTS $table;\n\n");
-				// }
+				fwrite($handle, "DROP TABLE IF EXISTS $table;\n\n");
 				
-				// Tulis query untuk membuat tabel
 				$createTableQuery = $conn->query("SHOW CREATE TABLE $table");
 				$createTable = $createTableQuery->fetch_row();
 				fwrite($handle, $createTable[1].";\n\n");
 				
-				// Tulis query INSERT untuk setiap baris data
 				while($row = $result->fetch_row()){
 					$row = array_map('addslashes', $row);
 					$row = array_map('htmlspecialchars', $row);
@@ -107,8 +97,6 @@
 				fwrite($handle, "\n\n\n");
 			}
 			fclose($handle);
-			
-			// Tutup koneksi database
 			$conn->close();
 
 			$json["responCode"] = "00";
@@ -120,59 +108,35 @@
 		}
 
 		function backuptable(){
-
 			if(!is_dir(self::$pathdatabase)){
 				mkdir(self::$pathdatabase, 0777, true);      
 			};
 			
 			$conn = new mysqli(self::$host, self::$user, self::$password, self::$database);
-			
-			// Periksa koneksi
 			if ($conn->connect_error) {
 				die("Koneksi ke database gagal: " . $conn->connect_error);
 			}
 			
-			// Mendapatkan daftar tabel dari database
 			$tables = array();
 			$result = $conn->query("SHOW TABLES LIKE 'dt01\_%'");
 			while($row = $result->fetch_row()){
 				$tables[] = $row[0];
 			}
 			
-			// Loop melalui tabel dan membuat file backup
 			$handle = fopen(self::$backupPath,'w+');
 			foreach($tables as $table){
-				$result = $conn->query("SELECT * FROM $table");
+				$result     = $conn->query("SELECT * FROM $table");
 				$numColumns = $result->field_count;
 				
-				// Tulis query DROP TABLE jika file backup baru
-				// if (ftell($handle) == 0){
-					fwrite($handle, "DROP TABLE IF EXISTS $table;\n\n");
-				// }
+				fwrite($handle, "DROP TABLE IF EXISTS $table;\n\n");
 				
-				// Tulis query untuk membuat tabel
 				$createTableQuery = $conn->query("SHOW CREATE TABLE $table");
-				$createTable = $createTableQuery->fetch_row();
+				$createTable      = $createTableQuery->fetch_row();
 				fwrite($handle, $createTable[1].";\n\n");
-				
-				// Tulis query INSERT untuk setiap baris data
-				// while($row = $result->fetch_row()){
-				// 	$row = array_map('addslashes', $row);
-				// 	$row = array_map('htmlspecialchars', $row);
-				// 	$insertQuery = "INSERT INTO $table VALUES (";
-				// 	for($i=0; $i<$numColumns; $i++){
-				// 		$insertQuery .= '"'.$row[$i].'", ';
-				// 	}
-				// 	$insertQuery = substr($insertQuery, 0, -2);
-				// 	$insertQuery .= ");\n";
-				// 	fwrite($handle, $insertQuery);
-				// }
 				
 				fwrite($handle, "\n\n\n");
 			}
 			fclose($handle);
-			
-			// Tutup koneksi database
 			$conn->close();
 
 			$json["responCode"] = "00";
